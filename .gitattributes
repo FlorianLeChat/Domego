@@ -1,0 +1,5 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Exclude CSS files from language statistics
+*.css linguist-vendored
