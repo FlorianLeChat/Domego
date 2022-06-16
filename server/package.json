@@ -1,0 +1,21 @@
+{
+  "main": "app.js",
+  "name": "domego",
+  "proxy": "http://localhost:8080",
+  "author": "Florian Trayon (https://github.com/FlorianLeChat)",
+  "license": "AGPL-3.0",
+  "private": true,
+  "version": "1.0.0",
+  "contributors": [
+    "Gilles Chandelier (https://github.com/GillesChandelier)",
+    "Jiaqi Lui (https://github.com/LiuJiaqi-unice)",
+    "Gaetan Vialon (https://github.com/VialonGaetan)",
+    "Wei Wang (https://github.com/WANGWei118)"
+  ],
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

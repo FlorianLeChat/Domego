@@ -2,7 +2,7 @@
   "main": "app.js",
   "name": "domego",
   "proxy": "http://localhost:8080",
-  "author": "Florian Trayon <floriantrayon942@gmail.com> (https://github.com/FlorianLeChat)",
+  "author": "Florian Trayon (https://github.com/FlorianLeChat)",
   "license": "AGPL-3.0",
   "private": true,
   "version": "1.0.0",
