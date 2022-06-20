@@ -1,4 +1,5 @@
 import express from "express";
+
 const router = express.Router();
 
 router.get( "/", function ( _request, result )
@@ -11,4 +12,4 @@ router.get( "/about", function ( _request, result )
 	result.send( "Page à propos des oiseaux." );
 } );
 
-module.exports = router;
+export default router;
