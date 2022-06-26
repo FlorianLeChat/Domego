@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { createRoot } from "react-dom/client";
+import "normalize.css";
 import "./index.css";
 
 class TestAPI extends Component
