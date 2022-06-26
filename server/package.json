@@ -18,7 +18,9 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "build": "npm run build-client && cd ../server && npm run build-server",
+    "build-client": "cd ../client && npm run build",
+    "build-server": "npx tsc && nodemon index.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
