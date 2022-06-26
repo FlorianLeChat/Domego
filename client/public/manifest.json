@@ -1,25 +1,16 @@
 {
-	"short_name": "React App",
-	"name": "Create React App Sample",
+	"short_name": "Domego",
+	"name": "Domego - A serious game",
+	"description": "Domego is a serious educational game in which each player takes the role of an actor in a construction operation.",
 	"icons": [
 		{
-			"src": "favicon.ico",
+			"src": "assets/images/favicon.ico",
 			"sizes": "64x64 32x32 24x24 16x16",
 			"type": "image/x-icon"
-		},
-		{
-			"src": "logo192.png",
-			"type": "image/png",
-			"sizes": "192x192"
-		},
-		{
-			"src": "logo512.png",
-			"type": "image/png",
-			"sizes": "512x512"
 		}
 	],
 	"start_url": ".",
+	"background_color": "#ffffff",
 	"display": "standalone",
-	"theme_color": "#000000",
-	"background_color": "#ffffff"
+	"theme_color": "#ffffff"
 }
