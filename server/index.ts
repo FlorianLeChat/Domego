@@ -4,9 +4,10 @@ import express from "express";
 
 // Création du serveur express.
 const app = express();
+const root = path.resolve( `${ __dirname }/../client/build` );
 
 app.use( cors() );
-app.use( express.static( path.resolve( `${ __dirname }/../client/build` ) ) );
+app.use( express.static( root ) );
 
 app.listen( 3001 );
 
@@ -19,10 +20,18 @@ app.use( "/birds", birds );
 app.use( "/cats", cats );
 app.use( "/json", json );
 
+// Modification du contenu de certains fichiers.
+import { readFileSync, writeFileSync } from "fs";
+
+let index = readFileSync( `${ root }/index.html`, "utf8" );
+index = index.replace( "INSERT_GITHUB_IMAGE_HERE", "this is a test" );
+
+writeFileSync( `${ root }/index.html`, index );
+
 // Affichage des fichiers statiques.
 app.get( "/", function ( _request, result )
 {
-	result.sendFile( path.resolve( `${ __dirname }/../client/build/index.html` ) );
+	result.sendFile( `${ root }/index.html` );
 } );
 
 // Interaction quelconque avec la base de données SQL.
