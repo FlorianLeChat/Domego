@@ -3,9 +3,19 @@
         "target": "es6",
         "module": "commonjs",
         "sourceMap": false,
-        "noImplicitAny": true,
-        "esModuleInterop": true,
         "moduleResolution": "node",
+
+        "esModuleInterop": true,
+        "removeComments": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "allowSyntheticDefaultImports": true,
+
         "paths": {
             "*": [
                 "./node_modules/*"
