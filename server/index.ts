@@ -4,15 +4,11 @@ import express from "express";
 
 // Création du serveur express.
 const app = express();
-const port = 3001;
 
 app.use( cors() );
 app.use( express.static( path.resolve( `${ __dirname }/../client/build` ) ) );
 
-app.listen( port, function ()
-{
-	console.log( `Serveur lancé sur le port ${ port }` );
-} );
+app.listen( 3001 );
 
 // Création des routes de tests.
 import birds from "./routes/birds";
