@@ -15,7 +15,7 @@ class TestAPI extends Component
 	callAPI()
 	{
 		// Requête de l'API vers le serveur NodeJS.
-		fetch( "http://localhost:3001/cats" )
+		fetch( "cats" )
 			.then( res => res.text() )
 			.then( res => this.setState( { response: res } ) )
 			.catch( err => err );
