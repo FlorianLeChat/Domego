@@ -5,6 +5,7 @@
   "license": "AGPL-3.0",
   "private": true,
   "version": "1.0.0",
+  "homepage": ".",
   "contributors": [
     "Gilles Chandelier (https://github.com/GillesChandelier)",
     "Jiaqi Lui (https://github.com/LiuJiaqi-unice)",
