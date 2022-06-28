@@ -10,7 +10,9 @@
     "Gilles Chandelier (https://github.com/GillesChandelier)",
     "Jiaqi Lui (https://github.com/LiuJiaqi-unice)",
     "Gaetan Vialon (https://github.com/VialonGaetan)",
-    "Wei Wang (https://github.com/WANGWei118)"
+    "Wei Wang (https://github.com/WANGWei118)",
+    "Denis Adanlehoussi (https://github.com/Denisko185)",
+    "Armand Honyigloh (https://github.com/RmannLePhilosopheFou)"
   ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
