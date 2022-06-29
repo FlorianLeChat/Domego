@@ -1,9 +1,7 @@
 import { Component } from "react";
-import { createRoot } from "react-dom/client";
-import "normalize.css";
-import "./index.scss";
+import "./TestApi.css";
 
-class TestAPI extends Component
+export default class TestApi extends Component
 {
 	constructor( props )
 	{
@@ -31,7 +29,7 @@ class TestAPI extends Component
 	{
 		// Rendu final de la page.
 		return (
-			<section>
+			<section className="component-testApi">
 				<h1>Bienvenue sur React !</h1>
 
 				<p>État de la réponse : {this.state.response}</p>
@@ -39,6 +37,3 @@ class TestAPI extends Component
 		);
 	}
 }
-
-const root = createRoot( document.querySelector( "main" ) );
-root.render( <TestAPI /> );
