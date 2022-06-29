@@ -1,14 +1,14 @@
-// Importation of the main CSS stylesheets.
+// Importation des feuilles de style CSS.
 import "normalize.css";
 import "./index.scss";
 
-// Importation of React and its components.
+// Importation de React et de ses composants.
 import { Component } from "react";
 import { createRoot } from "react-dom/client";
 
 import TestApi from "./components/TestApi";
 
-// Create the root element.
+// Création du conteneur principal.
 export default class App extends Component
 {
 	render()

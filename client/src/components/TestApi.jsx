@@ -1,33 +1,30 @@
+// Importation de React et des fonctions logiques.
 import { Component } from "react";
+import callApi from "../logic/CallApi";
+
+// Importation de la feuille de style CSS lié au composant.
 import "./TestApi.css";
 
+// Classe de test pour l'API de test côté serveur.
 export default class TestApi extends Component
 {
 	constructor( props )
 	{
+		// Création des variables du constructeur.
 		super( props );
 
 		this.state = { response: "" };
 	}
 
-	callAPI()
-	{
-		// Requête de l'API vers le serveur NodeJS.
-		fetch( "cats" )
-			.then( res => res.text() )
-			.then( res => this.setState( { response: res } ) )
-			.catch( err => err );
-	}
-
 	componentDidMount()
 	{
-		// Appel de la requête API au chargement du composant.
-		this.callAPI();
+		// Création de l'appel via l'API lors de la création du composant.
+		callApi(this, "cats");
 	}
 
 	render()
 	{
-		// Rendu final de la page.
+		// Affichage du rendu HTML du composant.
 		return (
 			<section className="component-testApi">
 				<h1>Bienvenue sur React !</h1>
