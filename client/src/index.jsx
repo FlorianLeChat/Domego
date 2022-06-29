@@ -3,21 +3,29 @@ import "normalize.css";
 import "./index.scss";
 
 // Importation de React et de ses composants.
-import { Component } from "react";
+import React from "react";
 import { createRoot } from "react-dom/client";
 
 import TestApi from "./components/TestApi";
+import SocketChat from "./components/SocketChat";
 
 // Création du conteneur principal.
-export default class App extends Component
+export default class App extends React.Component
 {
 	render()
 	{
 		return (
-			<TestApi></TestApi>
+			<main>
+				<TestApi />
+				<SocketChat />
+			</main>
 		);
 	}
 }
 
-const root = createRoot( document.querySelector( "main" ) );
-root.render( <App /> );
+const root = createRoot( document.querySelector( "div" ) );
+root.render(
+	<React.StrictMode>
+		<App />
+	</React.StrictMode>
+);

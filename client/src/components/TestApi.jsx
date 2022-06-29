@@ -1,11 +1,11 @@
-// Importation de React et des fonctions logiques.
+//
+// Classe de test pour l'API de test côté serveur.
+//
 import { Component } from "react";
 import callApi from "../logic/CallApi";
 
-// Importation de la feuille de style CSS lié au composant.
 import "./TestApi.css";
 
-// Classe de test pour l'API de test côté serveur.
 export default class TestApi extends Component
 {
 	constructor( props )
