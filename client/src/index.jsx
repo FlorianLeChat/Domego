@@ -23,7 +23,7 @@ export default class App extends React.Component
 	}
 }
 
-const root = createRoot( document.querySelector( "div" ) );
+const root = createRoot( document.querySelector( "body > div" ) );
 root.render(
 	<React.StrictMode>
 		<App />

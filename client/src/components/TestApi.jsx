@@ -27,7 +27,7 @@ export default class TestApi extends Component
 		// Affichage du rendu HTML du composant.
 		return (
 			<section className="component-testApi">
-				<h1>Bienvenue sur React !</h1>
+				<h1>Test de l'appel API vers le serveur</h1>
 
 				<p>État de la réponse : {this.state.response}</p>
 			</section>
