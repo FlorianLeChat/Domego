@@ -3,7 +3,7 @@
 //
 import { Component } from "react";
 
-import "./SocketChat.css";
+import "./SocketChat.scss";
 
 export default class SocketChat extends Component
 {

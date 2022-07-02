@@ -4,7 +4,7 @@
 import { Component } from "react";
 import callApi from "../logic/CallApi";
 
-import "./TestApi.css";
+import "./TestApi.scss";
 
 export default class TestApi extends Component
 {
