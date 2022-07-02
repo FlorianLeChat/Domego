@@ -2,7 +2,7 @@
 // Classe de test pour l'API de test côté serveur.
 //
 import { Component } from "react";
-import callApi from "../logic/CallApi";
+import callApi from "../utils/CallApi";
 
 import "./TestApi.scss";
 
