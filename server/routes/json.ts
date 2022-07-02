@@ -1,3 +1,6 @@
+//
+// Route fournissant des données sous format JSON.
+//
 import express from "express";
 
 const router = express.Router();

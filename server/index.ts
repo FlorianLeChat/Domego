@@ -7,35 +7,26 @@ const app = express();
 const root = path.resolve( `${ __dirname }/../client/build` );
 
 app.use( cors() );
+app.use( express.json() );
 app.use( express.static( root ) );
 
 app.listen( 3001 );
 
 // Création des routes de tests.
-import birds from "./routes/birds";
-import cats from "./routes/cats";
 import json from "./routes/json";
+import database from "./routes/database";
 
-app.use( "/birds", birds );
-app.use( "/cats", cats );
-app.use( "/json", json );
+app.use( "/api/json", json );
+app.use( "/api/database", database );
 
-// Modification du contenu de certains fichiers.
-import { readFileSync, writeFileSync } from "fs";
-
-let index = readFileSync( `${ root }/index.html`, "utf8" );
-index = index.replace( "INSERT_GITHUB_IMAGE_HERE", "this is a test" );
-
-writeFileSync( `${ root }/index.html`, index );
-
-// Affichage des fichiers statiques.
-app.get( "/", function ( _request, result )
+// Affichage par défaut des fichiers statiques.
+app.get( "*", function ( _request, result, _next )
 {
 	result.sendFile( `${ root }/index.html` );
 } );
 
-// Interaction quelconque avec la base de données SQL.
-app.get( "/database", function ( _request, _result )
+// Envoi d'un message d'erreur sur les routes manquantes.
+app.use( function ( _request, result, _next )
 {
-	// TODO.
+	result.sendStatus( 404 );
 } );
