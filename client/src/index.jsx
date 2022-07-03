@@ -17,9 +17,9 @@ export default class Home extends React.Component
 	{
 		return (
 			<section>
-				<h1>Test ?</h1>
+				<h1>Page d'accueil</h1>
 
-				<h3>Pas un test</h3>
+				<h3>Vous êtes sur la page d'accueil du site...</h3>
 			</section>
 		);
 	}
