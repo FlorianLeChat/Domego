@@ -31,8 +31,8 @@ root.render(
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="expenses" element={<TestApi />} />
-				<Route path="invoices" element={<SocketChat />} />
+				<Route path="database" element={<TestApi />} />
+				<Route path="chat" element={<SocketChat />} />
 			</Routes>
 		</BrowserRouter>
 	</React.StrictMode>
