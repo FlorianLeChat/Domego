@@ -12,6 +12,11 @@ app.use( express.static( root ) );
 
 app.listen( 3001 );
 
+// Initialisation de la base de données.
+import { connectDatabase } from "./utils/database";
+
+connectDatabase();
+
 // Création des routes de tests.
 import json from "./routes/json";
 import database from "./routes/database";
