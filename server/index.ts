@@ -10,7 +10,21 @@ app.use( cors() );
 app.use( express.json() );
 app.use( express.static( root ) );
 
-app.listen( 3001 );
+const server = app.listen( 3001 );
+
+// Communication avec le chat de test.
+import { Server } from "socket.io";
+const io = new Server( server );
+
+io.on( "connection", function ( socket )
+{
+	console.log( "Un utilisateur s'est connecté." );
+
+	socket.on( "disconnect", function ()
+	{
+		console.log( "L'utilisateur s'est déconnecté." );
+	} );
+} );
 
 // Initialisation de la base de données.
 import { connectDatabase } from "./utils/database";
