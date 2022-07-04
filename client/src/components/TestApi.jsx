@@ -43,7 +43,7 @@ export default class TestApi extends Component
 	{
 		// Affichage du rendu HTML du composant.
 		return (
-			<section className="component-testApi">
+			<section className="TestApi">
 				<h1>Test de l'appel API vers le serveur</h1>
 
 				<p>État de la réponse GET : {this.state.get}</p>
