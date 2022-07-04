@@ -12,11 +12,11 @@ export default class NotFound extends Component
 	{
 		return (
 			<section className="NotFound">
-				<h1>404</h1>
+				<h1>Erreur 404</h1>
 
 				<h2>Page introuvable</h2>
 
-				<Link to="/">Cliquez ici pour revenir en lieu sûr</Link>
+				<Link to="./">Cliquez ici pour revenir en lieu sûr</Link>
 			</section>
 		);
 	}
