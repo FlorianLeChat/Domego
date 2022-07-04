@@ -17,7 +17,7 @@ export default class Home extends React.Component
 	render()
 	{
 		return (
-			<section className="Home" >
+			<section className="Home">
 				<h1>Page d'accueil</h1>
 
 				<h3>Vous êtes sur la page d'accueil du site...</h3>
@@ -29,12 +29,14 @@ export default class Home extends React.Component
 const root = createRoot( document.querySelector( "body > main" ) );
 root.render(
 	<React.StrictMode>
-		<BrowserRouter>
+		<BrowserRouter basename={process.env.PUBLIC_URL}>
 			<Routes>
-				<Route path="*" element={<NotFound />} />
-				<Route path="/" element={<Home />} />
-				<Route path="/database" element={<TestApi />} />
-				<Route path="/chat" element={<SocketChat />} />
+				<Route path="/">
+					<Route index element={<Home />} />
+					<Route path="*" element={<NotFound />} />
+					<Route path="chat" element={<SocketChat />} />
+					<Route path="database" element={<TestApi />} />
+				</Route>
 			</Routes>
 		</BrowserRouter>
 	</React.StrictMode>
