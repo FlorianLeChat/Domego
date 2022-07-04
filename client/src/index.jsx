@@ -8,6 +8,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import TestApi from "./components/TestApi";
+import NotFound from "./components/NotFound";
 import SocketChat from "./components/SocketChat";
 
 // Création du conteneur principal.
@@ -30,9 +31,10 @@ root.render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<Routes>
+				<Route path="*" element={<NotFound />} />
 				<Route path="/" element={<Home />} />
-				<Route path="database" element={<TestApi />} />
-				<Route path="chat" element={<SocketChat />} />
+				<Route path="/database" element={<TestApi />} />
+				<Route path="/chat" element={<SocketChat />} />
 			</Routes>
 		</BrowserRouter>
 	</React.StrictMode>
