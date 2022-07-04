@@ -13,7 +13,7 @@ export default class SocketChat extends Component
 		// Création des variables du constructeur.
 		super( props );
 
-		this.state.inputValue = "";
+		// this.state.inputValue = "";
 	}
 
 	handleSubmit( event )
@@ -24,7 +24,9 @@ export default class SocketChat extends Component
 
 		socket.emit( "chat message", this.state.inputValue );
 
-		this.state.inputValue = "";
+		this.state.setState( {
+			inputValue: ""
+		} );
 	}
 
 	handleChange( event )
