@@ -24,19 +24,16 @@ export default class TestApi extends Component
 	componentDidMount()
 	{
 		// Récupération de l'ensemble des données de l'API.
-		callApi( this, "database/users", "GET" );
+		callApi( this, "users", "GET" );
 
 		// Ajout d'une nouvelle valeur au travers de l'API.
-		// Note : l'utilisateur possède un prénom/nom de famille fixe mais son âge est généré aléatoirement entre 1 et 100.
-		callApi( this, "database/users", "POST", { name: { first: "Florian", last: "Trayon" }, age: Math.floor( Math.random() * 100 ) + 1 } );
+		callApi( this, "users", "POST", { email: "florian@gmail.com", name: { first: "Florian", last: "Trayon" }, age: Math.floor( Math.random() * 100 ) + 1 } );
 
 		// Mise à jour d'une valeur existante au travers de l'API.
-		// Note : on récupère le premier utilisateur s'appelant "Florian" et n'ayant pas 10 ans afin actualiser son âge.
-		callApi( this, "database/users", "PUT", { filter: { "name.first": "Florian", age: { $not: { $eq: 10 } } }, update: { age: 10 } } );
+		callApi( this, "users", "PUT", { filter: { email: "florian@gmail.com", age: { $not: { $eq: 10 } } }, update: { age: 10 } } );
 
 		// Suppression définitive d'une valeur de l'API.
-		// Note : on supprime le premier utilisateur ayant l'âge de 10 ans.
-		callApi( this, "database/users", "DELETE", { age: 10 } );
+		callApi( this, "users", "DELETE", { age: 10 } );
 	}
 
 	render()
