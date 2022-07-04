@@ -1,8 +1,10 @@
+//
+// Initialisation du serveur express.
+//
 import cors from "cors";
 import path from "path";
 import express from "express";
 
-// Création du serveur express.
 const app = express();
 const root = path.resolve( `${ __dirname }/../client/build` );
 
@@ -10,10 +12,47 @@ app.use( cors() );
 app.use( express.json() );
 app.use( express.static( root ) );
 
+//
+// Création des routes de réponses.
+//
+import users from "./routes/users";
+import rooms from "./routes/rooms";
+
+app.use( "/api/users", users );
+app.use( "/api/rooms", rooms );
+
+app.all( "*", function ( _request, result, _next )
+{
+	result.sendFile( `${ root }/index.html` );
+} );
+
 const server = app.listen( 3001 );
 
-// Communication avec le chat de test.
+//
+// Liaison à la base de données MongoDB.
+//
+import mongoose from "mongoose";
+
+const url = "mongodb://127.0.0.1:27017/domego";
+const connection = mongoose.connection;
+
+mongoose.connect( url );
+
+connection.once( "open", function ()
+{
+	console.log( "Connecté à la base de données :", url );
+} );
+
+connection.on( "error", function ( error: any )
+{
+	console.error( "Erreur de connexion à la base de données :", error );
+} );
+
+//
+// Prise en charge des connexions via les sockets.
+//
 import { Server } from "socket.io";
+
 const io = new Server( server );
 
 io.on( "connection", function ( socket )
@@ -24,28 +63,4 @@ io.on( "connection", function ( socket )
 	{
 		console.log( "L'utilisateur s'est déconnecté." );
 	} );
-} );
-
-// Initialisation de la base de données.
-import { connectDatabase } from "./utils/database";
-
-connectDatabase();
-
-// Création des routes de tests.
-import json from "./routes/json";
-import database from "./routes/database";
-
-app.use( "/api/json", json );
-app.use( "/api/database", database );
-
-// Affichage par défaut des fichiers statiques.
-app.get( "*", function ( _request, result, _next )
-{
-	result.sendFile( `${ root }/index.html` );
-} );
-
-// Envoi d'un message d'erreur sur les routes manquantes.
-app.use( function ( _request, result, _next )
-{
-	result.sendStatus( 404 );
 } );

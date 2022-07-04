@@ -1,5 +1,5 @@
 //
-// Route fournissant des données sous format JSON.
+// Route fournissant des données sur les parties.
 //
 import express from "express";
 
