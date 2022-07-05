@@ -1,12 +1,12 @@
 //
 // Permet de créer un appel asynchrone vers une API de test côté serveur.
 //
-export default function callApi( component, url, method, body )
+export default function callApi( component: React.Component, url: string, method: string, body: Object="GET" )
 {
 	fetch( `api/${ url }`, {
 
 		// Méthode de la requête.
-		method: method || "GET",
+		method: method,
 
 		// Corps de la requête.
 		body: JSON.stringify( body ),

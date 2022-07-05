@@ -2,11 +2,11 @@
 // Classe pour simuler un chat en réseau via les sockets.
 //
 import io from "socket.io-client";
-import { Component } from "react";
+import React from "react";
 
 import "./SocketChat.scss";
 
-export default class SocketChat extends Component
+export default class SocketChat extends React.Component
 {
 	constructor( props )
 	{
@@ -16,7 +16,7 @@ export default class SocketChat extends Component
 		// this.state.inputValue = "";
 	}
 
-	handleSubmit( event )
+	handleSubmit( event: React.FormEvent<HTMLFormElement> )
 	{
 		const socket = io();
 
@@ -29,7 +29,7 @@ export default class SocketChat extends Component
 		} );
 	}
 
-	handleChange( event )
+	handleChange( event: React.ChangeEvent<HTMLInputElement> )
 	{
 		this.setState( {
 			inputValue: event.target.value
