@@ -28,9 +28,6 @@
     "nodemon": "~2.0",
     "typescript": "~4.7"
   },
-  "overrides": {
-    "got": ">=12.1.0"
-  },
   "scripts": {
     "start": "pm2 start index.js",
     "stop": "pm2 stop index.js",
