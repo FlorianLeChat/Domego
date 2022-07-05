@@ -26,7 +26,7 @@ export default class Home extends React.Component
 	}
 }
 
-const root = createRoot( document.querySelector( "body > main" ) );
+const root = createRoot( document.querySelector( "body > main" ) as HTMLElement );
 root.render(
 	<React.StrictMode>
 		<BrowserRouter basename={process.env.PUBLIC_URL}>

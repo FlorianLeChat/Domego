@@ -1,12 +1,12 @@
 //
 // Classe de test pour l'API de test côté serveur.
 //
-import { Component } from "react";
+import React from "react";
 import callApi from "../utils/CallApi";
 
 import "./TestApi.scss";
 
-export default class TestApi extends Component
+export default class TestApi extends React.Component
 {
 	constructor( props )
 	{
