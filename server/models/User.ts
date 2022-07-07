@@ -11,7 +11,7 @@ const schema = new mongoose.Schema( {
 		type: String,
 		required: true,
 		lowercase: true,
-		validate: function ( value: any )
+		validate: ( value: string ) =>
 		{
 			return validator.isEmail( value );
 		}
