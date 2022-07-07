@@ -21,7 +21,7 @@ import rooms from "./routes/rooms";
 app.use( "/api/users", users );
 app.use( "/api/rooms", rooms );
 
-app.all( "*", function ( _request, result, _next )
+app.all( "*", ( _request, result, _next ) =>
 {
 	result.sendFile( `${ root }/index.html` );
 } );
@@ -38,12 +38,12 @@ const connection = mongoose.connection;
 
 mongoose.connect( url );
 
-connection.once( "open", function ()
+connection.once( "open", () =>
 {
 	console.log( "Connecté à la base de données :", url );
 } );
 
-connection.on( "error", function ( error: any )
+connection.on( "error", ( error ) =>
 {
 	console.error( "Erreur de connexion à la base de données :", error );
 } );
@@ -55,11 +55,11 @@ import { Server } from "socket.io";
 
 const io = new Server( server );
 
-io.on( "connection", function ( socket )
+io.on( "connection", ( socket ) =>
 {
 	console.log( "Un utilisateur s'est connecté." );
 
-	socket.on( "disconnect", function ()
+	socket.on( "disconnect", () =>
 	{
 		console.log( "L'utilisateur s'est déconnecté." );
 	} );
