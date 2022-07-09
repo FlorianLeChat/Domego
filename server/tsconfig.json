@@ -2,10 +2,8 @@
     "compilerOptions": {
         "paths": { "*": ["./node_modules/*"]},
         "strict": true,
-        "noEmit": true,
         "target": "esnext",
         "module": "esnext",
-        "allowJs": true,
         "sourceMap": false,
         "skipLibCheck": true,
         "noImplicitAny": true,
