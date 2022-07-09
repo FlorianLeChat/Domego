@@ -15,7 +15,7 @@ interface ApiResult
 	delete?: string;
 }
 
-export default class TestApi extends React.Component<ApiResult, {}>
+export default class TestApi extends React.Component<{}, ApiResult>
 {
 	constructor( props: ApiResult )
 	{
@@ -52,10 +52,10 @@ export default class TestApi extends React.Component<ApiResult, {}>
 			<section className="TestApi">
 				<h1>Test de l'appel API vers le serveur</h1>
 
-				<p>État de la réponse GET : {this.props.get}</p>
-				<p>État de la réponse POST : {this.props.post}</p>
-				<p>État de la réponse PUT : {this.props.put}</p>
-				<p>État de la réponse DELETE : {this.props.delete}</p>
+				<p>État de la réponse GET : {this.state.get}</p>
+				<p>État de la réponse POST : {this.state.post}</p>
+				<p>État de la réponse PUT : {this.state.put}</p>
+				<p>État de la réponse DELETE : {this.state.delete}</p>
 			</section>
 		);
 	}

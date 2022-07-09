@@ -9,7 +9,7 @@ export default function callApi( component: React.Component, url: string, method
 		method: method,
 
 		// Corps de la requête.
-		body: JSON.stringify( body ),
+		body: method === "GET" ? null : JSON.stringify( body ),
 
 		// En-tête HTTP de la requête.
 		headers: {
