@@ -6,11 +6,20 @@ import callApi from "../utils/CallApi";
 
 import "./TestApi.scss";
 
-export default class TestApi extends React.Component
+interface ApiResult
 {
-	constructor( props )
+	// Déclaration des variables de l'interface.
+	get?: string;
+	post?: string;
+	put?: string;
+	delete?: string;
+}
+
+export default class TestApi extends React.Component<ApiResult, {}>
+{
+	constructor( props: ApiResult )
 	{
-		// Création des variables du constructeur.
+		// Initialisation des variables du constructeur.
 		super( props );
 
 		this.state = {
@@ -43,10 +52,10 @@ export default class TestApi extends React.Component
 			<section className="TestApi">
 				<h1>Test de l'appel API vers le serveur</h1>
 
-				<p>État de la réponse GET : {this.state.get}</p>
-				<p>État de la réponse POST : {this.state.post}</p>
-				<p>État de la réponse PUT : {this.state.put}</p>
-				<p>État de la réponse DELETE : {this.state.delete}</p>
+				<p>État de la réponse GET : {this.props.get}</p>
+				<p>État de la réponse POST : {this.props.post}</p>
+				<p>État de la réponse PUT : {this.props.put}</p>
+				<p>État de la réponse DELETE : {this.props.delete}</p>
 			</section>
 		);
 	}

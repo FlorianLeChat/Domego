@@ -6,14 +6,22 @@ import React from "react";
 
 import "./SocketChat.scss";
 
-export default class SocketChat extends React.Component
+interface ChatInput
 {
-	constructor( props )
+	// Déclaration des variables de l'interface.
+	value?: string;
+}
+
+export default class SocketChat extends React.Component<ChatInput, {}>
+{
+	constructor( props: ChatInput )
 	{
-		// Création des variables du constructeur.
+		// Initialisation des variables du constructeur.
 		super( props );
 
-		// this.state.inputValue = "";
+		this.state = {
+			value: ""
+		};
 	}
 
 	handleSubmit( event: React.FormEvent<HTMLFormElement> )
@@ -22,17 +30,17 @@ export default class SocketChat extends React.Component
 
 		event.preventDefault();
 
-		socket.emit( "chat message", this.state.inputValue );
+		socket.emit( "chat message", this.props.value );
 
-		this.state.setState( {
-			inputValue: ""
+		this.setState( {
+			value: ""
 		} );
 	}
 
 	handleChange( event: React.ChangeEvent<HTMLInputElement> )
 	{
 		this.setState( {
-			inputValue: event.target.value
+			value: event.target.value
 		} );
 	}
 
