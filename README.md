@@ -1,2 +1,2 @@
-# Domego
-Domego est un jeu pédagogique sérieux dans lequel chaque joueur prend le rôle d’un acteur d’une opération de construction.
+# 🏗️ Domego
+Domego is a serious educational game in which each player takes the role of an actor in a construction operation.
