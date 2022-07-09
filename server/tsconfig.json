@@ -3,7 +3,7 @@
         "paths": { "*": ["./node_modules/*"]},
         "strict": true,
         "target": "esnext",
-        "module": "esnext",
+        "module": "commonjs",
         "sourceMap": false,
         "skipLibCheck": true,
         "noImplicitAny": true,
