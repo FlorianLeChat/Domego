@@ -12,7 +12,7 @@ interface ChatInput
 	value?: string;
 }
 
-export default class SocketChat extends React.Component<ChatInput, {}>
+export default class SocketChat extends React.Component<{}, ChatInput>
 {
 	constructor( props: ChatInput )
 	{
@@ -30,7 +30,7 @@ export default class SocketChat extends React.Component<ChatInput, {}>
 
 		event.preventDefault();
 
-		socket.emit( "chat message", this.props.value );
+		socket.emit( "chat message", this.state.value );
 
 		this.setState( {
 			value: ""
