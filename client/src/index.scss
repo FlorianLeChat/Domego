@@ -1,9 +1,123 @@
 body
 {
+	// Ensemble des documents.
+	line-height: 1.5;
 	font-family: "Roboto", sans-serif;
+	text-rendering: optimizeSpeed;
+	scroll-behavior: smooth;
 }
 
 section.Home
 {
-	margin: 1rem;
+	// Corps de la page d'accueil.
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	text-align: center;
+	user-select: none;
+	align-items: center;
+	flex-direction: column;
+	background-image: url("../public/assets/images/wallpapers/home.jpg");
+
+	h1
+	{
+		// Titre de la page.
+		color: rgb(63, 63, 63);
+		margin: 0.5rem 0 1rem 0;
+		font-size: 2.5rem;
+		align-items: center;
+		text-transform: uppercase;
+	}
+
+	u
+	{
+		// Sous-titre de la page.
+		color: rgb(63, 63, 63);
+	}
+
+	article
+	{
+		// Partie centrale de la page.
+		width: max(20rem, 40%);
+		border: 1px solid rgb(139, 139, 139);
+		padding: 2rem;
+		opacity: 0.95;
+		margin-top: 6rem;
+		background-color: white;
+
+		label
+		{
+			// Libellé du formulaire de création de parties.
+			width: 100%;
+			color: rgb(63, 63, 63);
+			display: inline-block;
+
+			> input
+			{
+				// Champ de saisie pour le pseudonyme.
+				width: 100%;
+				border: 1px solid rgb(139, 139, 139);
+				display: block;
+				padding: 0.25rem 0.5rem;
+				font-size: 0.85rem;
+				margin-top: 0.75rem;
+				box-sizing: border-box;
+				border-radius: 0.25rem;
+				background-color: white;
+				transition-duration: 300ms;
+				transition-property: border-color, box-shadow;
+
+				&::placeholder
+				{
+					// Texte de remplissage du champ de saisie.
+					color: rgb(63, 63, 63, 0.6);
+				}
+
+				&:hover
+				{
+					// Effet de survol du champ de saisie.
+					border-color: rgb(64, 169, 255);
+				}
+
+				&:focus
+				{
+					// Effet de sélection du champ de saisie.
+					outline: none;
+					box-shadow: 0 0 0 0.25rem rgba(24, 144, 255, 0.2);
+					border-color: rgb(64, 169, 255);
+				}
+			}
+		}
+
+		> button
+		{
+			// Bouton de création d'une nouvelle partie.
+			color: rgb(64, 169, 255);
+			width: 100%;
+			height: 4rem;
+			border: 1px solid rgb(139, 139, 139);
+			cursor: pointer;
+			font-size: 2rem;
+			margin-top: 1.25rem;
+			border-radius: 0.25rem;
+			background-color: white;
+			transition-duration: 300ms;
+			transition-property: color, border-color, background-color, box-shadow;
+
+			&:hover
+			{
+				// Effet de survol du bouton.
+				color: white;
+				border-color: rgb(64, 169, 255);
+				background-color: rgb(64, 169, 255);
+			}
+
+			&:active
+			{
+				// Effet de maintien du bouton.
+				box-shadow: 0 0 0 0.25rem rgba(24, 144, 255, 0.2);
+				border-color: rgb(64, 169, 255);
+			}
+		}
+	}
 }

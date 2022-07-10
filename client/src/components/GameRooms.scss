@@ -1,0 +1,93 @@
+table.GameRooms
+{
+	// Corps du tableau.
+	border: 1px solid rgb(139, 139, 139);
+	overflow-y: auto;
+	max-height: 500px;
+	margin-top: 1.25rem;
+	border-collapse: collapse;
+
+	thead
+	{
+		tr:first-of-type th
+		{
+			// Titre du tableau.
+			color: rgb(63, 63, 63);
+			padding: 1rem 0;
+			font-size: 1.25rem;
+			font-weight: bold;
+			border-radius: 0.25rem 0.25rem 0 0;
+			border-bottom: 1px solid rgb(139, 139, 139);
+		}
+
+		tr:last-of-type th
+		{
+			// Catégories du tableau.
+			color: rgb(63, 63, 63, 0.8);
+			border: 1px solid rgb(139, 139, 139);
+			padding: 1rem;
+			font-size: 0.9rem;
+		}
+	}
+
+	tbody tr
+	{
+		// Lignes du tableau.
+		transition: background-color 300ms;
+
+		td
+		{
+			// Contenu du tableau (partie en cours).
+			color: rgb(63, 63, 63);
+			padding: 1rem;
+			font-size: 0.9rem;
+
+			&:not(:last-of-type)
+			{
+				// Blocage de la sélection des informations de la partie.
+				user-select: text;
+			}
+
+			&:last-of-type button
+			{
+				// Bouton pour rejoindre ou observer une partie.
+				cursor: pointer;
+				border: 1px solid rgb(139, 139, 139);
+				display: inline-block;
+				padding: 0.25rem 0.5rem;
+				border-radius: 0.25rem;
+				background-color: white;
+				transition-duration: 300ms;
+				transition-property: color, border-color, box-shadow;
+
+				&:last-of-type
+				{
+					// Marge supérieure du dernier bouton.
+					margin-top: 0.75rem;
+				}
+
+				&:hover
+				{
+					// Effet de survol sur le bouton.
+					color: rgb(64, 169, 255);
+					border-color: rgb(64, 169, 255);
+				}
+
+				&:active
+				{
+					// Effet de maintien sur le bouton.
+					color: rgb(64, 169, 255);
+					outline: none;
+					box-shadow: 0 0 0 0.25rem rgba(24, 144, 255, 0.2);
+					border-color: rgb(64, 169, 255);
+				}
+			}
+		}
+
+		&:hover
+		{
+			// Effet de survol sur une ligne du tableau.
+			background-color: rgb(64, 169, 255, 0.2);
+		}
+	}
+}
