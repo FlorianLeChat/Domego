@@ -1,10 +1,14 @@
 {
-  "main": "app.js",
+  "main": "index.js",
   "name": "domego",
   "author": "Florian Trayon (https://github.com/FlorianLeChat)",
   "license": "AGPL-3.0",
   "private": true,
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FlorianLeChat/Domego.git"
+  },
   "contributors": [
     "Gilles Chandelier (https://github.com/GillesChandelier)",
     "Jiaqi Lui (https://github.com/LiuJiaqi-unice)",
