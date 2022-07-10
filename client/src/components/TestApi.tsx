@@ -1,5 +1,5 @@
 //
-// Classe de test pour l'API de test côté serveur.
+// Composant pour le test de récupération des données de l'API côté serveur.
 //
 import React from "react";
 import callApi from "../utils/CallApi";
