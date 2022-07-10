@@ -1,5 +1,5 @@
 //
-// Classe pour simuler un chat en réseau via les sockets.
+// Composant pour simuler un chat en réseau via les sockets.
 //
 import io from "socket.io-client";
 import React from "react";
