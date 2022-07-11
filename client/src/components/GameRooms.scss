@@ -2,6 +2,7 @@ table.GameRooms
 {
 	// Corps du tableau.
 	border: 1px solid rgb(139, 139, 139);
+	display: block;
 	overflow-y: auto;
 	max-height: 500px;
 	margin-top: 1.25rem;
@@ -27,6 +28,11 @@ table.GameRooms
 			border: 1px solid rgb(139, 139, 139);
 			padding: 1rem;
 			font-size: 0.9rem;
+
+			// Correctifs pour l'apparence des bordures en raison
+			// 	de la modification du type d'affichage du tableau.
+			&:first-of-type { border-left: none; }
+			&:last-of-type { border-right: none; }
 		}
 	}
 
