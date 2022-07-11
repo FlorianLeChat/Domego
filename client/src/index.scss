@@ -1,6 +1,7 @@
-body
+html
 {
 	// Ensemble des documents.
+	min-width: 360px;
 	line-height: 1.5;
 	font-family: "Roboto", sans-serif;
 	text-rendering: optimizeSpeed;
@@ -10,14 +11,15 @@ body
 section.Home
 {
 	// Corps de la page d'accueil.
-	width: 100vw;
 	height: 100vh;
 	display: flex;
 	text-align: center;
 	user-select: none;
 	align-items: center;
 	flex-direction: column;
+	background-size: cover;
 	background-image: url("../public/assets/images/wallpapers/home.jpg");
+	background-position: center;
 
 	h1
 	{
@@ -38,7 +40,7 @@ section.Home
 	article
 	{
 		// Partie centrale de la page.
-		width: max(20rem, 40%);
+		width: max(16rem, 40%);
 		border: 1px solid rgb(139, 139, 139);
 		padding: 2rem;
 		opacity: 0.95;
