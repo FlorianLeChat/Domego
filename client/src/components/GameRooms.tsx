@@ -1,7 +1,7 @@
 //
 // Composant pour afficher un tableau de l'ensemble des parties en cours.
 //
-import React from "react";
+import { Component } from "react";
 import "./GameRooms.scss";
 
 interface RoomProperties
@@ -10,7 +10,7 @@ interface RoomProperties
 	title: string;
 }
 
-export default class GameRooms extends React.Component<RoomProperties, {}>
+export default class GameRooms extends Component<RoomProperties, {}>
 {
 	render()
 	{
