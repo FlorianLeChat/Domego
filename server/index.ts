@@ -57,7 +57,14 @@ const io = new Server( server );
 
 io.on( "connection", ( socket ) =>
 {
+	console.log( socket.id, socket.rooms );
 	console.log( "Un utilisateur s'est connecté." );
+
+	socket.on( "chat message", ( message ) =>
+	{
+		io.emit( "chat message", message );
+		console.log( "Nouveau message reçu :", message );
+	} );
 
 	socket.on( "disconnect", () =>
 	{

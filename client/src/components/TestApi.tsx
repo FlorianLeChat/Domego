@@ -1,7 +1,7 @@
 //
 // Composant pour le test de récupération des données de l'API côté serveur.
 //
-import React from "react";
+import { Component } from "react";
 import callApi from "../utils/CallApi";
 
 import "./TestApi.scss";
@@ -15,7 +15,7 @@ interface ApiResult
 	delete?: string;
 }
 
-export default class TestApi extends React.Component<{}, ApiResult>
+export default class TestApi extends Component<{}, ApiResult>
 {
 	constructor( props: ApiResult )
 	{

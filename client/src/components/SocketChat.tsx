@@ -2,62 +2,48 @@
 // Composant pour simuler un chat en réseau via les sockets.
 //
 import io from "socket.io-client";
-import React from "react";
+import { useEffect, useState } from "react";
 
 import "./SocketChat.scss";
 
-interface ChatInput
+export default function SocketChat()
 {
-	// Déclaration des variables de l'interface.
-	value?: string;
-}
+	const socket = io();
+	const [ inputValue, setInputValue ] = useState( "" );
 
-export default class SocketChat extends React.Component<{}, ChatInput>
-{
-	constructor( props: ChatInput )
+	const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) =>
 	{
-		// Initialisation des variables du constructeur.
-		super( props );
-
-		this.state = {
-			value: ""
-		};
+		setInputValue( event.target.value );
 	}
 
-	handleSubmit( event: React.FormEvent<HTMLFormElement> )
+	const handleFormSubmit = ( event: React.FormEvent<HTMLFormElement> ) =>
 	{
-		const socket = io();
-
 		event.preventDefault();
 
-		socket.emit( "chat message", this.state.value );
+		socket.emit( "chat message", inputValue );
 
-		this.setState( {
-			value: ""
-		} );
+		setInputValue( "" );
 	}
 
-	handleChange( event: React.ChangeEvent<HTMLInputElement> )
+	useEffect( () =>
 	{
-		this.setState( {
-			value: event.target.value
+		socket.on( "chat message", ( message: string ) =>
+		{
+			console.log( message );
 		} );
-	}
+	} )
 
-	render()
-	{
-		// Affichage du rendu HTML du composant.
-		return (
-			<section className="SocketChat">
-				<h1>Test des sockets réseau</h1>
+	// Affichage du rendu HTML du composant.
+	return (
+		<section className="SocketChat">
+			<h1>Test des sockets réseau</h1>
 
-				<ul></ul>
+			<ul></ul>
 
-				<form onSubmit={this.handleSubmit}>
-					<input type="text" onChange={this.handleChange} />
-					<button type="submit">Envoyer</button>
-				</form>
-			</section>
-		);
-	}
+			<form onSubmit={handleFormSubmit}>
+				<input type="text" onChange={handleInputChange} value={inputValue} />
+				<button type="submit">Envoyer</button>
+			</form>
+		</section>
+	);
 }
