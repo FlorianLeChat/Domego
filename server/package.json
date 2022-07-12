@@ -5,6 +5,7 @@
   "license": "AGPL-3.0",
   "private": true,
   "version": "1.0.0",
+  "homepage": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/FlorianLeChat/Domego.git"
