@@ -61,7 +61,7 @@ export default class SocketChat extends Component<{}, ChatState>
 	componentDidMount = () =>
 	{
 		// On crée un socket au montage du composant.
-		this.setState( { socket: io() }, () =>
+		this.setState( { socket: io( { path: process.env.PUBLIC_URL + "/socket.io" } ) }, () =>
 		{
 			// Une fois le socket créé, on écoute les messages du serveur.
 			this.state.socket?.on( "chat message", ( message: string ) =>
@@ -90,7 +90,7 @@ export default class SocketChat extends Component<{}, ChatState>
 		this.state.messages.forEach( ( element ) =>
 		{
 			messages.push( <li>{element}</li> );
-		} )
+		} );
 
 		// On retourne le rendu HTML du composant.
 		return (
