@@ -57,17 +57,17 @@ const io = new Server( server );
 
 io.on( "connection", ( socket ) =>
 {
-	console.log( socket.id, socket.rooms );
-	console.log( "Un utilisateur s'est connecté." );
+	console.log( "Un utilisateur s'est connecté au salon :", socket.id );
 
 	socket.on( "chat message", ( message ) =>
 	{
 		io.emit( "chat message", message );
-		console.log( "Nouveau message reçu :", message );
+
+		console.log( "Nouveau message reçu :", message, socket.id );
 	} );
 
 	socket.on( "disconnect", () =>
 	{
-		console.log( "L'utilisateur s'est déconnecté." );
+		console.log( "L'utilisateur s'est déconnecté du salon :", socket.id );
 	} );
 } );
