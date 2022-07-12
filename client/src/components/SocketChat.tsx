@@ -1,12 +1,12 @@
 //
 // Composant pour simuler un chat en réseau via les sockets.
 //
-import { Component } from "react";
+import { Component, JSXElementConstructor, ReactElement, ReactFragment } from "react";
 import { io, Socket } from "socket.io-client";
 
 import "./SocketChat.scss";
 
-interface ChatInput
+interface ChatState
 {
 	// Déclaration des variables de l'interface.
 	input: string;
@@ -14,9 +14,9 @@ interface ChatInput
 	messages: string[];
 }
 
-export default class SocketChat extends Component<{}, ChatInput>
+export default class SocketChat extends Component<{}, ChatState>
 {
-	constructor( props: ChatInput )
+	constructor( props: ChatState )
 	{
 		// Initialisation des variables du constructeur.
 		super( props );
@@ -85,7 +85,7 @@ export default class SocketChat extends Component<{}, ChatInput>
 	render()
 	{
 		// On génère le rendu HTML du composant.
-		const messages: any = [];
+		const messages: JSX.Element[] = [];
 
 		this.state.messages.forEach( ( element ) =>
 		{
