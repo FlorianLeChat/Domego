@@ -1,7 +1,7 @@
 //
 // Composant pour simuler un chat en réseau via les sockets.
 //
-import { Component, JSXElementConstructor, ReactElement, ReactFragment } from "react";
+import { Component } from "react";
 import { io, Socket } from "socket.io-client";
 
 import "./SocketChat.scss";
