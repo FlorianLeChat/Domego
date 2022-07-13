@@ -9,8 +9,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import TestApi from "./components/TestApi";
 import NotFound from "./components/NotFound";
+import LiveChat from "./components/LiveChat";
 import GameRooms from "./components/GameRooms";
-import SocketChat from "./components/SocketChat";
 
 // Création du conteneur principal.
 export default class Home extends React.Component
@@ -51,7 +51,7 @@ root.render(
 				<Route path="/">
 					<Route index element={<Home />} />
 					<Route path="*" element={<NotFound />} />
-					<Route path="chat" element={<SocketChat />} />
+					<Route path="chat" element={<LiveChat />} />
 					<Route path="database" element={<TestApi />} />
 				</Route>
 			</Routes>

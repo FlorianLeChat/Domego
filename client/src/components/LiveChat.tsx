@@ -4,7 +4,7 @@
 import { Component } from "react";
 import { io, Socket } from "socket.io-client";
 
-import "./SocketChat.scss";
+import "./LiveChat.scss";
 
 interface ChatState
 {
@@ -14,7 +14,7 @@ interface ChatState
 	messages: string[];
 }
 
-export default class SocketChat extends Component<{}, ChatState>
+export default class LiveChat extends Component<{}, ChatState>
 {
 	constructor( props: ChatState )
 	{
@@ -94,7 +94,7 @@ export default class SocketChat extends Component<{}, ChatState>
 
 		// On retourne le rendu HTML du composant.
 		return (
-			<section className="SocketChat">
+			<section className="LiveChat">
 				{/* Titre de la page */}
 				<h1>Test des sockets réseau</h1>
 
