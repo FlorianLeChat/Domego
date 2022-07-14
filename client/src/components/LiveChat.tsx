@@ -8,7 +8,7 @@ import "./LiveChat.scss";
 
 interface ChatState
 {
-	// Déclaration des variables de l'interface.
+	// Déclaration des variables d'état.
 	input: string;
 	socket?: Socket;
 	messages: string[];
@@ -53,9 +53,9 @@ export default class LiveChat extends Component<{}, ChatState>
 		}
 
 		// On vide enfin le champ de saisie.
-		this.setState(
-			{ input: "" }
-		);
+		this.setState( {
+			input: ""
+		} );
 	};
 
 	componentDidMount = () =>
@@ -70,8 +70,6 @@ export default class LiveChat extends Component<{}, ChatState>
 				this.setState( ( state ) => ( {
 					messages: [ ...state.messages, message ]
 				} ) );
-
-				console.log( message );
 			} );
 		} );
 	};
@@ -85,12 +83,9 @@ export default class LiveChat extends Component<{}, ChatState>
 	render()
 	{
 		// On génère le rendu HTML du composant.
-		const messages: JSX.Element[] = [];
-
-		this.state.messages.forEach( ( element ) =>
-		{
-			messages.push( <li>{element}</li> );
-		} );
+		const messages = this.state.messages.map( ( element ) =>
+			<li>{element}</li>
+		);
 
 		// On retourne le rendu HTML du composant.
 		return (
