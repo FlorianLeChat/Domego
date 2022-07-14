@@ -1,8 +1,8 @@
 //
 // Composant pour le test de récupération des données de l'API côté serveur.
 //
-import { useState, useEffect } from "react";
 import callApi from "../utils/CallApi";
+import { useState, useEffect } from "react";
 
 import "./TestApi.scss";
 
