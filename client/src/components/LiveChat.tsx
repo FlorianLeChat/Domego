@@ -1,50 +1,35 @@
 //
 // Composant pour simuler un chat en réseau via les sockets.
 //
-import { Component } from "react";
 import { io, Socket } from "socket.io-client";
+import { useState, useEffect } from "react";
 
 import "./LiveChat.scss";
 
-interface ChatState
+export default function LiveChat()
 {
 	// Déclaration des variables d'état.
-	input: string;
-	socket?: Socket;
-	messages: string[];
-}
+	const [ input, setInput ] = useState( "" );
+	const [ socket, setSocket ] = useState<Socket>();
+	const [ messages, addMessage ] = useState<JSX.Element[]>( [] );
 
-export default class LiveChat extends Component<{}, ChatState>
-{
-	constructor( props: ChatState )
+	// Récupération de la valeur du champ de saisie.
+	const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) =>
 	{
-		// Initialisation des variables du constructeur.
-		super( props );
-
-		this.state = {
-			input: "",
-			messages: []
-		};
-	}
-
-	handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) =>
-	{
-		// On récupère la valeur du champ de saisie.
-		this.setState( {
-			input: event.target.value
-		} );
+		setInput( event.target.value );
 	};
 
-	handleFormSubmit = ( event: React.FormEvent<HTMLFormElement> ) =>
+	// Envoi des nouveaux messages au serveur via les sockets.
+	const handleFormSubmit = ( event: React.FormEvent<HTMLFormElement> ) =>
 	{
 		// On cesse d'abord le comportement par défaut du formulaire.
 		event.preventDefault();
 
-		// On vérifie que l'utilisateur est connecté à un socket.
-		if ( this.state.socket?.connected )
+		// On vérifie alors que l'utilisateur est connecté à un socket.
+		if ( socket?.connected )
 		{
 			// L'utilisateur est connecté, on envoie le message au serveur.
-			this.state.socket?.emit( "chat message", this.state.input );
+			socket.emit( "chat message", input );
 		}
 		else
 		{
@@ -53,55 +38,47 @@ export default class LiveChat extends Component<{}, ChatState>
 		}
 
 		// On vide enfin le champ de saisie.
-		this.setState( {
-			input: ""
-		} );
+		setInput( "" );
 	};
 
-	componentDidMount = () =>
+	// Création du socket au montage du composant.
+	useEffect( () =>
 	{
-		// On crée un socket au montage du composant.
-		this.setState( { socket: io( { path: process.env.PUBLIC_URL + "/socket.io" } ) }, () =>
+		setSocket( io( { path: process.env.PUBLIC_URL + "/socket.io" } ) );
+	}, [] );
+
+	// Gestion de la connexion du socket.
+	// Note : cet effet se déclenche uniquement lorsque le socket est créé.
+	useEffect( () =>
+	{
+		// On accroche un écouteur pour récupérer les messages du serveur.
+		socket?.on( "chat message", ( message ) =>
 		{
-			// Une fois le socket créé, on écoute les messages du serveur.
-			this.state.socket?.on( "chat message", ( message: string ) =>
-			{
-				// Lors de chaque nouveau message, on ajoute le message en mémoire.
-				this.setState( ( state ) => ( {
-					messages: [ ...state.messages, message ]
-				} ) );
-			} );
+			// Lors de chaque nouveau message, on l'ajoute en mémoire.
+			addMessage( elements => [ ...elements, <li key={elements.length}>{message}</li> ] );
 		} );
-	};
 
-	componentWillUnmount = () =>
-	{
-		// On déconnecte le socket au démontage du composant.
-		this.state.socket?.disconnect();
-	};
+		return () =>
+		{
+			// On déconnecte le socket au démontage du composant.
+			socket?.disconnect();
+		};
+	}, [ socket ] );
 
-	render()
-	{
-		// On génère le rendu HTML du composant.
-		const messages = this.state.messages.map( ( element ) =>
-			<li>{element}</li>
-		);
+	// Affichage du rendu HTML du composant.
+	return (
+		<section className="LiveChat">
+			{/* Titre de la page */}
+			<h1>Test des sockets réseau</h1>
 
-		// On retourne le rendu HTML du composant.
-		return (
-			<section className="LiveChat">
-				{/* Titre de la page */}
-				<h1>Test des sockets réseau</h1>
+			{/* Liste des messages */}
+			<ul>{messages}</ul>
 
-				{/* Liste des messages */}
-				<ul>{messages}</ul>
-
-				{/* Champ de saisie */}
-				<form onSubmit={this.handleFormSubmit}>
-					<input type="text" onChange={this.handleInputChange} value={this.state.input} />
-					<button type="submit">Envoyer</button>
-				</form>
-			</section>
-		);
-	}
+			{/* Champ de saisie */}
+			<form onSubmit={handleFormSubmit}>
+				<input type="text" onChange={handleInputChange} value={input} />
+				<button type="submit">Envoyer</button>
+			</form>
+		</section>
+	);
 }
