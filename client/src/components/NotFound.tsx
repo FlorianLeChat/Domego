@@ -7,6 +7,7 @@ import "./NotFound.scss";
 export default function NotFound()
 {
 	return (
+		// Affichage du rendu HTML du composant.
 		<section className="NotFound">
 			{/* Titre de la page */}
 			<h1>Erreur 404</h1>

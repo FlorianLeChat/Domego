@@ -1,62 +1,85 @@
 //
 // Composant pour le test de récupération des données de l'API côté serveur.
 //
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import callApi from "../utils/CallApi";
 
 import "./TestApi.scss";
 
-interface ApiResult
+export default function TestApi()
 {
-	// Déclaration des variables de l'interface.
-	get?: string;
-	post?: string;
-	put?: string;
-	delete?: string;
-}
+	// Déclaration des variables d'état.
+	const [ responses, setResponse ] = useState( {
+		get: "Veuillez patienter...",
+		post: "Veuillez patienter...",
+		put: "Veuillez patienter...",
+		delete: "Veuillez patienter..."
+	} );
 
-export default class TestApi extends Component<{}, ApiResult>
-{
-	constructor( props: ApiResult )
-	{
-		// Initialisation des variables du constructeur.
-		super( props );
-
-		this.state = {
-			get: "Veuillez patienter...",	// Méthode GET.
-			post: "Veuillez patienter...",	// Méthode POST.
-			put: "Veuillez patienter...",	// Méthode PUT.
-			delete: "Veuillez patienter..."	// Méthode DELETE.
-		};
-	}
-
-	componentDidMount()
+	useEffect( () =>
 	{
 		// Récupération de l'ensemble des données de l'API.
-		callApi( this, "users", "GET" );
+		const makeGetRequest = async () =>
+		{
+			const response = await callApi( "users", "GET" );
+
+			setResponse( ( state ) => ( {
+				...state, get: response
+			} ) );
+		}
+
+		makeGetRequest()
+			.catch( console.error );
 
 		// Ajout d'une nouvelle valeur au travers de l'API.
-		callApi( this, "users", "POST", { email: "florian@gmail.com", name: { first: "Florian", last: "Trayon" }, age: Math.floor( Math.random() * 100 ) + 1 } );
+		const makePostRequest = async () =>
+		{
+			const response = await callApi( "users", "POST", { email: "florian@gmail.com", name: { first: "Florian", last: "Trayon" }, age: Math.floor( Math.random() * 100 ) + 1 } );
+
+			setResponse( ( state ) => ( {
+				...state, post: response
+			} ) );
+		};
+
+		makePostRequest()
+			.catch( console.error );
 
 		// Mise à jour d'une valeur existante au travers de l'API.
-		callApi( this, "users", "PUT", { filter: { email: "florian@gmail.com", age: { $not: { $eq: 10 } } }, update: { age: 10 } } );
+		const makePutRequest = async () =>
+		{
+			const response = await callApi( "users", "PUT", { filter: { email: "florian@gmail.com", age: { $not: { $eq: 10 } } }, update: { age: 10 } } );
+
+			setResponse( ( state ) => ( {
+				...state, put: response
+			} ) );
+		};
+
+		makePutRequest()
+			.catch( console.error );
 
 		// Suppression définitive d'une valeur de l'API.
-		callApi( this, "users", "DELETE", { age: 10 } );
-	}
+		const makeDeleteRequest = async () =>
+		{
+			const response = await callApi( "users", "DELETE", { age: 10 } );
 
-	render()
-	{
+			setResponse( ( state ) => ( {
+				...state, delete: response
+			} ) );
+		};
+
+		makeDeleteRequest()
+			.catch( console.error );
+	}, [] );
+
+	return (
 		// Affichage du rendu HTML du composant.
-		return (
-			<section className="TestApi">
-				<h1>Test de l'appel API vers le serveur</h1>
+		<section className="TestApi">
+			<h1>Test de l'appel API vers le serveur</h1>
 
-				<p>État de la réponse GET : {this.state.get}</p>
-				<p>État de la réponse POST : {this.state.post}</p>
-				<p>État de la réponse PUT : {this.state.put}</p>
-				<p>État de la réponse DELETE : {this.state.delete}</p>
-			</section>
-		);
-	}
+			<p>État de la réponse GET : {responses.get}</p>
+			<p>État de la réponse POST : {responses.post}</p>
+			<p>État de la réponse PUT : {responses.put}</p>
+			<p>État de la réponse DELETE : {responses.delete}</p>
+		</section>
+	);
 }
