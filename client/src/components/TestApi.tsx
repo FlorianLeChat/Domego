@@ -71,8 +71,8 @@ export default function TestApi()
 			.catch( console.error );
 	}, [] );
 
+	// Affichage du rendu HTML du composant.
 	return (
-		// Affichage du rendu HTML du composant.
 		<section className="TestApi">
 			<h1>Test de l'appel API vers le serveur</h1>
 
