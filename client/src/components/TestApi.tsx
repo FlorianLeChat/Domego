@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 import "./TestApi.scss";
 
-export default function TestApi()
+export default function TestApi(): JSX.Element
 {
 	// Déclaration des variables d'état.
 	const [ responses, setResponse ] = useState( {

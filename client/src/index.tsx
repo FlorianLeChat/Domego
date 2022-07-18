@@ -13,7 +13,7 @@ import LiveChat from "./components/LiveChat";
 import GameRooms from "./components/GameRooms";
 
 // Création du conteneur principal.
-export default class Home extends React.Component
+export default function Home(): JSX.Element
 {
 	render()
 	{
