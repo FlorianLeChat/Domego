@@ -33,15 +33,9 @@ const server = app.listen( 3001 );
 //
 import mongoose from "mongoose";
 
-const url = "mongodb://127.0.0.1:27017/domego";
 const connection = mongoose.connection;
 
-mongoose.connect( url );
-
-connection.once( "open", () =>
-{
-	console.log( "Connecté à la base de données :", url );
-} );
+mongoose.connect( "mongodb://127.0.0.1:27017/domego" );
 
 connection.on( "error", ( error ) =>
 {
