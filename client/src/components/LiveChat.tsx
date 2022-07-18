@@ -1,35 +1,34 @@
 //
 // Composant pour simuler un chat en réseau via les sockets.
 //
-import { io, Socket } from "socket.io-client";
+import { Socket } from "socket.io-client";
 import { useState, useEffect } from "react";
 
 import "./LiveChat.scss";
 
-export default function LiveChat()
+export default function LiveChat( socket: Socket )
 {
 	// Déclaration des variables d'état.
 	const [ input, setInput ] = useState( "" );
-	const [ socket, setSocket ] = useState<Socket>();
 	const [ messages, addMessage ] = useState<JSX.Element[]>( [] );
 
-	// Récupération de la valeur du champ de saisie.
+	// Récupération du message saisi par l'utilisateur.
 	const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) =>
 	{
 		setInput( event.target.value );
 	};
 
-	// Envoi des nouveaux messages au serveur via les sockets.
+	// Envoi des nouveaux messages au serveur.
 	const handleFormSubmit = ( event: React.FormEvent<HTMLFormElement> ) =>
 	{
 		// On cesse d'abord le comportement par défaut du formulaire.
 		event.preventDefault();
 
 		// On vérifie alors que l'utilisateur est connecté à un socket.
-		if ( socket?.connected )
+		if ( socket.connected )
 		{
 			// L'utilisateur est connecté, on envoie le message au serveur.
-			socket.emit( "chat message", input );
+			socket.emit( "chat", input );
 		}
 		else
 		{
@@ -41,29 +40,16 @@ export default function LiveChat()
 		setInput( "" );
 	};
 
-	// Création du socket au montage du composant.
-	useEffect( () =>
-	{
-		setSocket( io( { path: process.env.PUBLIC_URL + "/socket.io" } ) );
-	}, [] );
-
-	// Gestion de la connexion du socket.
-	// Note : cet effet se déclenche uniquement lorsque le socket est créé.
+	// Récupération des nouveaux messages.
 	useEffect( () =>
 	{
 		// On accroche un écouteur pour récupérer les messages du serveur.
-		socket?.on( "chat message", ( message ) =>
+		socket.on( "message", ( message ) =>
 		{
 			// Lors de chaque nouveau message, on l'ajoute en mémoire.
 			addMessage( elements => [ ...elements, <li key={elements.length}>{message}</li> ] );
 		} );
-
-		return () =>
-		{
-			// On déconnecte le socket au démontage du composant.
-			socket?.disconnect();
-		};
-	}, [ socket ] );
+	}, [] );
 
 	// Affichage du rendu HTML du composant.
 	return (
