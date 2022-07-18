@@ -6,7 +6,7 @@ import { useState, useEffect, HTMLProps } from "react";
 
 import "./GameRooms.scss";
 
-export default function GameRooms( props: HTMLProps<HTMLTableElement> )
+export default function GameRooms( props: HTMLProps<HTMLTableElement> ): JSX.Element
 {
 	// Déclaration des variables d'état.
 	const [ socket, setSocket ] = useState<Socket>();

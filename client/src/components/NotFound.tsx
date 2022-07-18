@@ -4,7 +4,7 @@
 import { Link } from "react-router-dom";
 import "./NotFound.scss";
 
-export default function NotFound()
+export default function NotFound(): JSX.Element
 {
 	// Affichage du rendu HTML du composant.
 	return (

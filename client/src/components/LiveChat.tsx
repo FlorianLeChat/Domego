@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 import "./LiveChat.scss";
 
-export default function LiveChat( socket: Socket )
+export default function LiveChat( socket: Socket ): JSX.Element
 {
 	// Déclaration des variables d'état.
 	const [ input, setInput ] = useState( "" );
