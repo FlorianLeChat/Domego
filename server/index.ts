@@ -46,22 +46,72 @@ connection.on( "error", ( error ) =>
 // Prise en charge des connexions via les sockets.
 //
 import { Server } from "socket.io";
+import { joinUser, getCurrentUser, userDisconnect } from "./utils/UserManager";
 
 const io = new Server( server );
 
 io.on( "connection", ( socket ) =>
 {
-	console.log( "Un utilisateur s'est connecté au salon :", socket.id );
-
-	socket.on( "chat message", ( message ) =>
+	// Connexion des utilisateurs aux salons.
+	socket.on( "joinRoom", ( { username, roomname } ) =>
 	{
-		io.emit( "chat message", message );
+		// On met en mémoire l'utilisateur.
+		const user = joinUser( { id: socket.id, name: username, room: roomname } );
+		socket.join( user.room );
 
-		console.log( "Nouveau message reçu :", message, socket.id );
+		// On affiche ensuite un message de bienvenue au nouvel utilisateur.
+		socket.emit( "message", {
+			id: user.id,
+			name: user.name,
+			message: `Bienvenue ${ user.name } !`
+		} );
+
+		// On envoie enfin un message de connexion à tous les joueurs du salon
+		//	sauf au nouvel utilisateur.
+		socket.broadcast.to( user.room ).emit( "message", {
+			id: user.id,
+			name: user.name,
+			message: `${ user.name } a rejoint le chat.`
+		} );
 	} );
 
+	// Réception des estimations de latence client <-> serveur.
+	socket.on( "ping", ( callback ) =>
+	{
+		callback();
+	} );
+
+	// Réception des messages.
+	socket.on( "chat", ( message ) =>
+	{
+		// On tente de récupérer les informations de l'utilisateur avant
+		//	d'émettre le message à tous les autres utilisateurs du salon.
+		const user = getCurrentUser( socket.id );
+
+		if ( user )
+		{
+			io.to( user.room ).emit( "message", {
+				id: user.id,
+				name: user.name,
+				message: message,
+			} );
+		}
+	} );
+
+	// Déconnexion des utilisateurs des salons.
 	socket.on( "disconnect", () =>
 	{
-		console.log( "L'utilisateur s'est déconnecté du salon :", socket.id );
+		// On tente de récupérer les informations de l'utilisateur avant
+		//	de le déconnecter définitivement du salon.
+		const user = userDisconnect( socket.id );
+
+		if ( user )
+		{
+			io.to( user.room ).emit( "message", {
+				id: user.id,
+				name: user.name,
+				message: `${ user.name } a quitté le chat.`,
+			} );
+		}
 	} );
 } );
