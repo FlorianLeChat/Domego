@@ -53,10 +53,10 @@ const io = new Server( server );
 io.on( "connection", ( socket ) =>
 {
 	// Connexion des utilisateurs aux salons.
-	socket.on( "joinRoom", ( { username, roomname } ) =>
+	socket.on( "joinRoom", ( username, roomname ) =>
 	{
 		// On met en mémoire l'utilisateur.
-		const user = joinUser( { id: socket.id, name: username, room: roomname } );
+		const user = joinUser( socket.id, username, roomname );
 		socket.join( user.room );
 
 		// On affiche ensuite un message de bienvenue au nouvel utilisateur.
