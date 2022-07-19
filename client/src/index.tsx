@@ -5,7 +5,6 @@ import "./index.scss";
 // Importation de React et de ses dépendances.
 import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
-import { randomUUID } from "crypto";
 import { createRoot } from "react-dom/client";
 import { useState, StrictMode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -17,7 +16,7 @@ import LiveChat from "./components/LiveChat";
 import GameRooms from "./components/GameRooms";
 
 // Création des constantes.
-const uuid = randomUUID();
+const uuid = crypto.randomUUID();
 const socket = io( { path: process.env.PUBLIC_URL + "/socket.io" } );
 
 // Création du conteneur principal.
