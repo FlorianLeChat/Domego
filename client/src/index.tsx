@@ -26,16 +26,26 @@ export default function Home(): JSX.Element
 	const [ username, setUsername ] = useState( "" );
 
 	// Création d'une nouvelle partie.
-	const handleButtonClick = ( _event: React.MouseEvent<HTMLButtonElement> ) =>
+	const handleButtonClick = ( event: React.MouseEvent<HTMLButtonElement> ) =>
 	{
-		if ( username !== "" )
+		// On vérifie tout d'abord si l'utilisateur veut bien créer une nouvelle partie.
+		if ( window.confirm( "Voulez-vous créer une nouvelle partie ?" ) === false )
 		{
-			// Le nom d'utilisateur a été renseigné, on créé la nouvelle partie.
-			socket.emit( "joinRoom", { username, uuid } );
+			event.preventDefault();
+			return;
+		}
+
+		// Si c'est le cas, on vérifie si un pseudonyme a bien été renseigné.
+		if ( username.trim() !== "" )
+		{
+			// On signale au serveur qu'on veut créer une nouvelle partie.
+			socket.emit( "joinRoom", username, uuid );
 		}
 		else
 		{
-			// Le nom d'utilisateur est invalide, on bloque l'action.
+			// Dans le cas contraire, on bloque l'action de l'utilisateur.
+			event.preventDefault();
+
 			alert( "Le nom d'utilisateur est manquant ou invalide." );
 		}
 	};
@@ -63,7 +73,7 @@ export default function Home(): JSX.Element
 				</label>
 
 				{/* Bouton de création d'une nouvelle partie */}
-				<Link to={`/game/${ uuid }/${ username }`}>
+				<Link to={`/game/${ uuid }`}>
 					<button type="button" onClick={handleButtonClick}>Créer une partie</button>
 				</Link>
 
