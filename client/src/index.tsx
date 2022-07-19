@@ -14,6 +14,7 @@ import TestApi from "./components/TestApi";
 import NotFound from "./components/NotFound";
 import LiveChat from "./components/LiveChat";
 import GameRooms from "./components/GameRooms";
+import RoleSelection from "./components/RoleSelection";
 
 // Création des constantes.
 const uuid = crypto.randomUUID();
@@ -22,7 +23,7 @@ const socket = io( { path: process.env.PUBLIC_URL + "/socket.io" } );
 // Création du conteneur principal.
 export default function Home(): JSX.Element
 {
-	// Déclaration des variables d'éstat.
+	// Déclaration des variables d'état.
 	const [ username, setUsername ] = useState( "" );
 
 	// Création d'une nouvelle partie.
@@ -73,7 +74,7 @@ export default function Home(): JSX.Element
 				</label>
 
 				{/* Bouton de création d'une nouvelle partie */}
-				<Link to={`/game/${ uuid }`}>
+				<Link to={`/game/${ uuid }/selection`}>
 					<button type="button" onClick={handleButtonClick}>Créer une partie</button>
 				</Link>
 
@@ -84,15 +85,26 @@ export default function Home(): JSX.Element
 	);
 }
 
+// Gestion des routes vers les pages du site.
 const root = createRoot( document.querySelector( "body > main" ) as HTMLElement );
 root.render(
 	<StrictMode>
 		<BrowserRouter basename={process.env.PUBLIC_URL}>
 			<Routes>
 				<Route path="/">
+					{/* Page d'accueil */}
 					<Route index element={<Home />} />
+
+					{/* Page non trouvée. */}
 					<Route path="*" element={<NotFound />} />
-					<Route path="chat" element={<LiveChat socket={socket} />} />
+
+					{/* Chat de test pour chaque partie. */}
+					<Route path="chat/:roomid" element={<LiveChat socket={socket} />} />
+
+					{/* Page de sélection des rôles avant chaque partie. */}
+					<Route path="game/:roomid/selection" element={<RoleSelection socket={socket} />} />
+
+					{/* Page de test des requêtes via MongoDB */}
 					<Route path="database" element={<TestApi />} />
 				</Route>
 			</Routes>
