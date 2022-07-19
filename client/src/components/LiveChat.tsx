@@ -6,7 +6,13 @@ import { useState, useEffect } from "react";
 
 import "./LiveChat.scss";
 
-export default function LiveChat( socket: Socket ): JSX.Element
+interface ChatProps
+{
+	// Déclaration des variables de l'interface.
+	socket: Socket;
+}
+
+export default function LiveChat( props: ChatProps ): JSX.Element
 {
 	// Déclaration des variables d'état.
 	const [ input, setInput ] = useState( "" );
@@ -25,10 +31,10 @@ export default function LiveChat( socket: Socket ): JSX.Element
 		event.preventDefault();
 
 		// On vérifie alors que l'utilisateur est connecté à un socket.
-		if ( socket.connected )
+		if ( props.socket.connected )
 		{
 			// L'utilisateur est connecté, on envoie le message au serveur.
-			socket.emit( "chat", input );
+			props.socket.emit( "chat", input );
 		}
 		else
 		{
@@ -44,12 +50,12 @@ export default function LiveChat( socket: Socket ): JSX.Element
 	useEffect( () =>
 	{
 		// On accroche un écouteur pour récupérer les messages du serveur.
-		socket.on( "message", ( message ) =>
+		props.socket.on( "message", ( message ) =>
 		{
 			// Lors de chaque nouveau message, on l'ajoute en mémoire.
 			addMessage( elements => [ ...elements, <li key={elements.length}>{message}</li> ] );
 		} );
-	}, [] );
+	}, [ props.socket ] );
 
 	// Affichage du rendu HTML du composant.
 	return (
