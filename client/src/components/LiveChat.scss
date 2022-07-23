@@ -1,17 +1,20 @@
 section.LiveChat
 {
+	// Corps de la page.
 	margin: 1rem;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 	padding-bottom: 3rem;
 
 	ul
 	{
+		// Liste des messages.
 		margin: 0;
 		padding: 0;
 		list-style-type: none;
 
 		> li
 		{
+			// Message quelconque.
 			padding: 0.5rem 1rem;
 
 			&:nth-child(odd)
@@ -23,6 +26,7 @@ section.LiveChat
 
 	form
 	{
+		// Formulaire de saisie.
 		left: 0;
 		right: 0;
 		bottom: 0;
@@ -36,6 +40,7 @@ section.LiveChat
 
 		> input
 		{
+			// Champ de saisie.
 			border: none;
 			margin: 0.25rem;
 			padding: 0 1rem;
@@ -44,12 +49,14 @@ section.LiveChat
 
 			&:focus
 			{
+				// Effet de sélection.
 				outline: none;
 			}
 		}
 
 		> button
 		{
+			// Bouton d'envoi.
 			color: white;
 			cursor: pointer;
 			border: none;

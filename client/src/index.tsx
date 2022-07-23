@@ -3,6 +3,7 @@ import "normalize.css";
 import "./index.scss";
 
 // Importation de React et de ses dépendances.
+import Swal from "sweetalert2";
 import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
 import { createRoot } from "react-dom/client";
@@ -27,27 +28,38 @@ export default function Home(): JSX.Element
 	const [ username, setUsername ] = useState( "" );
 
 	// Création d'une nouvelle partie.
-	const handleButtonClick = ( event: React.MouseEvent<HTMLButtonElement> ) =>
+	const handleButtonClick = async ( event: React.MouseEvent<HTMLButtonElement> ) =>
 	{
-		// On vérifie tout d'abord si l'utilisateur veut bien créer une nouvelle partie.
-		if ( window.confirm( "Voulez-vous créer une nouvelle partie ?" ) === false )
-		{
-			event.preventDefault();
-			return;
-		}
+		// On cesse tout d'abord le comportement par défaut du formulaire.
+		event.preventDefault();
 
-		// Si c'est le cas, on vérifie si un pseudonyme a bien été renseigné.
-		if ( username.trim() !== "" )
-		{
-			// On signale au serveur qu'on veut créer une nouvelle partie.
-			socket.emit( "joinRoom", username, uuid );
-		}
-		else
-		{
-			// Dans le cas contraire, on bloque l'action de l'utilisateur.
-			event.preventDefault();
+		// On vérifie ensuite si l'utilisateur veut bien créer une nouvelle partie.
+		const result = await Swal.fire( {
+			title: "Voulez-vous créer une nouvelle partie ?",
+			icon: "warning",
+			text: "Une fois la partie créée, vous ne pourrez plus changer de nom d'utilisateur.",
+			showCancelButton: true,
+			cancelButtonText: "Non",
+			confirmButtonText: "Oui",
+			cancelButtonColor: '#d33333',
+			confirmButtonColor: '#3085d6',
+		} );
 
-			alert( "Le nom d'utilisateur est manquant ou invalide." );
+		if ( result.isConfirmed )
+		{
+			// Si c'est le cas, on vérifie si un nom d'utilisateur a bien été renseigné.
+			if ( username.trim() !== "" )
+			{
+				// On signale alors au serveur qu'on veut créer une nouvelle partie.
+				socket.emit( "joinRoom", username, uuid );
+				event.currentTarget.click();
+			}
+			else
+			{
+				// Dans le cas contraire, on avertit l'utilisateur qu'une information
+				//	est manquante.
+				Swal.fire( "Information manquante", "Le nom d'utilisateur est manquant ou invalide.", "error" );
+			}
 		}
 	};
 
@@ -86,7 +98,7 @@ export default function Home(): JSX.Element
 }
 
 // Gestion des routes vers les pages du site.
-const root = createRoot( document.querySelector( "body > main" ) as HTMLElement );
+const root = createRoot( document.querySelector( "body > main" ) as Element );
 root.render(
 	<StrictMode>
 		<BrowserRouter basename={process.env.PUBLIC_URL}>
