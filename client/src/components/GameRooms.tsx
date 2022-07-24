@@ -1,40 +1,60 @@
 //
 // Composant pour afficher un tableau de l'ensemble des parties en cours.
 //
-import { io, Socket } from "socket.io-client";
-import { useState, useEffect, HTMLProps } from "react";
+import { SocketContext } from "../utils/SocketContext";
+import { HTMLProps, useEffect, useState, useContext } from "react";
 
 import "./GameRooms.scss";
+
+interface Room
+{
+	// Déclaration des variables de l'interface.
+	id: string;
+	count: number;
+	creator: string;
+}
 
 export default function GameRooms( props: HTMLProps<HTMLTableElement> ): JSX.Element
 {
 	// Déclaration des variables d'état.
-	const [ socket, setSocket ] = useState<Socket>();
+	const [ rooms, setRooms ] = useState<JSX.Element[]>( [] );
 
-	// Création du socket au montage du composant.
+	// Déclaration des constantes.
+	const socket = useContext( SocketContext );
+
+	// Récupération de l'ensemble des parties en cours.
 	useEffect( () =>
 	{
-		setSocket( io( { path: process.env.PUBLIC_URL + "/socket.io" } ) );
-	}, [] );
-
-	// Gestion de la connexion du socket.
-	// Note : cet effet se déclenche uniquement lorsque le socket est créé.
-	useEffect( () =>
-	{
-		//
-		const start = Date.now();
-
-		socket?.emit( "ping", () =>
+		const interval = setInterval( () =>
 		{
-			console.log( "Temps de réponse : %d ms", Date.now() - start );
-		} );
+			// On actualise les informations des parties en cours toutes les 3 secondes
+			//	à partir du montage du composant.
+			socket.emit( "GameRooms", ( rooms: any ) =>
+			{
+				// Lors de la réception des données, on construit le HTML afin de l'afficher
+				//	lors du rendu de la page.
+				const rows = rooms.map( ( element: Room, indice: number ) =>
+					<tr key={indice}>
+						<td>{element.id}</td>
+						<td>{element.creator}</td>
+						<td>{element.count}/6</td>
+						<td>
+							<button type="button">Rejoindre</button>
+							<button type="button">Regarder</button>
+						</td>
+					</tr>
+				);
+
+				setRooms( rows );
+			} );
+		}, 3000 );
 
 		return () =>
 		{
-			// On déconnecte le socket au démontage du composant.
-			socket?.disconnect();
+			// On supprime le minuteur au démontage du composant.
+			clearInterval( interval );
 		};
-	} );
+	}, [ socket ] );
 
 	// Affichage du rendu HTML du composant.
 	return (
@@ -53,23 +73,7 @@ export default function GameRooms( props: HTMLProps<HTMLTableElement> ): JSX.Ele
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>38e6364b-6ae1-49ab-8b07-f41d934fb100</td>
-					<td>Florian06</td>
-					<td>18</td>
-					<td>
-						<button type="button">Rejoindre</button>
-						<button type="button">Regarder</button>
-					</td>
-				</tr>
-				{/* <tr *ngFor="let data of filterTable.data">
-					<td>{{ data?.roomID}}</td>
-					<td>{{ data?.creator}}</td>
-					<td>{{ data?.numberOfPlayer }}</td>
-					<td>
-						<button nz-button (click)="joinSalon(data)" [disabled]="data.numberOfPlayer===6">Join</button>
-					</td>
-				</tr> */}
+				{rooms}
 			</tbody>
 		</table>
 	);

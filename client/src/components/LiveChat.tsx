@@ -31,7 +31,7 @@ export default function LiveChat(): JSX.Element
 		if ( socket.connected )
 		{
 			// L'utilisateur est connecté, on envoie le message au serveur.
-			socket.emit( "chat", input );
+			socket.emit( "GameChat", input );
 		}
 		else
 		{
@@ -47,7 +47,7 @@ export default function LiveChat(): JSX.Element
 	useEffect( () =>
 	{
 		// On accroche un écouteur pour récupérer les messages du serveur.
-		socket.on( "message", ( message ) =>
+		socket.on( "GameChat", ( message ) =>
 		{
 			// Lors de chaque nouveau message, on l'ajoute en mémoire.
 			addMessage( elements => [ ...elements, <li key={elements.length}>{message}</li> ] );

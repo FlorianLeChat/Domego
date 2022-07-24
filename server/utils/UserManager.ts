@@ -20,7 +20,6 @@ export function registerUser( id: string, name: string, room: string )
 	return user;
 }
 
-
 //
 // Permet de supprimer les données d'un utilisateur déconnecté.
 //
@@ -43,9 +42,21 @@ export function findUser( id: string )
 }
 
 //
-// Permet de récupérer l'ensemble des utilisateurs.
+// Permet de récupérer l'ensemble des utilisateurs associés à des parties.
 //
 export function getUsers()
 {
-	return users;
+	return users.map( ( user ) =>
+	{
+		return {
+			// L'identifiant unique de la partie.
+			id: user.room,
+
+			// Le nom de l'utilisateur ayant créé la partie.
+			creator: user.name,
+
+			// Le nombre de joueurs associés à cette partie.
+			count: users.filter( ( room ) => room.id === user.id ).length,
+		};
+	} );
 }

@@ -46,7 +46,7 @@ connection.on( "error", ( error ) =>
 // Prise en charge des connexions via les sockets.
 //
 import { Server } from "socket.io";
-import { registerUser, findUser, destroyUser } from "./utils/UserManager";
+import { registerUser, findUser, destroyUser, getUsers } from "./utils/UserManager";
 
 const io = new Server( server );
 
@@ -78,7 +78,7 @@ io.on( "connection", ( socket ) =>
 		callback( "success" );
 
 		// On affiche ensuite un message de bienvenue au nouvel utilisateur.
-		socket.emit( "GameAlert", {
+		socket.emit( "GameChat", {
 			id: user.id,
 			name: user.name,
 			message: `Bienvenue ${ user.name } !`
@@ -86,14 +86,20 @@ io.on( "connection", ( socket ) =>
 
 		// On envoie enfin un message de connexion à tous les joueurs du salon
 		//	sauf au nouvel utilisateur.
-		socket.broadcast.to( user.room ).emit( "GameAlert", {
+		socket.broadcast.to( user.room ).emit( "GameChat", {
 			id: user.id,
 			name: user.name,
 			message: `${ user.name } a rejoint le chat.`
 		} );
 	} );
 
-	// Réception des estimations de latence client <-> serveur.
+	// Réception des demandes de listage des parties disponibles.
+	socket.on( "GameRooms", ( callback ) =>
+	{
+		callback( getUsers() );
+	} );
+
+	// Réception des estimations de latence entre le client et le serveur.
 	socket.on( "GamePing", ( callback ) =>
 	{
 		callback();
@@ -108,7 +114,7 @@ io.on( "connection", ( socket ) =>
 
 		if ( user )
 		{
-			io.to( user.room ).emit( "GameAlert", {
+			io.to( user.room ).emit( "GameChat", {
 				id: user.id,
 				name: user.name,
 				message: message,
