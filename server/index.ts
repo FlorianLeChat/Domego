@@ -53,14 +53,41 @@ const io = new Server( server );
 io.on( "connection", ( socket ) =>
 {
 	// Connexion des utilisateurs aux salons.
-	socket.on( "joinRoom", ( username, roomname ) =>
+	socket.on( "GameConnect", ( username, roomid ) =>
 	{
-		// On met en mémoire l'utilisateur.
-		const user = joinUser( socket.id, username, roomname );
+		// On vérifie tout d'abord si l'utilisateur n'est pas déjà connecté
+		// 	dans une autre partie.
+		if ( getCurrentUser( socket.id ) )
+		{
+			socket.emit( "GameAlert", {
+				type: "error",
+				title: "Duplication des données",
+				message: "Vous êtes déjà connecté à une partie en cours. Veuillez la quitter avant d'en rejoindre une autre."
+			} );
+
+			return;
+		}
+
+		// On vérifie également si les informations transmises par l'utilisateur
+		//	sont considérées comme valides.
+		if ( username.length === 0 || roomid.length === 0 )
+		{
+			socket.emit( "GameAlert", {
+				type: "error",
+				title: "Informations invalides",
+				message: "Le nom d'utilisateur ou l'identifiant unique de la partie sont manquants ou invalides."
+			} );
+
+			return;
+		}
+
+		// On enregistre alors les données en utilisateur en mémoire.
+		const user = joinUser( socket.id, username, roomid );
 		socket.join( user.room );
+		socket.emit( "GameAlert", { type: "success" } );
 
 		// On affiche ensuite un message de bienvenue au nouvel utilisateur.
-		socket.emit( "message", {
+		socket.emit( "GameAlert", {
 			id: user.id,
 			name: user.name,
 			message: `Bienvenue ${ user.name } !`
@@ -68,7 +95,7 @@ io.on( "connection", ( socket ) =>
 
 		// On envoie enfin un message de connexion à tous les joueurs du salon
 		//	sauf au nouvel utilisateur.
-		socket.broadcast.to( user.room ).emit( "message", {
+		socket.broadcast.to( user.room ).emit( "GameAlert", {
 			id: user.id,
 			name: user.name,
 			message: `${ user.name } a rejoint le chat.`
@@ -76,13 +103,13 @@ io.on( "connection", ( socket ) =>
 	} );
 
 	// Réception des estimations de latence client <-> serveur.
-	socket.on( "ping", ( callback ) =>
+	socket.on( "GamePing", ( callback ) =>
 	{
 		callback();
 	} );
 
-	// Réception des messages.
-	socket.on( "chat", ( message ) =>
+	// Réception des messages utilisateur.
+	socket.on( "GameChat", ( message ) =>
 	{
 		// On tente de récupérer les informations de l'utilisateur avant
 		//	d'émettre le message à tous les autres utilisateurs du salon.
@@ -90,7 +117,7 @@ io.on( "connection", ( socket ) =>
 
 		if ( user )
 		{
-			io.to( user.room ).emit( "message", {
+			io.to( user.room ).emit( "GameAlert", {
 				id: user.id,
 				name: user.name,
 				message: message,
@@ -99,7 +126,7 @@ io.on( "connection", ( socket ) =>
 	} );
 
 	// Déconnexion des utilisateurs des salons.
-	socket.on( "disconnect", () =>
+	socket.on( "GameDisconnect", () =>
 	{
 		// On tente de récupérer les informations de l'utilisateur avant
 		//	de le déconnecter définitivement du salon.
@@ -107,7 +134,7 @@ io.on( "connection", ( socket ) =>
 
 		if ( user )
 		{
-			io.to( user.room ).emit( "message", {
+			io.to( user.room ).emit( "GameAlert", {
 				id: user.id,
 				name: user.name,
 				message: `${ user.name } a quitté le chat.`,
