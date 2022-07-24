@@ -6,6 +6,14 @@ html
 	font-family: "Roboto", sans-serif;
 	text-rendering: optimizeSpeed;
 	scroll-behavior: smooth;
+
+	// Flou artistique sur les fenêtres modales.
+	// 	Source : https://sweetalert2.github.io/recipe-gallery/blurred-backdrop.html
+	.swal2-shown > [aria-hidden]
+	{
+		transition: 0.1s filter;
+		filter: blur(10px);
+	}
 }
 
 section.Home
