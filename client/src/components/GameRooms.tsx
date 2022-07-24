@@ -47,7 +47,7 @@ export default function GameRooms( props: HTMLProps<HTMLTableElement> ): JSX.Ele
 
 				setRooms( rows );
 			} );
-		}, 3000 );
+		}, 1000 );
 
 		return () =>
 		{

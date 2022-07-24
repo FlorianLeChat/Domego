@@ -93,19 +93,19 @@ io.on( "connection", ( socket ) =>
 		} );
 	} );
 
-	// Réception des demandes de listage des parties disponibles.
+	// Listage des parties actuellement disponibles.
 	socket.on( "GameRooms", ( callback ) =>
 	{
 		callback( getUsers() );
 	} );
 
-	// Réception des estimations de latence entre le client et le serveur.
+	// Réception et calcul des estimations de latence client <-> serveur.
 	socket.on( "GamePing", ( callback ) =>
 	{
 		callback();
 	} );
 
-	// Réception des messages utilisateur.
+	// Réception et diffusion globale des messages utilisateur.
 	socket.on( "GameChat", ( message ) =>
 	{
 		// On tente de récupérer les informations de l'utilisateur avant
@@ -122,8 +122,8 @@ io.on( "connection", ( socket ) =>
 		}
 	} );
 
-	// Déconnexion des utilisateurs des salons.
-	socket.on( "GameDisconnect", () =>
+	// Déconnexion des utilisateurs du socket.
+	socket.on( "disconnect", () =>
 	{
 		// On tente de récupérer les informations de l'utilisateur avant
 		//	de le déconnecter définitivement du salon.
