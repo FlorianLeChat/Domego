@@ -1,22 +1,19 @@
 //
 // Composant pour simuler un chat en réseau via les sockets.
 //
-import { Socket } from "socket.io-client";
-import { useState, useEffect } from "react";
+import { SocketContext } from "../utils/SocketContext";
+import { useState, useEffect, useContext } from "react";
 
 import "./LiveChat.scss";
 
-interface ChatProps
-{
-	// Déclaration des variables de l'interface.
-	socket: Socket;
-}
-
-export default function LiveChat( props: ChatProps ): JSX.Element
+export default function LiveChat(): JSX.Element
 {
 	// Déclaration des variables d'état.
 	const [ input, setInput ] = useState( "" );
 	const [ messages, addMessage ] = useState<JSX.Element[]>( [] );
+
+	// Création des constantes.
+	const socket = useContext( SocketContext );
 
 	// Récupération du message saisi par l'utilisateur.
 	const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) =>
@@ -31,10 +28,10 @@ export default function LiveChat( props: ChatProps ): JSX.Element
 		event.preventDefault();
 
 		// On vérifie alors que l'utilisateur est connecté à un socket.
-		if ( props.socket.connected )
+		if ( socket.connected )
 		{
 			// L'utilisateur est connecté, on envoie le message au serveur.
-			props.socket.emit( "chat", input );
+			socket.emit( "chat", input );
 		}
 		else
 		{
@@ -50,12 +47,12 @@ export default function LiveChat( props: ChatProps ): JSX.Element
 	useEffect( () =>
 	{
 		// On accroche un écouteur pour récupérer les messages du serveur.
-		props.socket.on( "message", ( message ) =>
+		socket.on( "message", ( message ) =>
 		{
 			// Lors de chaque nouveau message, on l'ajoute en mémoire.
 			addMessage( elements => [ ...elements, <li key={elements.length}>{message}</li> ] );
 		} );
-	}, [ props.socket ] );
+	}, [ socket ] );
 
 	// Affichage du rendu HTML du composant.
 	return (
