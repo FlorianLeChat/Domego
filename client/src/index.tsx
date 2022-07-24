@@ -34,9 +34,9 @@ export default function Home(): JSX.Element
 	{
 		// On vérifie tout d'abord si l'utilisateur veut bien créer une nouvelle partie.
 		const result = await Swal.fire( {
-			title: "Voulez-vous créer une nouvelle partie ?",
 			icon: "question",
 			text: "Une fois la partie créée, vous ne pourrez plus changer de nom d'utilisateur.",
+			title: "Voulez-vous créer une nouvelle partie ?",
 			reverseButtons: true,
 			showCancelButton: true,
 			cancelButtonText: "Non",
@@ -45,40 +45,53 @@ export default function Home(): JSX.Element
 			confirmButtonColor: '#3085d6',
 		} );
 
-		if ( result.isConfirmed )
+		if ( result.isDenied || result.isDismissed )
 		{
-			// Si c'est le cas, on vérifie ensuite si un nom d'utilisateur a bien été renseigné.
-			if ( username.trim() !== "" )
-			{
-				// On signale alors au serveur qu'on veut créer une nouvelle partie.
-				socket.emit( "joinRoom", username, uuid );
-
-				// On redirige enfin l'utilisateur vers la page de sélection des rôles.
-				await Swal.fire( {
-					timer: 500,
-					title: "Création de la partie en cours...",
-					allowEscapeKey: false,
-					timerProgressBar: true,
-					allowOutsideClick: false,
-					didOpen: () =>
-					{
-						// Affichage de l'animation de chargement.
-						Swal.showLoading();
-					},
-					willClose: () =>
-					{
-						// Redirection automatique à la fin du temps d'attente.
-						navigate( `/game/${ uuid }/selection` );
-					}
-				} );
-			}
-			else
-			{
-				// Dans le cas contraire, on avertit enfin l'utilisateur qu'une information
-				//	est manquante.
-				Swal.fire( "Information manquante", "Le nom d'utilisateur est manquant ou invalide.", "error" );
-			}
+			// Si ce n'est pas le cas, on ne fait rien.
+			return;
 		}
+
+		// On affiche alors une animation de chargement pour indiquer à l'utilisateur
+		//	que la partie est en cours de création.
+		await Swal.fire( {
+			icon: "info",
+			text: "Vous trouvez ça long ? Rassurez-vous, le serveur se démène pour traiter la requête.",
+			title: "Création de la partie en cours...",
+			allowEscapeKey: false,
+			timerProgressBar: true,
+			allowOutsideClick: false,
+			didOpen: () =>
+			{
+				// Affichage de l'animation de chargement.
+				Swal.showLoading();
+
+				// Récupération des messages créés par le serveur.
+				socket.once( "GameAlert", ( response ) =>
+				{
+					// Si la réponse indique que la partie n'a pas été créée avec succès,
+					//	on affiche le message d'erreur correspondant avec les informations
+					//	transmises par le serveur.
+					if ( response.type !== "success" )
+					{
+						Swal.fire( response.title, response.message, response.type );
+						return;
+					}
+
+					// Dans le cas contraire, on ferme la fenêtre de chargement afin de poursuivre
+					//	l'exécution des opérations.
+					Swal.close();
+				} );
+
+				// Envoi de la requête de création de la partie.
+				socket.emit( "GameConnect", username, uuid );
+			},
+			willClose: () =>
+			{
+				// Redirection automatique si la fenêtre de chargement est fermée
+				//	normalement (sans aucune erreur émise par le serveur).
+				navigate( `/game/${ uuid }/selection` );
+			}
+		} );
 	};
 
 	// Récupération de la valeur du champ de saisie.
