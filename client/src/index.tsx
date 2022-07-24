@@ -3,10 +3,9 @@ import "normalize.css";
 import "./index.scss";
 
 // Importation de React et de ses dépendances.
-import Swal from "sweetalert2";
-import { io } from "socket.io-client";
 import { createRoot } from "react-dom/client";
-import { useState, StrictMode } from "react";
+import Swal, { SweetAlertIcon } from "sweetalert2";
+import { useState, StrictMode, useContext } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 // Importation des composants React.
@@ -16,20 +15,21 @@ import LiveChat from "./components/LiveChat";
 import GameRooms from "./components/GameRooms";
 import RoleSelection from "./components/RoleSelection";
 
-// Création du socket de communication.
-const socket = io( { path: process.env.PUBLIC_URL + "/socket.io" } );
+// Importation des fonctions utilitaires.
+import { SocketProvider, SocketContext } from "./utils/SocketContext";
 
 // Création du conteneur principal.
 export default function Home(): JSX.Element
 {
-	// Création des constantes.
+	// Déclaration des constantes.
 	const uuid = crypto.randomUUID();
+	const socket = useContext( SocketContext );
 	const navigate = useNavigate();
 
 	// Déclaration des variables d'état.
 	const [ username, setUsername ] = useState( "" );
 
-	// Création d'une nouvelle partie.
+	// Bouton de création d'une nouvelle partie.
 	const handleButtonClick = async () =>
 	{
 		// On vérifie tout d'abord si l'utilisateur veut bien créer une nouvelle partie.
@@ -41,8 +41,8 @@ export default function Home(): JSX.Element
 			showCancelButton: true,
 			cancelButtonText: "Non",
 			confirmButtonText: "Oui",
-			cancelButtonColor: '#d33333',
-			confirmButtonColor: '#3085d6',
+			cancelButtonColor: "#dc3545",
+			confirmButtonColor: "#28a745"
 		} );
 
 		if ( result.isDenied || result.isDismissed )
@@ -65,25 +65,22 @@ export default function Home(): JSX.Element
 				// Affichage de l'animation de chargement.
 				Swal.showLoading();
 
-				// Récupération des messages créés par le serveur.
-				socket.once( "GameAlert", ( response ) =>
+				// Envoi de la requête de création de la partie.
+				socket.emit( "GameConnect", username, uuid, ( type: SweetAlertIcon, title: string, message: string ) =>
 				{
 					// Si la réponse indique que la partie n'a pas été créée avec succès,
 					//	on affiche le message d'erreur correspondant avec les informations
 					//	transmises par le serveur.
-					if ( response.type !== "success" )
+					if ( type !== "success" )
 					{
-						Swal.fire( response.title, response.message, response.type );
+						Swal.fire( title, message, type );
 						return;
 					}
 
-					// Dans le cas contraire, on ferme la fenêtre de chargement afin de poursuivre
+					// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
 					//	l'exécution des opérations.
 					Swal.close();
 				} );
-
-				// Envoi de la requête de création de la partie.
-				socket.emit( "GameConnect", username, uuid );
 			},
 			willClose: () =>
 			{
@@ -94,7 +91,7 @@ export default function Home(): JSX.Element
 		} );
 	};
 
-	// Récupération de la valeur du champ de saisie.
+	// Champ de saisie pour le nom d'utilisateur.
 	const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) =>
 	{
 		setUsername( event.target.value );
@@ -130,25 +127,27 @@ export default function Home(): JSX.Element
 const root = createRoot( document.querySelector( "body > main" ) as Element );
 root.render(
 	<StrictMode>
-		<BrowserRouter basename={process.env.PUBLIC_URL}>
-			<Routes>
-				<Route path="/">
-					{/* Page d'accueil */}
-					<Route index element={<Home />} />
+		<SocketProvider>
+			<BrowserRouter basename={process.env.PUBLIC_URL}>
+				<Routes>
+					<Route path="/">
+						{/* Page d'accueil */}
+						<Route index element={<Home />} />
 
-					{/* Page non trouvée. */}
-					<Route path="*" element={<NotFound />} />
+						{/* Page non trouvée. */}
+						<Route path="*" element={<NotFound />} />
 
-					{/* Chat de test pour chaque partie. */}
-					<Route path="chat/:roomid" element={<LiveChat socket={socket} />} />
+						{/* Chat de test pour chaque partie. */}
+						<Route path="chat/:roomid" element={<LiveChat />} />
 
-					{/* Page de sélection des rôles avant chaque partie. */}
-					<Route path="game/:roomid/selection" element={<RoleSelection socket={socket} />} />
+						{/* Page de sélection des rôles avant chaque partie. */}
+						<Route path="game/:roomid/selection" element={<RoleSelection />} />
 
-					{/* Page de test des requêtes via MongoDB */}
-					<Route path="database" element={<TestApi />} />
-				</Route>
-			</Routes>
-		</BrowserRouter>
+						{/* Page de test des requêtes via MongoDB */}
+						<Route path="database" element={<TestApi />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</SocketProvider>
 	</StrictMode>
 );

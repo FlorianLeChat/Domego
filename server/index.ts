@@ -46,25 +46,20 @@ connection.on( "error", ( error ) =>
 // Prise en charge des connexions via les sockets.
 //
 import { Server } from "socket.io";
-import { joinUser, getCurrentUser, userDisconnect } from "./utils/UserManager";
+import { registerUser, findUser, destroyUser } from "./utils/UserManager";
 
 const io = new Server( server );
 
 io.on( "connection", ( socket ) =>
 {
 	// Connexion des utilisateurs aux salons.
-	socket.on( "GameConnect", ( username, roomid ) =>
+	socket.on( "GameConnect", ( username, roomid, callback ) =>
 	{
 		// On vérifie tout d'abord si l'utilisateur n'est pas déjà connecté
 		// 	dans une autre partie.
-		if ( getCurrentUser( socket.id ) )
+		if ( findUser( socket.id ) )
 		{
-			socket.emit( "GameAlert", {
-				type: "error",
-				title: "Duplication des données",
-				message: "Vous êtes déjà connecté à une partie en cours. Veuillez la quitter avant d'en rejoindre une autre."
-			} );
-
+			callback( "error", "Duplication des données", "Vous êtes déjà connecté à une partie en cours. Veuillez la quitter avant d'en rejoindre une autre." )
 			return;
 		}
 
@@ -72,19 +67,15 @@ io.on( "connection", ( socket ) =>
 		//	sont considérées comme valides.
 		if ( username.length === 0 || roomid.length === 0 )
 		{
-			socket.emit( "GameAlert", {
-				type: "error",
-				title: "Informations invalides",
-				message: "Le nom d'utilisateur ou l'identifiant unique de la partie sont manquants ou invalides."
-			} );
-
+			callback( "error", "Informations invalides", "Le nom d'utilisateur ou l'identifiant unique de la partie sont manquants ou invalides." );
 			return;
 		}
 
 		// On enregistre alors les données en utilisateur en mémoire.
-		const user = joinUser( socket.id, username, roomid );
+		const user = registerUser( socket.id, username, roomid );
 		socket.join( user.room );
-		socket.emit( "GameAlert", { type: "success" } );
+
+		callback( "success" );
 
 		// On affiche ensuite un message de bienvenue au nouvel utilisateur.
 		socket.emit( "GameAlert", {
@@ -113,7 +104,7 @@ io.on( "connection", ( socket ) =>
 	{
 		// On tente de récupérer les informations de l'utilisateur avant
 		//	d'émettre le message à tous les autres utilisateurs du salon.
-		const user = getCurrentUser( socket.id );
+		const user = findUser( socket.id );
 
 		if ( user )
 		{
@@ -130,7 +121,7 @@ io.on( "connection", ( socket ) =>
 	{
 		// On tente de récupérer les informations de l'utilisateur avant
 		//	de le déconnecter définitivement du salon.
-		const user = userDisconnect( socket.id );
+		const user = destroyUser( socket.id );
 
 		if ( user )
 		{

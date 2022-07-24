@@ -10,9 +10,9 @@ interface UserAttributes
 const users: UserAttributes[] = [];
 
 //
-// Permet d'ajouter les informations d'un utilisateur en mémoire.
+// Permet d'enregistrer un utilisateur ayant rejoint une partie.
 //
-export function joinUser( id: string, name: string, room: string )
+export function registerUser( id: string, name: string, room: string )
 {
 	const user = { id, name, room };
 	users.push( user );
@@ -20,18 +20,11 @@ export function joinUser( id: string, name: string, room: string )
 	return user;
 }
 
-//
-// Permet de récupérer l'ensemble des informations d'un utilisateur.
-//
-export function getCurrentUser( id: string )
-{
-	return users.find( ( user ) => user.id === id );
-}
 
 //
-// Permet de supprimer les informations d'un utilisateur à sa déconnexion.
+// Permet de supprimer les données d'un utilisateur déconnecté.
 //
-export function userDisconnect( id: string )
+export function destroyUser( id: string )
 {
 	const index = users.findIndex( ( user ) => user.id === id );
 
@@ -39,4 +32,20 @@ export function userDisconnect( id: string )
 	{
 		return users.splice( index, 1 )[ 0 ];
 	}
+}
+
+//
+// Permet de récupérer les informations d'un utilisateur.
+//
+export function findUser( id: string )
+{
+	return users.find( ( user ) => user.id === id );
+}
+
+//
+// Permet de récupérer l'ensemble des utilisateurs.
+//
+export function getUsers()
+{
+	return users;
 }
