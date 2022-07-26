@@ -73,7 +73,7 @@ export default function GameRooms( props: HTMLProps<HTMLTableElement> ): JSX.Ele
 				</tr>
 			</thead>
 			<tbody>
-				{rooms}
+				{rooms.length > 0 ? rooms : <tr><td colSpan={4}>Aucune partie en cours</td></tr>}
 			</tbody>
 		</table>
 	);

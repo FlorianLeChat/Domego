@@ -1,10 +1,9 @@
 table.GameRooms
 {
 	// Corps du tableau.
-	border: 1px solid rgb(139, 139, 139);
 	display: block;
 	overflow-y: auto;
-	max-height: 500px;
+	max-height: 45vh;
 	margin-top: 1.25rem;
 	border-collapse: collapse;
 
@@ -13,26 +12,21 @@ table.GameRooms
 		tr:first-of-type th
 		{
 			// Titre du tableau.
-			color: rgb(63, 63, 63);
+			color: white;
 			padding: 1rem 0;
-			font-size: 1.25rem;
-			font-weight: bold;
+			font-size: 1.5rem;
+			font-weight: normal;
 			border-radius: 0.25rem 0.25rem 0 0;
-			border-bottom: 1px solid rgb(139, 139, 139);
+			background-color: rgb(63, 63, 63);
 		}
 
 		tr:last-of-type th
 		{
 			// Catégories du tableau.
-			color: rgb(63, 63, 63, 0.8);
-			border: 1px solid rgb(139, 139, 139);
+			color: white;
 			padding: 1rem;
-			font-size: 0.9rem;
-
-			// Correctifs pour l'apparence des bordures en raison
-			// 	de la modification du type d'affichage du tableau.
-			&:first-of-type { border-left: none; }
-			&:last-of-type { border-right: none; }
+			font-weight: normal;
+			background-color: rgb(63, 63, 63, 0.8);
 		}
 	}
 
@@ -40,52 +34,75 @@ table.GameRooms
 	{
 		// Lignes du tableau.
 		transition: background-color 300ms;
+		background-color: lightgrey;
 
 		td
 		{
 			// Contenu du tableau (partie en cours).
 			color: rgb(63, 63, 63);
 			padding: 1rem;
-			font-size: 0.9rem;
+
+			&[colSpan = "4"]
+			{
+				// Contenu par défaut ou vide du tableau.
+				height: 10rem;
+				font-size: 1.25rem;
+				border-radius: 0 0 0.25rem 0.25rem;
+			}
 
 			&:not(:last-of-type)
 			{
-				// Blocage de la sélection des informations de la partie.
-				user-select: text;
+				// Blocage de la sélection des informations de la partie
+				// 	sauf ceux de la dernière colonne.
+				user-select: none;
+
+				&:first-child
+				{
+					// Arrondissement du coin gauche en bas dans la
+					// 	première colonne du tableau.
+					border-bottom-left-radius: 0.25rem;
+				}
 			}
 
-			&:last-of-type button
+			&:last-of-type
 			{
-				// Bouton pour rejoindre ou observer une partie.
-				cursor: pointer;
-				border: 1px solid rgb(139, 139, 139);
-				display: inline-block;
-				padding: 0.25rem 0.5rem;
-				border-radius: 0.25rem;
-				background-color: white;
-				transition-duration: 300ms;
-				transition-property: color, border-color, box-shadow;
+				// Dernière colonne du tableau.
+				border-bottom-right-radius: 0.25rem;
 
-				&:last-of-type
+				button
 				{
-					// Marge supérieure du dernier bouton.
-					margin-top: 0.75rem;
-				}
+					// Boutons pour rejoindre ou observer une partie.
+					margin: auto;
+					cursor: pointer;
+					border: 1px solid rgb(139, 139, 139);
+					display: block;
+					padding: 0.25rem 0.5rem;
+					border-radius: 0.25rem;
+					background-color: white;
+					transition-duration: 300ms;
+					transition-property: color, border-color, box-shadow;
 
-				&:hover
-				{
-					// Effet de survol sur le bouton.
-					color: rgb(64, 169, 255);
-					border-color: rgb(64, 169, 255);
-				}
+					&:last-of-type
+					{
+						// Marge supérieure du dernier bouton.
+						margin-top: 0.5rem;
+					}
 
-				&:active
-				{
-					// Effet de maintien sur le bouton.
-					color: rgb(64, 169, 255);
-					outline: none;
-					box-shadow: 0 0 0 0.25rem rgba(24, 144, 255, 0.2);
-					border-color: rgb(64, 169, 255);
+					&:hover
+					{
+						// Effet de survol sur le bouton.
+						color: rgb(64, 169, 255);
+						border-color: rgb(64, 169, 255);
+					}
+
+					&:active
+					{
+						// Effet de maintien sur le bouton.
+						color: rgb(64, 169, 255);
+						outline: none;
+						box-shadow: 0 0 0 0.25rem rgba(24, 144, 255, 0.2);
+						border-color: rgb(64, 169, 255);
+					}
 				}
 			}
 		}
