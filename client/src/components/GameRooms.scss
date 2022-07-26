@@ -50,18 +50,11 @@ table.GameRooms
 				border-radius: 0 0 0.25rem 0.25rem;
 			}
 
-			&:not(:last-of-type)
+			&:not(:last-of-type):first-child
 			{
-				// Blocage de la sélection des informations de la partie
-				// 	sauf ceux de la dernière colonne.
-				user-select: none;
-
-				&:first-child
-				{
-					// Arrondissement du coin gauche en bas dans la
-					// 	première colonne du tableau.
-					border-bottom-left-radius: 0.25rem;
-				}
+				// Arrondissement du coin gauche en bas dans la
+				// 	première colonne du tableau.
+				border-bottom-left-radius: 0.25rem;
 			}
 
 			&:last-of-type
@@ -77,6 +70,7 @@ table.GameRooms
 					border: 1px solid rgb(139, 139, 139);
 					display: block;
 					padding: 0.25rem 0.5rem;
+					font-size: 1rem;
 					border-radius: 0.25rem;
 					background-color: white;
 					transition-duration: 300ms;

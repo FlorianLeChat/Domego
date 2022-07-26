@@ -1,5 +1,4 @@
 // Importation des feuilles de style CSS.
-import "normalize.css";
 import "./index.scss";
 
 // Importation de React et de ses dépendances.
