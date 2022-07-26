@@ -107,11 +107,13 @@ export default function Home(): JSX.Element
 			<u>Un jeu sérieux pédagogique</u>
 
 			<article>
-				{/* Saisie d'un pseudonyme */}
-				<label>
-					Veuillez saisir un pseudonyme.
-					<input type="text" placeholder="Marc007" autoComplete="off" spellCheck="false" minLength={5} maxLength={20} onChange={handleInputChange} value={username} />
+				{/* Saisie d'un nom d'utilisateur */}
+				<label htmlFor="pseudo">
+					Veuillez saisir un nom d'utilisateur<span>*</span><br />
+					(<strong>5</strong> caractères minimum, <strong>20</strong> caractères maximum)
 				</label>
+
+				<input type="text" name="pseudo" placeholder="Marc007" autoComplete="off" spellCheck="false" minLength={5} maxLength={20} onChange={handleInputChange} value={username} required />
 
 				{/* Bouton de création d'une nouvelle partie */}
 				<button type="button" onClick={handleButtonClick}>Créer une partie</button>

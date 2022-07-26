@@ -34,7 +34,7 @@ section.Home
 		// Titre de la page.
 		color: rgb(63, 63, 63);
 		margin: 0.5rem 0 1rem 0;
-		font-size: 2.5rem;
+		font-size: 3rem;
 		align-items: center;
 		text-transform: uppercase;
 	}
@@ -43,17 +43,17 @@ section.Home
 	{
 		// Sous-titre de la page.
 		color: rgb(63, 63, 63);
+		font-size: 1.25rem;
 	}
 
 	article
 	{
 		// Partie centrale de la page.
-		width: max(16rem, 40%);
 		border: 1px solid rgb(139, 139, 139);
 		padding: 2rem;
-		opacity: 0.95;
+		max-width: max(16rem, 45vw);
 		margin-top: 6rem;
-		background-color: white;
+		background-color: whitesmoke;
 
 		label
 		{
@@ -61,41 +61,54 @@ section.Home
 			width: 100%;
 			color: rgb(63, 63, 63);
 			display: inline-block;
+			font-weight: 500;
 
-			> input
+			> span
 			{
-				// Champ de saisie pour le pseudonyme.
-				width: 100%;
-				border: 1px solid rgb(139, 139, 139);
-				display: block;
-				padding: 0.25rem 0.5rem;
-				font-size: 0.85rem;
-				margin-top: 0.75rem;
-				box-sizing: border-box;
-				border-radius: 0.25rem;
-				background-color: white;
-				transition-duration: 300ms;
-				transition-property: border-color, box-shadow;
+				// Champs requis.
+				color: red;
+			}
+		}
 
-				&::placeholder
-				{
-					// Texte de remplissage du champ de saisie.
-					color: rgb(63, 63, 63, 0.6);
-				}
+		input
+		{
+			// Champ de saisie pour le pseudonyme.
+			width: 100%;
+			border: 1px solid rgb(139, 139, 139);
+			display: block;
+			padding: 0.5rem;
+			margin-top: 0.75rem;
+			box-sizing: border-box;
+			border-radius: 0.25rem;
+			background-color: white;
+			transition-duration: 300ms;
+			transition-property: border-color, box-shadow;
 
-				&:hover
-				{
-					// Effet de survol du champ de saisie.
-					border-color: rgb(64, 169, 255);
-				}
+			&::placeholder
+			{
+				// Texte de remplissage du champ de saisie.
+				color: rgb(63, 63, 63, 0.6);
+			}
 
-				&:focus
-				{
-					// Effet de sélection du champ de saisie.
-					outline: none;
-					box-shadow: 0 0 0 0.25rem rgba(24, 144, 255, 0.2);
-					border-color: rgb(64, 169, 255);
-				}
+			&:hover
+			{
+				// Effet de survol du champ de saisie.
+				border-color: rgb(64, 169, 255);
+			}
+
+			&:focus
+			{
+				// Effet de sélection du champ de saisie.
+				outline: none;
+				box-shadow: 0 0 0 0.25rem rgba(24, 144, 255, 0.2);
+				border-color: rgb(64, 169, 255);
+			}
+
+			&:invalid ~ button
+			{
+				// Désactivation conditionnelle du bouton de validation.
+				filter: opacity(0.5);
+				pointer-events: none;
 			}
 		}
 
@@ -104,15 +117,16 @@ section.Home
 			// Bouton de création d'une nouvelle partie.
 			color: rgb(64, 169, 255);
 			width: 100%;
-			height: 4rem;
+			height: 4.5rem;
 			border: 1px solid rgb(139, 139, 139);
 			cursor: pointer;
-			font-size: 2rem;
+			font-size: 2.5rem;
 			margin-top: 1.25rem;
+			will-change: transform; // Correctif pour Chrome : https://stackoverflow.com/a/62403969
 			border-radius: 0.25rem;
 			background-color: white;
 			transition-duration: 300ms;
-			transition-property: color, border-color, background-color, box-shadow;
+			transition-property: color, filter, border-color, background-color, box-shadow;
 
 			&:hover
 			{
