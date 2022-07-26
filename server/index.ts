@@ -1,14 +1,12 @@
 //
 // Initialisation du serveur express.
 //
-import cors from "cors";
 import path from "path";
 import express from "express";
 
 const app = express();
 const root = path.resolve( `${ __dirname }/../client/build` );
 
-app.use( cors() );
 app.use( express.json() );
 app.use( express.static( root ) );
 
