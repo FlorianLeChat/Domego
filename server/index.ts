@@ -12,6 +12,8 @@ app.use( cors() );
 app.use( express.json() );
 app.use( express.static( root ) );
 
+app.disable( "x-powered-by" );
+
 //
 // Création des routes de réponses.
 //
