@@ -126,10 +126,11 @@ section.Home
 			// Bouton de création d'une nouvelle partie.
 			color: rgb(64, 169, 255);
 			width: 100%;
-			height: 4rem;
 			border: 1px solid rgb(139, 139, 139);
 			cursor: pointer;
+			padding: 0.5rem;
 			font-size: 2.25rem;
+			min-height: 4rem;
 			margin-top: 1.25rem;
 			will-change: transform; // Correctif pour Chrome : https://stackoverflow.com/a/62403969
 			border-radius: 0.25rem;
