@@ -8,7 +8,7 @@ import express from "express";
 const app = express();
 const root = path.resolve( `${ __dirname }/../client/build` );
 
-app.use( cors() );
+app.use( cors( { origin: "http://localhost:3000" } ) );
 app.use( express.json() );
 app.use( express.static( root ) );
 
