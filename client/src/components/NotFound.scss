@@ -12,27 +12,54 @@ section.NotFound
 	> h1
 	{
 		// Code d'erreur.
+		$black-strip: rgb(51, 51, 51);		// Couleur de la bande noire.
+		$orange-strip: rgb(245, 154, 35);	// Couleur de la bande orange.
+
+		color: white;
 		margin: 0;
+		padding: 0 1rem;
 		font-size: 8rem;
+		text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+		background-size: 12rem 12rem;
+		background-image: linear-gradient(45deg, $orange-strip 12.5%, $black-strip 12.5%, $black-strip 37.5%, $orange-strip 37.5%, $orange-strip 62.5%, $black-strip 62.5%, $black-strip 87.5%, $orange-strip 87.5%);
 	}
 
 	> h2
 	{
 		// Description de l'erreur.
-		margin: 0;
+		@extend h1;
 		font-size: 4rem;
 	}
 
 	> a
 	{
 		// Lien de redirection.
-		color: black;
+		color: white;
+		font-size: 2rem;
+		text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 		text-decoration: none;
 
 		&:hover
 		{
 			// Effet de sélection.
-			background-color: yellow;
+			@extend h1;
+			font-size: 2rem;
 		}
+	}
+
+	&::before
+	{
+		// Fond d'écran du corps de la section.
+		left: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		filter: blur(3px);
+		content: "";
+		z-index: -1;
+		position: fixed;
+		background-size: cover;
+		background-image: url("../../public/assets/images/wallpapers/notfound.jpg");
+		background-position: center;
 	}
 }
