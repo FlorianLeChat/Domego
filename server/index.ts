@@ -18,10 +18,10 @@ app.disable( "x-powered-by" );
 // Création des routes de réponses.
 //
 import users from "./routes/users";
-import rooms from "./routes/rooms";
+import tokens from "./routes/tokens";
 
 app.use( "/api/users", users );
-app.use( "/api/rooms", rooms );
+app.use( "/api/tokens", tokens );
 
 app.all( "*", ( _request, result ) =>
 {

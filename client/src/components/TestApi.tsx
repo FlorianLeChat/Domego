@@ -24,7 +24,7 @@ export default function TestApi(): JSX.Element
 			const response = await fetchApi( "users", "GET" );
 
 			setResponse( ( state ) => ( {
-				...state, get: response
+				...state, get: JSON.stringify( response )
 			} ) );
 		}
 
@@ -37,7 +37,7 @@ export default function TestApi(): JSX.Element
 			const response = await fetchApi( "users", "POST", { email: "florian@gmail.com", name: { first: "Florian", last: "Trayon" }, age: Math.floor( Math.random() * 100 ) + 1 } );
 
 			setResponse( ( state ) => ( {
-				...state, post: response
+				...state, post: JSON.stringify( response )
 			} ) );
 		};
 
@@ -50,7 +50,7 @@ export default function TestApi(): JSX.Element
 			const response = await fetchApi( "users", "PUT", { filter: { email: "florian@gmail.com", age: { $not: { $eq: 10 } } }, update: { age: 10 } } );
 
 			setResponse( ( state ) => ( {
-				...state, put: response
+				...state, put: JSON.stringify( response )
 			} ) );
 		};
 
@@ -63,7 +63,7 @@ export default function TestApi(): JSX.Element
 			const response = await fetchApi( "users", "DELETE", { age: 10 } );
 
 			setResponse( ( state ) => ( {
-				...state, delete: response
+				...state, delete: JSON.stringify( response )
 			} ) );
 		};
 
