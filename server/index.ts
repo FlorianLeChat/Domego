@@ -23,7 +23,7 @@ import rooms from "./routes/rooms";
 app.use( "/api/users", users );
 app.use( "/api/rooms", rooms );
 
-app.all( "*", ( _request, result, _next ) =>
+app.all( "*", ( _request, result ) =>
 {
 	result.sendFile( `${ root }/index.html` );
 } );

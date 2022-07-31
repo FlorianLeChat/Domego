@@ -1,7 +1,7 @@
 //
-// Permet de créer un appel asynchrone vers une API de test côté serveur.
+// Permet de créer un appel asynchrone vers une route de données côté serveur.
 //
-export function callApi( url: string, method: string = "GET", body: Object = {} ): Promise<string>
+export function fetchApi( url: string, method: string = "GET", body: Object = {} ): Promise<string>
 {
 	// On génère une promesse à cause de la création d'une requête réseau.
 	return new Promise<string>( async ( resolve, reject ) =>

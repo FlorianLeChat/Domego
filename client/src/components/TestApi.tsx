@@ -1,7 +1,7 @@
 //
 // Composant pour le test de récupération des données de l'API côté serveur.
 //
-import { callApi } from "../utils/NetworkHelper";
+import { fetchApi } from "../utils/NetworkHelper";
 import { useState, useEffect } from "react";
 
 import "./TestApi.scss";
@@ -21,7 +21,7 @@ export default function TestApi(): JSX.Element
 		// Récupération de l'ensemble des données de l'API.
 		const makeGetRequest = async () =>
 		{
-			const response = await callApi( "users", "GET" );
+			const response = await fetchApi( "users", "GET" );
 
 			setResponse( ( state ) => ( {
 				...state, get: response
@@ -34,7 +34,7 @@ export default function TestApi(): JSX.Element
 		// Ajout d'une nouvelle valeur au travers de l'API.
 		const makePostRequest = async () =>
 		{
-			const response = await callApi( "users", "POST", { email: "florian@gmail.com", name: { first: "Florian", last: "Trayon" }, age: Math.floor( Math.random() * 100 ) + 1 } );
+			const response = await fetchApi( "users", "POST", { email: "florian@gmail.com", name: { first: "Florian", last: "Trayon" }, age: Math.floor( Math.random() * 100 ) + 1 } );
 
 			setResponse( ( state ) => ( {
 				...state, post: response
@@ -47,7 +47,7 @@ export default function TestApi(): JSX.Element
 		// Mise à jour d'une valeur existante au travers de l'API.
 		const makePutRequest = async () =>
 		{
-			const response = await callApi( "users", "PUT", { filter: { email: "florian@gmail.com", age: { $not: { $eq: 10 } } }, update: { age: 10 } } );
+			const response = await fetchApi( "users", "PUT", { filter: { email: "florian@gmail.com", age: { $not: { $eq: 10 } } }, update: { age: 10 } } );
 
 			setResponse( ( state ) => ( {
 				...state, put: response
@@ -60,7 +60,7 @@ export default function TestApi(): JSX.Element
 		// Suppression définitive d'une valeur de l'API.
 		const makeDeleteRequest = async () =>
 		{
-			const response = await callApi( "users", "DELETE", { age: 10 } );
+			const response = await fetchApi( "users", "DELETE", { age: 10 } );
 
 			setResponse( ( state ) => ( {
 				...state, delete: response

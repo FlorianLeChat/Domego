@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.route( "/" )
 
-	.get( async ( _request, result, _next ) =>
+	.get( async ( _request, result ) =>
 	{
 		// Exemple de la méthode GET.
 		// Récupération de l'ensemble des utilisateurs (maximum 10).
@@ -24,7 +24,7 @@ router.route( "/" )
 		}
 	} )
 
-	.post( async ( request, result, _next ) =>
+	.post( async ( request, result ) =>
 	{
 		// Exemple de la méthode POST.
 		// Ajout d'un nouvel utilisateur dans la base de données.
@@ -41,7 +41,7 @@ router.route( "/" )
 		}
 	} )
 
-	.put( async ( request, result, _next ) =>
+	.put( async ( request, result ) =>
 	{
 		// Exemple de la méthode PUT.
 		// Modification d'un l'utilisateur dans la base de données.
@@ -57,7 +57,7 @@ router.route( "/" )
 		}
 	} )
 
-	.delete( async ( request, result, _next ) =>
+	.delete( async ( request, result ) =>
 	{
 		// Exemple de la méthode DELETE.
 		// Suppression d'un utilisateur dans la base de données.

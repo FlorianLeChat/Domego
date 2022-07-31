@@ -6,6 +6,7 @@ import { createRoot } from "react-dom/client";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useState, StrictMode, useContext } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 // Importation des composants React.
 import TestApi from "./components/TestApi";
@@ -15,6 +16,7 @@ import GameRooms from "./components/GameRooms";
 import RoleSelection from "./components/RoleSelection";
 
 // Importation des fonctions utilitaires.
+import { fetchApi } from "./utils/NetworkHelper";
 import { SocketProvider, SocketContext } from "./utils/SocketContext";
 
 // Création du conteneur principal.
@@ -24,6 +26,7 @@ export default function Home(): JSX.Element
 	const uuid = crypto.randomUUID();
 	const socket = useContext( SocketContext );
 	const navigate = useNavigate();
+	const { executeRecaptcha } = useGoogleReCaptcha();
 
 	// Déclaration des variables d'état.
 	const [ username, setUsername ] = useState( "" );
@@ -31,7 +34,73 @@ export default function Home(): JSX.Element
 	// Bouton de création d'une nouvelle partie.
 	const handleButtonClick = async () =>
 	{
-		// On vérifie tout d'abord si l'utilisateur veut bien créer une nouvelle partie.
+		// On réalise tout d'abord une vérification de sécurité en utilisant le service
+		//	Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
+		await Swal.fire( {
+			icon: "info",
+			text: "Nous sommes en train d'utiliser le service Google reCAPTCHA pour garantir que vous êtes un humain.",
+			title: "Vérification en cours...",
+			allowEscapeKey: false,
+			timerProgressBar: true,
+			allowOutsideClick: false,
+			didOpen: async () =>
+			{
+				// Affichage de l'animation de chargement.
+				Swal.showLoading();
+
+				// Vérification de la disponibilité du service reCAPTCHA.
+				if ( !executeRecaptcha )
+				{
+					// Si le service est indisponible, on affiche un message d'erreur
+					// 	et on arrête l'exécution de la fonction.
+					Swal.fire( {
+						icon: "error",
+						text: "Les services de vérification de Google reCAPTCHA sont actuellement indisponibles. Veuillez réessayer dans quelques instants..",
+						title: "Services indisponibles",
+						confirmButtonText: "D'accord",
+						confirmButtonColor: "#28a745"
+					} );
+
+					return;
+				}
+
+				// Récupération et vérification du jeton d'authentification généré
+				//	par l'API de Google reCAPTCHA.
+				try
+				{
+					// On envoie d'abord une requête de vérification au serveur.
+					const token = await executeRecaptcha();
+					const response = await fetchApi( "tokens", "POST", { token } );
+
+					// On vérifie si le serveur a validé l'intégrité de l'utilisateur.
+					// 	Note : un score trop bas est considéré comme un utilisateur non humain.
+					if ( response !== "human" )
+					{
+						return;
+					}
+
+					// On ferme enfin l'animation de chargement si l'utilisateur n'est pas
+					//	considéré comme un programme informatique.
+					Swal.close();
+				}
+				catch ( error )
+				{
+					// On affiche un message d'erreur si le traitement du jeton d'authentification
+					//	ainsi que la requête au serveur a échouée.
+					Swal.fire( {
+						icon: "error",
+						text: "Le jeton d'authentification transmis par Google reCAPTCHA est invalide ou erroné. Veuillez réessayer dans quelques instants..",
+						title: "Jeton invalide ou erroné",
+						confirmButtonText: "D'accord",
+						confirmButtonColor: "#28a745"
+					} );
+
+					return;
+				}
+			}
+		} );
+
+		// On vérifie alors si l'utilisateur veut bien créer une nouvelle partie.
 		const result = await Swal.fire( {
 			icon: "question",
 			text: "Une fois la partie créée, vous ne pourrez plus changer de nom d'utilisateur.",
@@ -50,7 +119,7 @@ export default function Home(): JSX.Element
 			return;
 		}
 
-		// On affiche alors une animation de chargement pour indiquer à l'utilisateur
+		// On affiche enfin une animation de chargement pour indiquer à l'utilisateur
 		//	que la partie est en cours de création.
 		await Swal.fire( {
 			icon: "info",
@@ -129,26 +198,28 @@ const root = createRoot( document.querySelector( "body > main" ) as Element );
 root.render(
 	<StrictMode>
 		<SocketProvider>
-			<BrowserRouter basename={process.env.PUBLIC_URL}>
-				<Routes>
-					<Route path="/">
-						{/* Page d'accueil */}
-						<Route index element={<Home />} />
+			<GoogleReCaptchaProvider reCaptchaKey={process.env.REACT_APP_CAPTCHA_PUBLIC_KEY || ""}>
+				<BrowserRouter basename={process.env.PUBLIC_URL}>
+					<Routes>
+						<Route path="/">
+							{/* Page d'accueil */}
+							<Route index element={<Home />} />
 
-						{/* Page non trouvée. */}
-						<Route path="*" element={<NotFound />} />
+							{/* Page non trouvée. */}
+							<Route path="*" element={<NotFound />} />
 
-						{/* Chat de test pour chaque partie. */}
-						<Route path="chat/:roomid" element={<LiveChat />} />
+							{/* Chat de test pour chaque partie. */}
+							<Route path="chat/:roomid" element={<LiveChat />} />
 
-						{/* Page de sélection des rôles avant chaque partie. */}
-						<Route path="game/:roomid/selection" element={<RoleSelection />} />
+							{/* Page de sélection des rôles avant chaque partie. */}
+							<Route path="game/:roomid/selection" element={<RoleSelection />} />
 
-						{/* Page de test des requêtes via MongoDB */}
-						<Route path="database" element={<TestApi />} />
-					</Route>
-				</Routes>
-			</BrowserRouter>
+							{/* Page de test des requêtes via MongoDB */}
+							<Route path="database" element={<TestApi />} />
+						</Route>
+					</Routes>
+				</BrowserRouter>
+			</GoogleReCaptchaProvider>
 		</SocketProvider>
 	</StrictMode>
 );
