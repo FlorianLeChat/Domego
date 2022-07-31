@@ -29,7 +29,7 @@ export function fetchApi( url: string, method: string = "GET", body: Object = {}
 			const json = await response.json();
 
 			// On donne enfin le résultat adéquat en fonction de la réponse de l'API.
-			json.state === true ? resolve( JSON.stringify( json.response ?? "" ) ) : reject( "Aucune réponse disponible." );
+			json.state === true ? resolve( json.response ?? "" ) : reject( "Aucune réponse disponible." );
 		}
 
 		// Dans le cas contraire, on rejette la promesse avec le message d'erreur.

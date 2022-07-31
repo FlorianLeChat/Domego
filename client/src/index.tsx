@@ -55,7 +55,7 @@ export default function Home(): JSX.Element
 					// 	et on arrête l'exécution de la fonction.
 					Swal.fire( {
 						icon: "error",
-						text: "Les services de vérification de Google reCAPTCHA sont actuellement indisponibles. Veuillez réessayer dans quelques instants..",
+						text: "Les services de vérification de Google reCAPTCHA sont actuellement indisponibles. Veuillez réessayer dans quelques instants.",
 						title: "Services indisponibles",
 						confirmButtonText: "D'accord",
 						confirmButtonColor: "#28a745"
@@ -89,7 +89,7 @@ export default function Home(): JSX.Element
 					//	ainsi que la requête au serveur a échouée.
 					Swal.fire( {
 						icon: "error",
-						text: "Le jeton d'authentification transmis par Google reCAPTCHA est invalide ou erroné. Veuillez réessayer dans quelques instants..",
+						text: "Le jeton d'authentification transmis par Google reCAPTCHA est invalide ou erroné. Veuillez réessayer dans quelques instants.",
 						title: "Jeton invalide ou erroné",
 						confirmButtonText: "D'accord",
 						confirmButtonColor: "#28a745"
