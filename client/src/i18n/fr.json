@@ -1,0 +1,48 @@
+{
+	"global": {
+		"yes": "Oui",
+		"no": "Non"
+	},
+	"modals": {
+		"recaptcha_waiting_title": "Vérification des informations...",
+		"recaptcha_waiting_description": "Nous sommes en train d'utiliser le service Google reCAPTCHA pour garantir que vous êtes un humain.",
+		"recaptcha_unavailable_title": "Services indisponibles",
+		"recaptcha_unavailable_description": "Les services de vérification de Google reCAPTCHA sont actuellement indisponibles. Veuillez réessayer dans quelques instants.",
+		"recaptcha_invalid_token_title": "Jeton invalide ou manquant",
+		"recaptcha_invalid_token_description": "Le jeton d'authentification transmis par Google reCAPTCHA est invalide ou manquant. Veuillez réessayer dans quelques instants.",
+		"create_new_game_title": "Voulez-vous créer une nouvelle partie ?",
+		"create_new_game_description": "Une fois la partie créée, vous ne pourrez plus changer de nom d'utilisateur.",
+		"creating_new_game_title": "Création d'une nouvelle partie...",
+		"creating_new_game_description": "Vous trouvez ça long ? Rassurez-vous, le serveur se démène pour traiter la requête."
+	},
+	"server": {
+		"duplicated_data_title": "Duplication des données",
+		"duplicated_data_description": "Vous êtes déjà connecté à une partie en cours. Veuillez la quitter avant d'en rejoindre une autre.",
+		"invalid_data_title": "Informations invalides",
+		"invalid_data_description": "Le nom d'utilisateur ou l'identifiant unique de la partie sont manquants ou invalides."
+	},
+	"pages": {
+		"index": {
+			"title": "Domego",
+			"description": "Un jeu sérieux pédagogique",
+			"choose_username": "Veuillez saisir un nom d'utilisateur",
+			"username_length": "<strong>5</strong> caractères minimum, <strong>20</strong> caractères maximum",
+			"create_new_game": "Créer une partie",
+			"games_available": "Parties disponibles"
+		},
+		"rooms": {
+			"join": "Rejoindre",
+			"watch": "Regarder",
+			"unique_identifier": "Identifiant unique",
+			"creator_name": "Nom du créateur",
+			"player_count": "Nombre de joueurs",
+			"available_actions": "Actions disponibles",
+			"no_current_data": "Aucune partie en cours"
+		},
+		"notfound": {
+			"title": "Page introuvable",
+			"description": "La page que vous recherchez n'existe pas.",
+			"link": "Cliquez ici pour revenir en lieu sûr."
+		}
+	}
+}

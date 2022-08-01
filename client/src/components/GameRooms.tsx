@@ -2,8 +2,10 @@
 // Composant pour afficher un tableau de l'ensemble des parties en cours.
 //
 import { SocketContext } from "../utils/SocketContext";
+import { useTranslation } from "react-i18next";
 import { HTMLProps, useEffect, useState, useContext } from "react";
 
+import "../i18n/config";
 import "./GameRooms.scss";
 
 interface Room
@@ -20,6 +22,7 @@ export default function GameRooms( props: HTMLProps<HTMLTableElement> ): JSX.Ele
 	const [ rooms, setRooms ] = useState<JSX.Element[]>( [] );
 
 	// Déclaration des constantes.
+	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
 
 	// Récupération de l'ensemble des parties en cours.
@@ -39,8 +42,8 @@ export default function GameRooms( props: HTMLProps<HTMLTableElement> ): JSX.Ele
 						<td>{element.creator}</td>
 						<td>{element.count}/6</td>
 						<td>
-							<button type="button">Rejoindre</button>
-							<button type="button">Regarder</button>
+							<button type="button">{t( "pages.rooms.join" )}</button>
+							<button type="button">{t( "pages.rooms.watch" )}</button>
 						</td>
 					</tr>
 				);
@@ -54,7 +57,7 @@ export default function GameRooms( props: HTMLProps<HTMLTableElement> ): JSX.Ele
 			// On supprime le minuteur au démontage du composant.
 			clearInterval( interval );
 		};
-	}, [ socket ] );
+	}, [ t, socket ] );
 
 	// Affichage du rendu HTML du composant.
 	return (
@@ -66,14 +69,14 @@ export default function GameRooms( props: HTMLProps<HTMLTableElement> ): JSX.Ele
 				</tr>
 				<tr>
 					{/* Catégories du tableau */}
-					<th>Identifiant unique</th>
-					<th>Nom du créateur</th>
-					<th>Nombre de joueurs</th>
-					<th>Actions disponibles</th>
+					<th>{t( "pages.rooms.unique_identifier" )}</th>
+					<th>{t( "pages.rooms.creator_name" )}</th>
+					<th>{t( "pages.rooms.player_count" )}</th>
+					<th>{t( "pages.rooms.available_actions" )}</th>
 				</tr>
 			</thead>
 			<tbody>
-				{rooms.length > 0 ? rooms : <tr><td colSpan={4}>Aucune partie en cours</td></tr>}
+				{rooms.length > 0 ? rooms : <tr><td colSpan={4}>{t( "pages.rooms.no_current_data" )}</td></tr>}
 			</tbody>
 		</table>
 	);
