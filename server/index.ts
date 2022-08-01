@@ -61,7 +61,7 @@ io.on( "connection", ( socket ) =>
 		// 	dans une autre partie.
 		if ( findUser( socket.id ) )
 		{
-			callback( "error", "Duplication des données", "Vous êtes déjà connecté à une partie en cours. Veuillez la quitter avant d'en rejoindre une autre." )
+			callback( "error", "server.duplicated_data_title", "server.duplicated_data_description" )
 			return;
 		}
 
@@ -69,7 +69,7 @@ io.on( "connection", ( socket ) =>
 		//	sont considérées comme valides.
 		if ( username.length === 0 || roomid.length === 0 )
 		{
-			callback( "error", "Informations invalides", "Le nom d'utilisateur ou l'identifiant unique de la partie sont manquants ou invalides." );
+			callback( "error", "server.invalid_data_title", "server.invalid_data_description" );
 			return;
 		}
 

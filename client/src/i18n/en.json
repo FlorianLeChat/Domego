@@ -1,0 +1,48 @@
+{
+	"global": {
+		"yes": "Yes",
+		"no": "No"
+	},
+	"modals": {
+		"recaptcha_waiting_title": "Checking information...",
+		"recaptcha_waiting_description": "We are using the Google reCAPTCHA service to ensure that you are a human.",
+		"recaptcha_unavailable_title": "Services unavailable",
+		"recaptcha_unavailable_description": "Google reCAPTCHA verification services are currently unavailable. Please try again in a few moments.",
+		"recaptcha_invalid_token_title": "Invalid or missing token",
+		"recaptcha_invalid_token_description": "The authentification token provided by Google reCAPTCHA is invalid or missing. Please try again in a few moments.",
+		"create_new_game_title": "Do you want to create a new game ?",
+		"create_new_game_description": "Once the game is created, you will not be able to change the username.",
+		"creating_new_game_title": "Creating a new game...",
+		"creating_new_game_description": "You think it takes a long time? Don't worry, the server is working hard to process the request."
+	},
+	"server": {
+		"duplicated_data_title": "Data duplication",
+		"duplicated_data_description": "You are already connected to a running game. Please leave it before joining another one.",
+		"invalid_data_title": "Invalid data",
+		"invalid_data_description": "The username or unique game identifier is missing or invalid."
+	},
+	"pages": {
+		"index": {
+			"title": "Domego",
+			"description": "A serious educational game",
+			"choose_username": "Please enter a username",
+			"username_length": "<strong>5</strong> minimum characters, <strong>20</strong> maximum characters",
+			"create_new_game": "Create a new game",
+			"games_available": "Available games"
+		},
+		"rooms": {
+			"join": "Join",
+			"watch": "Watch",
+			"unique_identifier": "Unique identifier",
+			"creator_name": "Creator's name",
+			"player_count": "Player count",
+			"available_actions": "Available actions",
+			"no_current_data": "No games in progress"
+		},
+		"notfound": {
+			"title": "Page not found",
+			"description": "The page you are looking for does not exist.",
+			"link": "Click here to return to a safe place."
+		}
+	}
+}

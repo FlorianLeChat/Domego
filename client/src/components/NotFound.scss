@@ -18,7 +18,7 @@ section.NotFound
 		color: white;
 		margin: 0;
 		padding: 0 1rem;
-		font-size: 8rem;
+		font-size: 6rem;
 		text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 		background-size: 12rem 12rem;
 		background-image: linear-gradient(45deg, $orange-strip 12.5%, $black-strip 12.5%, $black-strip 37.5%, $orange-strip 37.5%, $orange-strip 62.5%, $black-strip 62.5%, $black-strip 87.5%, $orange-strip 87.5%);
@@ -28,14 +28,14 @@ section.NotFound
 	{
 		// Description de l'erreur.
 		@extend h1;
-		font-size: 4rem;
+		font-size: 2rem;
 	}
 
 	> a
 	{
 		// Lien de redirection.
 		color: white;
-		font-size: 2rem;
+		font-size: 1.5rem;
 		text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 		text-decoration: none;
 
@@ -43,7 +43,7 @@ section.NotFound
 		{
 			// Effet de sélection.
 			@extend h1;
-			font-size: 2rem;
+			font-size: 1.5rem;
 		}
 	}
 

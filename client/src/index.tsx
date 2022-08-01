@@ -1,9 +1,13 @@
 // Importation des feuilles de style CSS.
 import "./index.scss";
 
+// Importation des fichiers de configuration.
+import "./i18n/config";
+
 // Importation de React et de ses dépendances.
 import { createRoot } from "react-dom/client";
 import Swal, { SweetAlertIcon } from "sweetalert2";
+import { useTranslation, Trans } from "react-i18next";
 import { useState, StrictMode, useContext } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3";
@@ -24,6 +28,7 @@ export default function Home(): JSX.Element
 {
 	// Déclaration des constantes.
 	const uuid = crypto.randomUUID();
+	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
 	const navigate = useNavigate();
 	const { executeRecaptcha } = useGoogleReCaptcha();
@@ -38,8 +43,8 @@ export default function Home(): JSX.Element
 		//	Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
 		await Swal.fire( {
 			icon: "info",
-			text: "Nous sommes en train d'utiliser le service Google reCAPTCHA pour garantir que vous êtes un humain.",
-			title: "Vérification en cours...",
+			text: t( "modals.recaptcha_waiting_description" ),
+			title: t( "modals.recaptcha_waiting_title" ),
 			allowEscapeKey: false,
 			timerProgressBar: true,
 			allowOutsideClick: false,
@@ -55,9 +60,9 @@ export default function Home(): JSX.Element
 					// 	et on arrête l'exécution de la fonction.
 					Swal.fire( {
 						icon: "error",
-						text: "Les services de vérification de Google reCAPTCHA sont actuellement indisponibles. Veuillez réessayer dans quelques instants.",
-						title: "Services indisponibles",
-						confirmButtonText: "D'accord",
+						text: t( "modals.recaptcha_unavailable_description" ),
+						title: t( "modals.recaptcha_unavailable_title" ),
+						confirmButtonText: t( "global.yes" ),
 						confirmButtonColor: "#28a745"
 					} );
 
@@ -89,9 +94,9 @@ export default function Home(): JSX.Element
 					//	ainsi que la requête au serveur a échouée.
 					Swal.fire( {
 						icon: "error",
-						text: "Le jeton d'authentification transmis par Google reCAPTCHA est invalide ou erroné. Veuillez réessayer dans quelques instants.",
-						title: "Jeton invalide ou erroné",
-						confirmButtonText: "D'accord",
+						text: t( "modals.recaptcha_invalid_token_description" ),
+						title: t( "modals.recaptcha_invalid_token_title" ),
+						confirmButtonText: t( "global.yes" ),
 						confirmButtonColor: "#28a745"
 					} );
 
@@ -103,12 +108,12 @@ export default function Home(): JSX.Element
 		// On vérifie alors si l'utilisateur veut bien créer une nouvelle partie.
 		const result = await Swal.fire( {
 			icon: "question",
-			text: "Une fois la partie créée, vous ne pourrez plus changer de nom d'utilisateur.",
-			title: "Voulez-vous créer une nouvelle partie ?",
+			text: t( "modals.create_new_game_description" ),
+			title: t( "modals.create_new_game_title" ),
 			reverseButtons: true,
 			showCancelButton: true,
-			cancelButtonText: "Non",
-			confirmButtonText: "Oui",
+			cancelButtonText: t( "global.no" ),
+			confirmButtonText: t( "global.yes" ),
 			cancelButtonColor: "#dc3545",
 			confirmButtonColor: "#28a745"
 		} );
@@ -123,8 +128,8 @@ export default function Home(): JSX.Element
 		//	que la partie est en cours de création.
 		await Swal.fire( {
 			icon: "info",
-			text: "Vous trouvez ça long ? Rassurez-vous, le serveur se démène pour traiter la requête.",
-			title: "Création de la partie en cours...",
+			text: t( "modals.creating_new_game_description" ),
+			title: t( "modals.creating_new_game_title" ),
 			allowEscapeKey: false,
 			timerProgressBar: true,
 			allowOutsideClick: false,
@@ -141,7 +146,7 @@ export default function Home(): JSX.Element
 					//	transmises par le serveur.
 					if ( type !== "success" )
 					{
-						Swal.fire( title, message, type );
+						Swal.fire( t( title ), t( message ), type );
 						return;
 					}
 
@@ -169,25 +174,26 @@ export default function Home(): JSX.Element
 	return (
 		<section className="Home">
 			{/* Titre de la page */}
-			<h1>Domego</h1>
+			<h1>{t( "pages.index.title" )}</h1>
 
 			{/* Descriptif du jeu */}
-			<u>Un jeu sérieux pédagogique</u>
+			<u>{t( "pages.index.description" )}</u>
 
 			<article>
 				{/* Saisie d'un nom d'utilisateur */}
 				<label htmlFor="pseudo">
-					Veuillez saisir un nom d'utilisateur<span>*</span><br />
-					(<strong>5</strong> caractères minimum, <strong>20</strong> caractères maximum)
+					{t( "pages.index.choose_username" )}<span>*</span>
+					<br />
+					(<Trans i18nKey="pages.index.username_length" components={{ strong: <strong /> }} />)
 				</label>
 
 				<input type="text" name="pseudo" placeholder="Marc007" autoComplete="off" spellCheck="false" minLength={5} maxLength={20} onChange={handleInputChange} value={username} required />
 
 				{/* Bouton de création d'une nouvelle partie */}
-				<button type="button" onClick={handleButtonClick}>Créer une partie</button>
+				<button type="button" onClick={handleButtonClick}>{t( "pages.index.create_new_game" )}</button>
 
 				{/* Tableau des parties en cours */}
-				<GameRooms title="Parties disponibles" />
+				<GameRooms title={t( "pages.index.games_available" )} />
 			</article>
 		</section>
 	);

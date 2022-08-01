@@ -22,9 +22,11 @@
   "dependencies": {
     "sass": "~1.54",
     "react": "~18.2",
+    "i18next": "~21.8",
     "react-dom": "~18.2",
     "web-vitals": "~2.1",
     "sweetalert2": "~11.4",
+    "react-i18next": "~11.18",
     "socket.io-client": "~4.5",
     "react-router-dom": "~6.3",
     "react-google-recaptcha-v3": "~1.10"
