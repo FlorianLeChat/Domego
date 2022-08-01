@@ -5,10 +5,11 @@ import "./index.scss";
 import "./i18n/config";
 
 // Importation de React et de ses dépendances.
+import ReactGA from "react-ga";
 import { createRoot } from "react-dom/client";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useTranslation, Trans } from "react-i18next";
-import { useState, StrictMode, useContext } from "react";
+import { useState, StrictMode, useContext, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
@@ -170,6 +171,13 @@ export default function Home(): JSX.Element
 		setUsername( event.target.value );
 	};
 
+	// Mise en place des statistiques de Google Analytics.
+	useEffect( () =>
+	{
+		ReactGA.initialize( process.env.REACT_APP_ANALYTICS_IDENTIFIER ?? "" );
+		ReactGA.pageview( window.location.pathname + window.location.search );
+	}, [] );
+
 	// Affichage du rendu HTML du composant.
 	return (
 		<section className="Home">
@@ -204,7 +212,7 @@ const root = createRoot( document.querySelector( "body > main" ) as Element );
 root.render(
 	<StrictMode>
 		<SocketProvider>
-			<GoogleReCaptchaProvider reCaptchaKey={process.env.REACT_APP_CAPTCHA_PUBLIC_KEY || ""}>
+			<GoogleReCaptchaProvider reCaptchaKey={process.env.REACT_APP_CAPTCHA_PUBLIC_KEY ?? ""}>
 				<BrowserRouter basename={process.env.PUBLIC_URL}>
 					<Routes>
 						<Route path="/">
