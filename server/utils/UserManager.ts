@@ -1,9 +1,29 @@
 // Déclaration des interfaces.
 interface UserAttributes
 {
-	id: string;
+	// Identifiant unique de l'utilisateur (socket).
+	// 	Source : https://socket.io/docs/v4/server-socket-instance/#socketid
+	id: string[ 20 ];
+
+	// Nom d'utilisateur (le premier équivaut au créateur).
 	name: string;
-	room: string;
+
+	// Rôle de l'utilisateur (joueur ou spectateur).
+	role: UserRole;
+
+	// Identifiant unique de la partie (UUID v4).
+	// 	Source : https://en.wikipedia.org/wiki/Universally_unique_identifier#Format
+	game: string[ 36 ];
+}
+
+// Déclaration des énumérations.
+enum UserRole
+{
+	// Joueur.
+	PLAYER = "player",
+
+	// Spectateur.
+	SPECTATOR = "spectator",
 }
 
 // Déclaration des constantes.
@@ -12,9 +32,9 @@ const users: UserAttributes[] = [];
 //
 // Permet d'enregistrer un utilisateur ayant rejoint une partie.
 //
-export function registerUser( id: string, name: string, room: string )
+export function registerUser( id: string, name: string, role: UserRole, game: string )
 {
-	const user = { id, name, room };
+	const user = { id, name, role, game };
 	users.push( user );
 
 	return user;
@@ -34,7 +54,7 @@ export function destroyUser( id: string )
 }
 
 //
-// Permet de récupérer les informations d'un utilisateur.
+// Permet de récupérer les informations d'un utilisateur en particulier.
 //
 export function findUser( id: string )
 {
@@ -42,21 +62,9 @@ export function findUser( id: string )
 }
 
 //
-// Permet de récupérer l'ensemble des utilisateurs associés à des parties.
+// Permet d'exporter l'ensemble des utilisateurs en mémoire.
 //
 export function getUsers()
 {
-	return users.map( ( user ) =>
-	{
-		return {
-			// L'identifiant unique de la partie.
-			id: user.room,
-
-			// Le nom de l'utilisateur ayant créé la partie.
-			creator: user.name,
-
-			// Le nombre de joueurs associés à cette partie.
-			count: users.filter( ( room ) => room.id === user.id ).length,
-		};
-	} );
+	return structuredClone( users );
 }
