@@ -19,7 +19,9 @@
 		"duplicated_data_title": "Duplication des données",
 		"duplicated_data_description": "Vous êtes déjà connecté à une partie en cours. Veuillez la quitter avant d'en rejoindre une autre.",
 		"invalid_data_title": "Informations invalides",
-		"invalid_data_description": "Le nom d'utilisateur ou l'identifiant unique de la partie sont manquants ou invalides."
+		"invalid_data_description": "Le nom d'utilisateur ou l'identifiant unique de la partie sont manquants ou invalides.",
+		"full_game_title": "Partie pleine",
+		"full_game_description": "La partie est pleine. Vous pouvez toujours la rejoindre en tant que spectateur ou attendre que des places se libèrent."
 	},
 	"pages": {
 		"index": {

@@ -12,8 +12,9 @@ interface Room
 {
 	// Déclaration des variables de l'interface.
 	id: string;
-	count: number;
 	creator: string;
+	players: number;
+	spectators: number;
 }
 
 export default function GameRooms( props: HTMLProps<HTMLTableElement> ): JSX.Element
@@ -32,7 +33,7 @@ export default function GameRooms( props: HTMLProps<HTMLTableElement> ): JSX.Ele
 		{
 			// On actualise les informations des parties en cours toutes les 3 secondes
 			//	à partir du montage du composant.
-			socket.emit( "GameRooms", ( rooms: any ) =>
+			socket.emit( "GameRooms", ( rooms: Room[] ) =>
 			{
 				// Lors de la réception des données, on construit le HTML afin de l'afficher
 				//	lors du rendu de la page.
@@ -40,10 +41,10 @@ export default function GameRooms( props: HTMLProps<HTMLTableElement> ): JSX.Ele
 					<tr key={indice}>
 						<td>{element.id}</td>
 						<td>{element.creator}</td>
-						<td>{element.count}/6</td>
+						<td>{element.players}/6 [{element.spectators}]</td>
 						<td>
-							<button type="button">{t( "pages.rooms.join" )}</button>
-							<button type="button">{t( "pages.rooms.watch" )}</button>
+							<button type="button" onClick={joinGame}>{t( "pages.rooms.join" )}</button>
+							<button type="button" onClick={watchGame}>{t( "pages.rooms.watch" )}</button>
 						</td>
 					</tr>
 				);

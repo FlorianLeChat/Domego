@@ -38,7 +38,7 @@ export default function Home(): JSX.Element
 	const [ username, setUsername ] = useState( "" );
 
 	// Bouton de création d'une nouvelle partie.
-	const handleButtonClick = async () =>
+	const createNewGame = async () =>
 	{
 		// On réalise tout d'abord une vérification de sécurité en utilisant le service
 		//	Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
@@ -140,7 +140,7 @@ export default function Home(): JSX.Element
 				Swal.showLoading();
 
 				// Envoi de la requête de création de la partie.
-				socket.emit( "GameConnect", username, uuid, ( type: SweetAlertIcon, title: string, message: string ) =>
+				socket.emit( "GameConnect", username, "player", uuid, ( type: SweetAlertIcon, title: string, message: string ) =>
 				{
 					// Si la réponse indique que la partie n'a pas été créée avec succès,
 					//	on affiche le message d'erreur correspondant avec les informations
@@ -166,7 +166,7 @@ export default function Home(): JSX.Element
 	};
 
 	// Champ de saisie pour le nom d'utilisateur.
-	const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) =>
+	const updateUsername = ( event: React.ChangeEvent<HTMLInputElement> ) =>
 	{
 		setUsername( event.target.value );
 	};
@@ -195,10 +195,10 @@ export default function Home(): JSX.Element
 					(<Trans i18nKey="pages.index.username_length" components={{ strong: <strong /> }} />)
 				</label>
 
-				<input type="text" name="pseudo" placeholder="Marc007" autoComplete="off" spellCheck="false" minLength={5} maxLength={20} onChange={handleInputChange} value={username} required />
+				<input type="text" name="pseudo" placeholder="Marc007" autoComplete="off" spellCheck="false" minLength={5} maxLength={20} onChange={updateUsername} value={username} required />
 
 				{/* Bouton de création d'une nouvelle partie */}
-				<button type="button" onClick={handleButtonClick}>{t( "pages.index.create_new_game" )}</button>
+				<button type="button" onClick={createNewGame}>{t( "pages.index.create_new_game" )}</button>
 
 				{/* Tableau des parties en cours */}
 				<GameRooms title={t( "pages.index.games_available" )} />

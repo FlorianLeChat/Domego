@@ -4,7 +4,7 @@
 		"no": "No"
 	},
 	"modals": {
-		"recaptcha_waiting_title": "Checking information...",
+		"recaptcha_waiting_title": "Checking data...",
 		"recaptcha_waiting_description": "We are using the Google reCAPTCHA service to ensure that you are a human.",
 		"recaptcha_unavailable_title": "Services unavailable",
 		"recaptcha_unavailable_description": "Google reCAPTCHA verification services are currently unavailable. Please try again in a few moments.",
@@ -19,7 +19,9 @@
 		"duplicated_data_title": "Data duplication",
 		"duplicated_data_description": "You are already connected to a running game. Please leave it before joining another one.",
 		"invalid_data_title": "Invalid data",
-		"invalid_data_description": "The username or unique game identifier is missing or invalid."
+		"invalid_data_description": "The username or unique game identifier is missing or invalid.",
+		"full_game_title": "Full game",
+		"full_game_description": "The game is full. You can always join as a spectator or wait for available slots."
 	},
 	"pages": {
 		"index": {

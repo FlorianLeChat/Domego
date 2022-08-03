@@ -48,14 +48,15 @@ connection.on( "error", ( error ) =>
 // Prise en charge des connexions via les sockets.
 //
 import { Server } from "socket.io";
-import { registerUser, findUser, destroyUser, getUsers } from "./utils/UserManager";
+import { registerUser, findUser, destroyUser } from "./utils/UserManager";
+import { registerRoom, updateRoom, findRoom, getRooms } from "./utils/RoomManager";
 
 const io = new Server( server );
 
 io.on( "connection", ( socket ) =>
 {
 	// Connexion des utilisateurs aux salons.
-	socket.on( "GameConnect", ( username, roomid, callback ) =>
+	socket.on( "GameConnect", ( name, role, game, callback ) =>
 	{
 		// On vérifie tout d'abord si l'utilisateur n'est pas déjà connecté
 		// 	dans une autre partie.
@@ -67,15 +68,36 @@ io.on( "connection", ( socket ) =>
 
 		// On vérifie également si les informations transmises par l'utilisateur
 		//	sont considérées comme valides.
-		if ( username.length === 0 || roomid.length === 0 )
+		if ( ( name.length < 5 || name.length > 20 ) || ( role !== "player" && role !== "spectator" ) || game.length !== 36 )
 		{
 			callback( "error", "server.invalid_data_title", "server.invalid_data_description" );
 			return;
 		}
 
+		// On met à jour par la même occasion les informations des parties actuelles
+		//	afin de prendre en compte ou non les nouveaux joueurs.
+		const room = findRoom( game );
+
+		if ( !room )
+		{
+			// Création d'une nouvelle partie.
+			registerRoom( game, name );
+		}
+		else
+		{
+			// Vérification du nombre de places restantes.
+			if ( role === "player" && room.players >= 6 )
+			{
+				callback( "error", "server.full_game_title", "server.full_game_description" );
+				return;
+			}
+		}
+
+		updateRoom( game, undefined, role, true );
+
 		// On enregistre alors les données en utilisateur en mémoire.
-		const user = registerUser( socket.id, username, roomid );
-		socket.join( user.room );
+		const user = registerUser( socket.id, name, role, game );
+		socket.join( user.game );
 
 		callback( "success" );
 
@@ -88,17 +110,17 @@ io.on( "connection", ( socket ) =>
 
 		// On envoie enfin un message de connexion à tous les joueurs du salon
 		//	sauf au nouvel utilisateur.
-		socket.broadcast.to( user.room ).emit( "GameChat", {
+		socket.broadcast.to( user.game ).emit( "GameChat", {
 			id: user.id,
 			name: user.name,
-			message: `${ user.name } a rejoint le chat.`
+			message: `${ user.name } a rejoint la partie.`
 		} );
 	} );
 
 	// Listage des parties actuellement disponibles.
 	socket.on( "GameRooms", ( callback ) =>
 	{
-		callback( getUsers() );
+		callback( getRooms() );
 	} );
 
 	// Réception et calcul des estimations de latence client <-> serveur.
@@ -116,7 +138,7 @@ io.on( "connection", ( socket ) =>
 
 		if ( user )
 		{
-			io.to( user.room ).emit( "GameChat", {
+			io.to( user.game ).emit( "GameChat", {
 				id: user.id,
 				name: user.name,
 				message: message,
@@ -133,11 +155,16 @@ io.on( "connection", ( socket ) =>
 
 		if ( user )
 		{
-			io.to( user.room ).emit( "GameAlert", {
+			// On envoie ensuite une notification à l'ensemble des utilisateurs
+			//	encore présents dans le salon.
+			io.to( user.game ).emit( "GameAlert", {
 				id: user.id,
 				name: user.name,
-				message: `${ user.name } a quitté le chat.`,
+				message: `${ user.name } a quitté la partie.`,
 			} );
+
+			// On met enfin à jour les informations de la partie.
+			updateRoom( user.game, undefined, user.role, false );
 		}
 	} );
 } );
