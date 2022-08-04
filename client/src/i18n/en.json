@@ -13,7 +13,13 @@
 		"create_new_game_title": "Do you want to create a new game ?",
 		"create_new_game_description": "Once the game is created, you will not be able to change the username.",
 		"creating_new_game_title": "Creating a new game...",
-		"creating_new_game_description": "You think it takes a long time? Don't worry, the server is working hard to process the request."
+		"creating_new_game_description": "You think it takes a long time? Don't worry, the server is working hard to process the request.",
+		"join_game_player_title": "Join a game",
+		"join_game_player_description": "Do you want to join this game? You must leave the current game if you want to join another one.",
+		"join_game_spectator_title": "Observe a game",
+		"join_game_spectator_description": "Do you want to observe this game? In this mode, you will not be able to participate to the game.",
+		"joining_game_title": "Joining a game...",
+		"joining_game_description": "You are joining a game as {{role}}. Please wait..."
 	},
 	"server": {
 		"duplicated_data_title": "Data duplication",
@@ -35,6 +41,8 @@
 		"rooms": {
 			"join": "Join",
 			"watch": "Watch",
+			"player": "Player",
+			"spectator": "Spectator",
 			"unique_identifier": "Unique identifier",
 			"creator_name": "Creator's name",
 			"player_count": "Player count",
