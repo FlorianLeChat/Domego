@@ -13,7 +13,13 @@
 		"create_new_game_title": "Voulez-vous créer une nouvelle partie ?",
 		"create_new_game_description": "Une fois la partie créée, vous ne pourrez plus changer de nom d'utilisateur.",
 		"creating_new_game_title": "Création d'une nouvelle partie...",
-		"creating_new_game_description": "Vous trouvez ça long ? Rassurez-vous, le serveur se démène pour traiter la requête."
+		"creating_new_game_description": "Vous trouvez ça long ? Rassurez-vous, le serveur se démène pour traiter la requête.",
+		"join_game_player_title": "Rejoindre une partie",
+		"join_game_player_description": "Voulez-vous rejoindre cette partie ? Vous devrez obligatoirement quitter la partie si vous voulez en rejoindre une autre.",
+		"join_game_spectator_title": "Observation une partie",
+		"join_game_spectator_description": "Voulez-vous observer cette partie ? Dans ce mode, vous ne pourrez pas participer à la partie.",
+		"joining_game_title": "Connexion à une partie...",
+		"joining_game_description": "Vous êtes en train de rejoindre une partie en tant que {{role}}. Veuillez patienter..."
 	},
 	"server": {
 		"duplicated_data_title": "Duplication des données",
@@ -35,6 +41,8 @@
 		"rooms": {
 			"join": "Rejoindre",
 			"watch": "Regarder",
+			"player": "Joueur",
+			"spectator": "Spectateur",
 			"unique_identifier": "Identifiant unique",
 			"creator_name": "Nom du créateur",
 			"player_count": "Nombre de joueurs",

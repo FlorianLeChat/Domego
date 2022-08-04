@@ -201,7 +201,7 @@ export default function Home(): JSX.Element
 				<button type="button" onClick={createNewGame}>{t( "pages.index.create_new_game" )}</button>
 
 				{/* Tableau des parties en cours */}
-				<GameRooms title={t( "pages.index.games_available" )} />
+				<GameRooms username={username} />
 			</article>
 		</section>
 	);
@@ -223,10 +223,10 @@ root.render(
 							<Route path="*" element={<NotFound />} />
 
 							{/* Chat de test pour chaque partie. */}
-							<Route path="chat/:roomid" element={<LiveChat />} />
+							<Route path="chat/:roomId" element={<LiveChat />} />
 
 							{/* Page de sélection des rôles avant chaque partie. */}
-							<Route path="game/:roomid/selection" element={<RoleSelection />} />
+							<Route path="game/:roomId/selection" element={<RoleSelection />} />
 
 							{/* Page de test des requêtes via MongoDB */}
 							<Route path="database" element={<TestApi />} />
