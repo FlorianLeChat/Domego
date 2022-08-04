@@ -19,56 +19,36 @@ export default function TestApi(): JSX.Element
 	useEffect( () =>
 	{
 		// Récupération de l'ensemble des données de l'API.
-		const makeGetRequest = async () =>
+		fetchApi( "users", "GET" ).then( response =>
 		{
-			const response = await fetchApi( "users", "GET" );
-
 			setResponse( ( state ) => ( {
 				...state, get: JSON.stringify( response )
 			} ) );
-		}
-
-		makeGetRequest()
-			.catch( console.error );
+		} );
 
 		// Ajout d'une nouvelle valeur au travers de l'API.
-		const makePostRequest = async () =>
+		fetchApi( "users", "POST", { email: "florian@gmail.com", name: { first: "Florian", last: "Trayon" }, age: Math.floor( Math.random() * 100 ) + 1 } ).then( response =>
 		{
-			const response = await fetchApi( "users", "POST", { email: "florian@gmail.com", name: { first: "Florian", last: "Trayon" }, age: Math.floor( Math.random() * 100 ) + 1 } );
-
 			setResponse( ( state ) => ( {
 				...state, post: JSON.stringify( response )
 			} ) );
-		};
-
-		makePostRequest()
-			.catch( console.error );
+		} );
 
 		// Mise à jour d'une valeur existante au travers de l'API.
-		const makePutRequest = async () =>
+		fetchApi( "users", "PUT", { filter: { email: "florian@gmail.com", age: { $not: { $eq: 10 } } }, update: { age: 10 } } ).then( response =>
 		{
-			const response = await fetchApi( "users", "PUT", { filter: { email: "florian@gmail.com", age: { $not: { $eq: 10 } } }, update: { age: 10 } } );
-
 			setResponse( ( state ) => ( {
 				...state, put: JSON.stringify( response )
 			} ) );
-		};
-
-		makePutRequest()
-			.catch( console.error );
+		} );
 
 		// Suppression définitive d'une valeur de l'API.
-		const makeDeleteRequest = async () =>
+		fetchApi( "users", "DELETE", { age: 10 } ).then( response =>
 		{
-			const response = await fetchApi( "users", "DELETE", { age: 10 } );
-
 			setResponse( ( state ) => ( {
 				...state, delete: JSON.stringify( response )
 			} ) );
-		};
-
-		makeDeleteRequest()
-			.catch( console.error );
+		} );
 	}, [] );
 
 	// Affichage du rendu HTML du composant.
