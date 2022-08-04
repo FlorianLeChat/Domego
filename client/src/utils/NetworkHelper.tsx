@@ -20,7 +20,7 @@ export function fetchApi( url: string, method: string = "GET", body: Object = {}
 				"Content-type": "application/json; charset=UTF-8"
 			}
 
-		} )
+		} );
 
 		// Lors de sa réponse, on vérifie si la réponse est valide.
 		if ( response.ok )

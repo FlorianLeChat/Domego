@@ -62,7 +62,7 @@ io.on( "connection", ( socket ) =>
 		// 	dans une autre partie.
 		if ( findUser( socket.id ) )
 		{
-			callback( "error", "server.duplicated_data_title", "server.duplicated_data_description" )
+			callback( "error", "server.duplicated_data_title", "server.duplicated_data_description" );
 			return;
 		}
 
