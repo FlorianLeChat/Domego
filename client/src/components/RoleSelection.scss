@@ -1,0 +1,160 @@
+section#RoleSelection
+{
+	// Corps de la page.
+	min-height: 100vh;
+	text-align: center;
+	user-select: none;
+
+	> h1
+	{
+		// Titre de la page.
+		color: rgb(63, 63, 63);
+		margin: 2rem 0;
+		font-size: 3rem;
+		text-shadow: -1px -1px 0 whitesmoke, 1px -1px 0 whitesmoke, -1px 1px 0 whitesmoke, 1px 1px 0 whitesmoke;
+	}
+
+	> div
+	{
+		// Conteneur de la liste des rôles.
+		margin: 0 5rem 0 5rem;
+		display: flex;
+		row-gap: 5rem;
+		flex-wrap: wrap;
+		column-gap: 2rem;
+		justify-content: center;
+
+		// Conteneur d'un rôle.
+		$colors: (1: royalblue, 2: limegreen, 3: gold, 4: black, 5: magenta, 6: red);
+
+		@each $indice, $color in $colors
+		{
+			article:nth-of-type(#{ $indice })
+			{
+				// Corps d'un rôle.
+				flex: 1 1 30%;
+				padding: 0 1rem 0 1rem;
+				position: relative;
+
+				img
+				{
+					// Image représentative d'un rôle.
+					width: 5rem;
+					height: 5rem;
+					border: 0.25rem solid $color;
+					border-radius: 50%;
+				}
+
+				div
+				{
+					&:first-of-type
+					{
+						// Informations générales du rôle.
+						border: 1rem solid $color;
+						padding: 1rem;
+						overflow-y: auto;
+						box-shadow: 0.2rem 0.2rem 0.2rem rgb(139, 139, 139);
+						background-color: whitesmoke;
+
+						h2
+						{
+							// Nom du rôle.
+							color: rgb(63, 63, 63);
+							margin: 0;
+							padding-bottom: 0.5rem;
+							border-bottom: 1px solid rgb(139, 139, 139);
+						}
+
+						p
+						{
+							// Description du rôle.
+							color: rgb(63, 63, 63);
+						}
+
+						span
+						{
+							// Budget à disposition pour le rôle.
+							color: white;
+							width: 4rem;
+							height: 4rem;
+							display: inline-block;
+							font-size: 1.5rem;
+							line-height: 4rem;
+							border-radius: 50%;
+							background-color: $color;
+						}
+					}
+
+					&:last-of-type
+					{
+						// Sélection du rôle.
+						color: whitesmoke;
+						padding: 0.75rem;
+						border-top: 1px solid whitesmoke;
+						background-color: $color;
+
+						input
+						{
+							// Bouton de sélection.
+							width: 1.5rem;
+							height: 1.25rem;
+						}
+
+						label
+						{
+							// Texte du bouton.
+							font-size: 1.5rem;
+							margin-left: 0.25rem;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	> button
+	{
+		// Bouton de lancement de la partie.
+		color: rgb(64, 169, 255);
+		border: 1px solid rgb(139, 139, 139);
+		cursor: pointer;
+		margin: 4rem 0;
+		font-size: 2.5rem;
+		will-change: transform; // Correctif pour Chrome : https://stackoverflow.com/a/62403969
+		border-radius: 0.25rem;
+		background-color: white;
+		transition-duration: 300ms;
+		transition-property: color, filter, border-color, background-color, box-shadow;
+
+		&:hover
+		{
+			// Effet de survol du bouton.
+			color: white;
+			border-color: rgb(64, 169, 255);
+			background-color: rgb(64, 169, 255);
+		}
+
+		&:active
+		{
+			// Effet de maintien du bouton.
+			box-shadow: 0 0 0 0.25rem rgba(24, 144, 255, 0.2);
+			border-color: rgb(64, 169, 255);
+		}
+	}
+
+	&::before
+	{
+		// Fond d'écran de la page.
+		left: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		filter: blur(0.5rem);
+		content: "";
+		z-index: -1;
+		position: fixed;
+		background-size: cover;
+		background-image: url("../../public/assets/images/wallpapers/selection.jpg");
+		background-position: center;
+	}
+}
