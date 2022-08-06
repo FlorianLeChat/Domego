@@ -1,9 +1,8 @@
-table.GameRooms
+table#GameRooms
 {
 	// Corps du tableau.
 	display: block;
 	overflow-y: auto;
-	max-height: 45vh;
 	margin-top: 1.25rem;
 	border-collapse: collapse;
 

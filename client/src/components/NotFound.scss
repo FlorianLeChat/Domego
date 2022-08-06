@@ -1,15 +1,15 @@
-section.NotFound
+section#NotFound
 {
-	// Corps de la section.
+	// Corps de la page.
 	gap: 5rem;
-	height: 100vh;
 	display: flex;
+	min-height: 100vh;
 	text-align: center;
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
 
-	> h1
+	h1
 	{
 		// Code d'erreur.
 		$black-strip: rgb(51, 51, 51);		// Couleur de la bande noire.
@@ -24,14 +24,14 @@ section.NotFound
 		background-image: linear-gradient(45deg, $orange-strip 12.5%, $black-strip 12.5%, $black-strip 37.5%, $orange-strip 37.5%, $orange-strip 62.5%, $black-strip 62.5%, $black-strip 87.5%, $orange-strip 87.5%);
 	}
 
-	> h2
+	h2
 	{
 		// Description de l'erreur.
 		@extend h1;
 		font-size: 2rem;
 	}
 
-	> a
+	a
 	{
 		// Lien de redirection.
 		color: white;
@@ -49,12 +49,12 @@ section.NotFound
 
 	&::before
 	{
-		// Fond d'écran du corps de la section.
+		// Fond d'écran de la page
 		left: 0;
 		right: 0;
 		width: 100%;
 		height: 100%;
-		filter: blur(3px);
+		filter: blur(0.5rem);
 		content: "";
 		z-index: -1;
 		position: fixed;

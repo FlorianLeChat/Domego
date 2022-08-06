@@ -180,7 +180,7 @@ export default function Home(): JSX.Element
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<section className="Home">
+		<section id="Home">
 			{/* Titre de la page */}
 			<h1>{t( "pages.index.title" )}</h1>
 
@@ -189,7 +189,7 @@ export default function Home(): JSX.Element
 
 			<article>
 				{/* Saisie d'un nom d'utilisateur */}
-				<label htmlFor="pseudo">
+				<label>
 					{t( "pages.index.choose_username" )}<span>*</span>
 					<br />
 					(<Trans i18nKey="pages.index.username_length" components={{ strong: <strong /> }} />)

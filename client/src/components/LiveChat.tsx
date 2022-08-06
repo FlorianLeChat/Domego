@@ -56,7 +56,7 @@ export default function LiveChat(): JSX.Element
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<section className="LiveChat">
+		<section id="LiveChat">
 			{/* Titre de la page */}
 			<h1>Test des sockets réseau</h1>
 

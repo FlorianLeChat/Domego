@@ -14,7 +14,7 @@ export default function NotFound(): JSX.Element
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<section className="NotFound">
+		<section id="NotFound">
 			{/* Titre de la page */}
 			<h1>{t( "pages.notfound.title" )}</h1>
 
