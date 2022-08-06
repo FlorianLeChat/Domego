@@ -49,6 +49,24 @@
 			"available_actions": "Actions disponibles",
 			"no_current_data": "Aucune partie en cours"
 		},
+		"selection": {
+			"title": "Choisissez votre rôle",
+			"check": "Choisir ce rôle",
+			"ready": "Je suis prêt !",
+			"launch": "Démarrer la partie",
+			"project_owner_title": "Maître d'ouvrage",
+			"project_owner_description": "Le maître d'ouvrage (le client) est la personne pour laquelle est réalisée l'ouvrage. Il est le porteur du projet, il définit l'objectif du projet, son calendrier et le budget. Le résultat attendu du projet est la réalisation et la livraison d'un résultat, appelé l'ouvrage.",
+			"architect_title": "Maître d'œuvre (Architecte)",
+			"architect_description": "Le maître d'œuvre (souvent l'architecte) est le chef de projet de construction, la personne physique ou morale qui dirige et vérifie la bonne exécution des travaux. En tant qu'architecte, il doit aussi concevoir le projet en répondant aux exigences du maître d'ouvrage.",
+			"engineering_office_title": "Bureau d'études",
+			"engineering_office_description": "Le bureau d'études doit assister l'architecte sur les spécificités techniques qui relèvent de sa compétence. Ils assurent des études techniques spécifiques : étude de la structure, étude de sol, étude thermique, étude acoustique, étude des réseaux...",
+			"control_office_title": "Bureau de contrôle",
+			"control_office_description": "Le bureau de contrôle juge de la solidité de l'ouvrage et vérifie le respect des normes et des règles de construction — appelées souvent « règles de l'art ». Il a une responsabilité juridique vis-à-vis du respect des différentes normes et réglementations.",
+			"secondary_state_title": "Entreprise corps état secondaire",
+			"secondary_state_description": "Leur rôle est de construire tout ce qui n'est pas assuré par le gros œuvre. Il s'agit des cloisons et plâtrerie, de la peinture, de l'électricité, de la ventilation, des menuiseries, des revêtement de sol, de la plomberie...",
+			"general_construction_title": "Entreprise gros œuvre",
+			"general_construction_description": "Ces entreprises ont pour but de bâtir l'ossature de l'ouvrage. Cela comprend les fondations, les poutres, les poteaux, les murs, la charpente, le dallage... Ils ont aussi souvent en charge les installations de chantier et le terrassement."
+		},
 		"notfound": {
 			"title": "Page introuvable",
 			"description": "La page que vous recherchez n'existe pas.",
