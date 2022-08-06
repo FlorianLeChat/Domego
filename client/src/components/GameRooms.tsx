@@ -124,7 +124,7 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 
 				setRooms( rows );
 			} );
-		}, 500 );
+		}, 3000 );
 
 		return () =>
 		{
@@ -135,7 +135,7 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<table className="GameRooms">
+		<table id="GameRooms">
 			<thead>
 				<tr>
 					{/* Titre du tableau */}

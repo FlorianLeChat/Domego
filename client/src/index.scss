@@ -26,16 +26,16 @@ html
 	// 	Source : https://sweetalert2.github.io/recipe-gallery/blurred-backdrop.html
 	.swal2-shown > [aria-hidden]
 	{
+		filter: blur(0.5rem);
 		transition: filter 100ms;
-		filter: blur(5px);
 	}
 }
 
-section.Home
+section#Home
 {
 	// Corps de la page d'accueil.
-	height: 100vh;
 	display: flex;
+	min-height: 100vh;
 	text-align: center;
 	user-select: none;
 	align-items: center;
@@ -45,9 +45,9 @@ section.Home
 	{
 		// Titre de la page.
 		color: rgb(63, 63, 63);
-		margin: 0.5rem 0 0.75rem 0;
+		margin: 1rem 0 0.75rem 0;
 		font-size: 3rem;
-		align-items: center;
+		text-shadow: -1px -1px 0 whitesmoke, 1px -1px 0 whitesmoke, -1px 1px 0 whitesmoke, 1px 1px 0 whitesmoke;
 		text-transform: uppercase;
 	}
 
@@ -56,18 +56,20 @@ section.Home
 		// Sous-titre de la page.
 		color: rgb(63, 63, 63);
 		font-size: 1.25rem;
+		text-shadow: -1px -1px 0 whitesmoke, 1px -1px 0 whitesmoke, -1px 1px 0 whitesmoke, 1px 1px 0 whitesmoke;
 	}
 
 	article
 	{
 		// Partie centrale de la page.
+		margin: 4rem 0 2rem 0;
 		border: 1px solid rgb(139, 139, 139);
 		padding: 2rem;
 		max-width: max(16rem, 45vw);
-		margin-top: 6rem;
+		box-shadow: 0.2rem 0.2rem 0.2rem rgb(139, 139, 139);
 		background-color: whitesmoke;
 
-		label
+		> label
 		{
 			// Libellé du formulaire de création de parties.
 			width: 100%;
@@ -75,14 +77,14 @@ section.Home
 			display: inline-block;
 			font-weight: 500;
 
-			> span
+			span
 			{
 				// Champs requis.
 				color: rgb(220, 53, 69);
 			}
 		}
 
-		input
+		> input
 		{
 			// Champ de saisie pour le pseudonyme.
 			width: 100%;
@@ -163,7 +165,7 @@ section.Home
 		right: 0;
 		width: 100%;
 		height: 100%;
-		filter: blur(3px);
+		filter: blur(0.5rem);
 		content: "";
 		z-index: -1;
 		position: fixed;
