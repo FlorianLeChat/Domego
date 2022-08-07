@@ -98,40 +98,47 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 	}, [ t, props, socket, navigate ] );
 
 	// Récupération de l'ensemble des parties en cours.
+	const updateRooms = useCallback( () =>
+	{
+		// On effectue une requête pour récupérer la liste des parties en cours.
+		socket.emit( "GameRooms", ( rooms: GameRoomList[] ) =>
+		{
+			// Lors de la réception des données, on construit le HTML afin de l'afficher
+			//	lors du rendu de la page.
+			const rows = rooms.map( ( element: GameRoomList, indice: number ) =>
+				<tr key={indice}>
+					<td>{element.id}</td>
+					<td>{element.creator}</td>
+					<td>{element.players}/6 [{element.spectators}]</td>
+					<td>
+						{/* Rejoindre la partie */}
+						<button type="button" onClick={() => joinGame( element.id, "player" )}>{t( "pages.rooms.join" )}</button>
+						{/* Observer la partie */}
+						<button type="button" onClick={() => joinGame( element.id, "spectator" )}>{t( "pages.rooms.watch" )}</button>
+					</td>
+				</tr>
+			);
+
+			setRooms( rows );
+		} );
+	}, [ t, socket, joinGame ] );
+
+	// Rafraîchissement des parties en cours.
 	useEffect( () =>
 	{
-		const interval = setInterval( () =>
-		{
-			// On actualise les informations des parties en cours toutes les 3 secondes
-			//	à partir du montage du composant.
-			socket.emit( "GameRooms", ( rooms: GameRoomList[] ) =>
-			{
-				// Lors de la réception des données, on construit le HTML afin de l'afficher
-				//	lors du rendu de la page.
-				const rows = rooms.map( ( element: GameRoomList, indice: number ) =>
-					<tr key={indice}>
-						<td>{element.id}</td>
-						<td>{element.creator}</td>
-						<td>{element.players}/6 [{element.spectators}]</td>
-						<td>
-							{/* Rejoindre la partie */}
-							<button type="button" onClick={() => joinGame( element.id, "player" )}>{t( "pages.rooms.join" )}</button>
-							{/* Observer la partie */}
-							<button type="button" onClick={() => joinGame( element.id, "spectator" )}>{t( "pages.rooms.watch" )}</button>
-						</td>
-					</tr>
-				);
+		// On créé un minuteur qui actualise périodiquement les informations
+		//	des parties en cours au montage du composant.
+		const interval = setInterval( updateRooms, 5000 );
 
-				setRooms( rows );
-			} );
-		}, 3000 );
+		// On effectue ensuite une première actualisation des parties en cours.
+		updateRooms();
 
 		return () =>
 		{
-			// On supprime le minuteur au démontage du composant.
+			// On supprime enfin le minuteur au démontage du composant.
 			clearInterval( interval );
 		};
-	}, [ t, props, socket, joinGame ] );
+	}, [ t, socket, updateRooms ] );
 
 	// Affichage du rendu HTML du composant.
 	return (
