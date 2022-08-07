@@ -1,10 +1,9 @@
 //
-// Composant pour indiquer à l'utilisateur que la page n'existe pas.
+// Composant d'affichage lorsqu'une page du routeur n'est pas trouvée.
 //
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import "../i18n/config";
 import "./NotFound.scss";
 
 export default function NotFound(): JSX.Element

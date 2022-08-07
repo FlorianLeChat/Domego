@@ -1,0 +1,145 @@
+
+section#GameHome
+{
+	// Corps de la page d'accueil.
+	display: flex;
+	min-height: 100vh;
+	text-align: center;
+	user-select: none;
+	align-items: center;
+	flex-direction: column;
+
+	h1
+	{
+		// Titre de la page.
+		color: rgb(63, 63, 63);
+		margin: 1rem 0 0.75rem 0;
+		font-size: 3rem;
+		text-shadow: -1px -1px 0 whitesmoke, 1px -1px 0 whitesmoke, -1px 1px 0 whitesmoke, 1px 1px 0 whitesmoke;
+		text-transform: uppercase;
+	}
+
+	u
+	{
+		// Sous-titre de la page.
+		color: rgb(63, 63, 63);
+		font-size: 1.25rem;
+		text-shadow: -1px -1px 0 whitesmoke, 1px -1px 0 whitesmoke, -1px 1px 0 whitesmoke, 1px 1px 0 whitesmoke;
+	}
+
+	article
+	{
+		// Partie centrale de la page.
+		margin: 4rem 0 2rem 0;
+		border: 1px solid rgb(139, 139, 139);
+		padding: 2rem;
+		max-width: max(16rem, 45vw);
+		box-shadow: 0.2rem 0.2rem 0.2rem rgb(139, 139, 139);
+		background-color: whitesmoke;
+
+		> label
+		{
+			// Libellé du formulaire de création de parties.
+			width: 100%;
+			color: rgb(63, 63, 63);
+			display: inline-block;
+			font-weight: 500;
+
+			span
+			{
+				// Champs requis.
+				color: rgb(220, 53, 69);
+			}
+		}
+
+		> input
+		{
+			// Champ de saisie pour le pseudonyme.
+			width: 100%;
+			border: 1px solid rgb(139, 139, 139);
+			display: block;
+			margin-top: 0.75rem;
+			box-sizing: border-box;
+			border-radius: 0.25rem;
+			background-color: white;
+			transition-duration: 300ms;
+			transition-property: border-color, box-shadow;
+
+			&::placeholder
+			{
+				// Texte de remplissage du champ de saisie.
+				color: rgb(63, 63, 63, 0.6);
+			}
+
+			&:hover
+			{
+				// Effet de survol du champ de saisie.
+				border-color: rgb(64, 169, 255);
+			}
+
+			&:focus
+			{
+				// Effet de sélection du champ de saisie.
+				outline: none;
+				box-shadow: 0 0 0 0.25rem rgba(24, 144, 255, 0.2);
+				border-color: rgb(64, 169, 255);
+			}
+
+			&:invalid ~ button
+			{
+				// Désactivation conditionnelle du bouton de validation.
+				filter: opacity(0.5);
+				pointer-events: none;
+			}
+		}
+
+		> button
+		{
+			// Bouton de création d'une nouvelle partie.
+			color: rgb(64, 169, 255);
+			width: 100%;
+			border: 1px solid rgb(139, 139, 139);
+			cursor: pointer;
+			outline: none;
+			font-size: 2.25rem;
+			min-height: 4rem;
+			margin-top: 1.25rem;
+			will-change: transform; // Correctif pour Chrome : https://stackoverflow.com/a/62403969
+			border-radius: 0.25rem;
+			background-color: white;
+			transition-duration: 300ms;
+			transition-property: color, filter, border-color, background-color, box-shadow;
+
+			&:hover
+			{
+				// Effet de survol du bouton.
+				color: white;
+				border-color: rgb(64, 169, 255);
+				background-color: rgb(64, 169, 255);
+			}
+
+			&:active
+			{
+				// Effet de maintien du bouton.
+				box-shadow: 0 0 0 0.25rem rgba(24, 144, 255, 0.2);
+				border-color: rgb(64, 169, 255);
+			}
+		}
+	}
+
+	&::before
+	{
+		// Fond d'écran du corps de la page.
+		left: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		filter: blur(0.5rem);
+		content: "";
+		z-index: -1;
+		position: fixed;
+		background-size: cover;
+		background-image: url("../../public/assets/images/wallpapers/home.jpg");
+		background-position: center;
+	}
+}

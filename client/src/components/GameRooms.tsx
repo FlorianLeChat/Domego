@@ -1,5 +1,5 @@
 //
-// Composant pour afficher un tableau de l'ensemble des parties en cours.
+// Composant d'affichage de l'ensemble des parties créées.
 //
 import { useNavigate } from "react-router-dom";
 import { SocketContext } from "../utils/SocketContext";
@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useEffect, useState, useCallback, useContext } from "react";
 
-import "../i18n/config";
 import "./GameRooms.scss";
 
 interface GameRoomsProps
