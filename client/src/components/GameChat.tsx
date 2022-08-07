@@ -1,12 +1,12 @@
 //
-// Composant pour simuler un chat en réseau via les sockets.
+// Composant du chat en réseau à l'intérieur des parties.
 //
 import { SocketContext } from "../utils/SocketContext";
 import { useState, useEffect, useContext } from "react";
 
-import "./LiveChat.scss";
+import "./GameChat.scss";
 
-export default function LiveChat(): JSX.Element
+export default function GameChat(): JSX.Element
 {
 	// Déclaration des variables d'état.
 	const [ input, setInput ] = useState( "" );
@@ -56,7 +56,7 @@ export default function LiveChat(): JSX.Element
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<section id="LiveChat">
+		<section id="GameChat">
 			{/* Titre de la page */}
 			<h1>Test des sockets réseau</h1>
 
