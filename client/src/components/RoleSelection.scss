@@ -1,4 +1,4 @@
-section#RoleSelection
+section.RoleSelection
 {
 	// Corps de la page.
 	min-height: 100vh;
@@ -36,7 +36,7 @@ section#RoleSelection
 				padding: 0 1rem 0 1rem;
 				position: relative;
 
-				img
+				> img
 				{
 					// Image représentative d'un rôle.
 					width: 5rem;
@@ -45,15 +45,26 @@ section#RoleSelection
 					border-radius: 50%;
 				}
 
-				div
+				> span
 				{
+					// Utilisateur jouant ce rôle.
+					color: $color;
+					font-size: 1.5rem;
+					margin-left: 0.5rem;
+					text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+				}
+
+				> div
+				{
+					// Corps des informations.
+					box-shadow: 0.2rem 0.2rem 0.2rem rgb(139, 139, 139);
+
 					&:first-of-type
 					{
 						// Informations générales du rôle.
 						border: 1rem solid $color;
 						padding: 1rem;
 						overflow-y: auto;
-						box-shadow: 0.2rem 0.2rem 0.2rem rgb(139, 139, 139);
 						background-color: whitesmoke;
 
 						h2
@@ -85,7 +96,7 @@ section#RoleSelection
 						}
 					}
 
-					&:last-of-type
+					&:nth-of-type(2)
 					{
 						// Sélection du rôle.
 						color: whitesmoke;
@@ -98,12 +109,29 @@ section#RoleSelection
 							// Bouton de sélection.
 							width: 1.5rem;
 							height: 1.25rem;
+							outline: none;
 						}
 
 						label
 						{
 							// Texte du bouton.
 							font-size: 1.5rem;
+							margin-left: 0.25rem;
+						}
+					}
+
+					&:last-of-type
+					{
+						// Prêt à jouer.
+						display: none;
+						box-shadow: none;
+						margin-top: 1rem;
+
+						label
+						{
+							// Texte du bouton.
+							color: rgb(63, 63, 63);
+							font-weight: bold;
 							margin-left: 0.25rem;
 						}
 					}
