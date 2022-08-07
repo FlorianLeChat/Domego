@@ -1,11 +1,12 @@
 //
-// Composant pour afficher un tableau de l'ensemble des parties en cours.
+// Composant pour sélectionner un rôle avant de lancer la partie.
 //
 import { useParams } from "react-router-dom";
 import { SocketContext } from "../utils/SocketContext";
 import { useTranslation } from "react-i18next";
 import { useEffect, useContext } from "react";
 
+import RoleCard from "../components/RoleCard";
 import "./RoleSelection.scss";
 
 export default function RoleSelection(): JSX.Element
@@ -17,6 +18,31 @@ export default function RoleSelection(): JSX.Element
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
 
+	// Estimation de la latence entre le client et le serveur.
+	useEffect( () =>
+	{
+		console.log( roomId, socket );
+		// On met tout d'abord la date du moment actuelle.
+		// const start = Date.now();
+
+		// socket.emit( "GamePing", () =>
+		// {
+		// 	// Lo
+		// 	const delta = Date.now() - start;
+
+		// 	if ( delta > 500 )
+		// 	{
+		// 		Swal.fire( {
+		// 			icon: "warning",
+		// 			title: "Latence élevée",
+		// 			text: `La latence entre vous et le serveur semble élevé (${ delta } ms). Certaines de vos actions pourraient subir un délai conséquent.`,
+		// 			confirmButtonText: "Je comprends l'avertissement",
+		// 			confirmButtonColor: "#28a745"
+		// 		} );
+		// 	}
+		// } );
+	}, [] );
+
 	// Affichage du rendu HTML du composant.
 	return (
 		<section id="RoleSelection">
@@ -25,137 +51,12 @@ export default function RoleSelection(): JSX.Element
 
 			<div>
 				{/* Conteneur de la liste des rôles */}
-				<article>
-					{/* Image représentative du rôle */}
-					<img src="../../assets/images/jobs/maitre_ouvrage.jpg" alt={t( "pages.selection.project_owner_title" )} />
-
-					<div>
-						{/* Nom du rôle */}
-						<h2>{t( "pages.selection.project_owner_title" )}</h2>
-
-						{/* Description du rôle */}
-						<p>{t( "pages.selection.project_owner_description" )}</p>
-
-						{/* Budget à disposition */}
-						<span>150K</span>
-					</div>
-
-					<div>
-						{/* Sélection du rôle */}
-						<input type="checkbox" />
-						<label>{t( "pages.selection.check" )}</label>
-					</div>
-				</article>
-
-				<article>
-					{/* Image représentative du rôle */}
-					<img src="../../assets/images/jobs/architecte.png" alt={t( "pages.selection.architect_title" )} />
-
-					<div>
-						{/* Nom du rôle */}
-						<h2>{t( "pages.selection.architect_title" )}</h2>
-
-						{/* Description du rôle */}
-						<p>{t( "pages.selection.architect_description" )}</p>
-
-						{/* Budget à disposition */}
-						<span>30K</span>
-					</div>
-
-					<div>
-						{/* Sélection du rôle */}
-						<input type="checkbox" />
-						<label>{t( "pages.selection.check" )}</label>
-					</div>
-				</article>
-
-				<article>
-					{/* Image représentative du rôle */}
-					<img src="../../assets/images/jobs/bureau_etude.png" alt={t( "pages.selection.engineering_office_title" )} />
-
-					<div>
-						{/* Nom du rôle */}
-						<h2>{t( "pages.selection.engineering_office_title" )}</h2>
-
-						{/* Description du rôle */}
-						<p>{t( "pages.selection.engineering_office_description" )}</p>
-
-						{/* Budget à disposition */}
-						<span>20K</span>
-					</div>
-
-					<div>
-						{/* Sélection du rôle */}
-						<input type="checkbox" />
-						<label>{t( "pages.selection.check" )}</label>
-					</div>
-				</article>
-
-				<article>
-					{/* Image représentative du rôle */}
-					<img src="../../assets/images/jobs/bureau_de_controle.jpg" alt={t( "pages.selection.control_office_title" )} />
-
-					<div>
-						{/* Nom du rôle */}
-						<h2>{t( "pages.selection.control_office_title" )}</h2>
-
-						{/* Description du rôle */}
-						<p>{t( "pages.selection.control_office_description" )}</p>
-
-						{/* Budget à disposition */}
-						<span>20K</span>
-					</div>
-
-					<div>
-						{/* Sélection du rôle */}
-						<input type="checkbox" />
-						<label>{t( "pages.selection.check" )}</label>
-					</div>
-				</article>
-
-				<article>
-					{/* Image représentative du rôle */}
-					<img src="../../assets/images/jobs/entreprise_corps_etat_secondaire.png" alt={t( "pages.selection.secondary_state_title" )} />
-
-					<div>
-						{/* Nom du rôle */}
-						<h2>{t( "pages.selection.secondary_state_title" )}</h2>
-
-						{/* Description du rôle */}
-						<p>{t( "pages.selection.secondary_state_description" )}</p>
-
-						{/* Budget à disposition */}
-						<span>30K</span>
-					</div>
-
-					<div>
-						{/* Sélection du rôle */}
-						<input type="checkbox" />
-						<label>{t( "pages.selection.check" )}</label>
-					</div>
-				</article>
-
-				<article>
-					{/* Image représentative du rôle */}
-					<img src="../../assets/images/jobs/entreprise_gros_oeuvre.png" alt={t( "pages.selection.general_construction_title" )} />
-
-					<div>
-						{/* Nom du rôle */}
-						<h2>{t( "pages.selection.general_construction_title" )}</h2>
-
-						{/* Description du rôle */}
-						<p>{t( "pages.selection.general_construction_description" )}</p>
-
-						{/* Budget à disposition */}
-						<span>30K</span>
-					</div>
-
-					<div>
-						{/* Sélection du rôle */}
-						<input type="checkbox" />
-						<label>{t( "pages.selection.check" )}</label>
-					</div>
-				</article>
+				<RoleCard name="project_owner" />
+				<RoleCard name="project_manager" />
+				<RoleCard name="engineering_office" />
+				<RoleCard name="control_office" />
+				<RoleCard name="secondary_state" />
+				<RoleCard name="general_construction" />
 			</div>
 
 			{/* Bouton de lancement de la partie */}
