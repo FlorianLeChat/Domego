@@ -22,7 +22,7 @@
   "dependencies": {
     "sass": "~1.54",
     "react": "~18.2",
-    "i18next": "~21.8",
+    "i18next": "~21.9",
     "react-ga": "~3.3",
     "react-dom": "~18.2",
     "sweetalert2": "~11.4",
