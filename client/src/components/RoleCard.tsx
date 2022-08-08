@@ -1,10 +1,17 @@
 //
-// Composant pour sélectionner un rôle avant de lancer la partie.
+// Composant d'affichage pour la carte d'un rôle.
 //
 import { useTranslation } from "react-i18next";
-import "./RoleSelection.scss";
+import "./RoleCard.scss";
 
-export default function RoleSelection(): JSX.Element
+interface RoleCardProps
+{
+	// Déclaration des champs des propriétés du composant.
+	name: string;
+	budget: string;
+}
+
+export default function RoleCard( props: RoleCardProps ): JSX.Element
 {
 	// Déclaration des constantes.
 	const { t } = useTranslation();
@@ -25,20 +32,20 @@ export default function RoleSelection(): JSX.Element
 	return (
 		<article className="RoleCard">
 			{/* Image représentative du rôle */}
-			<img src="../../assets/images/jobs/maitre_ouvrage.jpg" alt={t( "pages.selection.project_owner_title" )} />
+			<img src={`../../assets/images/jobs/${ props.name }.png`} alt={t( `pages.selection.${ props.name }_title` )} />
 
 			{/* Utilisateur jouant ce rôle */}
-			<span>El Presidente</span>
+			<span>Prénom Nom</span>
 
 			<div>
 				{/* Nom du rôle */}
-				<h2>{t( "pages.selection.project_owner_title" )}</h2>
+				<h2>{t( `pages.selection.${ props.name }_title` )}</h2>
 
 				{/* Description du rôle */}
-				<p>{t( "pages.selection.project_owner_description" )}</p>
+				<p>{t( `pages.selection.${ props.name }_description` )}</p>
 
 				{/* Budget à disposition */}
-				<span>150K</span>
+				<span>{props.budget}</span>
 			</div>
 
 			<div>

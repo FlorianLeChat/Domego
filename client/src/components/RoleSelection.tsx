@@ -50,13 +50,13 @@ export default function RoleSelection(): JSX.Element
 			<h1>{t( "pages.selection.title" )}</h1>
 
 			<div>
-				{/* Conteneur de la liste des rôles */}
-				<RoleCard name="project_owner" />
-				<RoleCard name="project_manager" />
-				<RoleCard name="engineering_office" />
-				<RoleCard name="control_office" />
-				<RoleCard name="secondary_state" />
-				<RoleCard name="general_construction" />
+				{/* Liste des rôles */}
+				<RoleCard name="project_owner" budget="150K" />
+				<RoleCard name="project_manager" budget="30K" />
+				<RoleCard name="engineering_office" budget="20K" />
+				<RoleCard name="control_office" budget="20K" />
+				<RoleCard name="secondary_state" budget="30K" />
+				<RoleCard name="general_construction" budget="30K" />
 			</div>
 
 			{/* Bouton de lancement de la partie */}
