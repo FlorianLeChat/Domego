@@ -42,6 +42,12 @@ export default function RoleSelection(): JSX.Element
 		// } );
 	}, [] );
 
+	// Vérification de la connexion à la partie.
+	if ( location.state === null )
+	{
+		return <NotFound />;
+	}
+
 	// Affichage du rendu HTML du composant.
 	return (
 		<section id="RoleSelection">
