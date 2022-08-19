@@ -36,13 +36,13 @@ root.render(
 							<Route path="*" element={<NotFound />} />
 
 							{/* Chat de test pour chaque partie. */}
-							<Route path="game/:roomId/chat" element={<GameChat />} />
+							<Route path="game/chat" element={<GameChat />} />
 
 							{/* Page de sélection des rôles avant chaque partie. */}
-							<Route path="game/:roomId/selection" element={<RoleSelection />} />
+							<Route path="game/selection" element={<RoleSelection />} />
 
 							{/* Tableau de contrôle durant une partie en cours. */}
-							<Route path="game/:roomId/dashboard" element={<GameHome />} />
+							<Route path="game/dashboard" element={<GameHome />} />
 
 							{/* Page de test des requêtes via MongoDB */}
 							<Route path="database" element={<TestApi />} />

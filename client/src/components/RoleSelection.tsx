@@ -1,7 +1,7 @@
 //
 // Composant pour sélectionner un rôle avant de lancer la partie.
 //
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { SocketContext } from "../utils/SocketContext";
 import { useTranslation } from "react-i18next";
 import { useEffect, useContext } from "react";
@@ -11,17 +11,16 @@ import "./RoleSelection.scss";
 
 export default function RoleSelection(): JSX.Element
 {
-	// Récupération des paramètres.
-	const { roomId } = useParams();
 
 	// Déclaration des constantes.
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
+	const location = useLocation();
 
 	// Estimation de la latence entre le client et le serveur.
 	useEffect( () =>
 	{
-		console.log( roomId, socket );
+		console.log( location.state, socket );
 		// On met tout d'abord la date du moment actuelle.
 		// const start = Date.now();
 
