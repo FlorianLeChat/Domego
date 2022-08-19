@@ -78,7 +78,13 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 					//	transmises par le serveur.
 					if ( type !== "success" )
 					{
-						Swal.fire( t( title ), t( message ), type );
+						Swal.fire( {
+							icon: type,
+							text: t( title ),
+							title: t( message ),
+							confirmButtonColor: "#28a745"
+						} );
+
 						return;
 					}
 

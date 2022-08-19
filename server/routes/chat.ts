@@ -17,7 +17,7 @@ export function Chat( io: Server, socket: Socket )
 			io.to( user.game ).emit( "GameChat", {
 				id: user.id,
 				name: user.name,
-				message: message,
+				message: message.trim(),
 			} );
 		}
 	} );
