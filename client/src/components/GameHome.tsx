@@ -9,7 +9,6 @@ import { useTranslation, Trans } from "react-i18next";
 import { useState, useContext, useEffect } from "react";
 
 import GameRooms from "../components/GameRooms";
-import { fetchApi } from "../utils/NetworkHelper";
 import { SocketContext } from "../utils/SocketContext";
 
 import "./GameHome.scss";
@@ -52,7 +51,6 @@ export default function GameHome(): JSX.Element
 						icon: "error",
 						text: t( "modals.recaptcha_unavailable_description" ),
 						title: t( "modals.recaptcha_unavailable_title" ),
-						confirmButtonText: t( "global.yes" ),
 						confirmButtonColor: "#28a745"
 					} );
 
@@ -61,37 +59,29 @@ export default function GameHome(): JSX.Element
 
 				// Récupération et vérification du jeton d'authentification généré
 				//	par l'API de Google reCAPTCHA.
-				try
-				{
-					// On envoie d'abord une requête de vérification au serveur.
-					const token = await executeRecaptcha();
-					const response = await fetchApi( "tokens", "POST", { token } );
+				const token = await executeRecaptcha();
 
-					// On vérifie si le serveur a validé l'intégrité de l'utilisateur.
-					// 	Note : un score trop bas est considéré comme un utilisateur non humain.
-					if ( response !== "human" )
+				socket.emit( "GameRecaptcha", token, ( type: SweetAlertIcon, title: string, message: string ) =>
+				{
+					// Si la réponse indique que le joueur n'est pas un humain,
+					//	on affiche le message d'erreur correspondant avec les informations
+					//	transmises par le serveur.
+					if ( type !== "success" )
 					{
+						Swal.fire( {
+							icon: type,
+							text: t( title ),
+							title: t( message ),
+							confirmButtonColor: "#28a745"
+						} );
+
 						return;
 					}
 
-					// On ferme enfin l'animation de chargement si l'utilisateur n'est pas
-					//	considéré comme un programme malveillant.
+					// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
+					//	l'exécution des opérations.
 					Swal.close();
-				}
-				catch ( error )
-				{
-					// On affiche un message d'erreur si le traitement du jeton d'authentification
-					//	ainsi que la requête au serveur a échouée.
-					Swal.fire( {
-						icon: "error",
-						text: t( "modals.recaptcha_invalid_token_description" ),
-						title: t( "modals.recaptcha_invalid_token_title" ),
-						confirmButtonText: t( "global.yes" ),
-						confirmButtonColor: "#28a745"
-					} );
-
-					return;
-				}
+				} );
 			}
 		} );
 
@@ -136,7 +126,13 @@ export default function GameHome(): JSX.Element
 					//	transmises par le serveur.
 					if ( type !== "success" )
 					{
-						Swal.fire( t( title ), t( message ), type );
+						Swal.fire( {
+							icon: type,
+							text: t( title ),
+							title: t( message ),
+							confirmButtonColor: "#28a745"
+						} );
+
 						return;
 					}
 

@@ -18,10 +18,8 @@ app.disable( "x-powered-by" );
 // Création des routes de réponses.
 //
 import users from "./routes/users";
-import tokens from "./routes/tokens";
 
 app.use( "/api/users", users );
-app.use( "/api/tokens", tokens );
 
 app.all( "*", ( _request, result ) =>
 {
@@ -48,8 +46,6 @@ connection.on( "error", ( error ) =>
 // Prise en charge des connexions via les sockets.
 //
 import { Server } from "socket.io";
-import { registerUser, findUser, destroyUser } from "./utils/UserManager";
-import { registerRoom, updateRoom, findRoom, getRooms } from "./utils/RoomManager";
 
 const io = new Server( server );
 
@@ -74,4 +70,8 @@ io.on( "connection", ( socket ) =>
 	// Calcul de la latence client<->serveur.
 	const { Ping } = require( "./routes/ping" );
 	Ping( io, socket );
+
+	// Validation des jetons reCAPTCHA.
+	const { Recaptcha } = require( "./routes/recaptcha" );
+	Recaptcha( io, socket );
 } );
