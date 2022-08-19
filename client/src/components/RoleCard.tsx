@@ -9,6 +9,7 @@ interface RoleCardProps
 	// Déclaration des champs des propriétés du composant.
 	name: string;
 	budget: string;
+	player?: string;
 }
 
 export default function RoleCard( props: RoleCardProps ): JSX.Element
@@ -35,7 +36,7 @@ export default function RoleCard( props: RoleCardProps ): JSX.Element
 			<img src={`../../assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} />
 
 			{/* Utilisateur jouant ce rôle */}
-			<span>Prénom Nom</span>
+			<span>{props.player}</span>
 
 			<div>
 				{/* Nom du rôle */}

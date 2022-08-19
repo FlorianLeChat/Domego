@@ -14,19 +14,50 @@ html
 	font-family: "Roboto", sans-serif;
 	text-rendering: optimizeSpeed;
 	scroll-behavior: smooth;
+}
 
-	// Badge de Google reCAPTCHA.
-	// 	Source : https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
-	.grecaptcha-badge
-	{
-		display: none;
-	}
+// Badge de Google reCAPTCHA.
+// 	Source : https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
+.grecaptcha-badge
+{
+	display: none;
+}
 
-	// Flou artistique sur les fenêtres modales.
-	// 	Source : https://sweetalert2.github.io/recipe-gallery/blurred-backdrop.html
-	.swal2-shown > [aria-hidden]
+// Flou artistique sur les fenêtres modales.
+// 	Source : https://sweetalert2.github.io/recipe-gallery/blurred-backdrop.html
+.swal2-shown > [aria-hidden]
+{
+	filter: blur(0.5rem);
+	transition: filter 100ms;
+}
+
+// Icône de chargement de la page.
+// 	Source : https://web.dev/code-splitting-suspense/#suspending-multiple-components
+.loading
+{
+	// Conteneur de l'icône de chargement.
+	width: 4rem;
+	height: 4rem;
+	display: inline-block;
+	margin-top: 1rem;
+
+	&::after
 	{
-		filter: blur(0.5rem);
-		transition: filter 100ms;
+		// Animation de l'icône de chargement.
+		width: 4rem;
+		height: 4rem;
+		margin: 1px;
+		border: 5px solid rgb(63, 63, 63);
+		content: " ";
+		display: block;
+		animation: loader 1.2s linear infinite;
+		border-color: rgb(63, 63, 63) transparent rgb(63, 63, 63) transparent;
+		border-radius: 50%;
 	}
+}
+
+@keyframes loader
+{
+	0% { transform: rotate(0); }
+	100% { transform: rotate(360deg); }
 }
