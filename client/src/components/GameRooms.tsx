@@ -97,7 +97,7 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 			{
 				// Redirection automatique si la fenêtre de chargement est fermée
 				//	normalement (sans aucune erreur émise par le serveur).
-				navigate( `/game/${ roomId }/selection` );
+				navigate( `/game/selection`, { state: { roomId: roomId, userName: props.username } } );
 			}
 		} );
 	}, [ t, props, socket, navigate ] );
