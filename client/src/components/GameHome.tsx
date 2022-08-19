@@ -180,7 +180,7 @@ export default function GameHome(): JSX.Element
 					(<Trans i18nKey="pages.index.username_length" components={{ strong: <strong /> }} />)
 				</label>
 
-				<input type="text" name="pseudo" placeholder="Marc007" autoComplete="off" spellCheck="false" minLength={5} maxLength={20} onChange={updateUsername} value={username} required />
+				<input type="text" name="pseudo" placeholder="Marc007" autoComplete="username" spellCheck="false" minLength={5} maxLength={20} onChange={updateUsername} value={username} required />
 
 				{/* Bouton de création d'une nouvelle partie */}
 				<button type="button" onClick={createNewGame}>{t( "pages.index.create_new_game" )}</button>
