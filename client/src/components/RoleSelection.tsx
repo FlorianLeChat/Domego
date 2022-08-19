@@ -4,18 +4,33 @@
 import { useLocation } from "react-router-dom";
 import { SocketContext } from "../utils/SocketContext";
 import { useTranslation } from "react-i18next";
-import { useEffect, useContext } from "react";
+import { useState, useContext, useEffect, lazy, Suspense } from "react";
 
-import RoleCard from "../components/RoleCard";
+import NotFound from "../components/NotFound";
 import "./RoleSelection.scss";
+
+const RoleCard = lazy( () => import( "../components/RoleCard" ) );
+
+interface RoleSelectionPlayers
+{
+	// Déclaration des champs des propriétés du rôle des joueurs.
+	owner?: string;
+	artisan?: string;
+	manager?: string;
+	builder?: string;
+	engineer?: string;
+	inspector?: string;
+}
 
 export default function RoleSelection(): JSX.Element
 {
-
 	// Déclaration des constantes.
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
 	const location = useLocation();
+
+	// Déclaration des variables d'état.
+	const [ players ] = useState<RoleSelectionPlayers>();
 
 	// Estimation de la latence entre le client et le serveur.
 	useEffect( () =>
@@ -56,12 +71,14 @@ export default function RoleSelection(): JSX.Element
 
 			<div>
 				{/* Liste des rôles */}
-				<RoleCard name="project_owner" budget="150K" />
-				<RoleCard name="project_manager" budget="30K" />
-				<RoleCard name="engineering_office" budget="20K" />
-				<RoleCard name="control_office" budget="20K" />
-				<RoleCard name="secondary_state" budget="30K" />
-				<RoleCard name="general_construction" budget="30K" />
+				<Suspense fallback={<div className="loading"></div>}>
+					<RoleCard name="project_owner" player={players?.owner} budget="150K" />
+					<RoleCard name="project_manager" player={players?.manager} budget="30K" />
+					<RoleCard name="engineering_office" player={players?.engineer} budget="20K" />
+					<RoleCard name="control_office" player={players?.inspector} budget="20K" />
+					<RoleCard name="secondary_state" player={players?.artisan} budget="30K" />
+					<RoleCard name="general_construction" player={players?.builder} budget="30K" />
+				</Suspense>
 			</div>
 
 			{/* Bouton de lancement de la partie */}

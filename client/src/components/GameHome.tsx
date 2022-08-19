@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useTranslation, Trans } from "react-i18next";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, lazy, Suspense } from "react";
 
-import GameRooms from "../components/GameRooms";
 import { SocketContext } from "../utils/SocketContext";
-
 import "./GameHome.scss";
+
+const GameRooms = lazy( () => import( "../components/GameRooms" ) );
 
 export default function GameHome(): JSX.Element
 {
@@ -186,7 +186,9 @@ export default function GameHome(): JSX.Element
 				<button type="button" onClick={createNewGame}>{t( "pages.index.create_new_game" )}</button>
 
 				{/* Tableau des parties en cours */}
-				<GameRooms username={username} />
+				<Suspense fallback={<div className="loading"></div>}>
+					<GameRooms username={username} />
+				</Suspense>
 			</article>
 		</section>
 	);
