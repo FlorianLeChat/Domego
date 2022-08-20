@@ -31,11 +31,23 @@ html
 	transition: filter 100ms;
 }
 
-// Icône de chargement de la page.
+// Animation de chargement (cercle rotatif et texte de transition).
 // 	Source : https://web.dev/code-splitting-suspense/#suspending-multiple-components
-.loading
+span.loading
 {
-	// Conteneur de l'icône de chargement.
+	// Texte de transition.
+	width: 100%;
+	height: 100%;
+	display: flex;
+	position: absolute;
+	font-size: 3rem;
+	align-items: center;
+	justify-content: center;
+}
+
+div.loading
+{
+	// Conteneur du cercle rotatif de chargement.
 	width: 4rem;
 	height: 4rem;
 	display: inline-block;
@@ -43,7 +55,7 @@ html
 
 	&::after
 	{
-		// Animation de l'icône de chargement.
+		// Animation du cercle rotatif de chargement.
 		width: 4rem;
 		height: 4rem;
 		margin: 1px;
