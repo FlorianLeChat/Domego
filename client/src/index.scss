@@ -7,9 +7,9 @@
 @import "sanitize.css/ui-monospace";
 @import "sanitize.css/reduce-motion";
 
+// Ensemble des pages.
 html
 {
-	// Ensemble des documents.
 	min-width: 360px;
 	font-family: "Roboto", sans-serif;
 	text-rendering: optimizeSpeed;
@@ -48,7 +48,7 @@ html
 		height: 4rem;
 		margin: 1px;
 		border: 5px solid rgb(63, 63, 63);
-		content: " ";
+		content: "";
 		display: block;
 		animation: loader 1.2s linear infinite;
 		border-color: rgb(63, 63, 63) transparent rgb(63, 63, 63) transparent;
