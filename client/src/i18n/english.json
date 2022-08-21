@@ -19,7 +19,9 @@
 		"join_game_spectator_title": "Observe a game",
 		"join_game_spectator_description": "Do you want to observe this game? In this mode, you will not be able to participate to the game.",
 		"joining_game_title": "Joining a game...",
-		"joining_game_description": "You are joining a game as {{role}}. Please wait..."
+		"joining_game_description": "You are joining a game as {{type}}. Please wait...",
+		"network_latency_title": "High latency",
+		"network_latency_description": "The latency between you and the server looks high ({{latency}} ms). There could be a significant delay in some of your interactions."
 	},
 	"server": {
 		"duplicated_data_title": "Data duplication",

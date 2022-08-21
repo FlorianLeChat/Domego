@@ -19,7 +19,9 @@
 		"join_game_spectator_title": "Observation une partie",
 		"join_game_spectator_description": "Voulez-vous observer cette partie ? Dans ce mode, vous ne pourrez pas participer à la partie.",
 		"joining_game_title": "Connexion à une partie...",
-		"joining_game_description": "Vous êtes en train de rejoindre une partie en tant que {{role}}. Veuillez patienter..."
+		"joining_game_description": "Vous êtes en train de rejoindre une partie en tant que {{type}}. Veuillez patienter...",
+		"network_latency_title": "Latence élevée",
+		"network_latency_description": "La latence entre vous et le serveur semble élevée ({{latency}} ms). Certaines de vos actions pourraient subir un délai conséquent."
 	},
 	"server": {
 		"duplicated_data_title": "Duplication des données",

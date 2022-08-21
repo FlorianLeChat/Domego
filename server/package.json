@@ -45,7 +45,7 @@
     "build": "npm run build-client && cd ../server && npm run build-server",
     "tunnel": "npx localtunnel --port 3001",
     "restart": "pm2 restart index.js",
-    "build-client": "cd ../client && npm run build && npx purgecss --css build/static/css/*.css --content build/index.html build/static/js/*.js --output build/static/css",
+    "build-client": "cd ../client && npm run build",
     "build-server": "npx tsc && nodemon index.js"
   }
 }

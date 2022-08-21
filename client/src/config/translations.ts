@@ -3,10 +3,10 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 // Importation des traductions.
-import english from "./en.json";
-import french from "./fr.json";
+import english from "../i18n/english.json";
+import french from "../i18n/french.json";
 
-// Initialisation du module de traduction.
+// Initialisation du module des traductions.
 i18n.use( initReactI18next ).init( {
 	lng: navigator.language,
 	fallbackLng: "en",
