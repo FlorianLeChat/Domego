@@ -3,6 +3,7 @@
 //
 import ReactGA from "react-ga";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useTranslation, Trans } from "react-i18next";
@@ -16,7 +17,7 @@ const GameRooms = lazy( () => import( "../components/GameRooms" ) );
 export default function GameHome(): JSX.Element
 {
 	// Déclaration des constantes.
-	const uuid = crypto.randomUUID();
+	const uuid = uuidv4();
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
 	const navigate = useNavigate();
