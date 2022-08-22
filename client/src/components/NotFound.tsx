@@ -21,7 +21,7 @@ export default function NotFound(): JSX.Element
 			<h2>{t( "pages.notfound.description" )}</h2>
 
 			{/* Redirection vers la page principale */}
-			<Link to="./">{t( "pages.notfound.link" )}</Link>
+			<Link to="../">{t( "pages.notfound.link" )}</Link>
 		</section>
 	);
 }
