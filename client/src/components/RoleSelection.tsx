@@ -1,26 +1,16 @@
 //
 // Composant pour sélectionner un rôle avant de lancer la partie.
 //
+import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
 import { SocketContext } from "../utils/SocketContext";
 import { useTranslation } from "react-i18next";
-import { useState, useContext, useEffect, lazy, Suspense } from "react";
+import { useContext, useState, useEffect, lazy, Suspense } from "react";
 
 import NotFound from "../components/NotFound";
 import "./RoleSelection.scss";
 
 const RoleCard = lazy( () => import( "../components/RoleCard" ) );
-
-interface RoleSelectionPlayers
-{
-	// Déclaration des champs des propriétés du rôle des joueurs.
-	owner?: string;
-	artisan?: string;
-	manager?: string;
-	builder?: string;
-	engineer?: string;
-	inspector?: string;
-}
 
 export default function RoleSelection(): JSX.Element
 {
@@ -30,32 +20,34 @@ export default function RoleSelection(): JSX.Element
 	const location = useLocation();
 
 	// Déclaration des variables d'état.
-	const [ players ] = useState<RoleSelectionPlayers>();
+	const [ admin ] = useState( false );
 
 	// Estimation de la latence entre le client et le serveur.
 	useEffect( () =>
 	{
-		console.log( location.state, socket );
-		// On met tout d'abord la date du moment actuelle.
-		// const start = Date.now();
+		// On met tout d'abord en mémoire le temps actuel.
+		const start = Date.now();
 
-		// socket.emit( "GamePing", () =>
-		// {
-		// 	// Lo
-		// 	const delta = Date.now() - start;
+		socket.emit( "GamePing", () =>
+		{
+			// Lors de la réception de la requête par le serveur,
+			//	on calcule la différence entre la temps actuel ainsi
+			//	que le temps précédemment mis en mémoire.
+			const delta = Date.now() - start;
 
-		// 	if ( delta > 500 )
-		// 	{
-		// 		Swal.fire( {
-		// 			icon: "warning",
-		// 			title: "Latence élevée",
-		// 			text: `La latence entre vous et le serveur semble élevé (${ delta } ms). Certaines de vos actions pourraient subir un délai conséquent.`,
-		// 			confirmButtonText: "Je comprends l'avertissement",
-		// 			confirmButtonColor: "#28a745"
-		// 		} );
-		// 	}
-		// } );
-	}, [] );
+			if ( delta > 500 )
+			{
+				// Si la différence est supérieure à 500ms,
+				//	on affiche un avertissement à l'utilisateur.
+				Swal.fire( {
+					icon: "warning",
+					text: t( "modals.network_latency_description", { latency: delta } ),
+					title: t( "modals.network_latency_title" ),
+					confirmButtonColor: "#28a745"
+				} );
+			}
+		} );
+	}, [ t, socket ] );
 
 	// Vérification de la connexion à la partie.
 	if ( location.state === null )
@@ -72,17 +64,18 @@ export default function RoleSelection(): JSX.Element
 			<div>
 				{/* Liste des rôles */}
 				<Suspense fallback={<div className="loading"></div>}>
-					<RoleCard name="project_owner" player={players?.owner} budget="150K" />
-					<RoleCard name="project_manager" player={players?.manager} budget="30K" />
-					<RoleCard name="engineering_office" player={players?.engineer} budget="20K" />
-					<RoleCard name="control_office" player={players?.inspector} budget="20K" />
-					<RoleCard name="secondary_state" player={players?.artisan} budget="30K" />
-					<RoleCard name="general_construction" player={players?.builder} budget="30K" />
+					<RoleCard name="project_owner" budget="150K" />
+					<RoleCard name="project_manager" budget="30K" />
+					<RoleCard name="engineering_office" budget="20K" />
+					<RoleCard name="control_office" budget="20K" />
+					<RoleCard name="secondary_state" budget="30K" />
+					<RoleCard name="general_construction" budget="30K" />
 				</Suspense>
 			</div>
 
 			{/* Bouton de lancement de la partie */}
-			<button type="button">{t( "pages.selection.launch" )}</button>
+			{/* (disponible seulement pour l'administrateur) */}
+			{admin && <button type="button" onClick={startGame}>{t( "pages.selection.launch" )}</button>}
 		</section>
 	);
 }

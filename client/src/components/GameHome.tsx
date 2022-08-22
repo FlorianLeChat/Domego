@@ -62,15 +62,15 @@ export default function GameHome(): JSX.Element
 				//	par l'API de Google reCAPTCHA.
 				const token = await executeRecaptcha();
 
-				socket.emit( "GameRecaptcha", token, ( type: SweetAlertIcon, title: string, message: string ) =>
+				socket.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
 				{
 					// Si la réponse indique que le joueur n'est pas un humain,
 					//	on affiche le message d'erreur correspondant avec les informations
 					//	transmises par le serveur.
-					if ( type !== "success" )
+					if ( icon !== "success" )
 					{
 						Swal.fire( {
-							icon: type,
+							icon: icon,
 							text: t( message ),
 							title: t( title ),
 							confirmButtonColor: "#28a745"
@@ -120,15 +120,15 @@ export default function GameHome(): JSX.Element
 				Swal.showLoading();
 
 				// Envoi de la requête de création de la partie.
-				socket.emit( "GameConnect", username, "player", uuid, ( type: SweetAlertIcon, title: string, message: string ) =>
+				socket.emit( "GameConnect", username, "player", uuid, ( icon: SweetAlertIcon, title: string, message: string ) =>
 				{
 					// Si la réponse indique que la partie n'a pas été créée avec succès,
 					//	on affiche le message d'erreur correspondant avec les informations
 					//	transmises par le serveur.
-					if ( type !== "success" )
+					if ( icon !== "success" )
 					{
 						Swal.fire( {
-							icon: type,
+							icon: icon,
 							text: t( message ),
 							title: t( title ),
 							confirmButtonColor: "#28a745"
@@ -146,7 +146,7 @@ export default function GameHome(): JSX.Element
 			{
 				// Redirection automatique si la fenêtre de chargement est fermée
 				//	normalement (sans aucune erreur émise par le serveur).
-				navigate( `/game/selection`, { state: { roomId: uuid, userName: username } } );
+				navigate( `/game/selection`, { state: { roomId: uuid, username: username, type: "player" } } );
 			}
 		} );
 	};

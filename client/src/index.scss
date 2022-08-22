@@ -41,7 +41,9 @@ span.loading
 	display: flex;
 	position: absolute;
 	font-size: 3rem;
+	font-weight: bold;
 	align-items: center;
+	text-transform: uppercase;
 	justify-content: center;
 }
 

@@ -24,7 +24,7 @@ export function Disconnect( io: Server, socket: Socket )
 			} );
 
 			// On met enfin à jour les informations de la partie.
-			updateRoom( user.game, undefined, user.role, false );
+			updateRoom( user.game, socket.id, user.type, false );
 		}
 	} );
 };

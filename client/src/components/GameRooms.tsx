@@ -35,13 +35,13 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 	const navigate = useNavigate();
 
 	// Bouton pour rejoindre une partie (joueur/spectateur).
-	const joinGame = useCallback( async ( roomId: string, role: string ) =>
+	const joinGame = useCallback( async ( roomId: string, type: string ) =>
 	{
 		// On vérifie d'abord si l'utilisateur veut bien rejoindre la partie.
 		const result = await Swal.fire( {
 			icon: "question",
-			text: t( `modals.join_game_${ role }_description` ),
-			title: t( `modals.join_game_${ role }_title` ),
+			text: t( `modals.join_game_${ type }_description` ),
+			title: t( `modals.join_game_${ type }_title` ),
 			reverseButtons: true,
 			showCancelButton: true,
 			cancelButtonText: t( "global.no" ),
@@ -60,7 +60,7 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 		//	que la partie est en cours de chargement.
 		await Swal.fire( {
 			icon: "info",
-			text: t( "modals.joining_game_description", { role: t( `pages.rooms.${ role }` ).toLowerCase() } ),
+			text: t( "modals.joining_game_description", { type: t( `pages.rooms.${ type }` ).toLowerCase() } ),
 			title: t( "modals.joining_game_title" ),
 			allowEscapeKey: false,
 			timerProgressBar: true,
@@ -71,15 +71,15 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 				Swal.showLoading();
 
 				// Envoi de la requête pour rejoindre la partie.
-				socket.emit( "GameConnect", props.username, role, roomId, ( type: SweetAlertIcon, title: string, message: string ) =>
+				socket.emit( "GameConnect", props.username, type, roomId, ( icon: SweetAlertIcon, title: string, message: string ) =>
 				{
 					// Si la réponse indique que la partie n'a pas été créée avec succès,
 					//	on affiche le message d'erreur correspondant avec les informations
 					//	transmises par le serveur.
-					if ( type !== "success" )
+					if ( icon !== "success" )
 					{
 						Swal.fire( {
-							icon: type,
+							icon: icon,
 							text: t( message ),
 							title: t( title ),
 							confirmButtonColor: "#28a745"
@@ -97,7 +97,7 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 			{
 				// Redirection automatique si la fenêtre de chargement est fermée
 				//	normalement (sans aucune erreur émise par le serveur).
-				navigate( `/game/selection`, { state: { roomId: roomId, userName: props.username } } );
+				navigate( `/game/selection`, { state: { roomId: roomId, username: props.username, type: type } } );
 			}
 		} );
 	}, [ t, props, socket, navigate ] );

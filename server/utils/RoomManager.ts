@@ -1,9 +1,12 @@
+// Importation de déclarations.
+import { UserType } from "../utils/UserManager";
+
 // Déclaration des interfaces.
-interface RoomAttributes
+export interface RoomAttributes
 {
 	// Identifiant unique de la partie (UUID v4).
 	// 	Source : https://en.wikipedia.org/wiki/Universally_unique_identifier#Format
-	id: string[ 36 ];
+	id: string;
 
 	// État actuel de la partie (en cours, terminée, etc.).
 	state: RoomState;
@@ -11,15 +14,15 @@ interface RoomAttributes
 	// Nom d'utilisateur du créateur de la partie.
 	creator: string;
 
-	// Nombre de joueurs présents dans la partie.
-	players: number;
+	// Liste des joueurs présents dans la partie.
+	players: string[];
 
-	// Nombre de spectateurs présents dans la partie.
-	spectators: number;
+	// Liste des spectateurs présents dans la partie.
+	spectators: string[];
 }
 
 // Déclaration des énumérations.
-enum RoomState
+export enum RoomState
 {
 	// État de création (aucun joueur prêt).
 	CREATED = 0,
@@ -35,14 +38,15 @@ enum RoomState
 }
 
 // Déclaration des constantes.
-const rooms: RoomAttributes[] = [];
+export const rooms: RoomAttributes[] = [];
+export const MAX_PLAYERS = 6;
 
 //
 // Permet d'enregistrer les informations d'une nouvelle partie.
 //
-export function registerRoom( id: string, creator: string )
+export function registerRoom( id: string, player: string )
 {
-	const room = { id: id, state: RoomState.CREATED, creator: creator, players: 0, spectators: 0 };
+	const room = { id: id, state: RoomState.CREATED, creator: player, players: [ player ], spectators: [] };
 	rooms.push( room );
 
 	return rooms;
@@ -51,35 +55,41 @@ export function registerRoom( id: string, creator: string )
 //
 // Permet de mettre à jour certaines informations relatives à une partie.
 //
-export function updateRoom( id: string, state?: RoomState, role?: string, incremental?: boolean )
+export function updateRoom( id: string, player: string, type: UserType, state: boolean )
 {
 	const room = findRoom( id );
 
-	if ( room )
+	if ( room && Object.values( UserType ).includes( type ) )
 	{
-		// Tentative de mise à jour de l'état de la partie.
-		if ( state !== undefined )
+		// Récupération de la liste des joueurs/spectateurs.
+		let list: string[] = [];
+
+		if ( type === UserType.PLAYER )
 		{
-			room.state = state;
+			list = room.players;
+		}
+		else if ( type === UserType.SPECTATOR )
+		{
+			list = room.spectators;
 		}
 
-		// Tentative de mise à jour du nombre de joueurs/spectateurs.
-		if ( role !== undefined && incremental !== undefined )
+		// Ajout ou suppression d'une entrée.
+		if ( state )
 		{
-			if ( role === "player" )
+			list.push( player );
+		}
+		else
+		{
+			const index = list.findIndex( ( id ) => id === player );
+
+			if ( index !== -1 )
 			{
-				// Incrémentation/décrémentation du nombre de joueurs.
-				incremental ? room.players++ : room.players--;
-			}
-			else
-			{
-				// Incrémentation/décrémentation du nombre de spectateurs.
-				incremental ? room.spectators++ : room.spectators--;
+				list.splice( index, 1 )[ 0 ];
 			}
 		}
 
 		// Suppression de la partie si elle devient complètement vide.
-		if ( room.players === 0 && room.spectators === 0 )
+		if ( room.players.length === 0 && room.spectators.length === 0 )
 		{
 			destroyRoom( id );
 		}
@@ -109,8 +119,18 @@ export function findRoom( id: string )
 
 //
 // Permet de récupérer l'ensemble des parties en mémoire.
+//	Note : certains champs sont masqués/modifiés avant d'être envoyés
+//		aux utilisateurs de la partie React.
 //
 export function getRooms()
 {
-	return structuredClone( rooms );
+	return rooms.map( ( room ) =>
+	{
+		return {
+			id: room.id,
+			creator: room.creator,
+			players: room.players.length,
+			spectators: room.spectators.length
+		};
+	} );
 }
