@@ -80,8 +80,8 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 					{
 						Swal.fire( {
 							icon: type,
-							text: t( title ),
-							title: t( message ),
+							text: t( message ),
+							title: t( title ),
 							confirmButtonColor: "#28a745"
 						} );
 
