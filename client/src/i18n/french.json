@@ -71,8 +71,8 @@
 		},
 		"notfound": {
 			"title": "Page introuvable",
-			"description": "La page que vous recherchez n'existe pas.",
-			"link": "Cliquez ici pour revenir en lieu sûr."
+			"description": "La page que vous recherchez n'existe pas",
+			"link": "Cliquez ici pour revenir en lieu sûr"
 		}
 	}
 }

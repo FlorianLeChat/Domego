@@ -71,8 +71,8 @@
 		},
 		"notfound": {
 			"title": "Page not found",
-			"description": "The page you are looking for does not exist.",
-			"link": "Click here to return to a safe place."
+			"description": "The page you are looking for does not exist",
+			"link": "Click here to return to a safe place"
 		}
 	}
 }
