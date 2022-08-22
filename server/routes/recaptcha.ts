@@ -12,7 +12,7 @@ export function Recaptcha( _io: Server, socket: Socket )
 	{
 		// On vérifie tout d'abord si le jeton d'authentification qui a été transmis
 		//	semble valide ou non.
-		if ( token.length === 0 )
+		if ( !token )
 		{
 			callback( "error", "modals.recaptcha_invalid_token_title", "modals.recaptcha_invalid_token_description" );
 			return;

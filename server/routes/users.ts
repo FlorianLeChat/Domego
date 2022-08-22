@@ -16,7 +16,7 @@ router.route( "/" )
 		{
 			const document = await User.find().limit( 10 );
 
-			result.json( document !== null ? { state: true, response: document } : { state: false } );
+			result.json( document ? { state: true, response: document } : { state: false } );
 		}
 		catch ( error )
 		{
@@ -33,7 +33,7 @@ router.route( "/" )
 			const user = new User( request.body );
 			const document = await user.save();
 
-			result.json( document !== null ? { state: true, response: document } : { state: false } );
+			result.json( document ? { state: true, response: document } : { state: false } );
 		}
 		catch ( error )
 		{
@@ -49,7 +49,7 @@ router.route( "/" )
 		{
 			const document = await User.findOneAndUpdate( request.body.filter, request.body.update );
 
-			result.json( document !== null ? { state: true, response: document } : { state: false } );
+			result.json( document ? { state: true, response: document } : { state: false } );
 		}
 		catch ( error )
 		{
@@ -65,7 +65,7 @@ router.route( "/" )
 		{
 			const document = await User.findOneAndDelete( request.body );
 
-			result.json( document !== null ? { state: true, response: document } : { state: false } );
+			result.json( document ? { state: true, response: document } : { state: false } );
 		}
 		catch ( error )
 		{
