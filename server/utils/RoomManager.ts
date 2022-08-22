@@ -1,5 +1,5 @@
 // Importation de déclarations.
-import { UserType } from "../utils/UserManager";
+import { findUser, UserType } from "../utils/UserManager";
 
 // Déclaration des interfaces.
 export interface RoomAttributes
@@ -128,7 +128,7 @@ export function getRooms()
 	{
 		return {
 			id: room.id,
-			creator: room.creator,
+			creator: findUser( room.creator )?.name,
 			players: room.players.length,
 			spectators: room.spectators.length
 		};
