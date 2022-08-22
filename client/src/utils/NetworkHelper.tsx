@@ -8,7 +8,6 @@ export function fetchApi( url: string, method: string = "GET", body: Object = {}
 	{
 		// On créé une requête réseau en direction de l'API de test.
 		const response = await fetch( `api/${ url }`, {
-
 			// Méthode de la requête.
 			method: method,
 
@@ -19,7 +18,6 @@ export function fetchApi( url: string, method: string = "GET", body: Object = {}
 			headers: {
 				"Content-type": "application/json; charset=UTF-8"
 			}
-
 		} );
 
 		// Lors de sa réponse, on vérifie si la réponse est valide.
