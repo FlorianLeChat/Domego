@@ -4,8 +4,20 @@ import { createContext } from "react";
 
 //
 // Permet de créer le socket de communication avec le serveur.
+//	Note : on tente de définir l'identifiant unique précédemment en mémoire
+//		afin de garder une persistence avec les données du serveur.
 //
+const cacheId = sessionStorage.getItem( "cacheId" );
 const instance = io( { path: process.env.PUBLIC_URL + "/socket.io" } );
+
+instance.auth = { "cacheId": cacheId ?? instance.id };
+
+if ( !cacheId )
+{
+	sessionStorage.setItem( "cacheId", instance.id );
+}
+
+console.log( cacheId );
 
 //
 // Permet de créer un contexte d'exportation avec le socket précédemment créé.

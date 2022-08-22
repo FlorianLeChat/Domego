@@ -46,8 +46,29 @@ const server = app.listen( 3001 );
 // Création des routes de réponses via WebSockets.
 //
 import { Server } from "socket.io";
+import { findUser } from "./utils/UserManager";
 
 const io = new Server( server );
+
+io.use( ( socket, next ) =>
+{
+	// On vérifie tout d'abord si l'utilisateur a transmis un identifiant
+	//	unique en provenance de son navigateur pendant la phase de connexion.
+	if ( socket.handshake.auth.cacheId )
+	{
+		// On tente de récupère un quelconque utilisateur actuellement
+		//	enregistré avant de le mettre à jour.
+		const user = findUser( socket.handshake.auth.cacheId );
+
+		if ( user )
+		{
+			user.id = socket.id;
+		}
+	}
+
+	// On continue enfin la connexion.
+	next();
+} );
 
 io.on( "connection", ( socket ) =>
 {
