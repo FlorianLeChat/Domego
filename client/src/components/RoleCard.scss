@@ -94,7 +94,7 @@ $colors: (1: royalblue, 2: limegreen, 3: gold, 4: black, 5: magenta, 6: red);
 				}
 			}
 
-			&:last-of-type
+			&:nth-of-type(3)
 			{
 				// Prêt à jouer.
 				display: none;

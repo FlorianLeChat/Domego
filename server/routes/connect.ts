@@ -2,12 +2,12 @@
 // Fonction permettant de gérer les connexions des utilisateurs aux sockets.
 //
 import { Server, Socket } from "socket.io";
-import { registerUser, findUser } from "../utils/UserManager";
-import { registerRoom, updateRoom, findRoom } from "../utils/RoomManager";
+import { registerUser, findUser, UserType } from "../utils/UserManager";
+import { registerRoom, updateRoom, findRoom, MAX_PLAYERS } from "../utils/RoomManager";
 
 export function Connect( _io: Server, socket: Socket )
 {
-	socket.on( "GameConnect", ( name, role, game, callback ) =>
+	socket.on( "GameConnect", ( name, type, game, callback ) =>
 	{
 		// On vérifie tout d'abord si l'utilisateur n'est pas déjà connecté
 		// 	dans une autre partie.
@@ -19,7 +19,7 @@ export function Connect( _io: Server, socket: Socket )
 
 		// On vérifie également si les informations transmises par l'utilisateur
 		//	sont considérées comme valides.
-		if ( ( name.length < 5 || name.length > 20 ) || ( role !== "player" && role !== "spectator" ) || game.length !== 36 )
+		if ( ( name.length < 5 || name.length > 20 ) || ( !Object.values( UserType ).includes( type ) ) || game.length !== 36 )
 		{
 			callback( "error", "server.invalid_data_title", "server.invalid_data_description" );
 			return;
@@ -32,22 +32,23 @@ export function Connect( _io: Server, socket: Socket )
 		if ( !room )
 		{
 			// Création d'une nouvelle partie.
-			registerRoom( game, name );
+			registerRoom( game, socket.id );
 		}
 		else
 		{
 			// Vérification du nombre de places restantes.
-			if ( role === "player" && room.players >= 6 )
+			if ( type === UserType.PLAYER && room.players.length >= MAX_PLAYERS )
 			{
 				callback( "error", "server.full_game_title", "server.full_game_description" );
 				return;
 			}
+
+			// Actualisation des informations de la partie.
+			updateRoom( game, socket.id, type, true );
 		}
 
-		updateRoom( game, undefined, role, true );
-
 		// On enregistre alors les données en utilisateur en mémoire.
-		const user = registerUser( socket.id, name, role, game );
+		const user = registerUser( socket.id, name, type, game );
 		socket.join( user.game );
 
 		callback( "success" );

@@ -2,7 +2,7 @@
 import "./index.scss";
 
 // Importation des fichiers de configuration.
-import "./i18n/config";
+import "./config/translations";
 
 // Importation de React et de ses dépendances.
 import { createRoot } from "react-dom/client";
@@ -27,7 +27,7 @@ root.render(
 		<SocketProvider>
 			<GoogleReCaptchaProvider reCaptchaKey={process.env.REACT_APP_CAPTCHA_PUBLIC_KEY ?? ""}>
 				<BrowserRouter basename={process.env.PUBLIC_URL}>
-					<Suspense fallback={<span className="loading">🏗️ {process.env.REACT_APP_TITLE}...</span>}>
+					<Suspense fallback={<span className="loading">🏗️ {process.env.REACT_APP_TITLE}</span>}>
 						<Routes>
 							<Route path="/">
 								{/* Page d'accueil */}

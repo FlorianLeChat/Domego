@@ -15,20 +15,6 @@ app.use( express.static( root ) );
 app.disable( "x-powered-by" );
 
 //
-// Création des routes de réponses.
-//
-import users from "./routes/users";
-
-app.use( "/api/users", users );
-
-app.all( "*", ( _request, result ) =>
-{
-	result.sendFile( `${ root }/index.html` );
-} );
-
-const server = app.listen( 3001 );
-
-//
 // Liaison à la base de données MongoDB.
 //
 import mongoose from "mongoose";
@@ -43,7 +29,21 @@ connection.on( "error", ( error ) =>
 } );
 
 //
-// Prise en charge des connexions via les sockets.
+// Création des routes de réponses via HTTP.
+//
+import users from "./routes/users";
+
+app.use( "/api/users", users );
+
+app.all( "*", ( _request, result ) =>
+{
+	result.sendFile( `${ root }/index.html` );
+} );
+
+const server = app.listen( 3001 );
+
+//
+// Création des routes de réponses via WebSockets.
 //
 import { Server } from "socket.io";
 
@@ -62,6 +62,10 @@ io.on( "connection", ( socket ) =>
 	// Récupération des parties.
 	const { Rooms } = require( "./routes/rooms" );
 	Rooms( io, socket );
+
+	// Assignation des rôles.
+	const { Roles } = require( "./routes/roles" );
+	Roles( io, socket );
 
 	// Gestion des messages.
 	const { Chat } = require( "./routes/chat" );
