@@ -77,6 +77,12 @@ export function updateRoom( id: string, state?: RoomState, role?: string, increm
 				incremental ? room.spectators++ : room.spectators--;
 			}
 		}
+
+		// Suppression de la partie si elle devient complètement vide.
+		if ( room.players === 0 && room.spectators === 0 )
+		{
+			destroyRoom( id );
+		}
 	}
 }
 
