@@ -17,7 +17,6 @@ const GameRooms = lazy( () => import( "../components/GameRooms" ) );
 export default function GameHome(): JSX.Element
 {
 	// Déclaration des constantes.
-	const uuid = uuidv4();
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
 	const navigate = useNavigate();
@@ -107,6 +106,8 @@ export default function GameHome(): JSX.Element
 
 		// On affiche enfin une animation de chargement pour indiquer à l'utilisateur
 		//	que la partie est en cours de création.
+		const uuid = uuidv4();
+
 		await Swal.fire( {
 			icon: "info",
 			text: t( "modals.creating_new_game_description" ),
