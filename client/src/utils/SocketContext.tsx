@@ -10,14 +10,11 @@ import { createContext } from "react";
 const cacheId = sessionStorage.getItem( "cacheId" );
 const instance = io( { path: process.env.PUBLIC_URL + "/socket.io" } );
 
-instance.auth = { "cacheId": cacheId ?? instance.id };
-
-if ( !cacheId )
+instance.auth = { "cacheId": cacheId };
+instance.on( "connect", () =>
 {
 	sessionStorage.setItem( "cacheId", instance.id );
-}
-
-console.log( cacheId );
+} );
 
 //
 // Permet de créer un contexte d'exportation avec le socket précédemment créé.
