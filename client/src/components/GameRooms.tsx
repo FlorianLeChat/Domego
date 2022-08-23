@@ -24,6 +24,10 @@ interface GameRoomList
 	spectators: number;
 }
 
+// Temps d'attente entre chaque rafraîchissement de la liste
+//	des serveurs auprès du serveur (en millisecondes).
+const REFRESH_TIME = 5000;
+
 export default function GameRooms( props: GameRoomsProps ): JSX.Element
 {
 	// Déclaration des variables d'état.
@@ -133,7 +137,7 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 	{
 		// On créé un minuteur qui actualise périodiquement les informations
 		//	des parties en cours au montage du composant.
-		const interval = setInterval( updateRooms, 5000 );
+		const interval = setInterval( updateRooms, REFRESH_TIME );
 
 		// On effectue ensuite une première actualisation des parties en cours.
 		updateRooms();
