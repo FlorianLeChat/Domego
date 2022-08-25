@@ -40,6 +40,8 @@
     "utf-8-validate": "~5.0"
   },
   "scripts": {
+    "setup": "cd ../client && npm install && cd ../server && npm install",
+    "refresh": "cd ../client && npm update && cd ../server && npm update",
     "start": "pm2 start index.js",
     "stop": "pm2 stop index.js",
     "build": "npm run build-client && cd ../server && npm run build-server",
