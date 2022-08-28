@@ -3,7 +3,7 @@
 //
 import { Server, Socket } from "socket.io";
 import { registerUser, findUser, UserType } from "../utils/UserManager";
-import { registerRoom, updateRoom, findRoom, MAX_PLAYERS } from "../utils/RoomManager";
+import { registerRoom, updateRoom, findRoom, RoomState, MAX_PLAYERS } from "../utils/RoomManager";
 
 export function Connect( _io: Server, socket: Socket )
 {
@@ -40,6 +40,13 @@ export function Connect( _io: Server, socket: Socket )
 			if ( type === UserType.PLAYER && room.players.length >= MAX_PLAYERS )
 			{
 				callback( "error", "server.full_game_title", "server.full_game_description" );
+				return;
+			}
+
+			// Vérification de l'état actuel de la partie.
+			if ( ( room.state !== RoomState.CREATED && type === UserType.PLAYER ) || room.state === RoomState.FINISHED )
+			{
+				callback( "error", "server.game_started_title", "server.game_started_description" );
 				return;
 			}
 
