@@ -29,7 +29,9 @@
 		"invalid_data_title": "Informations invalides",
 		"invalid_data_description": "Le nom d'utilisateur ou l'identifiant unique de la partie sont manquants ou invalides.",
 		"full_game_title": "Partie pleine",
-		"full_game_description": "La partie est pleine. Vous pouvez toujours la rejoindre en tant que spectateur ou attendre que des places se libèrent."
+		"full_game_description": "La partie est pleine. Vous pouvez toujours la rejoindre en tant que spectateur ou attendre que des places se libèrent.",
+		"game_started_title": "Partie démarrée",
+		"game_started_description": "La partie a démarré. Vous pouvez la rejoindre en tant que spectateur ou attendre que la partie se termine."
 	},
 	"pages": {
 		"index": {

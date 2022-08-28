@@ -75,6 +75,13 @@ table#GameRooms
 					transition-duration: 300ms;
 					transition-property: color, border-color, box-shadow;
 
+					&:disabled
+					{
+						// Désactivation conditionnelle du bouton.
+						filter: opacity(0.5);
+						pointer-events: none;
+					}
+
 					&:last-of-type
 					{
 						// Marge supérieure du dernier bouton.

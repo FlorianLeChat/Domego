@@ -128,6 +128,7 @@ export function getRooms()
 	{
 		return {
 			id: room.id,
+			state: room.state,
 			creator: findUser( room.creator )?.name,
 			players: room.players.length,
 			spectators: room.spectators.length

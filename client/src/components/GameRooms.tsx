@@ -19,6 +19,7 @@ interface GameRoomList
 {
 	// Déclaration des champs de la liste des parties.
 	id: string;
+	state: number;
 	creator: string;
 	players: number;
 	spectators: number;
@@ -114,16 +115,16 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 		{
 			// Lors de la réception des données, on construit le HTML afin de l'afficher
 			//	lors du rendu de la page.
-			const rows = rooms.map( ( element: GameRoomList, indice: number ) =>
+			const rows = rooms.map( ( room: GameRoomList, indice: number ) =>
 				<tr key={indice}>
-					<td>{element.id}</td>
-					<td>{element.creator}</td>
-					<td>{element.players}/6 [{element.spectators}]</td>
+					<td>{room.id}</td>
+					<td>{room.creator}</td>
+					<td>{room.players}/6 [{room.spectators}]</td>
 					<td>
 						{/* Rejoindre la partie */}
-						<button type="button" onClick={() => joinGame( element.id, "player" )}>{t( "pages.rooms.join" )}</button>
+						<button type="button" onClick={() => joinGame( room.id, "player" )} disabled={room.state !== 0}>{t( "pages.rooms.join" )}</button>
 						{/* Observer la partie */}
-						<button type="button" onClick={() => joinGame( element.id, "spectator" )}>{t( "pages.rooms.watch" )}</button>
+						<button type="button" onClick={() => joinGame( room.id, "spectator" )} disabled={room.state === 3}>{t( "pages.rooms.watch" )}</button>
 					</td>
 				</tr>
 			);
