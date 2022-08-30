@@ -83,13 +83,6 @@ section#GameHome
 				box-shadow: 0 0 0 0.25rem rgba(24, 144, 255, 0.2);
 				border-color: rgb(64, 169, 255);
 			}
-
-			&:invalid ~ button
-			{
-				// Désactivation conditionnelle du bouton de validation.
-				filter: opacity(0.5);
-				pointer-events: none;
-			}
 		}
 
 		> button
@@ -108,6 +101,13 @@ section#GameHome
 			background-color: white;
 			transition-duration: 300ms;
 			transition-property: color, filter, border-color, background-color, box-shadow;
+
+			&:disabled
+			{
+				// Désactivation conditionnelle du bouton de validation.
+				filter: opacity(0.5);
+				pointer-events: none;
+			}
 
 			&:hover
 			{

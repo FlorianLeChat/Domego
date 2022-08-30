@@ -24,6 +24,7 @@ export default function GameHome(): JSX.Element
 
 	// Déclaration des variables d'état.
 	const [ username, setUsername ] = useState( "" );
+	const [ disabled, setDisabled ] = useState( true );
 
 	// Bouton de création d'une nouvelle partie.
 	const createNewGame = async () =>
@@ -156,6 +157,7 @@ export default function GameHome(): JSX.Element
 	const updateUsername = ( event: React.ChangeEvent<HTMLInputElement> ) =>
 	{
 		setUsername( event.target.value );
+		setDisabled( !event.target.validity.valid );
 	};
 
 	// Mise en place des statistiques de Google Analytics.
@@ -185,7 +187,7 @@ export default function GameHome(): JSX.Element
 				<input type="text" name="pseudo" placeholder="Marc007" autoComplete="username" spellCheck="false" minLength={5} maxLength={20} onChange={updateUsername} value={username} required />
 
 				{/* Bouton de création d'une nouvelle partie */}
-				<button type="button" onClick={createNewGame}>{t( "pages.index.create_new_game" )}</button>
+				<button type="button" onClick={createNewGame} disabled={disabled}>{t( "pages.index.create_new_game" )}</button>
 
 				{/* Tableau des parties en cours */}
 				<Suspense fallback={<div className="loading"></div>}>
