@@ -1,8 +1,8 @@
 //
-// Fonction permettant d'assigner les rôles aux utilisateurs.
+// Route permettant de gérer les assignations des rôles aux utilisateurs.
 //
-import { findRoom } from "../utils/RoomManager";
 import { Server, Socket } from "socket.io";
+import { findRoom, RoomState } from "../utils/RoomManager";
 import { findUser, UserType, UserState, UserRole } from "../utils/UserManager";
 
 export function Roles( _io: Server, socket: Socket )
@@ -86,7 +86,7 @@ export function Roles( _io: Server, socket: Socket )
 
 				// Par la même occasion, on essaie de déterminer si la partie est prête
 				//	à être lancée par l'administrateur de la partie.
-				let ready = true;
+				let ready = room.players.length === 6;
 
 				for ( const identifier of room.players )
 				{
@@ -100,7 +100,10 @@ export function Roles( _io: Server, socket: Socket )
 					}
 				}
 
-				// Après la vérification, on envoie le résultat à l'administrateur.
+				// Après la vérification, on change l'état de la partie si nécessaire
+				//	avant d'en avertir l'administrateur.
+				room.state = ready ? RoomState.READY : RoomState.CREATED;
+
 				socket.broadcast.to( room.creator ).emit( "GameReady", ready );
 			}
 		}

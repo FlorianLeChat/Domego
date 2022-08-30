@@ -1,5 +1,5 @@
 //
-// Fonction permettant de valider les jetons de Google reCAPTCHA.
+// Route permettant de valider les jetons d'authentification de Google reCAPTCHA.
 //
 import * as dotenv from "dotenv";
 import { Server, Socket } from "socket.io";

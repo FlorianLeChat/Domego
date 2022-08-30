@@ -1,5 +1,5 @@
 //
-// Fonction permettant de gérer les connexions des utilisateurs aux sockets.
+// Route permettant de gérer les connexions des utilisateurs aux sockets.
 //
 import { Server, Socket } from "socket.io";
 import { registerUser, findUser, UserType } from "../utils/UserManager";

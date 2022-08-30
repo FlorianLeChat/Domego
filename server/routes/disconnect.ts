@@ -1,5 +1,5 @@
 //
-// Fonction permettant de gérer les déconnexions des utilisateurs aux sockets.
+// Route permettant de gérer les déconnexions des utilisateurs aux sockets.
 //
 import { updateRoom } from "../utils/RoomManager";
 import { Server, Socket } from "socket.io";
