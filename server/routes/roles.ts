@@ -84,8 +84,6 @@ export function Roles( _io: Server, socket: Socket )
 				// L'utilisateur semble vouloir indiquer qu'il est prêt pour la partie.
 				user.state = UserState.READY;
 
-				callback( true );
-
 				// Par la même occasion, on essaie de déterminer si la partie est prête
 				//	à être lancée par l'administrateur de la partie.
 				let ready = true;
