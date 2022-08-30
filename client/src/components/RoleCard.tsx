@@ -3,18 +3,11 @@
 //
 import { useLocation } from "react-router-dom";
 import { SocketContext } from "../utils/SocketContext";
+import { LocationState } from "../types/LocationState";
 import { useTranslation } from "react-i18next";
 import { useState, useContext, useEffect } from "react";
 
 import "./RoleCard.scss";
-
-type LocationState = {
-	// Déclaration du type des propriétés utilisées avec « useLocation ».
-	// 	Source : https://github.com/DefinitelyTyped/DefinitelyTyped/discussions/58328
-	uuid: string;
-	type: string;
-	username: string;
-};
 
 interface RoleCardProps
 {
@@ -72,24 +65,28 @@ export default function RoleCard( props: RoleCardProps ): JSX.Element
 		setReady( state );
 	};
 
-	//
+	// Réception des mises à jour de sélection des rôles.
 	useEffect( () =>
 	{
+		// On émet d'abord une requête au serveur pour vérifier
+		//	si le rôle est déjà sélectionné ou non.
 		socket.emit( "GameRole", props.name, "check", true, ( available: boolean, player: string ) =>
 		{
+			// Si le rôle est déjà sélectionné, on l'assigne localement
+			//	le rôle avec les informations reçues depuis le serveur.
 			if ( !available )
 			{
 				setReady( true );
 				setPlayer( player );
 			}
 		} );
-	}, [] );
 
-	//
-	useEffect( () =>
-	{
+		// On accroche ensuite un écouteur pour réceptionner les mises à jour
+		//	des sélections des rôles.
 		socket.on( "GameRole", ( role: string, state: boolean, player: string ) =>
 		{
+			// Si la mise à jour correspond au rôle actuelle, alors on l'assigne
+			//	localement avec les informations reçues depuis le serveur.
 			if ( props.name === role )
 			{
 				setReady( state );
