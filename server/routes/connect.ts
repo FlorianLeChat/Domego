@@ -36,6 +36,20 @@ export function Connect( _io: Server, socket: Socket )
 		}
 		else
 		{
+			// Vérification de l'unicité des noms d'utilisateurs.
+			for ( const identifier of room.players )
+			{
+				const user = findUser( identifier );
+
+				// L'utilisateur ne doit pas avoir le même nom d'utilisateur que celui
+				//	qui a été indiqué.
+				if ( user && user.name === name )
+				{
+					callback( "error", "server.duplicated_username_title", "server.duplicated_username_description" );
+					return;
+				}
+			}
+
 			// Vérification du nombre de places restantes.
 			if ( type === UserType.PLAYER && room.players.length >= MAX_PLAYERS )
 			{

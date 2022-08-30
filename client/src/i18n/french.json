@@ -26,6 +26,8 @@
 	"server": {
 		"duplicated_data_title": "Duplication des données",
 		"duplicated_data_description": "Vous êtes déjà connecté à une partie en cours. Veuillez la quitter avant d'en rejoindre une autre.",
+		"duplicated_username_title": "Nom d'utilisateur déjà utilisé",
+		"duplicated_username_description": "Le nom d'utilisateur que vous avez choisi est déjà utilisé par un autre joueur. Veuillez en choisir un autre.",
 		"invalid_data_title": "Informations invalides",
 		"invalid_data_description": "Le nom d'utilisateur ou l'identifiant unique de la partie sont manquants ou invalides.",
 		"full_game_title": "Partie pleine",
