@@ -4,6 +4,7 @@
 import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
 import { SocketContext } from "../utils/SocketContext";
+import { LocationState } from "../types/LocationState";
 import { useTranslation } from "react-i18next";
 import { useContext, useState, useEffect, lazy, Suspense } from "react";
 
@@ -17,7 +18,7 @@ export default function RoleSelection(): JSX.Element
 	// Déclaration des constantes.
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
-	const location = useLocation();
+	const location = useLocation().state as LocationState;
 
 
 	// Estimation de la latence entre le client et le serveur.
@@ -48,7 +49,7 @@ export default function RoleSelection(): JSX.Element
 	}, [ t, socket ] );
 
 	// Vérification de la connexion à la partie.
-	if ( location.state === null )
+	if ( !socket.connected || location === null )
 	{
 		return <NotFound />;
 	}
