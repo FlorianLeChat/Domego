@@ -26,6 +26,8 @@
 	"server": {
 		"duplicated_data_title": "Data duplication",
 		"duplicated_data_description": "You are already connected to a running game. Please leave it before joining another one.",
+		"duplicated_username_title": "Duplicated username",
+		"duplicated_username_description": "The username you provided is already used by another player. Please choose another one.",
 		"invalid_data_title": "Invalid data",
 		"invalid_data_description": "The username or unique game identifier is missing or invalid.",
 		"full_game_title": "Full game",
