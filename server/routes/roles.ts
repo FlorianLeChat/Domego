@@ -39,7 +39,7 @@ export function Roles( _io: Server, socket: Socket )
 				{
 					// Si c'est une sélection, on vérifie que le rôle sélectionné
 					//	n'est pas occupé par quelqu'un d'autre.
-					let available = true;
+					let cache = undefined;
 
 					for ( const identifier of room.players )
 					{
@@ -49,12 +49,12 @@ export function Roles( _io: Server, socket: Socket )
 						//	qui a été sélectionné.
 						if ( user && user.role === role )
 						{
-							available = false;
+							cache = user.name;
 							break;
 						}
 					}
 
-					if ( available && action === "select" )
+					if ( !cache && action === "select" )
 					{
 						// Si le rôle est libre, on l'assigne à l'utilisateur et
 						//	on signale le changement à tous les utilisateurs du salon.
@@ -66,7 +66,7 @@ export function Roles( _io: Server, socket: Socket )
 					// Dans le cas contraire, rien ne se passe mais on renvoie
 					//	systématiquement un résultat pour indiquer si le changement
 					//	s'est effectué ou non.
-					callback( available, user.name );
+					callback( !cache, cache || user.name );
 				}
 				else
 				{
