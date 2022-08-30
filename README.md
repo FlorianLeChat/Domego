@@ -22,7 +22,7 @@ ___
 
 ## In English
 
-*Domego is a serious educational game in which each player takes the role of an actor in a construction operation. The objective is dual: collectively, the players must ensure that the project runs smoothly and finishes on time with the lowest possible cost, individually, they must ensure the sustainability of their business by meeting different objectives (making profits, ensuring their reputation ...).*
+*Domego is a serious educational game in which each player takes the role of an actor in a construction operation. The objective is dual: collectively, the players must ensure that the project runs smoothly and finishes on time with the lowest possible cost, individually, they must ensure the sustainability of their business by meeting different objectives (making profits, ensuring their reputation, etc.).*
 
 This project, completed as an end-of-school-year project, is based on a board game developed by [Franck Taillandier for the University of Bordeaux](https://www.i2m.u-bordeaux.fr/Projets/Autres-projets2/Domego). This is the **third** edition of the digital version of this game, the [first](https://github.com/Polytech-PFE2019/pfe2019-009) and the [second](https://github.com/Denisko185/SI4-stage-Domego) are publicly available but use different technologies than used in this edition.
 
