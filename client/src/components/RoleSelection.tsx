@@ -41,13 +41,7 @@ export default function RoleSelection(): JSX.Element
 					title: t( title ),
 					confirmButtonColor: "#28a745"
 				} );
-
-				return;
 			}
-
-			// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
-			//	l'exécution des opérations.
-			Swal.close();
 		} );
 	};
 
