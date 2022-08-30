@@ -18,6 +18,7 @@ const TestApi = lazy( () => import( "./components/TestApi" ) );
 const GameHome = lazy( () => import( "./components/GameHome" ) );
 const GameChat = lazy( () => import( "./components/GameChat" ) );
 const NotFound = lazy( () => import( "./components/NotFound" ) );
+const GameBoard = lazy( () => import( "./components/GameBoard" ) );
 const RoleSelection = lazy( () => import( "./components/RoleSelection" ) );
 
 // Gestion des routes vers les pages du site.
@@ -43,10 +44,10 @@ root.render(
 								<Route path="game/selection" element={<RoleSelection />} />
 
 								{/* Tableau de contrôle durant une partie en cours. */}
-								<Route path="game/dashboard" element={<GameHome />} />
+								<Route path="game/board" element={<GameBoard />} />
 
 								{/* Page de test des requêtes via MongoDB */}
-								<Route path="database" element={<TestApi />} />
+								<Route path="test/database" element={<TestApi />} />
 							</Route>
 						</Routes>
 					</Suspense>
