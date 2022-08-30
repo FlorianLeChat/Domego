@@ -97,16 +97,25 @@ $colors: (1: royalblue, 2: limegreen, 3: gold, 4: black, 5: magenta, 6: red);
 			&:nth-of-type(3)
 			{
 				// Prêt à jouer.
-				display: none;
 				box-shadow: none;
 				margin-top: 1rem;
+
+				input
+				{
+					// Bouton de sélection.
+					width: 1.5rem;
+					height: 1.25rem;
+					outline: none;
+				}
 
 				label
 				{
 					// Texte du bouton.
 					color: rgb(63, 63, 63);
+					font-size: 2rem;
 					font-weight: bold;
-					margin-left: 0.25rem;
+					margin-left: 0.5rem;
+					text-shadow: -1px -1px 0 whitesmoke, 1px -1px 0 whitesmoke, -1px 1px 0 whitesmoke, 1px 1px 0 whitesmoke;
 				}
 			}
 		}
