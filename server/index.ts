@@ -92,6 +92,10 @@ io.on( "connection", ( socket ) =>
 	const { Chat } = require( "./routes/chat" );
 	Chat( io, socket );
 
+	// Action des administrateurs.
+	const { Admin } = require( "./routes/admin" );
+	Admin( io, socket );
+
 	// Calcul de la latence client<->serveur.
 	const { Ping } = require( "./routes/ping" );
 	Ping( io, socket );

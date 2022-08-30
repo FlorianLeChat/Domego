@@ -38,7 +38,7 @@ export function Admin( io: Server, socket: Socket )
 
 				io.to( room.id ).emit( "GameStart" );
 
-				callback( true );
+				callback( "success" );
 			}
 			else
 			{

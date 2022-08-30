@@ -82,21 +82,24 @@ export function Roles( _io: Server, socket: Socket )
 			else if ( action === "ready" && user.role === role )
 			{
 				// L'utilisateur semble vouloir indiquer qu'il est prêt pour la partie.
-				user.state = UserState.READY;
+				user.state = state ? UserState.READY : UserState.WAITING;
 
 				// Par la même occasion, on essaie de déterminer si la partie est prête
 				//	à être lancée par l'administrateur de la partie.
-				let ready = room.players.length === 6;
+				let ready = room.players.length === 6 && state;
 
-				for ( const identifier of room.players )
+				if ( !ready )
 				{
-					const user = findUser( identifier );
-
-					// L'utilisateur ne doit pas être marqué comme en attente.
-					if ( user && user.state === UserState.WAITING )
+					for ( const identifier of room.players )
 					{
-						ready = false;
-						break;
+						const user = findUser( identifier );
+
+						// L'utilisateur ne doit pas être marqué comme en attente.
+						if ( user && user.state === UserState.WAITING )
+						{
+							ready = false;
+							break;
+						}
 					}
 				}
 
