@@ -82,7 +82,7 @@ export default function RoleSelection(): JSX.Element
 		//	l'utilisateur lorsque la partie a été lancée par l'administrateur.
 		socket.on( "GameStart", () =>
 		{
-			navigate( `/game/board`, { state: { roomId: location.uuid, username: location.username, admin: location.admin, type: location.type } } );
+			navigate( "/game/board", { state: { roomId: location.uuid, username: location.username, admin: location.admin, type: location.type } } );
 		} );
 
 		// On accroche enfin un dernier événement (seulement pour les administrateurs)

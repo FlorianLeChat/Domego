@@ -40,7 +40,7 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 	const navigate = useNavigate();
 
 	// Bouton pour rejoindre une partie (joueur/spectateur).
-	const joinGame = useCallback( async ( roomId: string, type: string ) =>
+	const joinGame = useCallback( async ( roomId: string, type: string, state: number ) =>
 	{
 		// On vérifie d'abord si l'utilisateur veut bien rejoindre la partie.
 		const result = await Swal.fire( {
@@ -102,7 +102,7 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 			{
 				// Redirection automatique si la fenêtre de chargement est fermée
 				//	normalement (sans aucune erreur émise par le serveur).
-				navigate( `/game/selection`, { state: { roomId: roomId, username: props.username, admin: false, type: type } } );
+				navigate( `/game/${ state === 2 ? "board" : "selection" }`, { state: { roomId: roomId, username: props.username, admin: false, type: type } } );
 			}
 		} );
 	}, [ t, props, socket, navigate ] );
@@ -122,9 +122,9 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 					<td>{room.players}/6 [{room.spectators}]</td>
 					<td>
 						{/* Rejoindre la partie */}
-						<button type="button" onClick={() => joinGame( room.id, "player" )} disabled={room.state !== 0}>{t( "pages.rooms.join" )}</button>
+						<button type="button" onClick={() => joinGame( room.id, "player", room.state )} disabled={room.state !== 0}>{t( "pages.rooms.join" )}</button>
 						{/* Observer la partie */}
-						<button type="button" onClick={() => joinGame( room.id, "spectator" )} disabled={room.state === 3}>{t( "pages.rooms.watch" )}</button>
+						<button type="button" onClick={() => joinGame( room.id, "spectator", room.state )} disabled={room.state === 3}>{t( "pages.rooms.watch" )}</button>
 					</td>
 				</tr>
 			);
