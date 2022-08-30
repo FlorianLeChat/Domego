@@ -19,8 +19,6 @@ export default function RoleSelection(): JSX.Element
 	const socket = useContext( SocketContext );
 	const location = useLocation();
 
-	// Déclaration des variables d'état.
-	const [ admin ] = useState( false );
 
 	// Estimation de la latence entre le client et le serveur.
 	useEffect( () =>
@@ -75,7 +73,7 @@ export default function RoleSelection(): JSX.Element
 
 			{/* Bouton de lancement de la partie */}
 			{/* (disponible seulement pour l'administrateur) */}
-			{admin && <button type="button" onClick={startGame}>{t( "pages.selection.launch" )}</button>}
+			{location.admin && <button type="button" onClick={startGame}>{t( "pages.selection.launch" )}</button>}
 		</section>
 	);
 }

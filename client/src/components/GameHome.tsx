@@ -148,7 +148,7 @@ export default function GameHome(): JSX.Element
 			{
 				// Redirection automatique si la fenêtre de chargement est fermée
 				//	normalement (sans aucune erreur émise par le serveur).
-				navigate( `/game/selection`, { state: { roomId: uuid, username: username, type: "player" } } );
+				navigate( `/game/selection`, { state: { roomId: uuid, username: username, admin: true, type: "player" } } );
 			}
 		} );
 	};
