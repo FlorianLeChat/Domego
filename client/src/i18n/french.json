@@ -31,7 +31,9 @@
 		"full_game_title": "Partie pleine",
 		"full_game_description": "La partie est pleine. Vous pouvez toujours la rejoindre en tant que spectateur ou attendre que des places se libèrent.",
 		"game_started_title": "Partie démarrée",
-		"game_started_description": "La partie a démarré. Vous pouvez la rejoindre en tant que spectateur ou attendre que la partie se termine."
+		"game_started_description": "La partie a démarré. Vous pouvez la rejoindre en tant que spectateur ou attendre que la partie se termine.",
+		"game_unready_title": "Joueurs non prêts",
+		"game_unready_description": "Veuillez attendre que tous les joueurs soient prêts avant de pouvoir lancer la partie."
 	},
 	"pages": {
 		"index": {

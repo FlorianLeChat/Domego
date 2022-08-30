@@ -31,7 +31,9 @@
 		"full_game_title": "Full game",
 		"full_game_description": "The game is full. You can always join as a spectator or wait for available slots.",
 		"game_started_title": "Game started",
-		"game_started_description": "The game has already started. You can always join as a spectator or wait until the game is over."
+		"game_started_description": "The game has already started. You can always join as a spectator or wait until the game is over.",
+		"game_unready_title": "Players not ready",
+		"game_unready_description": "Please wait until all players are ready before starting the game."
 	},
 	"pages": {
 		"index": {

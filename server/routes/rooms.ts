@@ -1,5 +1,5 @@
 //
-// Fonction permettant de lister les parties actuellement disponibles.
+// Route permettant de récupérer les parties actuellement disponibles.
 //
 import { getRooms } from "../utils/RoomManager";
 import { Server, Socket } from "socket.io";

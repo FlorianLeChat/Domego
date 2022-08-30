@@ -1,11 +1,11 @@
 //
 // Composant pour sélectionner un rôle avant de lancer la partie.
 //
-import Swal from "sweetalert2";
-import { useLocation } from "react-router-dom";
 import { SocketContext } from "../utils/SocketContext";
 import { LocationState } from "../types/LocationState";
 import { useTranslation } from "react-i18next";
+import Swal, { SweetAlertIcon } from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect, lazy, Suspense } from "react";
 
 import NotFound from "../components/NotFound";
@@ -18,10 +18,38 @@ export default function RoleSelection(): JSX.Element
 	// Déclaration des constantes.
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
+	const navigate = useNavigate();
 	const location = useLocation().state as LocationState;
 
 	// Déclaration des variables d'état.
 	const [ disabled, setDisabled ] = useState( true );
+
+	// Bouton de lancement de la partie.
+	const startGame = () =>
+	{
+		// Envoi de la requête de lancement de la partie.
+		socket.emit( "GameAdmin", "start", ( icon: SweetAlertIcon, title: string, message: string ) =>
+		{
+			// Si la réponse indique que la partie ne peut pas être actuellement lancée,
+			//	on affiche le message d'erreur correspondant avec les informations
+			//	transmises par le serveur.
+			if ( icon !== "success" )
+			{
+				Swal.fire( {
+					icon: icon,
+					text: t( message ),
+					title: t( title ),
+					confirmButtonColor: "#28a745"
+				} );
+
+				return;
+			}
+
+			// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
+			//	l'exécution des opérations.
+			Swal.close();
+		} );
+	};
 
 	// Envoi et des réceptions des mises à jour depuis/vers le serveur.
 	useEffect( () =>
@@ -48,6 +76,13 @@ export default function RoleSelection(): JSX.Element
 					confirmButtonColor: "#28a745"
 				} );
 			}
+		} );
+
+		// On accroche ensuite un événement pour rediriger automatiquement
+		//	l'utilisateur lorsque la partie a été lancée par l'administrateur.
+		socket.on( "GameStart", () =>
+		{
+			navigate( `/game/board`, { state: { roomId: location.uuid, username: location.username, admin: location.admin, type: location.type } } );
 		} );
 
 		// On accroche enfin un dernier événement (seulement pour les administrateurs)
