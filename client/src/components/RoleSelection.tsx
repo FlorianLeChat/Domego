@@ -20,11 +20,14 @@ export default function RoleSelection(): JSX.Element
 	const socket = useContext( SocketContext );
 	const location = useLocation().state as LocationState;
 
+	// Déclaration des variables d'état.
+	const [ disabled, setDisabled ] = useState( true );
 
-	// Estimation de la latence entre le client et le serveur.
+	// Envoi et des réceptions des mises à jour depuis/vers le serveur.
 	useEffect( () =>
 	{
-		// On met tout d'abord en mémoire le temps actuel.
+		// On vérifie d'abord la latence entre le client et le serveur
+		//	distant en mettant en mémoire le temps actuel.
 		const start = Date.now();
 
 		socket.emit( "GamePing", () =>
@@ -46,7 +49,14 @@ export default function RoleSelection(): JSX.Element
 				} );
 			}
 		} );
-	}, [ t, socket ] );
+
+		// On accroche enfin un dernier événement (seulement pour les administrateurs)
+		//	afin de déterminer l'état du bouton de lancement de partie.
+		socket.on( "GameReady", ( state: boolean ) =>
+		{
+			setDisabled( !state );
+		} );
+	}, [ t, navigate, socket, location ] );
 
 	// Vérification de la connexion à la partie.
 	if ( !socket.connected || location === null )
@@ -74,7 +84,7 @@ export default function RoleSelection(): JSX.Element
 
 			{/* Bouton de lancement de la partie */}
 			{/* (disponible seulement pour l'administrateur) */}
-			{location.admin && <button type="button" onClick={startGame}>{t( "pages.selection.launch" )}</button>}
+			{location.admin && <button type="button" onClick={startGame} disabled={disabled}>{t( "pages.selection.launch" )}</button>}
 		</section>
 	);
 }

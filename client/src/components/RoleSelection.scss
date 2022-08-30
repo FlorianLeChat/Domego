@@ -39,6 +39,13 @@ section#RoleSelection
 		transition-duration: 300ms;
 		transition-property: color, filter, border-color, background-color, box-shadow;
 
+		&:disabled
+		{
+			// Désactivation conditionnelle du bouton.
+			filter: opacity(0.5);
+			pointer-events: none;
+		}
+
 		&:hover
 		{
 			// Effet de survol du bouton.
