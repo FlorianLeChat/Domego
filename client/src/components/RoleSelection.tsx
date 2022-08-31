@@ -117,7 +117,8 @@ export default function RoleSelection(): JSX.Element
 			{location.admin && <button type="button" onClick={startGame} disabled={disabled}>{t( "pages.selection.launch" )}</button>}
 
 			{/* Communications textuelles de la partie */}
-			<GameChat />
+			{/* (disponible seulement pour les non-spectateurs) */}
+			{location.type === "player" && <GameChat />}
 		</section>
 	);
 }
