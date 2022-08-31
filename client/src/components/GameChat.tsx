@@ -1,19 +1,23 @@
 //
 // Composant des communications textuelles entre les joueurs d'une partie.
 //
+import { useLocation } from "react-router-dom";
+import { LocationState } from "../types/LocationState";
 import { SocketContext } from "../utils/SocketContext";
 import { useState, useEffect, useContext } from "react";
 
+import NotFound from "../components/NotFound";
 import "./GameChat.scss";
 
 export default function GameChat(): JSX.Element
 {
+	// Création des constantes.
+	const socket = useContext( SocketContext );
+	const location = useLocation().state as LocationState;
+
 	// Déclaration des variables d'état.
 	const [ input, setInput ] = useState( "" );
 	const [ messages, addMessage ] = useState<JSX.Element[]>( [] );
-
-	// Création des constantes.
-	const socket = useContext( SocketContext );
 
 	// Récupération du message saisi par l'utilisateur.
 	const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) =>
@@ -44,6 +48,13 @@ export default function GameChat(): JSX.Element
 			addMessage( elements => [ ...elements, <li key={elements.length}>{name + " : " + message}</li> ] );
 		} );
 	}, [ socket ] );
+
+
+	// Vérification de l'autorisation d'accès au composant.
+	if ( !socket.connected || location === null || location.type === "spectator" )
+	{
+		return <NotFound />;
+	}
 
 	// Affichage du rendu HTML du composant.
 	return (
