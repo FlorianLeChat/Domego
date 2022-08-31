@@ -1,5 +1,5 @@
 //
-// Composant du chat en réseau à l'intérieur des parties.
+// Composant des communications textuelles entre les joueurs d'une partie.
 //
 import { SocketContext } from "../utils/SocketContext";
 import { useState, useEffect, useContext } from "react";
@@ -27,17 +27,8 @@ export default function GameChat(): JSX.Element
 		// On cesse d'abord le comportement par défaut du formulaire.
 		event.preventDefault();
 
-		// On vérifie alors que l'utilisateur est connecté à un socket.
-		if ( socket.connected )
-		{
-			// L'utilisateur est connecté, on envoie le message au serveur.
-			socket.emit( "GameChat", input );
-		}
-		else
-		{
-			// Dans le cas, on affiche un message d'erreur.
-			console.log( "Vous n'êtes pas connecté au chat." );
-		}
+		// On envoie ensuite le message au serveur.
+		socket.emit( "GameChat", input );
 
 		// On vide enfin le champ de saisie.
 		setInput( "" );
@@ -47,19 +38,16 @@ export default function GameChat(): JSX.Element
 	useEffect( () =>
 	{
 		// On accroche un écouteur pour récupérer les messages du serveur.
-		socket.on( "GameChat", ( message ) =>
+		socket.on( "GameChat", ( name, message ) =>
 		{
 			// Lors de chaque nouveau message, on l'ajoute en mémoire.
-			addMessage( elements => [ ...elements, <li key={elements.length}>{message}</li> ] );
+			addMessage( elements => [ ...elements, <li key={elements.length}>{name + " : " + message}</li> ] );
 		} );
 	}, [ socket ] );
 
 	// Affichage du rendu HTML du composant.
 	return (
 		<section id="GameChat">
-			{/* Titre de la page */}
-			<h1>Test des sockets réseau</h1>
-
 			{/* Liste des messages */}
 			<ul>{messages}</ul>
 

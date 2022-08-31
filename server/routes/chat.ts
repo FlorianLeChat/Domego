@@ -14,11 +14,7 @@ export function Chat( io: Server, socket: Socket )
 
 		if ( user )
 		{
-			io.to( user.game ).emit( "GameChat", {
-				id: user.id,
-				name: user.name,
-				message: message.trim(),
-			} );
+			io.to( user.game ).emit( "GameChat", user.name, message.trim() );
 		}
 	} );
 };
