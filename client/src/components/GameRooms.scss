@@ -78,6 +78,7 @@ table#GameRooms
 					&:disabled
 					{
 						// Désactivation conditionnelle du bouton.
+						cursor: not-allowed;
 						filter: opacity(0.5);
 					}
 
