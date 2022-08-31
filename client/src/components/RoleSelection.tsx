@@ -12,6 +12,7 @@ import NotFound from "../components/NotFound";
 import "./RoleSelection.scss";
 
 const RoleCard = lazy( () => import( "../components/RoleCard" ) );
+const GameChat = lazy( () => import( "../components/GameChat" ) );
 
 export default function RoleSelection(): JSX.Element
 {
@@ -114,6 +115,9 @@ export default function RoleSelection(): JSX.Element
 			{/* Bouton de lancement de la partie */}
 			{/* (disponible seulement pour l'administrateur) */}
 			{location.admin && <button type="button" onClick={startGame} disabled={disabled}>{t( "pages.selection.launch" )}</button>}
+
+			{/* Communications textuelles de la partie */}
+			<GameChat />
 		</section>
 	);
 }

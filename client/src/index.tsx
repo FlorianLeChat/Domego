@@ -37,7 +37,7 @@ root.render(
 								{/* Page non trouvée. */}
 								<Route path="*" element={<NotFound />} />
 
-								{/* Chat de test pour chaque partie. */}
+								{/* Communications textuelles pour une partie. */}
 								<Route path="game/chat" element={<GameChat />} />
 
 								{/* Page de sélection des rôles avant chaque partie. */}

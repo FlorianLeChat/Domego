@@ -1,9 +1,11 @@
 section#GameChat
 {
 	// Corps de la page.
-	margin: 1rem;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-	padding-bottom: 3rem;
+	gap: 1rem;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	justify-content: flex-end;
 
 	ul
 	{
@@ -19,7 +21,7 @@ section#GameChat
 
 			&:nth-child(odd)
 			{
-				background: rgb(239, 239, 239);
+				background: whitesmoke;
 			}
 		}
 	}
@@ -27,29 +29,26 @@ section#GameChat
 	form
 	{
 		// Formulaire de saisie.
-		left: 0;
-		right: 0;
-		bottom: 0;
+		width: 100%;
 		height: 3rem;
 		display: flex;
 		padding: 0.25rem;
-		position: fixed;
 		box-sizing: border-box;
-		background: rgba(0, 0, 0, 0.15);
 		backdrop-filter: blur(10px);
+		background-color: rgb(139, 139, 139);
 
 		> input
 		{
 			// Champ de saisie.
 			border: none;
 			margin: 0.25rem;
-			padding: 0 1rem;
 			flex-grow: 1;
-			border-radius: 2rem;
+			border-radius: 0.25rem;
+			background-color: whitesmoke;
 
 			&:focus
 			{
-				// Effet de sélection.
+				// Suppression de l'effet de contour.
 				outline: none;
 			}
 		}
@@ -64,7 +63,7 @@ section#GameChat
 			outline: none;
 			padding: 0 1rem;
 			border-radius: 3px;
-			background-color: rgb(51, 51, 51);
+			background-color: rgb(63, 63, 63);
 		}
 	}
 }
