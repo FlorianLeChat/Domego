@@ -105,6 +105,7 @@ section#GameHome
 			&:disabled
 			{
 				// Désactivation conditionnelle du bouton de validation.
+				cursor: not-allowed;
 				filter: opacity(0.5);
 			}
 
