@@ -35,7 +35,9 @@
 		"game_started_title": "Game started",
 		"game_started_description": "The game has already started. You can always join as a spectator or wait until the game is over.",
 		"game_unready_title": "Players not ready",
-		"game_unready_description": "Please wait until all players are ready before starting the game."
+		"game_unready_description": "Please wait until all players are ready before starting the game.",
+		"user_connected": "{{username}} joined the game.",
+		"user_disconnected": "{{username}} disconnected."
 	},
 	"pages": {
 		"index": {
