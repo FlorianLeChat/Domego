@@ -4,20 +4,29 @@
 import { useLocation } from "react-router-dom";
 import { LocationState } from "../types/LocationState";
 import { SocketContext } from "../utils/SocketContext";
-import { useState, useEffect, useContext } from "react";
+import { useTranslation } from "react-i18next";
+import { useState, useRef, useEffect, useContext } from "react";
 
 import NotFound from "../components/NotFound";
 import "./GameChat.scss";
 
-export default function GameChat(): JSX.Element
+interface GameChatProps
+{
+	// Déclaration des champs des propriétés du composant.
+	show?: boolean;
+}
+
+export default function GameChat( props: GameChatProps ): JSX.Element
 {
 	// Création des constantes.
+	const list = useRef<HTMLUListElement>( null );
+	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
 	const location = useLocation().state as LocationState;
 
 	// Déclaration des variables d'état.
 	const [ input, setInput ] = useState( "" );
-	const [ messages, addMessage ] = useState<JSX.Element[]>( [] );
+	const [ messages, addMessage ] = useState<JSX.Element[]>( [ <i key={0}>{t( "pages.index.chat_welcome" )}</i> ] );
 
 	// Récupération du message saisi par l'utilisateur.
 	const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) =>
@@ -45,10 +54,17 @@ export default function GameChat(): JSX.Element
 		socket.on( "GameChat", ( name, message ) =>
 		{
 			// Lors de chaque nouveau message, on l'ajoute en mémoire.
-			addMessage( elements => [ ...elements, <li key={elements.length}>{name + " : " + message}</li> ] );
+			addMessage( elements => [ ...elements, <li key={elements.length}>{`[${ new Date().toLocaleTimeString() }] ${ name } : ${ message }`}</li> ] );
+
 		} );
 	}, [ socket ] );
 
+	// Retour automatique aux messages les plus récents.
+	useEffect( () =>
+	{
+		const last = list.current?.lastChild as Element;
+		last.scrollIntoView( { behavior: "smooth", block: "end", inline: "nearest" } );
+	}, [ messages ] );
 
 	// Vérification de l'autorisation d'accès au composant.
 	if ( !socket.connected || location === null || location.type === "spectator" )
@@ -56,17 +72,30 @@ export default function GameChat(): JSX.Element
 		return <NotFound />;
 	}
 
-	// Affichage du rendu HTML du composant.
-	return (
-		<section id="GameChat">
-			{/* Liste des messages */}
-			<ul>{messages}</ul>
+	// Affichage conditionnel du rendu HTML du composant.
+	if ( props.show )
+	{
+		// Le rendu est demandé par un composant parent ou par l'utilisateur.
+		// 	Note : c'est principalement le cas dans la page dédiée aux communications
+		//		textuelles entre les joueurs de la partie.
+		return (
+			<section id="GameChat">
+				{/* Liste des messages */}
+				<ul ref={list}>{messages}</ul>
 
-			{/* Champ de saisie */}
-			<form onSubmit={handleFormSubmit}>
-				<input type="text" onChange={handleInputChange} value={input} />
-				<button type="submit">Envoyer</button>
-			</form>
-		</section>
-	);
+				{/* Champ de saisie */}
+				<form onSubmit={handleFormSubmit}>
+					<input type="text" placeholder="Lorem ipsum dolor sit amet..." onChange={handleInputChange} value={input} />
+					<button type="submit">Envoyer</button>
+				</form>
+			</section>
+		);
+	}
+	else
+	{
+		// Le rendu est caché par un composant parent.
+		// 	Note : c'est uniquement le cas lorsqu'on veut cacher le chat dans
+		//		 la page de sélection des rôles.
+		return ( <></> );
+	}
 }

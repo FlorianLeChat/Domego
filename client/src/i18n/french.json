@@ -41,6 +41,7 @@
 		"index": {
 			"title": "Domego",
 			"description": "Un jeu sérieux pédagogique",
+			"chat_welcome": "Bienvenue sur le chat de votre partie Domego !",
 			"choose_username": "Veuillez saisir un nom d'utilisateur",
 			"username_length": "<strong>5</strong> caractères minimum, <strong>20</strong> caractères maximum",
 			"create_new_game": "Créer une partie",
