@@ -99,7 +99,7 @@ export default function RoleCard( props: RoleCardProps ): JSX.Element
 	return (
 		<article className="RoleCard">
 			{/* Image représentative du rôle */}
-			<img src={`../../assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} />
+			<img src={`${ process.env.PUBLIC_URL }/assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} />
 
 			{/* Utilisateur jouant ce rôle */}
 			<span>{player}</span>
