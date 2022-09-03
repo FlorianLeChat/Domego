@@ -41,6 +41,7 @@
 		"index": {
 			"title": "Domego",
 			"description": "A serious educational game",
+			"chat_welcome": "Welcome to your Domego chat room!",
 			"choose_username": "Please enter a username",
 			"username_length": "<strong>5</strong> minimum characters, <strong>20</strong> maximum characters",
 			"create_new_game": "Create a new game",

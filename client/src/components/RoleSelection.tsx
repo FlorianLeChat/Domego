@@ -24,6 +24,7 @@ export default function RoleSelection(): JSX.Element
 
 	// Déclaration des variables d'état.
 	const [ disabled, setDisabled ] = useState( true );
+	const [ showChat, setShowChat ] = useState( true );
 
 	// Bouton de lancement de la partie.
 	const startGame = () =>
@@ -44,6 +45,12 @@ export default function RoleSelection(): JSX.Element
 				} );
 			}
 		} );
+	};
+
+	// Apparition ou disparition des communications textuelles.
+	const toggleChat = () =>
+	{
+		setShowChat( !showChat );
 	};
 
 	// Envoi et des réceptions des mises à jour depuis/vers le serveur.
@@ -118,7 +125,7 @@ export default function RoleSelection(): JSX.Element
 
 			{/* Communications textuelles de la partie */}
 			{/* (disponible seulement pour les non-spectateurs) */}
-			{location.type === "player" && <GameChat />}
+			{location.type === "player" && <button type="button" onClick={toggleChat}></button>}<GameChat show={showChat} />
 		</section>
 	);
 }
