@@ -38,11 +38,7 @@ export function Disconnect( io: Server, socket: Socket )
 
 			// On envoie ensuite une notification à l'ensemble des utilisateurs
 			//	encore présents dans le salon afin d'indiquer son départ.
-			io.to( user.game ).emit( "GameAlert", {
-				id: user.id,
-				name: user.name,
-				message: `${ user.name } a quitté la partie.`,
-			} );
+			io.to( user.game ).emit( "GameAlert", user.name, "server.user_disconnected" );
 
 			// On met enfin à jour les informations de la partie.
 			updateRoom( user.game, socket.id, user.type, false );

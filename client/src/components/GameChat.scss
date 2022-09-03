@@ -19,10 +19,11 @@ section#GameChat
 
 		> i
 		{
-			// Message de bienvenue.
-			color: rgb(63, 63, 63);
-			display: inline-block;
+			// Notifications du serveur.
+			color: whitesmoke;
+			display: block;
 			padding-left: 0.25rem;
+			background-color: rgb(139, 139, 139);
 		}
 
 		> li

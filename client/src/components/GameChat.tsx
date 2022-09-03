@@ -50,14 +50,20 @@ export default function GameChat( props: GameChatProps ): JSX.Element
 	// Récupération des nouveaux messages.
 	useEffect( () =>
 	{
-		// On accroche un écouteur pour récupérer les messages du serveur.
+		// On accroche un premier écouteur pour récupérer les messages
+		//	des autres joueurs depuis le serveur.
 		socket.on( "GameChat", ( name, message ) =>
 		{
-			// Lors de chaque nouveau message, on l'ajoute en mémoire.
 			addMessage( elements => [ ...elements, <li key={elements.length}>{`[${ new Date().toLocaleTimeString() }] ${ name } : ${ message }`}</li> ] );
-
 		} );
-	}, [ socket ] );
+
+		// On accroche un deuxième écouteur pour récupérer les notifications
+		//	de connexion et de déconnexion des autres joueurs.
+		socket.on( "GameAlert", ( name, message ) =>
+		{
+			addMessage( elements => [ ...elements, <i key={elements.length}>{t( message, { username: name } )}</i> ] );
+		} );
+	}, [ t, socket ] );
 
 	// Retour automatique aux messages les plus récents.
 	useEffect( () =>

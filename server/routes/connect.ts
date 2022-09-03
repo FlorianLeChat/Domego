@@ -5,7 +5,7 @@ import { Server, Socket } from "socket.io";
 import { registerUser, findUser, UserType } from "../utils/UserManager";
 import { registerRoom, updateRoom, findRoom, RoomState, MAX_PLAYERS } from "../utils/RoomManager";
 
-export function Connect( _io: Server, socket: Socket )
+export function Connect( io: Server, socket: Socket )
 {
 	socket.on( "GameConnect", ( name, type, game, callback ) =>
 	{
@@ -74,19 +74,8 @@ export function Connect( _io: Server, socket: Socket )
 
 		callback( "success" );
 
-		// On affiche ensuite un message de bienvenue au nouvel utilisateur.
-		socket.emit( "GameChat", {
-			id: user.id,
-			name: user.name,
-			message: `Bienvenue ${ user.name } !`
-		} );
-
 		// On envoie enfin un message de connexion à tous les joueurs du salon
 		//	sauf au nouvel utilisateur.
-		socket.broadcast.to( user.game ).emit( "GameChat", {
-			id: user.id,
-			name: user.name,
-			message: `${ user.name } a rejoint la partie.`
-		} );
+		io.to( user.game ).emit( "GameAlert", user.name, "server.user_connected" );
 	} );
 };
