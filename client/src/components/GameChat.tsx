@@ -69,7 +69,13 @@ export default function GameChat( props: GameChatProps ): JSX.Element
 	useEffect( () =>
 	{
 		const last = list.current?.lastChild as Element;
-		last.scrollIntoView( { behavior: "smooth", block: "end", inline: "nearest" } );
+
+		if ( last )
+		{
+			// Le dernier élément peut être invalide si le composant
+			//	parent est actuellement caché ou en cours de démontage.
+			last.scrollIntoView( { behavior: "smooth", block: "end", inline: "nearest" } );
+		}
 	}, [ messages ] );
 
 	// Vérification de l'autorisation d'accès au composant.
