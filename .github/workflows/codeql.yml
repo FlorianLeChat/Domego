@@ -25,14 +25,6 @@ jobs:
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
-    - name: Install Client Dependencies
-      run: |
-        cd ../client
-        npm run build
-    - name: Install Server Dependencies
-      run: |
-        cd ../server
-        npx tsc
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
