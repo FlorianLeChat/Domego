@@ -4,11 +4,17 @@
 import cors from "cors";
 import path from "path";
 import express from "express";
+import rateLimit from "express-rate-limit";
 
 const app = express();
 const root = path.resolve( `${ __dirname }/../client/build` );
+const limiter = rateLimit( {
+	max: 100,
+	legacyHeaders: false
+} );
 
 app.use( cors( { origin: "http://localhost:3000" } ) );
+app.use( limiter );
 app.use( express.json() );
 app.use( express.static( root ) );
 
