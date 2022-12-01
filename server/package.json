@@ -10,6 +10,9 @@
     "type": "git",
     "url": "https://github.com/FlorianLeChat/Domego.git"
   },
+  "bugs": {
+    "url": "https://github.com/FlorianLeChat/Domego/issues"
+  },
   "contributors": [
     "Gilles Chandelier (https://github.com/GillesChandelier)",
     "Jiaqi Lui (https://github.com/LiuJiaqi-unice)",
