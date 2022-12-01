@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "uuid": "~9.0",
-    "sass": "~1.55",
+    "sass": "~1.56",
     "react": "~18.2",
     "i18next": "~21.9",
     "react-ga": "~3.3",
