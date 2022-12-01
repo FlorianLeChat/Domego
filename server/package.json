@@ -40,6 +40,10 @@
     "bufferutil": "~4.0",
     "utf-8-validate": "~5.0"
   },
+  "engines": {
+    "node": ">=18.7",
+    "npm": ">=8.11"
+  },
   "scripts": {
     "setup": "cd ../client && npm install && cd ../server && npm install",
     "refresh": "cd ../client && npm update && cd ../server && npm update",
