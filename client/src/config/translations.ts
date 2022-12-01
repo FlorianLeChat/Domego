@@ -10,6 +10,7 @@ import french from "../i18n/french.json";
 i18n.use( initReactI18next ).init( {
 	lng: navigator.language,
 	fallbackLng: "en",
+	returnNull: false,
 	resources: {
 		en: { translation: english },
 		fr: { translation: french }
