@@ -5,6 +5,9 @@ import cors from "cors";
 import path from "path";
 import express from "express";
 import rateLimit from "express-rate-limit";
+import * as dotenv from "dotenv";
+
+dotenv.config( { path: "../client/.env" } );
 
 const app = express();
 const root = path.resolve( `${ __dirname }/../client/build` );
@@ -27,7 +30,12 @@ import mongoose from "mongoose";
 
 const connection = mongoose.connection;
 
-mongoose.connect( "mongodb://127.0.0.1:27017/domego" );
+mongoose.connect( `mongodb://${ process.env.REACT_APP_MONGODB_HOST }:${ process.env.REACT_APP_MONGODB_PORT }/`,
+	{
+		user: process.env.REACT_APP_MONGODB_USERNAME,
+		pass: process.env.REACT_APP_MONGODB_PASSWORD,
+		dbName: process.env.REACT_APP_MONGODB_DATABASE
+	} as mongoose.ConnectOptions );
 
 connection.on( "error", ( error ) =>
 {
