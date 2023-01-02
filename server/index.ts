@@ -29,7 +29,7 @@ app.disable( "x-powered-by" );
 import mongoose from "mongoose";
 
 const connection = mongoose.connection;
-
+mongoose.set( "strictQuery", true );
 mongoose.connect( `mongodb://${ process.env.REACT_APP_MONGODB_HOST }:${ process.env.REACT_APP_MONGODB_PORT }/`,
 	{
 		user: process.env.REACT_APP_MONGODB_USERNAME,
