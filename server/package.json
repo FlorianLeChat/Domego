@@ -47,6 +47,9 @@
     "node": ">=18.7",
     "npm": ">=8.11"
   },
+  "overrides": {
+    "uuid": ">=7.0.0"
+  },
   "scripts": {
     "setup": "cd ../client && npm install && cd ../server && npm install",
     "refresh": "cd ../client && npm update && cd ../server && npm update",
