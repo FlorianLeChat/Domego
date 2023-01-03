@@ -26,9 +26,9 @@ const root = createRoot( document.querySelector( "body > main" ) as Element );
 root.render(
 	<StrictMode>
 		<SocketProvider>
-			<GoogleReCaptchaProvider reCaptchaKey={process.env.REACT_APP_CAPTCHA_PUBLIC_KEY ?? ""}>
-				<BrowserRouter basename={process.env.PUBLIC_URL}>
-					<Suspense fallback={<span className="loading">🏗️ {process.env.REACT_APP_TITLE}</span>}>
+			<GoogleReCaptchaProvider reCaptchaKey={process.env[ "REACT_APP_CAPTCHA_PUBLIC_KEY" ] ?? ""}>
+				<BrowserRouter basename={process.env[ "PUBLIC_URL" ]}>
+					<Suspense fallback={<span className="loading">🏗️ {process.env[ "REACT_APP_TITLE" ]}</span>}>
 						<Routes>
 							<Route path="/">
 								{/* Page d'accueil */}

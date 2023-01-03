@@ -7,6 +7,7 @@
         "sourceMap": true,
         "skipLibCheck": true,
         "noImplicitAny": true,
+        "importHelpers": true,
         "removeComments": true,
         "noImplicitThis": true,
         "noUnusedLocals": true,
@@ -15,10 +16,12 @@
         "strictNullChecks": true,
         "moduleResolution": "node",
         "resolveJsonModule": true,
+        "noImplicitOverride": true,
         "noUnusedParameters": true,
         "strictFunctionTypes": true,
         "noFallthroughCasesInSwitch": true,
         "allowSyntheticDefaultImports": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "noPropertyAccessFromIndexSignature": true,
     }
 }

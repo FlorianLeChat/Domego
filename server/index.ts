@@ -30,11 +30,11 @@ import mongoose from "mongoose";
 
 const connection = mongoose.connection;
 mongoose.set( "strictQuery", true );
-mongoose.connect( `mongodb://${ process.env.REACT_APP_MONGODB_HOST }:${ process.env.REACT_APP_MONGODB_PORT }/`,
+mongoose.connect( `mongodb://${ process.env[ "REACT_APP_MONGODB_HOST" ] }:${ process.env[ "REACT_APP_MONGODB_PORT" ] }/`,
 	{
-		user: process.env.REACT_APP_MONGODB_USERNAME,
-		pass: process.env.REACT_APP_MONGODB_PASSWORD,
-		dbName: process.env.REACT_APP_MONGODB_DATABASE
+		user: process.env[ "REACT_APP_MONGODB_USERNAME" ],
+		pass: process.env[ "REACT_APP_MONGODB_PASSWORD" ],
+		dbName: process.env[ "REACT_APP_MONGODB_DATABASE" ]
 	} as mongoose.ConnectOptions );
 
 connection.on( "error", ( error ) =>
@@ -68,11 +68,11 @@ io.use( ( socket, next ) =>
 {
 	// On vérifie tout d'abord si l'utilisateur a transmis un identifiant
 	//	unique en provenance de son navigateur pendant la phase de connexion.
-	if ( socket.handshake.auth.cacheId )
+	if ( socket.handshake.auth[ "cacheId" ] )
 	{
 		// On tente de récupère un quelconque utilisateur actuellement
 		//	enregistré avant de le mettre à jour.
-		const user = findUser( socket.handshake.auth.cacheId );
+		const user = findUser( socket.handshake.auth[ "cacheId" ] );
 
 		if ( user )
 		{
