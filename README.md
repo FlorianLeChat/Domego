@@ -14,7 +14,7 @@ Ce projet, réalisé en tant que sujet de fin d'année scolaire, est issue d'un 
 * TypeScript **4.8+**
 * Mongo DB **10.5+**
 
-**Pour installer le projet, il suffit juste de vous rendre dans le dossier `server` et de tapez la commande `npm run setup`. Si vous voulez travailler dans un environnement de développement local, utilisez la commande `npm start` dans le dossier `client` et la commande `npm run build` dans le dossier `server` dans deux terminaux séparés.**
+**Pour installer le projet, il suffit juste de vous rendre dans le dossier `server` et de tapez la commande `npm run setup`. Si vous voulez travailler dans un environnement de développement local, utilisez la commande `npm start` dans le dossier `client` et la commande `npm run build` dans le dossier `server` dans deux terminaux séparés. Une image Docker est d'ailleurs disponible pour tester ce projet ! 🐳**
 
 Comme le projet sera repris par des étudiants par la suite, l'entièreté du code est commentée dans ma langue natale (en français).
 
@@ -34,7 +34,7 @@ This project, completed as an end-of-school-year project, is based on a board ga
 * TypeScript **4.8+**
 * Mongo DB **10.5+**
 
-**To install the project, just navigate to the `server` folder and type the command `npm run setup`. If you want to work in a local development environment, use the `npm start` command in the `client` folder and the `npm run build` command in the `server` folder in two separate terminals.**
+**To install the project, just navigate to the `server` folder and type the command `npm run setup`. If you want to work in a local development environment, use the `npm start` command in the `client` folder and the `npm run build` command in the `server` folder in two separate terminals. A Docker image is also available to test this project! 🐳**
 
 Also, for the simplicity, the whole code is commented in my native language (French) but it will probably be translated in the near future.
 
