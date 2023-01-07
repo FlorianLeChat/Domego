@@ -10,7 +10,15 @@ export function Recaptcha( _io: Server, socket: Socket )
 {
 	socket.on( "GameRecaptcha", async ( token, callback ) =>
 	{
-		// On vérifie tout d'abord si le jeton d'authentification qui a été transmis
+		// On vérifie d'abord si on se trouve actuellement dans un environnement
+		// 	de développement ou de production.
+		if ( process.env[ "NODE_ENV" ] === "development" )
+		{
+			callback( "success", "🤖", "🤖" );
+			return;
+		}
+
+		// On vérifie ensuite si le jeton d'authentification qui a été transmis
 		//	semble valide ou non.
 		if ( !token )
 		{
@@ -18,7 +26,7 @@ export function Recaptcha( _io: Server, socket: Socket )
 			return;
 		}
 
-		// On effectue par la suite une requête à l'API de Google reCAPTCHA
+		// On effectue alors une requête à l'API de Google reCAPTCHA
 		//	afin de vérifier si le jeton d'authentification envoyé par le client
 		//	est valide ou non.
 		const response = await fetch( `https://www.google.com/recaptcha/api/siteverify?secret=${ process.env[ "REACT_APP_CAPTCHA_SECRET_KEY" ] }&response=${ token }` );
