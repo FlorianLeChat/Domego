@@ -32,7 +32,7 @@ export default function GameHome(): JSX.Element
 		// On réalise tout d'abord une vérification de sécurité en utilisant le service
 		//	Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
 		// 	Note : cette vérification n'est pas nécessaire en mode développement.
-		if ( process.env[ "NODE_ENV" ] === "production" )
+		if ( process.env[ "NODE_ENV" ] === "production" && window.location.hostname !== "localhost" )
 		{
 			await Swal.fire( {
 				icon: "info",
