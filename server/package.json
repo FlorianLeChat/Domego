@@ -55,10 +55,9 @@
     "refresh": "cd ../client && npm update && cd ../server && npm update",
     "start": "pm2 start index.js",
     "stop": "pm2 stop index.js",
-    "build": "npm run build-client && cd ../server && npm run build-server",
+    "dev": "nodemon index.js",
+    "build": "cd ../client && npm run build && cd ../server && npx tsc",
     "tunnel": "npx localtunnel --port 3001",
-    "restart": "pm2 restart index.js",
-    "build-client": "cd ../client && npm run build",
-    "build-server": "npx tsc && nodemon index.js"
+    "restart": "pm2 restart index.js"
   }
 }
