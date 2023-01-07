@@ -31,60 +31,64 @@ export default function GameHome(): JSX.Element
 	{
 		// On réalise tout d'abord une vérification de sécurité en utilisant le service
 		//	Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
-		await Swal.fire( {
-			icon: "info",
-			text: t( "modals.recaptcha_waiting_description" ),
-			title: t( "modals.recaptcha_waiting_title" ),
-			allowEscapeKey: false,
-			timerProgressBar: true,
-			allowOutsideClick: false,
-			didOpen: async () =>
-			{
-				// Affichage de l'animation de chargement.
-				Swal.showLoading();
-
-				// Vérification de la disponibilité du service reCAPTCHA.
-				if ( !executeRecaptcha )
+		// 	Note : cette vérification n'est pas nécessaire en mode développement.
+		if ( process.env[ "NODE_ENV" ] === "production" )
+		{
+			await Swal.fire( {
+				icon: "info",
+				text: t( "modals.recaptcha_waiting_description" ),
+				title: t( "modals.recaptcha_waiting_title" ),
+				allowEscapeKey: false,
+				timerProgressBar: true,
+				allowOutsideClick: false,
+				didOpen: async () =>
 				{
-					// Si le service est indisponible, on affiche un message d'erreur
-					// 	et on arrête l'exécution de la fonction.
-					Swal.fire( {
-						icon: "error",
-						text: t( "modals.recaptcha_unavailable_description" ),
-						title: t( "modals.recaptcha_unavailable_title" ),
-						confirmButtonColor: "#28a745"
-					} );
+					// Affichage de l'animation de chargement.
+					Swal.showLoading();
 
-					return;
-				}
-
-				// Récupération et vérification du jeton d'authentification généré
-				//	par l'API de Google reCAPTCHA.
-				const token = await executeRecaptcha();
-
-				socket.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
-				{
-					// Si la réponse indique que le joueur n'est pas un humain,
-					//	on affiche le message d'erreur correspondant avec les informations
-					//	transmises par le serveur.
-					if ( icon !== "success" )
+					// Vérification de la disponibilité du service reCAPTCHA.
+					if ( !executeRecaptcha )
 					{
+						// Si le service est indisponible, on affiche un message d'erreur
+						// 	et on arrête l'exécution de la fonction.
 						Swal.fire( {
-							icon: icon,
-							text: t( message ),
-							title: t( title ),
+							icon: "error",
+							text: t( "modals.recaptcha_unavailable_description" ),
+							title: t( "modals.recaptcha_unavailable_title" ),
 							confirmButtonColor: "#28a745"
 						} );
 
 						return;
 					}
 
-					// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
-					//	l'exécution des opérations.
-					Swal.close();
-				} );
-			}
-		} );
+					// Récupération et vérification du jeton d'authentification généré
+					//	par l'API de Google reCAPTCHA.
+					const token = await executeRecaptcha();
+
+					socket.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
+					{
+						// Si la réponse indique que le joueur n'est pas un humain,
+						//	on affiche le message d'erreur correspondant avec les informations
+						//	transmises par le serveur.
+						if ( icon !== "success" )
+						{
+							Swal.fire( {
+								icon: icon,
+								text: t( message ),
+								title: t( title ),
+								confirmButtonColor: "#28a745"
+							} );
+
+							return;
+						}
+
+						// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
+						//	l'exécution des opérations.
+						Swal.close();
+					} );
+				}
+			} );
+		}
 
 		// On vérifie alors si l'utilisateur veut bien créer une nouvelle partie.
 		const result = await Swal.fire( {
