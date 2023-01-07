@@ -1,0 +1,31 @@
+version: "3.9"
+
+networks:
+  domego:
+    driver: bridge
+
+services:
+  # https://hub.docker.com/_/mongo
+  mongo:
+    image: mongo:latest
+    container_name: database
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: domego
+    networks:
+      - domego
+
+  # https://github.com/FlorianLeChat/Domego
+  node:
+    image: domego
+    container_name: website
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      - domego
+    ports:
+      - 3001:3001
