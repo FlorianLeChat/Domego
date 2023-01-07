@@ -7,8 +7,9 @@ import { createContext } from "react";
 //	Note : on tente de définir l'identifiant unique précédemment en mémoire
 //		afin de garder une persistence avec les données du serveur.
 //
+const url = process.env[ "PUBLIC_URL" ];
 const cacheId = sessionStorage.getItem( "cacheId" );
-const instance = io( { path: process.env[ "PUBLIC_URL" ] + "socket.io" } );
+const instance = io( { path: ( url !== "" ? url : "/" ) + "socket.io" } );
 
 instance.auth = { "cacheId": cacheId };
 instance.on( "connect", () =>
