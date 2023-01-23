@@ -44,8 +44,8 @@
     "source-map-explorer": "~2.5"
   },
   "engines": {
-    "node": ">=18.7",
-    "npm": ">=8.11"
+    "node": ">=19.4",
+    "npm": ">=9.2"
   },
   "overrides": {
     "minimatch": ">=3.0.5",
