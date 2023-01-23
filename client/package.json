@@ -24,6 +24,7 @@
   ],
   "dependencies": {
     "uuid": "~9.0",
+    "next": "~13.1",
     "react": "~18.2",
     "i18next": "~22.0",
     "react-ga": "~3.3",
@@ -31,7 +32,6 @@
     "sweetalert2": "<11.4.9",
     "react-i18next": "~12.1",
     "socket.io-client": "~4.5",
-    "react-router-dom": "~6.6",
     "react-google-recaptcha-v3": "~1.10"
   },
   "devDependencies": {
@@ -42,7 +42,6 @@
     "sass": "~1.56",
     "purgecss": "~5.0",
     "typescript": "~4.9",
-    "react-scripts": "~5.0",
     "source-map-explorer": "~2.5"
   },
   "engines": {
@@ -56,10 +55,9 @@
     "json5": ">=2.2.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "next dev",
+	"start": "next start",
+    "build": "next build",
     "purge": "npx purgecss --config src/config/purgecss.js --css build/static/css/*.css --content build/index.html build/static/js/*.js --output build/static/css",
     "analyze": "source-map-explorer \"build/static/js/*.js\""
   },
