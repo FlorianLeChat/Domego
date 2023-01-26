@@ -1,7 +1,7 @@
 //
 // Composant des communications textuelles entre les joueurs d'une partie.
 //
-import { useLocation } from "react-router-dom";
+import { useLocation } from "next/link";
 import { LocationState } from "../types/LocationState";
 import { SocketContext } from "../utils/SocketContext";
 import { useTranslation } from "react-i18next";

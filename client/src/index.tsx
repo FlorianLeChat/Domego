@@ -8,7 +8,7 @@ import "./config/translations";
 import { createRoot } from "react-dom/client";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import { StrictMode, lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "next/link";
 
 // Importation des fonctions utilitaires.
 import { SocketProvider } from "./utils/SocketContext";

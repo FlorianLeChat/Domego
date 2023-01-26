@@ -1,7 +1,7 @@
 //
 // Composant d'affichage lorsqu'une page du routeur n'est pas trouvée.
 //
-import { Link } from "react-router-dom";
+import { Link } from "next/link";
 import { useTranslation } from "react-i18next";
 
 import "./NotFound.scss";

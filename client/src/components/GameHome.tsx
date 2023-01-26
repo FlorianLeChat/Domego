@@ -2,7 +2,7 @@
 // Composant de la page d'accueil du site.
 //
 import ReactGA from "react-ga";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "next/link";
 import { v4 as uuidv4 } from "uuid";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import Swal, { SweetAlertIcon } from "sweetalert2";

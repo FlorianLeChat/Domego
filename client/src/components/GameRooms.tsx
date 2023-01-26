@@ -1,7 +1,7 @@
 //
 // Composant d'affichage de l'ensemble des parties créées.
 //
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "next/link";
 import { SocketContext } from "../utils/SocketContext";
 import { useTranslation } from "react-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";

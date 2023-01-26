@@ -1,7 +1,7 @@
 //
 // Composant d'affichage pour la carte d'un rôle.
 //
-import { useLocation } from "react-router-dom";
+import { useLocation } from "next/link";
 import { SocketContext } from "../utils/SocketContext";
 import { LocationState } from "../types/LocationState";
 import { useTranslation } from "react-i18next";
