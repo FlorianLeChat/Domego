@@ -1,12 +1,14 @@
 {
+    "exclude": ["node_modules"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
     "compilerOptions": {
         "lib": ["dom", "dom.iterable", "esnext"],
-        "jsx": "react-jsx",
-        "paths": { "*": ["./node_modules/*"]},
+        "jsx": "preserve",
+        "paths": {"@/*": ["./*"], "*": ["./node_modules/*"]},
+        "noEmit": true,
         "strict": true,
         "target": "esnext",
         "module": "esnext",
-        "sourceMap": true,
         "skipLibCheck": true,
         "noImplicitAny": true,
         "importHelpers": true,
