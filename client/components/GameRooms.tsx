@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useEffect, useState, useCallback, useContext } from "react";
 
-import "./GameRooms.scss";
+import "../styles/GameRooms.module.scss";
 
 interface GameRoomsProps
 {

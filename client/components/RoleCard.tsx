@@ -8,7 +8,7 @@ import { LocationState } from "../types/LocationState";
 import { useTranslation } from "react-i18next";
 import { useState, useContext, useEffect } from "react";
 
-import "./RoleCard.scss";
+import "../styles/RoleCard.module.scss";
 
 interface RoleCardProps
 {

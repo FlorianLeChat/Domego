@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useContext } from "react";
 
 import NotFound from "../components/NotFound";
-import "./GameChat.scss";
+import "../styles/GameChat.module.scss";
 
 interface GameChatProps
 {

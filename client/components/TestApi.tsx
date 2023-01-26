@@ -4,7 +4,7 @@
 import { fetchApi } from "../utils/NetworkHelper";
 import { useState, useEffect } from "react";
 
-import "./TestApi.scss";
+import "../styles/TestApi.module.scss";
 
 export default function TestApi(): JSX.Element
 {

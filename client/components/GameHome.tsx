@@ -10,7 +10,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { useState, useContext, useEffect, lazy, Suspense } from "react";
 
 import { SocketContext } from "../utils/SocketContext";
-import "./GameHome.scss";
+import "../styles/GameHome.module.scss";
 
 const GameRooms = lazy( () => import( "../components/GameRooms" ) );
 

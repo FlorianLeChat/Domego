@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from "next/link";
 import { useContext, useState, useEffect, lazy, Suspense } from "react";
 
 import NotFound from "../components/NotFound";
-import "./RoleSelection.scss";
+import "../styles/RoleSelection.module.scss";
 
 const RoleCard = lazy( () => import( "../components/RoleCard" ) );
 const GameChat = lazy( () => import( "../components/GameChat" ) );
