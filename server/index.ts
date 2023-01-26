@@ -30,11 +30,11 @@ import mongoose from "mongoose";
 
 const connection = mongoose.connection;
 mongoose.set( "strictQuery", true );
-mongoose.connect( `mongodb://${ process.env[ "REACT_APP_MONGODB_HOST" ] }:${ process.env[ "REACT_APP_MONGODB_PORT" ] }/`,
+mongoose.connect( `mongodb://${ process.env[ "NEXT_PUBLIC_MONGODB_HOST" ] }:${ process.env[ "NEXT_PUBLIC_MONGODB_PORT" ] }/`,
 	{
-		user: process.env[ "REACT_APP_MONGODB_USERNAME" ],
-		pass: process.env[ "REACT_APP_MONGODB_PASSWORD" ],
-		dbName: process.env[ "REACT_APP_MONGODB_DATABASE" ]
+		user: process.env[ "NEXT_PUBLIC_MONGODB_USERNAME" ],
+		pass: process.env[ "NEXT_PUBLIC_MONGODB_PASSWORD" ],
+		dbName: process.env[ "NEXT_PUBLIC_MONGODB_DATABASE" ]
 	} as mongoose.ConnectOptions );
 
 connection.on( "error", ( error ) =>

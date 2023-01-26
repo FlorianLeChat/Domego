@@ -167,7 +167,7 @@ export default function GameHome(): JSX.Element
 	// Mise en place des statistiques de Google Analytics.
 	useEffect( () =>
 	{
-		ReactGA.initialize( process.env[ "REACT_APP_ANALYTICS_IDENTIFIER" ] ?? "" );
+		ReactGA.initialize( process.env[ "NEXT_PUBLIC_ANALYTICS_IDENTIFIER" ] ?? "" );
 		ReactGA.pageview( window.location.pathname + window.location.search );
 	}, [] );
 
