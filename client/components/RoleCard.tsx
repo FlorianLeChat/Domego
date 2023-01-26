@@ -1,6 +1,7 @@
 //
 // Composant d'affichage pour la carte d'un rôle.
 //
+import Image from "next/image";
 import { useLocation } from "next/link";
 import { SocketContext } from "../utils/SocketContext";
 import { LocationState } from "../types/LocationState";
@@ -99,7 +100,7 @@ export default function RoleCard( props: RoleCardProps ): JSX.Element
 	return (
 		<article className="RoleCard">
 			{/* Image représentative du rôle */}
-			<img src={`${ process.env[ "PUBLIC_URL" ] }/assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} />
+			<Image src={`${ process.env[ "PUBLIC_URL" ] }/assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} />
 
 			{/* Utilisateur jouant ce rôle */}
 			<span>{player}</span>
