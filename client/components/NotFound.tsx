@@ -4,7 +4,7 @@
 import { Link } from "next/link";
 import { useTranslation } from "react-i18next";
 
-import "../styles/NotFound.module.scss";
+import "@/styles/NotFound.module.scss";
 
 export default function NotFound(): JSX.Element
 {

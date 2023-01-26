@@ -2,8 +2,8 @@
 // Route permettant de gérer les connexions des utilisateurs aux sockets.
 //
 import { Server, Socket } from "socket.io";
-import { registerUser, findUser, UserType } from "../utils/UserManager";
-import { registerRoom, updateRoom, findRoom, RoomState, MAX_PLAYERS } from "../utils/RoomManager";
+import { registerUser, findUser, UserType } from "@/utils/UserManager";
+import { registerRoom, updateRoom, findRoom, RoomState, MAX_PLAYERS } from "@/utils/RoomManager";
 
 export function Connect( io: Server, socket: Socket )
 {

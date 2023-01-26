@@ -1,18 +1,18 @@
 //
 // Composant pour sélectionner un rôle avant de lancer la partie.
 //
-import { SocketContext } from "../utils/SocketContext";
-import { LocationState } from "../types/LocationState";
+import { SocketContext } from "@/utils/SocketContext";
+import { LocationState } from "@/types/LocationState";
 import { useTranslation } from "react-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useLocation, useNavigate } from "next/link";
 import { useContext, useState, useEffect, lazy, Suspense } from "react";
 
-import NotFound from "../components/NotFound";
-import "../styles/RoleSelection.module.scss";
+import NotFound from "@/components/NotFound";
+import "@/styles/RoleSelection.module.scss";
 
-const RoleCard = lazy( () => import( "../components/RoleCard" ) );
-const GameChat = lazy( () => import( "../components/GameChat" ) );
+const RoleCard = lazy( () => import( "@/components/RoleCard" ) );
+const GameChat = lazy( () => import( "@/components/GameChat" ) );
 
 export default function RoleSelection(): JSX.Element
 {

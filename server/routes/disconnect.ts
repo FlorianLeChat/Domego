@@ -1,9 +1,9 @@
 //
 // Route permettant de gérer les déconnexions des utilisateurs aux sockets.
 //
-import { updateRoom } from "../utils/RoomManager";
+import { updateRoom } from "@/utils/RoomManager";
 import { Server, Socket } from "socket.io";
-import { destroyUser, findUser } from "../utils/UserManager";
+import { destroyUser, findUser } from "@/utils/UserManager";
 
 // Temps d'attente avant une nouvelle vérification de l'identifiant
 //	unique de l'utilisateur déconnecté.

@@ -1,10 +1,10 @@
 //
 // Composant pour le test de récupération des données de l'API côté serveur.
 //
-import { fetchApi } from "../utils/NetworkHelper";
+import { fetchApi } from "@/utils/NetworkHelper";
 import { useState, useEffect } from "react";
 
-import "../styles/TestApi.module.scss";
+import "@/styles/TestApi.module.scss";
 
 export default function TestApi(): JSX.Element
 {

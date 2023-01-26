@@ -2,8 +2,8 @@
 // Route permettant de gérer les assignations des rôles aux utilisateurs.
 //
 import { Server, Socket } from "socket.io";
-import { findRoom, RoomState } from "../utils/RoomManager";
-import { findUser, UserType, UserState, UserRole } from "../utils/UserManager";
+import { findRoom, RoomState } from "@/utils/RoomManager";
+import { findUser, UserType, UserState, UserRole } from "@/utils/UserManager";
 
 export function Roles( _io: Server, socket: Socket )
 {

@@ -3,12 +3,12 @@
 //
 import Image from "next/image";
 import { useLocation } from "next/link";
-import { SocketContext } from "../utils/SocketContext";
-import { LocationState } from "../types/LocationState";
+import { SocketContext } from "@/utils/SocketContext";
+import { LocationState } from "@/types/LocationState";
 import { useTranslation } from "react-i18next";
 import { useState, useContext, useEffect } from "react";
 
-import "../styles/RoleCard.module.scss";
+import "@/styles/RoleCard.module.scss";
 
 interface RoleCardProps
 {

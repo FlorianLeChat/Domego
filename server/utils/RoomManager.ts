@@ -1,5 +1,5 @@
 // Importation de déclarations.
-import { findUser, UserType } from "../utils/UserManager";
+import { findUser, UserType } from "@/utils/UserManager";
 
 // Déclaration des interfaces.
 export interface RoomAttributes

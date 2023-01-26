@@ -9,10 +9,10 @@ import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useTranslation, Trans } from "react-i18next";
 import { useState, useContext, useEffect, lazy, Suspense } from "react";
 
-import { SocketContext } from "../utils/SocketContext";
-import "../styles/GameHome.module.scss";
+import { SocketContext } from "@/utils/SocketContext";
+import "@/styles/GameHome.module.scss";
 
-const GameRooms = lazy( () => import( "../components/GameRooms" ) );
+const GameRooms = lazy( () => import( "@/components/GameRooms" ) );
 
 export default function GameHome(): JSX.Element
 {

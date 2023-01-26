@@ -1,7 +1,7 @@
 //
 // Route permettant de gérer les messages des utilisateurs.
 //
-import { findUser } from "../utils/UserManager";
+import { findUser } from "@/utils/UserManager";
 import { Server, Socket } from "socket.io";
 
 export function Chat( io: Server, socket: Socket )
