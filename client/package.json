@@ -1,12 +1,10 @@
 {
-  "main": "index.js",
   "name": "domego",
   "proxy": "http://localhost:3001",
   "author": "Florian Trayon (https://github.com/FlorianLeChat)",
   "license": "AGPL-3.0",
   "private": true,
   "version": "1.0.0",
-  "homepage": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/FlorianLeChat/Domego.git"
@@ -28,7 +26,6 @@
     "react": "~18.2",
     "i18next": "~22.0",
     "react-ga": "~3.3",
-    "react-dom": "~18.2",
     "sweetalert2": "<11.4.9",
     "react-i18next": "~12.1",
     "socket.io-client": "~4.5",
@@ -38,7 +35,6 @@
     "@types/uuid": "~9.0",
     "@types/node": "~18.11",
     "@types/react": "~18.0",
-    "@types/react-dom": "~18.0",
     "sass": "~1.56",
     "typescript": "~4.9",
     "source-map-explorer": "~2.5"
