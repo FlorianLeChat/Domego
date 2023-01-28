@@ -1,3 +1,12 @@
+// Importation des normalisateurs CSS.
+@import "sanitize.css/sanitize";
+@import "sanitize.css/forms";
+@import "sanitize.css/assets";
+@import "sanitize.css/system-ui";
+@import "sanitize.css/typography";
+@import "sanitize.css/ui-monospace";
+@import "sanitize.css/reduce-motion";
+
 // Ensemble des pages.
 html
 {
