@@ -46,15 +46,9 @@
   },
   "scripts": {
     "dev": "next dev",
-	"start": "next start",
+    "start": "next start",
     "build": "next build",
     "analyze": "source-map-explorer \"build/static/js/*.js\""
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": [
     "defaults"
