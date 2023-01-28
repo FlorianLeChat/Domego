@@ -4,8 +4,14 @@ import "@/styles/_global.scss";
 // Importation des fichiers de configuration.
 import "@/config/translations";
 
-// Importation des composants.
+// Importation des dépendances.
 import Head from "next/head";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+
+// Importation des fonctions utilitaires.
+import { SocketProvider } from "@/utils/SocketContext";
+
+// Importation des composants.
 import type { AppProps } from "next/app";
 
 export default function Domego( { Component, pageProps }: AppProps )
@@ -36,15 +42,25 @@ export default function Domego( { Component, pageProps }: AppProps )
 				{/* Titre du document */}
 				<title>{`${ process.env[ "NEXT_PUBLIC_TITLE" ] }`}</title>
 
-				{/* Icônes et manifeste du document */}
-				<link rel="icon" type="image/webp" sizes="16x16" href={`${ process.env[ "NEXT_PUBLIC_URL" ] }16x16.webp`} />
-				<link rel="icon" type="image/webp" sizes="32x32" href={`${ process.env[ "NEXT_PUBLIC_URL" ] }32x32.webp`} />
-				<link rel="icon" type="image/webp" sizes="48x48" href={`${ process.env[ "NEXT_PUBLIC_URL" ] }48x48.webp`} />
-				<link rel="icon" type="image/webp" sizes="192x192" href={`${ process.env[ "NEXT_PUBLIC_URL" ] }192x192.webp`} />
-				<link rel="icon" type="image/webp" sizes="512x512" href={`${ process.env[ "NEXT_PUBLIC_URL" ] }512x512.webp`} />
+				{/* Pré-connexion des ressources externes */}
+				<link rel="preconnect" href="https://www.google.com" />
+				<link rel="preconnect" href="https://www.gstatic.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" />
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://www.google-analytics.com" />
 
-				<link rel="apple-touch-icon" href={`${ process.env[ "NEXT_PUBLIC_URL" ] }/180x180.webp`} />
-				<link rel="manifest" href={`${ process.env[ "NEXT_PUBLIC_URL" ] }manifest.json`} />
+				{/* Polices de caractères */}
+				<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" crossOrigin="anonymous" />
+
+				{/* Icônes et manifeste du document */}
+				<link rel="icon" type="image/webp" sizes="16x16" href="/assets/favicons/16x16.webp" />
+				<link rel="icon" type="image/webp" sizes="32x32" href="/assets/favicons/32x32.webp" />
+				<link rel="icon" type="image/webp" sizes="48x48" href="/assets/favicons/48x48.webp" />
+				<link rel="icon" type="image/webp" sizes="192x192" href="/assets/favicons/192x192.webp" />
+				<link rel="icon" type="image/webp" sizes="512x512" href="/assets/favicons/512x512.webp" />
+
+				<link rel="apple-touch-icon" href="/assets/favicons//180x180.webp" />
+				<link rel="manifest" href="/manifest.json" />
 			</Head>
 			<main>
 				<noscript>
@@ -52,7 +68,11 @@ export default function Domego( { Component, pageProps }: AppProps )
 					<h2>Click <a href="https://www.whatismybrowser.com/detect/is-javascript-enabled">here</a> to be redirected to an external site to help you solve this issue.</h2>
 				</noscript>
 
-				<Component {...pageProps} />;
+				<SocketProvider>
+					<GoogleReCaptchaProvider reCaptchaKey={process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] ?? ""}>
+						<Component {...pageProps} />
+					</GoogleReCaptchaProvider>
+				</SocketProvider>
 			</main>
 		</>
 	);
