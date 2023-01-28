@@ -14,6 +14,7 @@ import type { AppProps } from "next/app";
 
 const Domego = ( { Component, pageProps }: AppProps ) =>
 {
+	// Génération de la structure de la page.
 	return (
 		<>
 			<Head>
