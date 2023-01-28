@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useLocation } from "next/link";
 import { SocketContext } from "@/utils/SocketContext";
 import { LocationState } from "@/types/LocationState";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useState, useContext, useEffect } from "react";
 
 import styles from "@/styles/RoleCard.module.scss";

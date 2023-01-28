@@ -4,7 +4,7 @@
 import { useLocation } from "next/link";
 import { LocationState } from "@/types/LocationState";
 import { SocketContext } from "@/utils/SocketContext";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useState, useRef, useEffect, useContext } from "react";
 
 import styles from "@/styles/GameChat.module.scss";

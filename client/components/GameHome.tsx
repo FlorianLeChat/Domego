@@ -6,8 +6,8 @@ import { useNavigate } from "next/link";
 import { v4 as uuidv4 } from "uuid";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import Swal, { SweetAlertIcon } from "sweetalert2";
-import { useTranslation, Trans } from "react-i18next";
 import { useState, useContext, useEffect, lazy, Suspense } from "react";
+import { useTranslation, Trans } from "next-i18next";
 
 import { SocketContext } from "@/utils/SocketContext";
 import styles from "@/styles/GameHome.module.scss";

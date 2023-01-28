@@ -3,7 +3,7 @@
 //
 import { useNavigate } from "next/link";
 import { SocketContext } from "@/utils/SocketContext";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useEffect, useState, useCallback, useContext } from "react";
 

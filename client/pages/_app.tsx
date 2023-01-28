@@ -1,20 +1,18 @@
-// Importation de la feuille de style CSS.
+// Importation de la feuille de style CSS globale.
 import "@/styles/_global.scss";
-
-// Importation des fichiers de configuration.
-import "@/config/translations";
 
 // Importation des dépendances.
 import Head from "next/head";
+import { appWithTranslation } from "next-i18next";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 // Importation des fonctions utilitaires.
 import { SocketProvider } from "@/utils/SocketContext";
 
-// Importation des composants.
+// Importation des types.
 import type { AppProps } from "next/app";
 
-export default function Domego( { Component, pageProps }: AppProps )
+const Domego = ( { Component, pageProps }: AppProps ) =>
 {
 	return (
 		<>
@@ -66,4 +64,6 @@ export default function Domego( { Component, pageProps }: AppProps )
 			</main>
 		</>
 	);
-}
+};
+
+export default appWithTranslation( Domego );
