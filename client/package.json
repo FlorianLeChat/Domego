@@ -1,6 +1,5 @@
 {
   "name": "domego",
-  "proxy": "http://localhost:3001",
   "author": "Florian Trayon (https://github.com/FlorianLeChat)",
   "license": "AGPL-3.0",
   "private": true,
