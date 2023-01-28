@@ -1,7 +1,7 @@
 //
 // Composant d'affichage de l'ensemble des parties créées.
 //
-import { useNavigate } from "next/link";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useEffect, useState, useCallback, useContext } from "react";
@@ -36,8 +36,8 @@ export default function GameRooms( props: GameRoomsProps )
 
 	// Déclaration des constantes.
 	const { t } = useTranslation();
+	const router = useRouter();
 	const socket = useContext( SocketContext );
-	const navigate = useNavigate();
 
 	// Bouton pour rejoindre une partie (joueur/spectateur).
 	const joinGame = useCallback( async ( roomId: string, type: string, state: number ) =>
@@ -102,10 +102,13 @@ export default function GameRooms( props: GameRoomsProps )
 			{
 				// Redirection automatique si la fenêtre de chargement est fermée
 				//	normalement (sans aucune erreur émise par le serveur).
-				navigate( `/game/${ state === 2 ? "board" : "selection" }`, { state: { roomId: roomId, username: props.username, admin: false, type: type } } );
+				router.push( {
+					query: { roomId: roomId, username: props.username, admin: false, type: type },
+					pathname: `/game/${ state === 2 ? "board" : "selection" }`
+				} );
 			}
 		} );
-	}, [ t, props, socket, navigate ] );
+	}, [ t, props, socket, router ] );
 
 	// Récupération de l'ensemble des parties en cours.
 	const updateRooms = useCallback( () =>

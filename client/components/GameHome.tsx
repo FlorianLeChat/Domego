@@ -2,8 +2,8 @@
 // Composant de la page d'accueil du site.
 //
 import ReactGA from "react-ga";
-import { useNavigate } from "next/link";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import Swal, { SweetAlertIcon } from "sweetalert2";
@@ -19,8 +19,8 @@ export default function GameHome()
 {
 	// Déclaration des constantes.
 	const { t } = useTranslation();
+	const router = useRouter();
 	const socket = useContext( SocketContext );
-	const navigate = useNavigate();
 	const { executeRecaptcha } = useGoogleReCaptcha();
 
 	// Déclaration des variables d'état.
@@ -153,7 +153,10 @@ export default function GameHome()
 			{
 				// Redirection automatique si la fenêtre de chargement est fermée
 				//	normalement (sans aucune erreur émise par le serveur).
-				navigate( "/game/selection", { state: { roomId: uuid, username: username, admin: true, type: "player" } } );
+				router.push( {
+					query: { roomId: uuid, username: username, admin: true, type: "player" },
+					pathname: "/"
+				} );
 			}
 		} );
 	};

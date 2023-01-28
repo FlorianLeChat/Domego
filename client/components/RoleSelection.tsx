@@ -2,9 +2,10 @@
 // Composant pour sélectionner un rôle avant de lancer la partie.
 //
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
-import { useLocation, useNavigate } from "next/link";
+import { useLocation } from "next/link";
 import { useContext, useState, useEffect, Suspense } from "react";
 
 import styles from "@/styles/RoleSelection.module.scss";
@@ -19,8 +20,8 @@ export default function RoleSelection()
 {
 	// Déclaration des constantes.
 	const { t } = useTranslation();
+	const router = useRouter();
 	const socket = useContext( SocketContext );
-	const navigate = useNavigate();
 	const location = useLocation().state as LocationState;
 
 	// Déclaration des variables d'état.
@@ -85,7 +86,10 @@ export default function RoleSelection()
 		//	l'utilisateur lorsque la partie a été lancée par l'administrateur.
 		socket.on( "GameStart", () =>
 		{
-			navigate( "/game/board", { state: { roomId: location.uuid, username: location.username, admin: location.admin, type: location.type }, replace: true } );
+			router.replace( {
+				query: { roomId: location.uuid, username: location.username, admin: location.admin, type: location.type },
+				pathname: "/game/board"
+			} );
 		} );
 
 		// On accroche enfin un dernier événement (seulement pour les administrateurs)
@@ -94,7 +98,7 @@ export default function RoleSelection()
 		{
 			setDisabled( !state );
 		} );
-	}, [ t, navigate, socket, location ] );
+	}, [ t, router, socket, location ] );
 
 	// Vérification de la connexion à la partie.
 	if ( !socket.connected || location === null )
