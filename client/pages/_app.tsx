@@ -42,16 +42,6 @@ export default function Domego( { Component, pageProps }: AppProps )
 				{/* Titre du document */}
 				<title>{`${ process.env[ "NEXT_PUBLIC_TITLE" ] }`}</title>
 
-				{/* Pré-connexion des ressources externes */}
-				<link rel="preconnect" href="https://www.google.com" />
-				<link rel="preconnect" href="https://www.gstatic.com" />
-				<link rel="preconnect" href="https://fonts.gstatic.com" />
-				<link rel="preconnect" href="https://fonts.googleapis.com" />
-				<link rel="preconnect" href="https://www.google-analytics.com" />
-
-				{/* Polices de caractères */}
-				<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" crossOrigin="anonymous" />
-
 				{/* Icônes et manifeste du document */}
 				<link rel="icon" type="image/webp" sizes="16x16" href="/assets/favicons/16x16.webp" />
 				<link rel="icon" type="image/webp" sizes="32x32" href="/assets/favicons/32x32.webp" />
