@@ -16,7 +16,7 @@ interface GameChatProps
 	show?: boolean;
 }
 
-export default function GameChat( props: GameChatProps ): JSX.Element
+export default function GameChat( props: GameChatProps )
 {
 	// Création des constantes.
 	const list = useRef<HTMLUListElement>( null );

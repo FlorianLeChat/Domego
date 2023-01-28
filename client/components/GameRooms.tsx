@@ -29,7 +29,7 @@ interface GameRoomList
 //	des serveurs auprès du serveur (en millisecondes).
 const REFRESH_TIME = 5000;
 
-export default function GameRooms( props: GameRoomsProps ): JSX.Element
+export default function GameRooms( props: GameRoomsProps )
 {
 	// Déclaration des variables d'état.
 	const [ rooms, setRooms ] = useState<JSX.Element[]>( [] );

@@ -17,7 +17,7 @@ interface RoleCardProps
 	budget: string;
 }
 
-export default function RoleCard( props: RoleCardProps ): JSX.Element
+export default function RoleCard( props: RoleCardProps )
 {
 	// Déclaration des constantes.
 	const { t } = useTranslation();

@@ -6,7 +6,7 @@ import { useTranslation } from "next-i18next";
 
 import styles from "@/styles/NotFound.module.scss";
 
-export default function NotFound(): JSX.Element
+export default function NotFound()
 {
 	// Déclaration des constantes.
 	const { t } = useTranslation();

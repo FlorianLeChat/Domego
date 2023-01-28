@@ -3,7 +3,7 @@
 //
 import styles from "@/styles/GameBoard.module.scss";
 
-export default function GameBoard(): JSX.Element
+export default function GameBoard()
 {
 	// Affichage du rendu HTML du composant.
 	return (

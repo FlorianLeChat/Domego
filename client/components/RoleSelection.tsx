@@ -14,7 +14,7 @@ import NotFound from "@/components/NotFound";
 const RoleCard = lazy( () => import( "@/components/RoleCard" ) );
 const GameChat = lazy( () => import( "@/components/GameChat" ) );
 
-export default function RoleSelection(): JSX.Element
+export default function RoleSelection()
 {
 	// Déclaration des constantes.
 	const { t } = useTranslation();

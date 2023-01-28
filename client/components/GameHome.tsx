@@ -14,7 +14,7 @@ import styles from "@/styles/GameHome.module.scss";
 
 const GameRooms = lazy( () => import( "@/components/GameRooms" ) );
 
-export default function GameHome(): JSX.Element
+export default function GameHome()
 {
 	// Déclaration des constantes.
 	const { t } = useTranslation();
