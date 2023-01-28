@@ -3,16 +3,17 @@
 //
 import ReactGA from "react-ga";
 import { useNavigate } from "next/link";
+import dynamic from "next/dynamic";
 import { v4 as uuidv4 } from "uuid";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import Swal, { SweetAlertIcon } from "sweetalert2";
-import { useState, useContext, useEffect, lazy, Suspense } from "react";
 import { useTranslation, Trans } from "next-i18next";
+import { useState, useContext, useEffect, Suspense } from "react";
 
-import { SocketContext } from "@/utils/SocketContext";
 import styles from "@/styles/GameHome.module.scss";
+import { SocketContext } from "@/utils/SocketContext";
 
-const GameRooms = lazy( () => import( "@/components/GameRooms" ) );
+const GameRooms = dynamic( () => import( "@/components/GameRooms" ) );
 
 export default function GameHome()
 {

@@ -2,12 +2,12 @@
 // Composant d'affichage de l'ensemble des parties créées.
 //
 import { useNavigate } from "next/link";
-import { SocketContext } from "@/utils/SocketContext";
 import { useTranslation } from "next-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useEffect, useState, useCallback, useContext } from "react";
 
 import styles from "@/styles/GameRooms.module.scss";
+import { SocketContext } from "@/utils/SocketContext";
 
 interface GameRoomsProps
 {
