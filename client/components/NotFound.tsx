@@ -1,7 +1,7 @@
 //
 // Composant d'affichage lorsqu'une page du routeur n'est pas trouvée.
 //
-import { Link } from "next/link";
+import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
 import styles from "@/styles/NotFound.module.scss";
@@ -21,7 +21,7 @@ export default function NotFound()
 			<h2>{t( "pages.notfound.description" )}</h2>
 
 			{/* Redirection vers la page principale */}
-			<Link to="../">{t( "pages.notfound.link" )}</Link>
+			<Link href="/">{t( "pages.notfound.link" )}</Link>
 		</section>
 	);
 }
