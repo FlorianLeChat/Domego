@@ -7,8 +7,8 @@ import { SocketContext } from "@/utils/SocketContext";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useContext } from "react";
 
+import styles from "@/styles/GameChat.module.scss";
 import NotFound from "@/components/NotFound";
-import "@/styles/GameChat.module.scss";
 
 interface GameChatProps
 {
@@ -91,7 +91,7 @@ export default function GameChat( props: GameChatProps ): JSX.Element
 		// 	Note : c'est principalement le cas dans la page dédiée aux communications
 		//		textuelles entre les joueurs de la partie.
 		return (
-			<section id="GameChat">
+			<section id={styles[ "GameChat" ]}>
 				{/* Liste des messages */}
 				<ul ref={list}>{messages}</ul>
 

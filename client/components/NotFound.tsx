@@ -4,7 +4,7 @@
 import { Link } from "next/link";
 import { useTranslation } from "react-i18next";
 
-import "@/styles/NotFound.module.scss";
+import styles from "@/styles/NotFound.module.scss";
 
 export default function NotFound(): JSX.Element
 {
@@ -13,7 +13,7 @@ export default function NotFound(): JSX.Element
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<section id="NotFound">
+		<section id={styles[ "NotFound" ]}>
 			{/* Titre de la page */}
 			<h1>{t( "pages.notfound.title" )}</h1>
 

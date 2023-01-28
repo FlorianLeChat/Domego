@@ -8,8 +8,8 @@ import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useLocation, useNavigate } from "next/link";
 import { useContext, useState, useEffect, lazy, Suspense } from "react";
 
+import styles from "@/styles/RoleSelection.module.scss";
 import NotFound from "@/components/NotFound";
-import "@/styles/RoleSelection.module.scss";
 
 const RoleCard = lazy( () => import( "@/components/RoleCard" ) );
 const GameChat = lazy( () => import( "@/components/GameChat" ) );
@@ -103,7 +103,7 @@ export default function RoleSelection(): JSX.Element
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<section id="RoleSelection">
+		<section id={styles[ "RoleSelection" ]}>
 			{/* Titre de la page */}
 			<h1>{t( "pages.selection.title" )}</h1>
 

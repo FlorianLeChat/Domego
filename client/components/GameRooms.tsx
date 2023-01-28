@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useEffect, useState, useCallback, useContext } from "react";
 
-import "@/styles/GameRooms.module.scss";
+import styles from "@/styles/GameRooms.module.scss";
 
 interface GameRoomsProps
 {
@@ -152,7 +152,7 @@ export default function GameRooms( props: GameRoomsProps ): JSX.Element
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<table id="GameRooms">
+		<table id={styles[ "GameRooms" ]}>
 			<thead>
 				<tr>
 					{/* Titre du tableau */}

@@ -8,7 +8,7 @@ import { LocationState } from "@/types/LocationState";
 import { useTranslation } from "react-i18next";
 import { useState, useContext, useEffect } from "react";
 
-import "@/styles/RoleCard.module.scss";
+import styles from "@/styles/RoleCard.module.scss";
 
 interface RoleCardProps
 {
@@ -98,7 +98,7 @@ export default function RoleCard( props: RoleCardProps ): JSX.Element
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<article className="RoleCard">
+		<article className={styles[ "RoleCard" ]}>
 			{/* Image représentative du rôle */}
 			<Image src={`${ process.env[ "PUBLIC_URL" ] }/assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} />
 

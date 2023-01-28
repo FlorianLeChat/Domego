@@ -4,7 +4,7 @@
 import { fetchApi } from "@/utils/NetworkHelper";
 import { useState, useEffect } from "react";
 
-import "@/styles/TestApi.module.scss";
+import styles from "@/styles/TestApi.module.scss";
 
 export default function TestApi(): JSX.Element
 {
@@ -53,7 +53,7 @@ export default function TestApi(): JSX.Element
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<section id="TestApi">
+		<section id={styles[ "TestApi" ]}>
 			<h1>Test de l'appel API vers le serveur</h1>
 
 			<p>État de la réponse GET : {responses.get}</p>

@@ -10,7 +10,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { useState, useContext, useEffect, lazy, Suspense } from "react";
 
 import { SocketContext } from "@/utils/SocketContext";
-import "@/styles/GameHome.module.scss";
+import styles from "@/styles/GameHome.module.scss";
 
 const GameRooms = lazy( () => import( "@/components/GameRooms" ) );
 
@@ -173,7 +173,7 @@ export default function GameHome(): JSX.Element
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<section id="GameHome">
+		<section id={styles[ "GameHome" ]}>
 			{/* Titre de la page */}
 			<h1>{t( "pages.index.title" )}</h1>
 
