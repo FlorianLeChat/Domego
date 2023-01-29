@@ -1,11 +1,5 @@
 // Paramètres personnalisés pour le typage de i18next.
 import "i18next";
-import type common from "../public/locales/en/common.json";
-
-interface I18nNamespaces
-{
-	common: typeof common;
-}
 
 declare module "i18next"
 {
@@ -14,5 +8,6 @@ declare module "i18next"
 		defaultNS: "common";
 		resources: I18nNamespaces;
 		returnNull: false;
+		returnEmptyString: false;
 	}
 }
