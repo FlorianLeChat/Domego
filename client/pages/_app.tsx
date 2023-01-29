@@ -17,6 +17,7 @@ import type { AppProps } from "next/app";
 const roboto = Roboto( {
 	weight: [ "300", "400", "500" ],
 	subsets: [ "latin" ],
+	display: "swap"
 } );
 
 const Domego = ( { Component, pageProps }: AppProps ) =>
@@ -27,23 +28,23 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 			<Head>
 				{/* Méta-données du document */}
 				<meta charSet="utf-8" />
-				<meta name="author" content={`${ process.env[ "NEXT_PUBLIC_AUTHOR" ] }`} />
-				<meta name="description" content={`${ process.env[ "NEXT_PUBLIC_DESCRIPTION" ] }`} />
-				<meta name="keywords" lang="fr" content={`${ process.env[ "NEXT_PUBLIC_TAGS" ] }`} />
+				<meta name="author" content={process.env[ "NEXT_PUBLIC_AUTHOR" ]} />
+				<meta name="description" content={process.env[ "NEXT_PUBLIC_DESCRIPTION" ]} />
+				<meta name="keywords" lang="fr" content={process.env[ "NEXT_PUBLIC_TAGS" ]} />
 				<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 				<meta name="theme-color" content="#40a9ff" />
 
 				<meta property="og:type" content="website" />
-				<meta property="og:url" content={`${ process.env[ "NEXT_PUBLIC_URL" ] }`} />
-				<meta property="og:title" content={`${ process.env[ "NEXT_PUBLIC_TITLE" ] }`} />
-				<meta property="og:description" content={`${ process.env[ "NEXT_PUBLIC_DESCRIPTION" ] }`} />
-				<meta property="og:image" content={`${ process.env[ "NEXT_PUBLIC_BANNER" ] }`} />
+				<meta property="og:url" content={process.env[ "NEXT_PUBLIC_URL" ]} />
+				<meta property="og:title" content={process.env[ "NEXT_PUBLIC_TITLE" ]} />
+				<meta property="og:description" content={process.env[ "NEXT_PUBLIC_DESCRIPTION" ]} />
+				<meta property="og:image" content={process.env[ "NEXT_PUBLIC_BANNER" ]} />
 
 				<meta property="twitter:card" content="summary_large_image" />
-				<meta property="twitter:url" content={`${ process.env[ "NEXT_PUBLIC_URL" ] }`} />
-				<meta property="twitter:title" content={`${ process.env[ "NEXT_PUBLIC_TITLE" ] }`} />
-				<meta property="twitter:description" content={`${ process.env[ "NEXT_PUBLIC_DESCRIPTION" ] }`} />
-				<meta property="twitter:image" content={`${ process.env[ "NEXT_PUBLIC_BANNER" ] }`} />
+				<meta property="twitter:url" content={process.env[ "NEXT_PUBLIC_URL" ]} />
+				<meta property="twitter:title" content={process.env[ "NEXT_PUBLIC_TITLE" ]} />
+				<meta property="twitter:description" content={process.env[ "NEXT_PUBLIC_DESCRIPTION" ]} />
+				<meta property="twitter:image" content={process.env[ "NEXT_PUBLIC_BANNER" ]} />
 
 				{/* Titre du document */}
 				<title>{`${ process.env[ "NEXT_PUBLIC_TITLE" ] }`}</title>
@@ -58,11 +59,18 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 				<link rel="apple-touch-icon" href="/assets/favicons//180x180.webp" />
 				<link rel="manifest" href="/manifest.json" />
 			</Head>
-			<main className={roboto.className}>
+			<main>
 				<noscript>
 					<h1>This website created with <a href="https://nextjs.org/">NextJS</a> requires JavaScript to run.</h1>
 					<h2>Click <a href="https://www.whatismybrowser.com/detect/is-javascript-enabled">here</a> to be redirected to an external site to help you solve this issue.</h2>
 				</noscript>
+
+				<style jsx global>{`
+					html
+					{
+						font-family: ${ roboto.style.fontFamily };
+					}
+				`}</style>
 
 				<SocketProvider>
 					<GoogleReCaptchaProvider reCaptchaKey={process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] ?? ""}>
