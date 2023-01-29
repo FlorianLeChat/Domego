@@ -44,7 +44,7 @@ export default function GameHome()
 		// On réalise tout d'abord une vérification de sécurité en utilisant le service
 		//	Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
 		// 	Note : cette vérification n'est pas nécessaire en mode développement.
-		if ( process.env[ "NODE_ENV" ] === "production" && window.location.hostname !== "localhost" )
+		if ( process.env[ "NODE_ENV" ] === "production" )
 		{
 			await Swal.fire( {
 				icon: "info",
