@@ -7,7 +7,6 @@ import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useTranslation, Trans } from "next-i18next";
 import { useState, useContext, useEffect, Suspense } from "react";
@@ -34,7 +33,6 @@ export default function GameHome()
 	const { t } = useTranslation();
 	const router = useRouter();
 	const socket = useContext( SocketContext );
-	const { executeRecaptcha } = useGoogleReCaptcha();
 
 	// Déclaration des variables d'état.
 	const [ username, setUsername ] = useState( "" );
@@ -61,7 +59,7 @@ export default function GameHome()
 					Swal.showLoading();
 
 					// Vérification de la disponibilité du service reCAPTCHA.
-					if ( !executeRecaptcha )
+					if ( !window.grecaptcha )
 					{
 						// Si le service est indisponible, on affiche un message d'erreur
 						// 	et on arrête l'exécution de la fonction.
@@ -75,30 +73,34 @@ export default function GameHome()
 						return;
 					}
 
-					// Récupération et vérification du jeton d'authentification généré
-					//	par l'API de Google reCAPTCHA.
-					const token = await executeRecaptcha();
-
-					socket.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
+					// On attend ensuite que les services de reCAPTCHA soient chargés.
+					window.grecaptcha.ready( async () =>
 					{
-						// Si la réponse indique que le joueur n'est pas un humain,
-						//	on affiche le message d'erreur correspondant avec les informations
-						//	transmises par le serveur.
-						if ( icon !== "success" )
+						// Récupération et vérification du jeton d'authentification généré
+						//	par l'API de Google reCAPTCHA.
+						const token = await window.grecaptcha.execute( process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] ?? "", { action: "create" } );
+
+						socket.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
 						{
-							Swal.fire( {
-								icon: icon,
-								text: t( message ),
-								title: t( title ),
-								confirmButtonColor: "#28a745"
-							} );
+							// Si la réponse indique que le joueur n'est pas un humain,
+							//	on affiche le message d'erreur correspondant avec les informations
+							//	transmises par le serveur.
+							if ( icon !== "success" )
+							{
+								Swal.fire( {
+									icon: icon,
+									text: t( message ),
+									title: t( title ),
+									confirmButtonColor: "#28a745"
+								} );
 
-							return;
-						}
+								return;
+							}
 
-						// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
-						//	l'exécution des opérations.
-						Swal.close();
+							// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
+							//	l'exécution des opérations.
+							Swal.close();
+						} );
 					} );
 				}
 			} );

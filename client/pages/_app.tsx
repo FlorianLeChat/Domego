@@ -5,7 +5,6 @@ import "@/styles/_global.scss";
 import Head from "next/head";
 import { Roboto } from "@next/font/google";
 import { appWithTranslation } from "next-i18next";
-import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 // Importation des fonctions utilitaires.
 import { SocketProvider } from "@/utils/SocketContext";
@@ -73,9 +72,7 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 				`}</style>
 
 				<SocketProvider>
-					<GoogleReCaptchaProvider reCaptchaKey={process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] ?? ""}>
-						<Component {...pageProps} />
-					</GoogleReCaptchaProvider>
+					<Component {...pageProps} />
 				</SocketProvider>
 			</main>
 		</>

@@ -2,6 +2,7 @@
 import i18nextConfig from "@/next-i18next.config";
 
 // Importation des dépendances.
+import Script from "next/script";
 import { Html, Main, Head, NextScript } from "next/document";
 
 // Importation des types.
@@ -12,7 +13,16 @@ export default function Document( props: DocumentProps )
 	// Génération de la structure HTML.
 	return (
 		<Html lang={props.__NEXT_DATA__.locale ?? i18nextConfig.i18n.defaultLocale} dir="auto" prefix="og: https://ogp.me/ns#">
-			<Head />
+			<Head>
+				{/* Pré-connexion des ressources externes */}
+				<link rel="preconnect" href="https://www.google.com" />
+				<link rel="preconnect" href="https://www.gstatic.com" />
+				<link rel="preconnect" href="https://www.google-analytics.com" />
+
+				{/* Scripts JavaScript */}
+				<Script src={`https://www.googletagmanager.com/gtag/js?id=${ process.env[ "NEXT_PUBLIC_ANALYTICS_IDENTIFIER" ] }`} strategy="afterInteractive" />
+				<Script src={`https://www.google.com/recaptcha/api.js?render=${ process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] }`} strategy="afterInteractive" />
+			</Head>
 			<body>
 				<Main />
 				<NextScript />
