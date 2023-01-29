@@ -1,5 +1,5 @@
 //
-// Route utilisé lorsqu'une page n'est pas trouvée (erreur HTTP 404).
+// Route utilisé lorsqu'une erreur interne est survenue (erreur HTTP 500).
 //
 import Link from "next/link";
 import { GetStaticProps } from "next";
@@ -19,7 +19,7 @@ export const getStaticProps: GetStaticProps = async ( { locale } ) =>
 	};
 };
 
-export default function HTTP404()
+export default function HTTP500()
 {
 	// Déclaration des constantes.
 	const { t } = useTranslation();
@@ -28,10 +28,10 @@ export default function HTTP404()
 	return (
 		<section id={styles[ "NotFound" ]}>
 			{/* Titre de la page */}
-			<h1>{t( "pages.notfound.title" )}</h1>
+			<h1>{t( "pages.internalerror.title" )}</h1>
 
 			{/* Sous-titre de la page */}
-			<h2>{t( "pages.notfound.description" )}</h2>
+			<h2>{t( "pages.internalerror.description" )}</h2>
 
 			{/* Redirection vers la page principale */}
 			<Link href="/">{t( "pages.notfound.link" )}</Link>
