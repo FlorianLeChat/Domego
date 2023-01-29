@@ -1,13 +1,14 @@
 //
-// Route vers le tableau de bord du jeu.
+// Route vers le tableau de bord de jeu.
 //
-import dynamic from "next/dynamic";
-
-const GameBoard = dynamic( () => import( "@/components/GameBoard" ), {
-	loading: () => <span className="loading">🏗️ {process.env[ "NEXT_PUBLIC_TITLE" ]}</span>,
-} );
+import styles from "@/styles/GameBoard.module.scss";
 
 export default function Board()
 {
-	return <GameBoard />;
+	// Affichage du rendu HTML du composant.
+	return (
+		<section id={styles[ "GameBoard" ]}>
+			En développement...
+		</section>
+	);
 }
