@@ -1,15 +1,14 @@
 //
 // Route vers la page d'accueil du site.
 //
-import ReactGA from "react-ga";
 import dynamic from "next/dynamic";
-import { GetStaticProps } from "next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
+import { GetStaticProps } from "next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useTranslation, Trans } from "next-i18next";
-import { useState, useContext, useEffect, Suspense } from "react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useState, useContext, Suspense } from "react";
 
 import styles from "@/styles/GameHome.module.scss";
 import i18nextConfig from "@/next-i18next.config";
@@ -182,13 +181,6 @@ export default function GameHome()
 		setUsername( event.target.value );
 		setDisabled( !event.target.validity.valid );
 	};
-
-	// Mise en place des statistiques de Google Analytics.
-	useEffect( () =>
-	{
-		ReactGA.initialize( process.env[ "NEXT_PUBLIC_ANALYTICS_IDENTIFIER" ] ?? "" );
-		ReactGA.pageview( window.location.pathname + window.location.search );
-	}, [] );
 
 	// Affichage du rendu HTML du composant.
 	return (

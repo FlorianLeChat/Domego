@@ -24,7 +24,6 @@
     "next": "~13.1",
     "react": "~18.2",
     "i18next": "~22.0",
-    "react-ga": "~3.3",
     "@next/font": "~13.1",
     "sweetalert2": "<11.4.9",
     "sanitize.css": "~13.0",

@@ -64,12 +64,14 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 					<h2>Click <a href="https://www.whatismybrowser.com/detect/is-javascript-enabled">here</a> to be redirected to an external site to help you solve this issue.</h2>
 				</noscript>
 
-				<style jsx global>{`
-					html
-					{
-						font-family: ${ roboto.style.fontFamily };
-					}
-				`}</style>
+				<style jsx global>
+					{`
+						html
+						{
+							font-family: ${ roboto.style.fontFamily };
+						}
+					`}
+				</style>
 
 				<SocketProvider>
 					<Component {...pageProps} />

@@ -22,6 +22,21 @@ export default function Document( props: DocumentProps )
 				{/* Scripts JavaScript */}
 				<Script src={`https://www.googletagmanager.com/gtag/js?id=${ process.env[ "NEXT_PUBLIC_ANALYTICS_IDENTIFIER" ] }`} strategy="afterInteractive" />
 				<Script src={`https://www.google.com/recaptcha/api.js?render=${ process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] }`} strategy="afterInteractive" />
+
+				{/* Google Analytics */}
+				<Script strategy="afterInteractive">
+					{`
+						window.dataLayer = window.dataLayer || [];
+
+						function gtag()
+						{
+							dataLayer.push( arguments );
+						}
+
+						gtag( "js", new Date() );
+						gtag( "config", "${ process.env[ "NEXT_PUBLIC_ANALYTICS_IDENTIFIER" ] ?? "" }" );
+					`}
+				</Script>
 			</Head>
 			<body>
 				<Main />
