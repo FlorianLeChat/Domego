@@ -82,6 +82,10 @@
 			"title": "Page introuvable",
 			"description": "La page que vous recherchez n'existe pas",
 			"link": "Cliquez ici pour revenir en lieu sûr"
+		},
+		"internalerror": {
+			"title": "Erreur interne",
+			"description": "Une erreur interne est survenue"
 		}
 	}
 }
