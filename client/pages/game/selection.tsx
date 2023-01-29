@@ -3,7 +3,6 @@
 //
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { useLocation } from "next/link";
 import { GetStaticProps } from "next";
 import { useTranslation } from "next-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
@@ -14,7 +13,6 @@ import styles from "@/styles/RoleSelection.module.scss";
 import NotFound from "@/components/NotFound";
 import i18nextConfig from "@/next-i18next.config";
 import { SocketContext } from "@/utils/SocketContext";
-import { LocationState } from "@/types/LocationState";
 
 const RoleCard = dynamic( () => import( "@/components/RoleCard" ) );
 const GameChat = dynamic( () => import( "@/components/GameChat" ) );
@@ -35,7 +33,6 @@ export default function RoleSelection()
 	const { t } = useTranslation();
 	const router = useRouter();
 	const socket = useContext( SocketContext );
-	const location = useLocation().state as LocationState;
 
 	// Déclaration des variables d'état.
 	const [ disabled, setDisabled ] = useState( true );
@@ -100,7 +97,7 @@ export default function RoleSelection()
 		socket.on( "GameStart", () =>
 		{
 			router.replace( {
-				query: { roomId: location.uuid, username: location.username, admin: location.admin, type: location.type },
+				query: { roomId: router.query[ "uuid" ], username: router.query[ "username" ], admin: router.query[ "admin" ], type: router.query[ "type" ] },
 				pathname: "/game/board"
 			} );
 		} );
@@ -139,11 +136,11 @@ export default function RoleSelection()
 
 			{/* Bouton de lancement de la partie */}
 			{/* (disponible seulement pour l'administrateur) */}
-			{location.admin && <button type="button" onClick={startGame} disabled={disabled}>{t( "pages.selection.launch" )}</button>}
+			{router.query[ "admin" ] && <button type="button" onClick={startGame} disabled={disabled}>{t( "pages.selection.launch" )}</button>}
 
 			{/* Communications textuelles de la partie */}
 			{/* (disponible seulement pour les non-spectateurs) */}
-			{location.type === "player" && <button type="button" onClick={toggleChat}></button>}<GameChat show={showChat} />
+			{router.query[ "type" ] === "player" && <button type="button" onClick={toggleChat}></button>}<GameChat show={showChat} />
 		</section>
 	);
 }

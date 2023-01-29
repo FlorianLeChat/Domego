@@ -2,13 +2,12 @@
 // Composant d'affichage pour la carte d'un rôle.
 //
 import Image from "next/image";
-import { useLocation } from "next/link";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useState, useContext, useEffect } from "react";
 
 import styles from "@/styles/RoleCard.module.scss";
 import { SocketContext } from "@/utils/SocketContext";
-import { LocationState } from "@/types/LocationState";
 
 interface RoleCardProps
 {
@@ -22,7 +21,7 @@ export default function RoleCard( props: RoleCardProps )
 	// Déclaration des constantes.
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
-	const location = useLocation().state as LocationState;
+	const { query } = useRouter();
 
 	// Déclaration des variables d'état.
 	const [ ready, setReady ] = useState( false );
@@ -118,13 +117,13 @@ export default function RoleCard( props: RoleCardProps )
 
 			{/* Bouton de sélection du rôle */}
 			<div>
-				<input type="checkbox" onClick={selectRole} disabled={location.type === "spectator" || ready} />
+				<input type="checkbox" onClick={selectRole} disabled={query[ "type" ] === "spectator" || ready} />
 				<label>{t( "pages.selection.check" )}</label>
 			</div>
 
 			{/* Bouton de prêt à jouer */}
 			{/* (disponible seulement si le rôle est sélectionné par l'utilisateur) */}
-			{player === location.username &&
+			{player === query[ "username" ] &&
 				<div>
 					<input type="checkbox" onClick={readyToPlay} />
 					<label>{t( "pages.selection.ready" )}</label>

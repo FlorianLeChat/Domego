@@ -5,7 +5,6 @@ import { useTranslation } from "next-i18next";
 import { useState, useRef, useEffect, useContext } from "react";
 
 import styles from "@/styles/GameChat.module.scss";
-import NotFound from "@/components/NotFound";
 import { SocketContext } from "@/utils/SocketContext";
 
 interface GameChatProps
@@ -20,7 +19,6 @@ export default function GameChat( props: GameChatProps )
 	const list = useRef<HTMLUListElement>( null );
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
-	const location = useLocation().state as LocationState;
 
 	// Déclaration des variables d'état.
 	const [ input, setInput ] = useState( "" );
@@ -75,12 +73,6 @@ export default function GameChat( props: GameChatProps )
 			last.scrollIntoView( { behavior: "smooth", block: "end", inline: "nearest" } );
 		}
 	}, [ messages ] );
-
-	// Vérification de l'autorisation d'accès au composant.
-	if ( !socket.connected || location === null || location.type === "spectator" )
-	{
-		return <NotFound />;
-	}
 
 	// Affichage conditionnel du rendu HTML du composant.
 	if ( props.show )
