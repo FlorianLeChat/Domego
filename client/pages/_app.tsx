@@ -3,6 +3,7 @@ import "@/styles/_global.scss";
 
 // Importation des dépendances.
 import Head from "next/head";
+import { Roboto } from "@next/font/google";
 import { appWithTranslation } from "next-i18next";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
@@ -11,6 +12,12 @@ import { SocketProvider } from "@/utils/SocketContext";
 
 // Importation des types.
 import type { AppProps } from "next/app";
+
+// Création de la police de caractères Roboto.
+const roboto = Roboto( {
+	weight: [ "300", "400", "500" ],
+	subsets: [ "latin" ],
+} );
 
 const Domego = ( { Component, pageProps }: AppProps ) =>
 {
@@ -51,7 +58,7 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 				<link rel="apple-touch-icon" href="/assets/favicons//180x180.webp" />
 				<link rel="manifest" href="/manifest.json" />
 			</Head>
-			<main>
+			<main className={roboto.className}>
 				<noscript>
 					<h1>This website created with <a href="https://nextjs.org/">NextJS</a> requires JavaScript to run.</h1>
 					<h2>Click <a href="https://www.whatismybrowser.com/detect/is-javascript-enabled">here</a> to be redirected to an external site to help you solve this issue.</h2>
