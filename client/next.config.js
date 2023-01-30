@@ -23,5 +23,5 @@ module.exports = {
 				destination: "https://github.com/FlorianLeChat/Domego"
 			},
 		];
-	},
+	}
 };

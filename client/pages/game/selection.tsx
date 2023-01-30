@@ -3,6 +3,7 @@
 //
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import DefaultErrorPage from "next/error";
 import { GetStaticProps } from "next";
 import { useTranslation } from "next-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
@@ -10,7 +11,6 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useContext, useState, useEffect, Suspense } from "react";
 
 import styles from "@/styles/RoleSelection.module.scss";
-import NotFound from "@/components/NotFound";
 import i18nextConfig from "@/next-i18next.config";
 import { SocketContext } from "@/utils/SocketContext";
 
@@ -108,12 +108,12 @@ export default function RoleSelection()
 		{
 			setDisabled( !state );
 		} );
-	}, [ t, router, socket, location ] );
+	}, [ t, router, socket ] );
 
 	// Vérification de la connexion à la partie.
-	if ( !socket.connected || location === null )
+	if ( !socket.connected || !router.query )
 	{
-		return <NotFound />;
+		return <DefaultErrorPage statusCode={404} />;
 	}
 
 	// Affichage du rendu HTML du composant.
