@@ -60,8 +60,11 @@
   },
   "scripts": {
     "dev": "next dev",
-    "start": "next start",
     "build": "next build",
+    "start": "pm2 start next --name domego -- run start",
+    "stop": "pm2 delete domego",
+    "restart": "pm2 restart domego",
+    "reload": "pm2 reload domego",
     "tunnel": "npx localtunnel --port 3001"
   },
   "browserslist": [
