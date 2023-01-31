@@ -20,10 +20,13 @@
     "Armand Honyigloh (https://github.com/RmannLePhilosopheFou)"
   ],
   "dependencies": {
-    "uuid": "~9.0",
+    "pm2": "~5.2",
     "next": "~13.1",
     "react": "~18.2",
     "i18next": "~22.0",
+    "mongoose": "~6.8",
+    "socket.io": "~4.5",
+    "validator": "~13.7",
     "@next/font": "~13.1",
     "sweetalert2": "<11.4.9",
     "sanitize.css": "~13.0",
@@ -35,13 +38,21 @@
     "@types/uuid": "~9.0",
     "@types/node": "~18.11",
     "@types/react": "~18.0",
+    "@types/validator": "~13.7",
     "@types/grecaptcha": "~3.0",
     "sass": "~1.56",
     "typescript": "~4.9"
   },
+  "optionalDependencies": {
+    "bufferutil": "~4.0",
+    "utf-8-validate": "~5.0"
+  },
   "engines": {
     "node": ">=19.4",
     "npm": ">=9.2"
+  },
+  "overrides": {
+    "uuid": "~9.0"
   },
   "scripts": {
     "dev": "next dev",
