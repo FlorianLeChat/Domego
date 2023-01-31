@@ -22,6 +22,7 @@ export const getStaticProps: GetStaticProps = async ( { locale } ) =>
 export default function HTTP500()
 {
 	// Déclaration des constantes.
+	// @ts-ignore
 	const { t } = useTranslation();
 
 	// Affichage du rendu HTML du composant.

@@ -30,6 +30,7 @@ export const getStaticProps: GetStaticProps = async ( { locale } ) =>
 export default function RoleSelection()
 {
 	// Déclaration des constantes.
+	// @ts-ignore
 	const { t } = useTranslation();
 	const router = useRouter();
 	const socket = useContext( SocketContext );

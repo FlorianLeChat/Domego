@@ -17,6 +17,7 @@ export default function GameChat( props: GameChatProps )
 {
 	// Création des constantes.
 	const list = useRef<HTMLUListElement>( null );
+	// @ts-ignore
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
 

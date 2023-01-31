@@ -35,6 +35,7 @@ export default function GameRooms( props: GameRoomsProps )
 	const [ rooms, setRooms ] = useState<JSX.Element[]>( [] );
 
 	// Déclaration des constantes.
+	// @ts-ignore
 	const { t } = useTranslation();
 	const router = useRouter();
 	const socket = useContext( SocketContext );

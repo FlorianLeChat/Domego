@@ -19,6 +19,7 @@ interface RoleCardProps
 export default function RoleCard( props: RoleCardProps )
 {
 	// Déclaration des constantes.
+	// @ts-ignore
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
 	const { query } = useRouter();
