@@ -89,7 +89,7 @@ export default function GameChat( props: GameChatProps )
 				{/* Champ de saisie */}
 				<form onSubmit={handleFormSubmit}>
 					<input type="text" placeholder="Lorem ipsum dolor sit amet..." onChange={handleInputChange} value={input} />
-					<button type="submit">Envoyer</button>
+					<button type="submit">{t( "pages.index.send_chat_message" )}</button>
 				</form>
 			</section>
 		);

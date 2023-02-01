@@ -47,7 +47,8 @@
 			"choose_username": "Veuillez saisir un nom d'utilisateur",
 			"username_length": "<strong>5</strong> caractères minimum, <strong>20</strong> caractères maximum",
 			"create_new_game": "Créer une partie",
-			"games_available": "Parties disponibles"
+			"games_available": "Parties disponibles",
+			"send_chat_message": "Send"
 		},
 		"rooms": {
 			"join": "Rejoindre",
