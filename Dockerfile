@@ -7,8 +7,8 @@ FROM node:19-alpine
 # Copy the website files to the container
 COPY ./ /app
 
-# Set the working directory to the client files
-WORKDIR /app/client
+# Set the working directory to the website files
+WORKDIR /app
 
 # Duplicate the default environment file
 # COPY .env.base .env isn't working for some reason ¯\_(ツ)_/¯
@@ -19,14 +19,11 @@ RUN sed -i "s/localhost/database/g" .env
 RUN sed -i "s/<username>/root/g" .env
 RUN sed -i "s/<password>/password/g" .env
 
-# Set the working directory to the server files
-WORKDIR /app/server
-
 # Install the dependencies and build the project
-RUN npm run setup && npm run build
+RUN npm install && npm run build
 
-# Expose the port 3001
-EXPOSE 3001
+# Expose the port 3000
+EXPOSE 3000
 
 # Run the website
-CMD [ "node", "index.js" ]
+CMD [ "next", "start" ]
