@@ -1,45 +1,6 @@
 // Importation des déclarations.
+import { UserType } from "@/enums/User";
 import { UserAttributes } from "@/interfaces/User";
-
-// Déclaration des énumérations.
-export enum UserType
-{
-	// Joueur.
-	PLAYER = "player",
-
-	// Spectateur.
-	SPECTATOR = "spectator"
-}
-
-export enum UserState
-{
-	// En attente.
-	WAITING = 0,
-
-	// Prêt.
-	READY = 1
-}
-
-export enum UserRole
-{
-	// Maître d'ouvrage.
-	OWNER = "project_owner",
-
-	// Maître d'œuvre (Architecte).
-	MANAGER = "project_manager",
-
-	// Bureau d'études.
-	ENGINEER = "engineering_office",
-
-	// Bureau de contrôle.
-	INSPECTOR = "control_office",
-
-	// Entreprise corps état secondaire.
-	ARTISAN = "secondary_state",
-
-	// Entreprise gros œuvre.
-	BUILDER = "general_construction",
-}
 
 // Déclaration des constantes.
 export const users: UserAttributes[] = [];

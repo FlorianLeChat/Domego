@@ -1,22 +1,8 @@
 // Importation des déclarations.
+import { findUser } from "@/utils/UserManager";
+import { UserType } from "@/enums/User";
+import { RoomState } from "@/enums/Room";
 import { RoomAttributes } from "@/interfaces/Room";
-import { findUser, UserType } from "@/utils/UserManager";
-
-// Déclaration des énumérations.
-export enum RoomState
-{
-	// État de création (aucun joueur prêt).
-	CREATED = 0,
-
-	// État de préparation (tous les joueurs prêts).
-	READY = 1,
-
-	// État de jeu (partie en cours).
-	LAUNCHED = 2,
-
-	// État de fin (partie terminée).
-	FINISHED = 3
-}
 
 // Déclaration des constantes.
 export const rooms: RoomAttributes[] = [];
