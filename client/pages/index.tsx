@@ -11,6 +11,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useState, useContext, Suspense } from "react";
 
 import styles from "@/styles/GameHome.module.scss";
+import { UserType } from "@/enums/User";
 import i18nextConfig from "@/next-i18next.config";
 import { SocketContext } from "@/utils/SocketContext";
 
@@ -142,7 +143,7 @@ export default function GameHome()
 				Swal.showLoading();
 
 				// Envoi de la requête de création de la partie.
-				socket.emit( "GameConnect", username, "player", uuid, ( icon: SweetAlertIcon, title: string, message: string ) =>
+				socket.emit( "GameConnect", username, UserType.PLAYER, uuid, ( icon: SweetAlertIcon, title: string, message: string ) =>
 				{
 					// Si la réponse indique que la partie n'a pas été créée avec succès,
 					//	on affiche le message d'erreur correspondant avec les informations
@@ -169,7 +170,7 @@ export default function GameHome()
 				// Redirection automatique si la fenêtre de chargement est fermée
 				//	normalement (sans aucune erreur émise par le serveur).
 				router.push( {
-					query: { roomId: uuid, username: username, admin: true, type: "player" },
+					query: { roomId: uuid, username: username, admin: true, type: UserType.PLAYER },
 					pathname: "/"
 				} );
 			}

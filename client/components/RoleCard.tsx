@@ -7,6 +7,7 @@ import { useTranslation } from "next-i18next";
 import { useState, useContext, useEffect } from "react";
 
 import styles from "@/styles/RoleCard.module.scss";
+import { UserType } from "@/enums/User";
 import { SocketContext } from "@/utils/SocketContext";
 
 interface RoleCardProps
@@ -118,7 +119,7 @@ export default function RoleCard( props: RoleCardProps )
 
 			{/* Bouton de sélection du rôle */}
 			<div>
-				<input type="checkbox" onClick={selectRole} disabled={query[ "type" ] === "spectator" || ready} />
+				<input type="checkbox" onClick={selectRole} disabled={query[ "type" ] === UserType.SPECTATOR || ready} />
 				<label>{t( "pages.selection.check" )}</label>
 			</div>
 

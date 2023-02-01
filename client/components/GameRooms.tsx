@@ -7,6 +7,8 @@ import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useEffect, useState, useCallback, useContext } from "react";
 
 import styles from "@/styles/GameRooms.module.scss";
+import { UserType } from "@/enums/User";
+import { RoomState } from "@/enums/Room";
 import { SocketContext } from "@/utils/SocketContext";
 
 interface GameRoomsProps
@@ -105,7 +107,7 @@ export default function GameRooms( props: GameRoomsProps )
 				//	normalement (sans aucune erreur émise par le serveur).
 				router.push( {
 					query: { roomId: roomId, username: props.username, admin: false, type: type },
-					pathname: `/game/${ state === 2 ? "board" : "selection" }`
+					pathname: `/game/${ state === RoomState.LAUNCHED ? "board" : "selection" }`
 				} );
 			}
 		} );
@@ -126,9 +128,9 @@ export default function GameRooms( props: GameRoomsProps )
 					<td>{room.players}/6 [{room.spectators}]</td>
 					<td>
 						{/* Rejoindre la partie */}
-						<button type="button" onClick={() => joinGame( room.id, "player", room.state )} disabled={room.state !== 0}>{t( "pages.rooms.join" )}</button>
+						<button type="button" onClick={() => joinGame( room.id, UserType.PLAYER, room.state )} disabled={room.state !== RoomState.CREATED}>{t( "pages.rooms.join" )}</button>
 						{/* Observer la partie */}
-						<button type="button" onClick={() => joinGame( room.id, "spectator", room.state )} disabled={room.state === 3}>{t( "pages.rooms.watch" )}</button>
+						<button type="button" onClick={() => joinGame( room.id, UserType.SPECTATOR, room.state )} disabled={room.state === RoomState.FINISHED}>{t( "pages.rooms.watch" )}</button>
 					</td>
 				</tr>
 			);

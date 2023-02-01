@@ -11,6 +11,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useContext, useState, useEffect, Suspense } from "react";
 
 import styles from "@/styles/RoleSelection.module.scss";
+import { UserType } from "@/enums/User";
 import i18nextConfig from "@/next-i18next.config";
 import { SocketContext } from "@/utils/SocketContext";
 
@@ -141,7 +142,7 @@ export default function RoleSelection()
 
 			{/* Communications textuelles de la partie */}
 			{/* (disponible seulement pour les non-spectateurs) */}
-			{router.query[ "type" ] === "player" && <button type="button" onClick={toggleChat}></button>}<GameChat show={showChat} />
+			{router.query[ "type" ] === UserType.PLAYER && <button type="button" onClick={toggleChat}></button>}<GameChat show={showChat} />
 		</section>
 	);
 }
