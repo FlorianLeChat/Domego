@@ -20,6 +20,7 @@
     "Armand Honyigloh (https://github.com/RmannLePhilosopheFou)"
   ],
   "dependencies": {
+	"swr": "~2.0",
     "cors": "~2.8",
     "uuid": "~9.0",
     "next": "~13.1",
