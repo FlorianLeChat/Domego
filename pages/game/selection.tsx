@@ -8,7 +8,7 @@ import { GetStaticProps } from "next";
 import { useTranslation } from "next-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useContext, useState, useEffect, Suspense } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import styles from "@/styles/RoleSelection.module.scss";
 import { UserType } from "@/enums/User";
@@ -126,14 +126,12 @@ export default function RoleSelection()
 
 			<div>
 				{/* Liste des rôles */}
-				<Suspense fallback={<div className="loading"></div>}>
-					<RoleCard name="project_owner" budget="150K" />
-					<RoleCard name="project_manager" budget="30K" />
-					<RoleCard name="engineering_office" budget="20K" />
-					<RoleCard name="control_office" budget="20K" />
-					<RoleCard name="secondary_state" budget="30K" />
-					<RoleCard name="general_construction" budget="30K" />
-				</Suspense>
+				<RoleCard name="project_owner" budget="150K" />
+				<RoleCard name="project_manager" budget="30K" />
+				<RoleCard name="engineering_office" budget="20K" />
+				<RoleCard name="control_office" budget="20K" />
+				<RoleCard name="secondary_state" budget="30K" />
+				<RoleCard name="general_construction" budget="30K" />
 			</div>
 
 			{/* Bouton de lancement de la partie */}

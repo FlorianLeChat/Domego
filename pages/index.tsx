@@ -5,10 +5,10 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
 import { GetStaticProps } from "next";
+import { useState, useContext } from "react";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useTranslation, Trans } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useState, useContext, Suspense } from "react";
 
 import styles from "@/styles/GameHome.module.scss";
 import { UserType } from "@/enums/User";
@@ -207,9 +207,7 @@ export default function GameHome()
 				<button type="button" onClick={createNewGame} disabled={disabled}>{t( "pages.index.create_new_game" )}</button>
 
 				{/* Tableau des parties en cours */}
-				<Suspense fallback={<div className="loading"></div>}>
-					<GameRooms username={username} />
-				</Suspense>
+				<GameRooms username={username} />
 			</article>
 		</section>
 	);
