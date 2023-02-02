@@ -26,11 +26,21 @@ export default async function handler( request: NextApiRequest, result: NextApiR
 			{
 				const document = await User.find().limit( 10 );
 
-				result.json( document ? { state: true, response: document } : { state: false } );
+				if ( Object.keys( document ).length > 0 )
+				{
+					// Résultats trouvés.
+					result.status( 200 ).json( { response: document } );
+				}
+				else
+				{
+					// Aucun résultat trouvé.
+					result.status( 204 ).end();
+				}
 			}
 			catch ( error )
 			{
-				result.json( { state: false } );
+				// Erreur lors de la récupération des données.
+				result.status( 500 ).end();
 			}
 
 			break;
@@ -43,11 +53,21 @@ export default async function handler( request: NextApiRequest, result: NextApiR
 				const user = new User( request.body );
 				const document = await user.save();
 
-				result.json( document ? { state: true, response: document } : { state: false } );
+				if ( Object.keys( document ).length > 0 )
+				{
+					// Données ajoutées.
+					result.status( 200 ).json( { response: document } );
+				}
+				else
+				{
+					// Aucune donnée ajoutée.
+					result.status( 204 ).end();
+				}
 			}
 			catch ( error )
 			{
-				result.json( { state: false } );
+				// Erreur lors de l'ajout des données.
+				result.status( 500 ).end();
 			}
 
 			break;
@@ -59,11 +79,20 @@ export default async function handler( request: NextApiRequest, result: NextApiR
 			{
 				const document = await User.findOneAndUpdate( request.body.filter, request.body.update );
 
-				result.json( document ? { state: true, response: document } : { state: false } );
+				if ( Object.keys( document ).length > 0 )
+				{
+					// Données modifiées.
+					result.status( 200 ).json( { response: document } );
+				}
+				else
+				{
+					// Aucune donnée modifiée.
+					result.status( 204 ).end();
+				}
 			}
 			catch ( error )
 			{
-				result.json( { state: false } );
+				result.status( 500 ).end();
 			}
 
 			break;
@@ -75,7 +104,16 @@ export default async function handler( request: NextApiRequest, result: NextApiR
 			{
 				const document = await User.findOneAndDelete( request.body );
 
-				result.json( document ? { state: true, response: document } : { state: false } );
+				if ( Object.keys( document ).length > 0 )
+				{
+					// Données supprimées.
+					result.status( 200 ).json( { response: document } );
+				}
+				else
+				{
+					// Aucune donnée supprimée.
+					result.status( 204 ).end();
+				}
 			}
 			catch ( error )
 			{
