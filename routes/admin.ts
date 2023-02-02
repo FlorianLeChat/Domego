@@ -2,8 +2,9 @@
 // Route permettant de gérer les commandes des administrateurs.
 //
 import { findUser } from "@/utils/UserManager";
+import { findRoom } from "@/utils/RoomManager";
+import { RoomState } from "@/enums/Room";
 import { Server, Socket } from "socket.io";
-import { findRoom, RoomState } from "@/utils/RoomManager";
 
 export function Admin( io: Server, socket: Socket )
 {

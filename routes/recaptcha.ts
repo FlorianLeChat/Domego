@@ -1,10 +1,7 @@
 //
 // Route permettant de valider les jetons d'authentification de Google reCAPTCHA.
 //
-import * as dotenv from "dotenv";
 import { Server, Socket } from "socket.io";
-
-dotenv.config( { path: "../client/.env" } );
 
 export function Recaptcha( _io: Server, socket: Socket )
 {
