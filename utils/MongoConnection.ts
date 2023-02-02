@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 declare global
 {
 	// Déclaration de la variable globale mongoose.
-	var mongoose: { conn: mongoose.Connection | null, promise: Promise<mongoose.Mongoose> | null; };
+	var mongoose: { conn?: mongoose.Mongoose, promise?: Promise<mongoose.Mongoose>; };
 }
 
 // On récupère d'abord la connexion établie avec la base de données.
@@ -16,7 +16,7 @@ let cached = global.mongoose;
 if ( !cached )
 {
 	// Si aucune connexion n'est établie, on se prépare à en établir une.
-	cached = global.mongoose = { conn: null, promise: null };
+	cached = global.mongoose = { conn: undefined, promise: undefined };
 }
 
 export async function ConnectToMongoDB()
@@ -32,31 +32,17 @@ export async function ConnectToMongoDB()
 	if ( !cached.promise )
 	{
 		// Si ce n'est pas le cas, on définit d'abord la connexion à la base de données.
-		const connection = mongoose.connection;
+		const options = {
+			user: process.env[ "MONGODB_USERNAME" ],
+			pass: process.env[ "MONGODB_PASSWORD" ],
+			dbName: process.env[ "MONGODB_DATABASE" ]
+		};
+
 		mongoose.set( "strictQuery", true );
-		mongoose.connect( `mongodb://${ process.env[ "MONGODB_HOST" ] }:${ process.env[ "MONGODB_PORT" ] }/`,
-			{
-				user: process.env[ "MONGODB_USERNAME" ],
-				pass: process.env[ "MONGODB_PASSWORD" ],
-				dbName: process.env[ "MONGODB_DATABASE" ]
-			} as mongoose.ConnectOptions );
 
-		// On retourne ensuite une promesse pour attendre la connexion à la base de données.
-		cached.promise = new Promise( ( resolve, reject ) =>
+		cached.promise = mongoose.connect( `mongodb://${ process.env[ "MONGODB_HOST" ] }:${ process.env[ "MONGODB_PORT" ] }/`, options ).then( ( mongoose ) =>
 		{
-			connection.once( "open", () =>
-			{
-				// Une fois la connexion établie, on termine enfin la promesse.
-				console.log( "Connexion à la base de données établie." );
-				resolve( mongoose );
-			} );
-
-			connection.on( "error", ( error ) =>
-			{
-				// On affiche alors les erreurs de connexion dans la console.
-				console.error( "Erreur de connexion à la base de données :", error.message );
-				reject( error );
-			} );
+			return mongoose;
 		} );
 	}
 
@@ -68,7 +54,7 @@ export async function ConnectToMongoDB()
 	catch ( error )
 	{
 		// Si une erreur survient, on supprime la promesse de connexion.
-		cached.promise = null;
+		cached.promise = undefined;
 		throw error;
 	}
 
