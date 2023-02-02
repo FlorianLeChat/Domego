@@ -49,7 +49,7 @@
   },
   "optionalDependencies": {
     "bufferutil": "~4.0",
-    "utf-8-validate": "~5.0"
+    "utf-8-validate": "~6.0"
   },
   "engines": {
     "node": ">=19.4",
