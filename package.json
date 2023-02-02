@@ -65,7 +65,7 @@
     "stop": "pm2 delete domego",
     "restart": "pm2 restart domego",
     "reload": "pm2 reload domego",
-    "tunnel": "npx localtunnel --port 3001"
+    "tunnel": "npx localtunnel --port 3000"
   },
   "browserslist": [
     "defaults"
