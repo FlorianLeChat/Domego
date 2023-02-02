@@ -10,13 +10,7 @@ updates:
 
   # Maintain dependencies for npm
   - package-ecosystem: "npm"
-    directory: "/client"
-    schedule:
-      # Check for updates managed by npm once a month
-      interval: "monthly"
-
-  - package-ecosystem: "npm"
-    directory: "/server"
+    directory: "/"
     schedule:
       # Check for updates managed by npm once a month
       interval: "monthly"
