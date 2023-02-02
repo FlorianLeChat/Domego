@@ -10,6 +10,12 @@ export default async function handler( request: NextApiRequest, result: NextApiR
 	// Connexion à la base de données.
 	await ConnectToMongoDB();
 
+	// Restriction de l'accès à l'API en mode de production.
+	if ( process.env.NODE_ENV === "production" )
+	{
+		result.status( 403 ).end();
+	}
+
 	// Détermination de la méthode HTTP utilisée.
 	switch ( request.method )
 	{
