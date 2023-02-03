@@ -48,7 +48,7 @@
 			"username_length": "<strong>5</strong> minimum characters, <strong>20</strong> maximum characters",
 			"create_new_game": "Create a new game",
 			"games_available": "Available games",
-			"send_chat_message": "Envoyer"
+			"send_chat_message": "Send"
 		},
 		"rooms": {
 			"join": "Join",
