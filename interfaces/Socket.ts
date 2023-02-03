@@ -1,6 +1,6 @@
 //
 // Interface des attributs des sockets.
-// Source : https://stackoverflow.com/a/74060659
+// 	Source : https://stackoverflow.com/a/74060659
 //
 import type { NextApiResponse } from "next";
 import type { Server as IOServer } from "socket.io";

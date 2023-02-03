@@ -6,13 +6,6 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useState, useContext, useEffect } from "react";
 
-import project_owner from "@/public/assets/images/jobs/project_owner.webp";
-import control_office from "@/public/assets/images/jobs/control_office.webp";
-import secondary_state from "@/public/assets/images/jobs/secondary_state.webp";
-import project_manager from "@/public/assets/images/jobs/project_manager.webp";
-import engineering_office from "@/public/assets/images/jobs/engineering_office.webp";
-import general_construction from "@/public/assets/images/jobs/general_construction.webp";
-
 import styles from "@/styles/RoleCard.module.scss";
 import { UserType } from "@/enums/User";
 import { SocketContext } from "@/utils/SocketContext";
@@ -123,7 +116,7 @@ export default function RoleCard( props: RoleCardProps )
 	return (
 		<article className={styles[ "RoleCard" ]}>
 			{/* Image représentative du rôle */}
-			<Image src={`${ process.env[ "PUBLIC_URL" ] }/assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} />
+			<Image src={`/assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} width={225} height={225} />
 
 			{/* Utilisateur jouant ce rôle */}
 			<span>{player}</span>
