@@ -7,15 +7,19 @@ import { createContext } from "react";
 //	Note : on tente de définir l'identifiant unique précédemment en mémoire
 //		afin de garder une persistence avec les données du serveur.
 //
-const url = process.env[ "PUBLIC_URL" ];
-const cacheId = sessionStorage.getItem( "cacheId" );
-const instance = io( { path: ( url !== "" ? url : "/" ) + "socket.io" } );
+let instance!: Socket;
 
-instance.auth = { "cacheId": cacheId };
-instance.on( "connect", () =>
+if ( typeof window !== "undefined" )
 {
-	sessionStorage.setItem( "cacheId", instance.id );
-} );
+	const cacheId = sessionStorage.getItem( "cacheId" );
+
+	instance = io();
+	instance.auth = { "cacheId": cacheId };
+	instance.on( "connect", () =>
+	{
+		sessionStorage.setItem( "cacheId", instance.id );
+	} );
+}
 
 //
 // Permet de créer un contexte d'exportation avec le socket précédemment créé.
@@ -24,7 +28,7 @@ export const SocketContext = createContext<Socket>( instance );
 
 //
 // Permet d'importer la référence du contexte du socket.
-// 	Source : https://stackoverflow.com/a/67270359
+// Source : https://stackoverflow.com/a/67270359
 //
 export const SocketProvider = ( { children }: any ) =>
 (
