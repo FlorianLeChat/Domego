@@ -43,6 +43,12 @@ export default function RoleSelection()
 	// Bouton de lancement de la partie.
 	const startGame = () =>
 	{
+		// Vérification de la connexion aux sockets.
+		if ( !socket?.connected )
+		{
+			return;
+		}
+
 		// Envoi de la requête de lancement de la partie.
 		socket.emit( "GameAdmin", "start", ( icon: SweetAlertIcon, title: string, message: string ) =>
 		{
@@ -70,7 +76,13 @@ export default function RoleSelection()
 	// Envoi et des réceptions des mises à jour depuis/vers le serveur.
 	useEffect( () =>
 	{
-		// On vérifie d'abord la latence entre le client et le serveur
+		// On vérifie d'abord que la connexion aux sockets est établie.
+		if ( !socket?.connected )
+		{
+			return;
+		}
+
+		// On vérifie après la latence entre le client et le serveur
 		//	distant en mettant en mémoire le temps actuel.
 		const start = Date.now();
 
@@ -113,7 +125,7 @@ export default function RoleSelection()
 	}, [ t, router, socket ] );
 
 	// Vérification de la connexion à la partie.
-	if ( !socket.connected || !router.query )
+	if ( !router.query )
 	{
 		return <DefaultErrorPage statusCode={404} />;
 	}

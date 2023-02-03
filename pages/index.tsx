@@ -42,7 +42,13 @@ export default function GameHome()
 	// Bouton de création d'une nouvelle partie.
 	const createNewGame = async () =>
 	{
-		// On réalise tout d'abord une vérification de sécurité en utilisant le service
+		// On vérifie d'abord que la connexion aux sockets est établie.
+		if ( !socket?.connected )
+		{
+			return;
+		}
+
+		// On réalise juste après une vérification de sécurité en utilisant le service
 		//	Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
 		// 	Note : cette vérification n'est pas nécessaire en mode développement.
 		if ( process.env[ "NODE_ENV" ] === "production" )

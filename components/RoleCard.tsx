@@ -6,6 +6,13 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useState, useContext, useEffect } from "react";
 
+import project_owner from "@/public/assets/images/jobs/project_owner.webp";
+import control_office from "@/public/assets/images/jobs/control_office.webp";
+import secondary_state from "@/public/assets/images/jobs/secondary_state.webp";
+import project_manager from "@/public/assets/images/jobs/project_manager.webp";
+import engineering_office from "@/public/assets/images/jobs/engineering_office.webp";
+import general_construction from "@/public/assets/images/jobs/general_construction.webp";
+
 import styles from "@/styles/RoleCard.module.scss";
 import { UserType } from "@/enums/User";
 import { SocketContext } from "@/utils/SocketContext";
@@ -32,11 +39,17 @@ export default function RoleCard( props: RoleCardProps )
 	// Bouton de sélection d'un rôle.
 	const selectRole = ( event: React.MouseEvent<HTMLInputElement> ) =>
 	{
-		// On détermine si le bouton est coché ou non.
+		// On vérifie d'abord que la connexion aux sockets est établie.
+		if ( !socket?.connected )
+		{
+			return;
+		}
+
+		// On détermine ensuite si le bouton est coché ou non.
 		const state = event.currentTarget.checked;
 
-		// On envoie une requête au serveur pour déterminer s'il est possible
-		//	de sélectionner le rôle.
+		// On envoie enfin une requête au serveur pour déterminer s'il est
+		//	possible de sélectionner le rôle.
 		socket.emit( "GameRole", props.name, "select", state, ( available: boolean, player: string ) =>
 		{
 			// Si le serveur renvoie une réponse positive, on s'assigne localement
@@ -62,7 +75,10 @@ export default function RoleCard( props: RoleCardProps )
 		//	que le joueur est prêt à jouer sans autre vérification.
 		const state = event.currentTarget.checked;
 
-		socket.emit( "GameRole", props.name, "ready", state );
+		if ( socket?.connected )
+		{
+			socket.emit( "GameRole", props.name, "ready", state );
+		}
 
 		setReady( state );
 	};
@@ -70,7 +86,13 @@ export default function RoleCard( props: RoleCardProps )
 	// Réception des mises à jour de sélection des rôles.
 	useEffect( () =>
 	{
-		// On émet d'abord une requête au serveur pour vérifier
+		// On vérifie d'abord que la connexion aux sockets est établie.
+		if ( !socket?.connected )
+		{
+			return;
+		}
+
+		// On émet ensuite une requête au serveur pour vérifier
 		//	si le rôle est déjà sélectionné ou non.
 		socket.emit( "GameRole", props.name, "check", true, ( available: boolean, player: string ) =>
 		{
@@ -83,12 +105,12 @@ export default function RoleCard( props: RoleCardProps )
 			}
 		} );
 
-		// On accroche ensuite un écouteur pour réceptionner les mises à jour
+		// On accroche alors un écouteur pour réceptionner les mises à jour
 		//	des sélections des rôles.
 		socket.on( "GameRole", ( role: string, state: boolean, player: string ) =>
 		{
 			// Si la mise à jour correspond au rôle actuelle, alors on l'assigne
-			//	localement avec les informations reçues depuis le serveur.
+			//	enfin localement avec les informations reçues depuis le serveur.
 			if ( props.name === role )
 			{
 				setReady( state );

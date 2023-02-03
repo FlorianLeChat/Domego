@@ -45,7 +45,13 @@ export default function GameRooms( props: GameRoomsProps )
 	// Bouton pour rejoindre une partie (joueur/spectateur).
 	const joinGame = useCallback( async ( roomId: string, type: string, state: number ) =>
 	{
-		// On vérifie d'abord si l'utilisateur veut bien rejoindre la partie.
+		// On vérifie d'abord que la connexion aux sockets est établie.
+		if ( !socket?.connected )
+		{
+			return;
+		}
+
+		// On vérifie après si l'utilisateur veut bien rejoindre la partie.
 		const result = await Swal.fire( {
 			icon: "question",
 			text: t( `modals.join_game_${ type }_description` ),
@@ -116,7 +122,13 @@ export default function GameRooms( props: GameRoomsProps )
 	// Récupération de l'ensemble des parties en cours.
 	const updateRooms = useCallback( () =>
 	{
-		// On effectue une requête pour récupérer la liste des parties en cours.
+		// On vérifie d'abord que la connexion aux sockets est établie.
+		if ( !socket?.connected )
+		{
+			return;
+		}
+
+		// On effectue alors une requête pour récupérer la liste des parties en cours.
 		socket.emit( "GameRooms", ( rooms: GameRoomList[] ) =>
 		{
 			// Lors de la réception des données, on construit le HTML afin de l'afficher
