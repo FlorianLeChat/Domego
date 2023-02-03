@@ -1,9 +1,14 @@
 section#GameChat
 {
 	// Corps de la page.
+	right: 1rem;
+	width: max(300px, 35vw);
+	height: max(300px, 40vh);
+	bottom: 7rem;
+	border: 1px solid rgb(139, 139, 139);
 	display: flex;
+	position: fixed;
 	text-align: left;
-	min-height: 100vh;
 	flex-direction: column;
 	justify-content: flex-end;
 	background-color: whitesmoke;

@@ -81,19 +81,6 @@ section#RoleSelection
 			transition-duration: 300ms;
 			transition-property: color, border-color, background-color, box-shadow;
 
-			~ section#GameChat
-			{
-				// Conteneur des communications textuelles.
-				// (ceci est une réécriture des règles originales)
-				right: 1rem;
-				width: max(300px, 35vw);
-				height: max(300px, 40vh);
-				bottom: 7rem;
-				border: 1px solid rgb(139, 139, 139);
-				position: fixed;
-				min-height: 0;
-			}
-
 			&:hover
 			{
 				// Effet de sélection du bouton.
