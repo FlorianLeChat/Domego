@@ -4,7 +4,7 @@ import { UserType, UserRole, UserState } from "@/utils/UserManager";
 export interface UserAttributes
 {
 	// Identifiant unique de l'utilisateur (socket).
-	// 	Source : https://socket.io/docs/v4/server-socket-instance/#socketid
+	// Source : https://socket.io/docs/v4/server-socket-instance/#socketid
 	id: string;
 
 	// Nom d'utilisateur dans la partie.
@@ -14,7 +14,7 @@ export interface UserAttributes
 	type: UserType;
 
 	// Identifiant unique de la partie (UUID v4).
-	// 	Source : https://en.wikipedia.org/wiki/Universally_unique_identifier#Format
+	// Source : https://en.wikipedia.org/wiki/Universally_unique_identifier#Format
 	game: string;
 
 	// Rôle de l'utilisateur (métier dans la partie).

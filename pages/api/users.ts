@@ -5,7 +5,7 @@ import User from "@/models/User";
 import { ConnectToMongoDB } from "@/utils/MongoConnection";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler( request: NextApiRequest, result: NextApiResponse )
+export default async function handler( request: NextApiRequest, response: NextApiResponse )
 {
 	// Connexion à la base de données.
 	await ConnectToMongoDB();
@@ -13,7 +13,7 @@ export default async function handler( request: NextApiRequest, result: NextApiR
 	// Restriction de l'accès à l'API en mode de production.
 	if ( process.env.NODE_ENV === "production" )
 	{
-		result.status( 403 ).end();
+		response.status( 403 ).end();
 	}
 
 	// Détermination de la méthode HTTP utilisée.
@@ -29,18 +29,18 @@ export default async function handler( request: NextApiRequest, result: NextApiR
 				if ( Object.keys( document ).length > 0 )
 				{
 					// Résultats trouvés.
-					result.status( 200 ).json( { response: document } );
+					response.status( 200 ).json( { response: document } );
 				}
 				else
 				{
 					// Aucun résultat trouvé.
-					result.status( 204 ).end();
+					response.status( 204 ).end();
 				}
 			}
 			catch ( error )
 			{
 				// Erreur lors de la récupération des données.
-				result.status( 500 ).end();
+				response.status( 500 ).end();
 			}
 
 			break;
@@ -56,18 +56,18 @@ export default async function handler( request: NextApiRequest, result: NextApiR
 				if ( Object.keys( document ).length > 0 )
 				{
 					// Données ajoutées.
-					result.status( 200 ).json( { response: document } );
+					response.status( 200 ).json( { response: document } );
 				}
 				else
 				{
 					// Aucune donnée ajoutée.
-					result.status( 204 ).end();
+					response.status( 204 ).end();
 				}
 			}
 			catch ( error )
 			{
 				// Erreur lors de l'ajout des données.
-				result.status( 500 ).end();
+				response.status( 500 ).end();
 			}
 
 			break;
@@ -82,17 +82,17 @@ export default async function handler( request: NextApiRequest, result: NextApiR
 				if ( Object.keys( document ).length > 0 )
 				{
 					// Données modifiées.
-					result.status( 200 ).json( { response: document } );
+					response.status( 200 ).json( { response: document } );
 				}
 				else
 				{
 					// Aucune donnée modifiée.
-					result.status( 204 ).end();
+					response.status( 204 ).end();
 				}
 			}
 			catch ( error )
 			{
-				result.status( 500 ).end();
+				response.status( 500 ).end();
 			}
 
 			break;
@@ -107,23 +107,23 @@ export default async function handler( request: NextApiRequest, result: NextApiR
 				if ( Object.keys( document ).length > 0 )
 				{
 					// Données supprimées.
-					result.status( 200 ).json( { response: document } );
+					response.status( 200 ).json( { response: document } );
 				}
 				else
 				{
 					// Aucune donnée supprimée.
-					result.status( 204 ).end();
+					response.status( 204 ).end();
 				}
 			}
 			catch ( error )
 			{
-				result.json( { state: false } );
+				response.json( { state: false } );
 			}
 
 			break;
 
 		default:
 			// La méthode utilisée n'est pas supportée.
-			result.status( 405 ).end();
+			response.status( 405 ).end();
 	}
 };

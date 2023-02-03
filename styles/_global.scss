@@ -16,14 +16,14 @@ html
 }
 
 // Badge de Google reCAPTCHA.
-// 	Source : https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
+// Source : https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 .grecaptcha-badge
 {
 	display: none;
 }
 
 // Flou artistique sur les fenêtres modales.
-// 	Source : https://sweetalert2.github.io/recipe-gallery/blurred-backdrop.html
+// Source : https://sweetalert2.github.io/recipe-gallery/blurred-backdrop.html
 .swal2-shown > [aria-hidden]
 {
 	filter: blur(0.5rem);
@@ -31,7 +31,7 @@ html
 }
 
 // Animation de chargement (cercle rotatif et texte de transition).
-// 	Source : https://web.dev/code-splitting-suspense/#suspending-multiple-components
+// Source : https://web.dev/code-splitting-suspense/#suspending-multiple-components
 span.loading
 {
 	// Texte de transition.
