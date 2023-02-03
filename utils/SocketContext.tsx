@@ -11,13 +11,16 @@ let instance!: Socket;
 
 if ( typeof window !== "undefined" )
 {
-	const cacheId = sessionStorage.getItem( "cacheId" );
-
-	instance = io();
-	instance.auth = { "cacheId": cacheId };
-	instance.on( "connect", () =>
+	fetch( "/api/socket" ).then( () =>
 	{
-		sessionStorage.setItem( "cacheId", instance.id );
+		const cacheId = sessionStorage.getItem( "cacheId" );
+
+		instance = io();
+		instance.auth = { "cacheId": cacheId };
+		instance.on( "connect", () =>
+		{
+			sessionStorage.setItem( "cacheId", instance.id );
+		} );
 	} );
 }
 
