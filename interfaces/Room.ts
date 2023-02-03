@@ -1,5 +1,7 @@
+//
 // Interface des attributs d'une partie.
-import { RoomState } from "@/utils/RoomManager";
+//
+import type { RoomState } from "@/enums/Room";
 
 export interface RoomAttributes
 {

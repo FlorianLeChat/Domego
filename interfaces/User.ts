@@ -1,5 +1,7 @@
+//
 // Interface des attributs d'un joueur.
-import { UserType, UserRole, UserState } from "@/utils/UserManager";
+//
+import type { UserType, UserRole, UserState } from "@/enums/User";
 
 export interface UserAttributes
 {
