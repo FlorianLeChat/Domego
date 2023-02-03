@@ -3,7 +3,6 @@
 //
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import DefaultErrorPage from "next/error";
 import { GetStaticProps } from "next";
 import { useTranslation } from "next-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
@@ -43,13 +42,13 @@ export default function RoleSelection()
 	// Bouton de lancement de la partie.
 	const startGame = () =>
 	{
-		// Vérification de la connexion aux sockets.
+		// On vérifie d'abord que la connexion aux sockets est établie.
 		if ( !socket?.connected )
 		{
 			return;
 		}
 
-		// Envoi de la requête de lancement de la partie.
+		// On envoie enfin une requête au serveur pour lancer la partie.
 		socket.emit( "GameAdmin", "start", ( icon: SweetAlertIcon, title: string, message: string ) =>
 		{
 			// Si la réponse indique que la partie ne peut pas être actuellement lancée,
@@ -76,7 +75,14 @@ export default function RoleSelection()
 	// Envoi et des réceptions des mises à jour depuis/vers le serveur.
 	useEffect( () =>
 	{
-		// On vérifie d'abord que la connexion aux sockets est établie.
+		// On vérifie d'abord si des paramètres ont été transmis à la page.
+		if ( Object.keys( router.query ).length === 0 )
+		{
+			router.push( "/404" );
+			return;
+		}
+
+		// On vérifie également que la connexion aux sockets est établie.
 		if ( !socket?.connected )
 		{
 			return;
@@ -123,12 +129,6 @@ export default function RoleSelection()
 			setDisabled( !state );
 		} );
 	}, [ t, router, socket ] );
-
-	// Vérification de la connexion à la partie.
-	if ( !router.query )
-	{
-		return <DefaultErrorPage statusCode={404} />;
-	}
 
 	// Affichage du rendu HTML du composant.
 	return (
