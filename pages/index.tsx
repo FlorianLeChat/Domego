@@ -177,8 +177,8 @@ export default function GameHome()
 				//	normalement (sans aucune erreur émise par le serveur).
 				router.push( {
 					query: { roomId: uuid, username: username, admin: true, type: UserType.PLAYER },
-					pathname: "/"
-				} );
+					pathname: `/game/selection`
+				}, `/game/selection` );
 			}
 		} );
 	};

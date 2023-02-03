@@ -111,10 +111,12 @@ export default function GameRooms( props: GameRoomsProps )
 			{
 				// Redirection automatique si la fenêtre de chargement est fermée
 				//	normalement (sans aucune erreur émise par le serveur).
+				const path = `/game/${ state === RoomState.LAUNCHED ? "board" : "selection" }`;
+
 				router.push( {
 					query: { roomId: roomId, username: props.username, admin: false, type: type },
-					pathname: `/game/${ state === RoomState.LAUNCHED ? "board" : "selection" }`
-				} );
+					pathname: path
+				}, path );
 			}
 		} );
 	}, [ t, props, socket, router ] );
