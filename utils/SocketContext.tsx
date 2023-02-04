@@ -10,33 +10,29 @@ let instance!: Socket;
 
 if ( typeof window !== "undefined" )
 {
-	// On demande au serveur de créer le serveur des sockets.
-	fetch( "/api/socket" ).then( () =>
+	// On tente d'abord de récupérer l'identifiant unique précédemment
+	// 	mis en mémoire.
+	const cacheId = sessionStorage.getItem( "cacheId" );
+
+	// On crée ensuite le socket de communication avec le serveur.
+	instance = io();
+	instance.auth = { "cacheId": cacheId };
+	instance.on( "connect", () =>
 	{
-		// Une fois le serveur créé, on tente de récupérer l'identifiant
-		// 	unique précédemment mis en mémoire.
-		const cacheId = sessionStorage.getItem( "cacheId" );
+		// Si la connexion au serveur a réussi, on met alors en mémoire
+		//	l'identifiant unique du socket.
+		sessionStorage.setItem( "cacheId", instance.id );
+	} );
+	instance.once( "connect_error", ( error ) =>
+	{
+		// Si la connexion au serveur a échoué, on affiche enfin un message
+		// 	d'erreur à l'utilisateur.
+		console.error( error.message );
 
-		// On crée le socket de communication avec le serveur.
-		instance = io();
-		instance.auth = { "cacheId": cacheId };
-		instance.on( "connect", () =>
+		if ( Router.pathname !== "/500" )
 		{
-			// Si la connexion au serveur a réussi, on met en mémoire
-			// 	l'identifiant unique du socket.
-			sessionStorage.setItem( "cacheId", instance.id );
-		} );
-		instance.once( "connect_error", ( error ) =>
-		{
-			// Si la connexion au serveur a échoué, on affiche un message
-			//	d'erreur à l'utilisateur.
-			console.error( error.message );
-
-			if ( Router.pathname !== "/500" )
-			{
-				Router.push( "/500" );
-			}
-		} );
+			Router.push( "/500" );
+		}
 	} );
 }
 

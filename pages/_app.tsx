@@ -4,6 +4,7 @@ import "@/styles/_global.scss";
 // Importation des dépendances.
 import Head from "next/head";
 import { Roboto } from "@next/font/google";
+import { useEffect } from "react";
 import { appWithTranslation } from "next-i18next";
 
 // Importation des fonctions utilitaires.
@@ -21,6 +22,13 @@ const roboto = Roboto( {
 
 const Domego = ( { Component, pageProps }: AppProps ) =>
 {
+	// Création du socket de communication avec le serveur.
+	// 	Source : https://github.com/vercel/next.js/discussions/15341
+	useEffect( () =>
+	{
+		fetch( "/api/socket" );
+	}, [] );
+
 	// Génération de la structure de la page.
 	return (
 		<>

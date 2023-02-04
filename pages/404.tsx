@@ -1,5 +1,5 @@
 //
-// Route utilisé lorsqu'une page n'est pas trouvée (erreur HTTP 404).
+// Route utilisée lorsqu'une page n'est pas trouvée (erreur HTTP 404).
 //
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
