@@ -50,7 +50,7 @@ export default function GameHome()
 		// On réalise juste après une vérification de sécurité en utilisant le service
 		//	Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
 		// 	Note : cette vérification n'est pas nécessaire en mode développement.
-		if ( process.env[ "NODE_ENV" ] === "production" )
+		if ( process.env[ "NODE_ENV" ] === "production" && process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] !== "" )
 		{
 			await Swal.fire( {
 				icon: "info",
@@ -82,31 +82,46 @@ export default function GameHome()
 					// On attend ensuite que les services de reCAPTCHA soient chargés.
 					window.grecaptcha.ready( async () =>
 					{
-						// Récupération et vérification du jeton d'authentification généré
-						//	par l'API de Google reCAPTCHA.
-						const token = await window.grecaptcha.execute( process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] ?? "", { action: "create" } );
-
-						socket.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
+						try
 						{
-							// Si la réponse indique que le joueur n'est pas un humain,
-							//	on affiche le message d'erreur correspondant avec les informations
-							//	transmises par le serveur.
-							if ( icon !== "success" )
+							// Récupération et vérification du jeton d'authentification généré
+							//	par l'API de Google reCAPTCHA.
+							const token = await window.grecaptcha.execute( process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] ?? "", { action: "create" } );
+
+							socket.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
 							{
-								Swal.fire( {
-									icon: icon,
-									text: t( message ),
-									title: t( title ),
-									confirmButtonColor: "#28a745"
-								} );
+								// Si la réponse indique que le joueur n'est pas un humain,
+								//	on affiche le message d'erreur correspondant avec les informations
+								//	transmises par le serveur.
+								if ( icon !== "success" )
+								{
+									Swal.fire( {
+										icon: icon,
+										text: t( message ),
+										title: t( title ),
+										confirmButtonColor: "#28a745"
+									} );
 
-								return;
-							}
+									return;
+								}
 
-							// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
-							//	l'exécution des opérations.
-							Swal.close();
-						} );
+								// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
+								//	l'exécution des opérations.
+								Swal.close();
+							} );
+						}
+						catch ( error )
+						{
+							console.log( error );
+							// Si une erreur est survenue lors de l'exécution de la fonction de vérification,
+							//	on affiche un message d'erreur.
+							Swal.fire( {
+								icon: "error",
+								text: t( "modals.recaptcha_invalid_token_description" ),
+								title: t( "modals.recaptcha_invalid_token_title" ),
+								confirmButtonColor: "#28a745"
+							} );
+						}
 					} );
 				}
 			} );
