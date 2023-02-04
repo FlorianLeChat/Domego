@@ -20,12 +20,26 @@ module.exports = withPWA( {
 	},
 	async redirects()
 	{
-		return [
+		// Définition des redirections de base.
+		let redirects = [
 			{
 				source: "/source",
 				permanent: true,
 				destination: "https://github.com/FlorianLeChat/Domego"
 			}
 		];
+
+		if ( process.env.NODE_ENV === "production" )
+		{
+			// Ajout des redirections de test en production.
+			redirects.push( {
+				source: "/test/:path*",
+				permanent: true,
+				destination: "/"
+			} );
+		}
+
+		// Application des redirections.
+		return redirects;
 	}
 } );
