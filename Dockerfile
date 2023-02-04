@@ -26,4 +26,4 @@ RUN npm install && npm run build
 EXPOSE 3000
 
 # Run the website
-CMD [ "next", "start" ]
+CMD [ "npx", "next", "start" ]
