@@ -20,13 +20,14 @@
     "Armand Honyigloh (https://github.com/RmannLePhilosopheFou)"
   ],
   "dependencies": {
-	"swr": "~2.0",
+    "swr": "~2.0",
     "cors": "~2.8",
     "uuid": "~9.0",
     "next": "~13.1",
     "react": "~18.2",
     "i18next": "~22.4",
     "mongoose": "~6.9",
+    "next-pwa": "~5.6",
     "socket.io": "~4.5",
     "validator": "~13.7",
     "@next/font": "~13.1",
