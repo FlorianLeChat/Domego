@@ -4,7 +4,6 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
-import { GetStaticProps } from "next";
 import { useState, useContext } from "react";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useTranslation, Trans } from "next-i18next";
@@ -17,7 +16,7 @@ import { SocketContext } from "@/utils/SocketContext";
 
 const GameRooms = dynamic( () => import( "@/components/GameRooms" ) );
 
-export const getStaticProps: GetStaticProps = async ( { locale } ) =>
+export async function getStaticProps( { locale }: { locale: string; } )
 {
 	// Récupération des traductions côté serveur.
 	return {
@@ -25,7 +24,7 @@ export const getStaticProps: GetStaticProps = async ( { locale } ) =>
 			...( await serverSideTranslations( locale ?? i18nextConfig.i18n.defaultLocale ) )
 		},
 	};
-};
+}
 
 export default function GameHome()
 {

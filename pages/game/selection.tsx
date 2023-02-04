@@ -3,7 +3,6 @@
 //
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { GetStaticProps } from "next";
 import { useTranslation } from "next-i18next";
 import Swal, { SweetAlertIcon } from "sweetalert2";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -17,7 +16,7 @@ import { SocketContext } from "@/utils/SocketContext";
 const RoleCard = dynamic( () => import( "@/components/RoleCard" ) );
 const GameChat = dynamic( () => import( "@/components/GameChat" ) );
 
-export const getStaticProps: GetStaticProps = async ( { locale } ) =>
+export async function getStaticProps( { locale }: { locale: string; } )
 {
 	// Récupération des traductions côté serveur.
 	return {
@@ -25,7 +24,7 @@ export const getStaticProps: GetStaticProps = async ( { locale } ) =>
 			...( await serverSideTranslations( locale ?? i18nextConfig.i18n.defaultLocale ) )
 		},
 	};
-};
+}
 
 export default function RoleSelection()
 {

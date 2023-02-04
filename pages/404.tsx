@@ -2,14 +2,13 @@
 // Route utilisé lorsqu'une page n'est pas trouvée (erreur HTTP 404).
 //
 import Link from "next/link";
-import { GetStaticProps } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import styles from "@/styles/NotFound.module.scss";
 import i18nextConfig from "@/next-i18next.config";
 
-export const getStaticProps: GetStaticProps = async ( { locale } ) =>
+export async function getStaticProps( { locale }: { locale: string; } )
 {
 	// Récupération des traductions côté serveur.
 	return {
@@ -17,7 +16,7 @@ export const getStaticProps: GetStaticProps = async ( { locale } ) =>
 			...( await serverSideTranslations( locale ?? i18nextConfig.i18n.defaultLocale ) )
 		},
 	};
-};
+}
 
 export default function HTTP404()
 {
