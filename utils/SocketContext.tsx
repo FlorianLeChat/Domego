@@ -47,7 +47,7 @@ export const SocketContext = createContext<Socket>( instance );
 
 //
 // Permet d'importer la référence du contexte du socket.
-// Source : https://stackoverflow.com/a/67270359
+// 	Source : https://stackoverflow.com/a/67270359
 //
 export const SocketProvider = ( { children }: any ) =>
 (

@@ -41,7 +41,7 @@ export function Roles( _io: Server, socket: Socket )
 				{
 					// Si c'est une sélection, on vérifie que le rôle sélectionné
 					//	n'est pas occupé par quelqu'un d'autre.
-					let cache = undefined;
+					let cache = user.role && user.name;
 
 					for ( const identifier of room.players )
 					{
@@ -56,13 +56,13 @@ export function Roles( _io: Server, socket: Socket )
 						}
 					}
 
-					if ( !cache && action === "select" )
+					if ( !cache && !user.role && action === "select" )
 					{
 						// Si le rôle est libre, on l'assigne à l'utilisateur et
 						//	on signale le changement à tous les utilisateurs du salon.
 						user.role = role;
 
-						socket.broadcast.to( room.id ).emit( "GameRole", role, state, user.name );
+						socket.broadcast.to( room.id ).emit( "GameRole", role, true, user.name );
 					}
 
 					// Dans le cas contraire, rien ne se passe mais on renvoie
@@ -74,7 +74,10 @@ export function Roles( _io: Server, socket: Socket )
 				{
 					// En cas de désélection, on met à jour les informations de l'utilisateur
 					//	avant de signaler ce même changement à tous les utilisateurs du salon.
-					user.role = undefined;
+					if ( user.role === role )
+					{
+						user.role = undefined;
+					}
 
 					socket.broadcast.to( room.id ).emit( "GameRole", role, false, "" );
 

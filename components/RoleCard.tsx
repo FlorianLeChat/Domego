@@ -28,9 +28,10 @@ export default function RoleCard( props: RoleCardProps )
 	// Déclaration des variables d'état.
 	const [ ready, setReady ] = useState( false );
 	const [ player, setPlayer ] = useState( "" );
+	const [ selected, setSelected ] = useState( false );
 
 	// Bouton de sélection d'un rôle.
-	const selectRole = ( event: React.MouseEvent<HTMLInputElement> ) =>
+	const selectRole = () =>
 	{
 		// On vérifie d'abord que la connexion aux sockets est établie.
 		if ( !socket?.connected )
@@ -39,7 +40,7 @@ export default function RoleCard( props: RoleCardProps )
 		}
 
 		// On détermine ensuite si le bouton est coché ou non.
-		const state = event.currentTarget.checked;
+		const state = !selected;
 
 		// On envoie enfin une requête au serveur pour déterminer s'il est
 		//	possible de sélectionner le rôle.
@@ -50,6 +51,7 @@ export default function RoleCard( props: RoleCardProps )
 			if ( available && state )
 			{
 				setPlayer( player );
+				setSelected( true );
 			}
 			else
 			{
@@ -57,12 +59,13 @@ export default function RoleCard( props: RoleCardProps )
 				//	on a voulu désélectionner le rôle.
 				setReady( false );
 				setPlayer( "" );
+				setSelected( false );
 			}
 		} );
 	};
 
 	// Bouton de confirmation de sélection d'un rôle.
-	const readyToPlay = ( event: React.MouseEvent<HTMLInputElement> ) =>
+	const readyToPlay = ( event: React.ChangeEvent<HTMLInputElement> ) =>
 	{
 		// On envoie une simple requête d'usage au serveur pour signaler
 		//	que le joueur est prêt à jouer sans autre vérification.
@@ -95,6 +98,7 @@ export default function RoleCard( props: RoleCardProps )
 			{
 				setReady( true );
 				setPlayer( player );
+				setSelected( true );
 			}
 		} );
 
@@ -108,6 +112,7 @@ export default function RoleCard( props: RoleCardProps )
 			{
 				setReady( state );
 				setPlayer( player );
+				setSelected( state );
 			}
 		} );
 	}, [ props.name, socket ] );
@@ -134,7 +139,7 @@ export default function RoleCard( props: RoleCardProps )
 
 			{/* Bouton de sélection du rôle */}
 			<div>
-				<input type="checkbox" onClick={selectRole} disabled={query[ "type" ] === UserType.SPECTATOR || ready} />
+				<input type="checkbox" onChange={selectRole} checked={selected} disabled={query[ "type" ] === UserType.SPECTATOR || ready} />
 				<label>{t( "pages.selection.check" )}</label>
 			</div>
 
@@ -142,7 +147,7 @@ export default function RoleCard( props: RoleCardProps )
 			{/* (disponible seulement si le rôle est sélectionné par l'utilisateur) */}
 			{player === query[ "username" ] &&
 				<div>
-					<input type="checkbox" onClick={readyToPlay} />
+					<input type="checkbox" onChange={readyToPlay} />
 					<label>{t( "pages.selection.ready" )}</label>
 				</div>
 			}
