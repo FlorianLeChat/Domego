@@ -6,7 +6,7 @@ import { GetStaticProps } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import styles from "@/styles/NotFound.module.scss";
+import styles from "@/styles/InternalError.module.scss";
 import i18nextConfig from "@/next-i18next.config";
 
 export const getStaticProps: GetStaticProps = async ( { locale } ) =>
@@ -27,7 +27,7 @@ export default function HTTP500()
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<section id={styles[ "NotFound" ]}>
+		<section id={styles[ "InternalError" ]}>
 			{/* Titre de la page */}
 			<h1>{t( "pages.internalerror.title" )}</h1>
 
