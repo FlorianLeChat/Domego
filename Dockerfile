@@ -16,8 +16,8 @@ RUN cp .env.base .env
 
 # Find and replace the database host, username and password
 RUN sed -i "s/localhost/database/g" .env
-RUN sed -i "s/<username>/root/g" .env
-RUN sed -i "s/<password>/password/g" .env
+RUN sed -i "s/username/root/g" .env
+RUN sed -i "s/password/password/g" .env
 
 # Install the dependencies and build the project
 RUN npm install && npm run build
