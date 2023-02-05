@@ -12,7 +12,7 @@ const withPWA = require( "next-pwa" )( {
 
 module.exports = withPWA( {
 	i18n,
-	basePath: "",
+	basePath: process.env[ "NEXT_PUBLIC_BASE_PATH" ],
 	poweredByHeader: false,
 	reactStrictMode: true,
 	sassOptions: {
