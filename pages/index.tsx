@@ -112,9 +112,10 @@ export default function GameHome()
 						}
 						catch ( error )
 						{
-							console.log( error );
 							// Si une erreur est survenue lors de l'exécution de la fonction de vérification,
 							//	on affiche un message d'erreur.
+							console.error( error );
+
 							Swal.fire( {
 								icon: "error",
 								text: t( "modals.recaptcha_invalid_token_description" ),
