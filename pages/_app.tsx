@@ -20,13 +20,18 @@ const roboto = Roboto( {
 	display: "swap"
 } );
 
+import { useRouter } from "next/router";
+
 const Domego = ( { Component, pageProps }: AppProps ) =>
 {
+	// Déclaration des constantes.
+	const router = useRouter();
+
 	// Création du socket de communication avec le serveur.
 	// 	Source : https://github.com/vercel/next.js/discussions/15341
 	useEffect( () =>
 	{
-		fetch( "/api/socket" );
+		fetch( `${ router.basePath }/api/socket` );
 	}, [] );
 
 	// Génération de la structure de la page.
@@ -57,14 +62,14 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 				<title>{`${ process.env[ "NEXT_PUBLIC_TITLE" ] }`}</title>
 
 				{/* Icônes et manifeste du document */}
-				<link rel="icon" type="image/webp" sizes="16x16" href="/assets/favicons/16x16.webp" />
-				<link rel="icon" type="image/webp" sizes="32x32" href="/assets/favicons/32x32.webp" />
-				<link rel="icon" type="image/webp" sizes="48x48" href="/assets/favicons/48x48.webp" />
-				<link rel="icon" type="image/webp" sizes="192x192" href="/assets/favicons/192x192.webp" />
-				<link rel="icon" type="image/webp" sizes="512x512" href="/assets/favicons/512x512.webp" />
+				<link rel="icon" type="image/webp" sizes="16x16" href={`${ router.basePath }/assets/favicons/16x16.webp`} />
+				<link rel="icon" type="image/webp" sizes="32x32" href={`${ router.basePath }/assets/favicons/32x32.webp`} />
+				<link rel="icon" type="image/webp" sizes="48x48" href={`${ router.basePath }/assets/favicons/48x48.webp`} />
+				<link rel="icon" type="image/webp" sizes="192x192" href={`${ router.basePath }/assets/favicons/192x192.webp`} />
+				<link rel="icon" type="image/webp" sizes="512x512" href={`${ router.basePath }/assets/favicons/512x512.webp`} />
 
-				<link rel="apple-touch-icon" href="/assets/favicons//180x180.webp" />
-				<link rel="manifest" href="/manifest.json" />
+				<link rel="apple-touch-icon" href={`${ router.basePath }/assets/favicons/180x180.webp`} />
+				<link rel="manifest" href={`${ router.basePath }/manifest.json`} />
 			</Head>
 			<main>
 				<noscript>
