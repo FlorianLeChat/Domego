@@ -15,7 +15,7 @@ if ( typeof window !== "undefined" )
 	const cacheId = sessionStorage.getItem( "cacheId" );
 
 	// On crée ensuite le socket de communication avec le serveur.
-	instance = io();
+	instance = io( { path: process.env[ "NEXT_PUBLIC_BASE_PATH" ] + "/socket.io" } );
 	instance.auth = { "cacheId": cacheId };
 	instance.on( "connect", () =>
 	{
