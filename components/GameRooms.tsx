@@ -3,7 +3,7 @@
 //
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import Swal, { SweetAlertIcon } from "sweetalert2";
+import type { SweetAlertIcon } from "sweetalert2";
 import { useEffect, useState, useCallback, useContext } from "react";
 
 import styles from "@/styles/GameRooms.module.scss";
@@ -52,6 +52,7 @@ export default function GameRooms( props: GameRoomsProps )
 		}
 
 		// On vérifie après si l'utilisateur veut bien rejoindre la partie.
+		const Swal = ( await import( "sweetalert2" ) ).default;
 		const result = await Swal.fire( {
 			icon: "question",
 			text: t( `modals.join_game_${ type }_description` ),

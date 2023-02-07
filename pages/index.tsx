@@ -3,9 +3,8 @@
 //
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { v4 as uuidv4 } from "uuid";
+import type { SweetAlertIcon } from "sweetalert2";
 import { useState, useContext } from "react";
-import Swal, { SweetAlertIcon } from "sweetalert2";
 import { useTranslation, Trans } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -50,6 +49,8 @@ export default function GameHome()
 		// On réalise juste après une vérification de sécurité en utilisant le service
 		//	Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
 		// 	Note : cette vérification n'est pas nécessaire en mode développement.
+		const Swal = ( await import( "sweetalert2" ) ).default;
+
 		if ( process.env[ "NODE_ENV" ] === "production" && process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] !== "" )
 		{
 			await Swal.fire( {
@@ -149,7 +150,7 @@ export default function GameHome()
 
 		// On affiche enfin une animation de chargement pour indiquer à l'utilisateur
 		//	que la partie est en cours de création.
-		const uuid = uuidv4();
+		const uuid = ( await import( "uuid" ) ).v4();
 
 		await Swal.fire( {
 			icon: "info",

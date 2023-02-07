@@ -4,7 +4,7 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import Swal, { SweetAlertIcon } from "sweetalert2";
+import type { SweetAlertIcon } from "sweetalert2";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useContext, useState, useEffect } from "react";
 
@@ -48,13 +48,15 @@ export default function RoleSelection()
 		}
 
 		// On envoie enfin une requête au serveur pour lancer la partie.
-		socket.emit( "GameAdmin", "start", ( icon: SweetAlertIcon, title: string, message: string ) =>
+		socket.emit( "GameAdmin", "start", async ( icon: SweetAlertIcon, title: string, message: string ) =>
 		{
 			// Si la réponse indique que la partie ne peut pas être actuellement lancée,
 			//	on affiche le message d'erreur correspondant avec les informations
 			//	transmises par le serveur.
 			if ( icon !== "success" )
 			{
+				const Swal = ( await import( "sweetalert2" ) ).default;
+
 				Swal.fire( {
 					icon: icon,
 					text: t( message ),
@@ -91,7 +93,7 @@ export default function RoleSelection()
 		//	distant en mettant en mémoire le temps actuel.
 		const start = Date.now();
 
-		socket.emit( "GamePing", () =>
+		socket.emit( "GamePing", async () =>
 		{
 			// Lors de la réception de la requête par le serveur,
 			//	on calcule la différence entre la temps actuel ainsi
@@ -102,6 +104,8 @@ export default function RoleSelection()
 			{
 				// Si la différence est supérieure à 500ms,
 				//	on affiche un avertissement à l'utilisateur.
+				const Swal = ( await import( "sweetalert2" ) ).default;
+
 				Swal.fire( {
 					icon: "warning",
 					text: t( "modals.network_latency_description", { latency: delta } ),
