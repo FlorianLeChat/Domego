@@ -30,8 +30,8 @@ export default function GameHome()
 	// Déclaration des constantes.
 	// @ts-ignore
 	const { t } = useTranslation();
-	const router = useRouter();
 	const socket = useContext( SocketContext );
+	const { push } = useRouter();
 
 	// Déclaration des variables d'état.
 	const [ username, setUsername ] = useState( "" );
@@ -191,7 +191,7 @@ export default function GameHome()
 			{
 				// Redirection automatique si la fenêtre de chargement est fermée
 				//	normalement (sans aucune erreur émise par le serveur).
-				router.push( {
+				push( {
 					query: { roomId: uuid, username: username, admin: true, type: UserType.PLAYER },
 					pathname: `/game/selection`
 				}, `/game/selection` );

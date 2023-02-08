@@ -5,6 +5,7 @@ import "@/styles/_global.scss";
 import Head from "next/head";
 import { Roboto } from "@next/font/google";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { appWithTranslation } from "next-i18next";
 
 // Importation des fonctions utilitaires.
@@ -20,18 +21,16 @@ const roboto = Roboto( {
 	display: "swap"
 } );
 
-import { useRouter } from "next/router";
-
 const Domego = ( { Component, pageProps }: AppProps ) =>
 {
 	// Déclaration des constantes.
-	const router = useRouter();
+	const { basePath } = useRouter();
 
 	// Création du socket de communication avec le serveur.
 	// 	Source : https://github.com/vercel/next.js/discussions/15341
 	useEffect( () =>
 	{
-		fetch( `${ router.basePath }/api/socket` );
+		fetch( `${ basePath }/api/socket` );
 	}, [] );
 
 	// Génération de la structure de la page.
@@ -62,14 +61,14 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 				<title>{`${ process.env[ "NEXT_PUBLIC_TITLE" ] }`}</title>
 
 				{/* Icônes et manifeste du document */}
-				<link rel="icon" type="image/webp" sizes="16x16" href={`${ router.basePath }/assets/favicons/16x16.webp`} />
-				<link rel="icon" type="image/webp" sizes="32x32" href={`${ router.basePath }/assets/favicons/32x32.webp`} />
-				<link rel="icon" type="image/webp" sizes="48x48" href={`${ router.basePath }/assets/favicons/48x48.webp`} />
-				<link rel="icon" type="image/webp" sizes="192x192" href={`${ router.basePath }/assets/favicons/192x192.webp`} />
-				<link rel="icon" type="image/webp" sizes="512x512" href={`${ router.basePath }/assets/favicons/512x512.webp`} />
+				<link rel="icon" type="image/webp" sizes="16x16" href={`${ basePath }/assets/favicons/16x16.webp`} />
+				<link rel="icon" type="image/webp" sizes="32x32" href={`${ basePath }/assets/favicons/32x32.webp`} />
+				<link rel="icon" type="image/webp" sizes="48x48" href={`${ basePath }/assets/favicons/48x48.webp`} />
+				<link rel="icon" type="image/webp" sizes="192x192" href={`${ basePath }/assets/favicons/192x192.webp`} />
+				<link rel="icon" type="image/webp" sizes="512x512" href={`${ basePath }/assets/favicons/512x512.webp`} />
 
-				<link rel="apple-touch-icon" href={`${ router.basePath }/assets/favicons/180x180.webp`} />
-				<link rel="manifest" href={`${ router.basePath }/manifest.json`} />
+				<link rel="apple-touch-icon" href={`${ basePath }/assets/favicons/180x180.webp`} />
+				<link rel="manifest" href={`${ basePath }/manifest.json`} />
 			</Head>
 			<main>
 				<noscript>
