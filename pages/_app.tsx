@@ -8,6 +8,9 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { appWithTranslation } from "next-i18next";
 
+// Importation des fichiers de configuration.
+import i18nextConfig from "@/next-i18next.config";
+
 // Importation des fonctions utilitaires.
 import { SocketProvider } from "@/utils/SocketContext";
 
@@ -41,7 +44,7 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 				<meta charSet="utf-8" />
 				<meta name="author" content={process.env[ "NEXT_PUBLIC_AUTHOR" ]} />
 				<meta name="description" content={process.env[ "NEXT_PUBLIC_DESCRIPTION" ]} />
-				<meta name="keywords" lang="fr" content={process.env[ "NEXT_PUBLIC_TAGS" ]} />
+				<meta name="keywords" lang={pageProps.__NEXT_DATA__.locale ?? i18nextConfig.i18n.defaultLocale} content={process.env[ "NEXT_PUBLIC_TAGS" ]} />
 				<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 				<meta name="theme-color" content="#40a9ff" />
 
