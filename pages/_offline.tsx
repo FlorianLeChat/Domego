@@ -1,5 +1,5 @@
 //
-// Route utilisée lorsqu'un utilisateur devient hors-ligne.
+// Route vers la page de la perte de connexion entre le client et le serveur.
 //
 import Error from "next/error";
 

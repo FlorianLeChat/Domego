@@ -1,5 +1,5 @@
 //
-// Route utilisée lorsqu'une erreur interne est survenue (erreur HTTP 500).
+// Route vers la page des erreurs internes (erreur HTTP 500).
 //
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
