@@ -6,7 +6,7 @@ import { useTranslation } from "next-i18next";
 import type { SweetAlertIcon } from "sweetalert2";
 import { useEffect, useState, useCallback, useContext } from "react";
 
-import styles from "@/styles/GameRooms.module.scss";
+import styles from "./GameRooms.module.scss";
 import { UserType } from "@/enums/User";
 import { RoomState } from "@/enums/Room";
 import { SocketContext } from "@/utils/SocketContext";

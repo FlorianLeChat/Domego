@@ -76,7 +76,7 @@ section#RoleSelection
 			border-radius: 50%;
 			background-size: cover;
 			background-color: lightsteelblue;
-			background-image: url("../public/assets/images/decorations/chat.webp");
+			background-image: url("../../public/assets/images/decorations/chat.webp");
 			background-position: center;
 			transition-duration: 300ms;
 			transition-property: color, border-color, background-color, box-shadow;
@@ -102,7 +102,7 @@ section#RoleSelection
 		z-index: -1;
 		position: fixed;
 		background-size: cover;
-		background-image: url("../public/assets/images/wallpapers/selection.webp");
+		background-image: url("../../public/assets/images/wallpapers/selection.webp");
 		background-position: center;
 	}
 }

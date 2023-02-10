@@ -1,7 +1,7 @@
 //
 // Route vers le tableau de bord de jeu.
 //
-import styles from "@/styles/GameBoard.module.scss";
+import styles from "./board.module.scss";
 
 export default function GameBoard()
 {

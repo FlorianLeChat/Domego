@@ -4,7 +4,7 @@
 import { useTranslation } from "next-i18next";
 import { useState, useRef, useEffect, useContext } from "react";
 
-import styles from "@/styles/GameChat.module.scss";
+import styles from "./GameChat.module.scss";
 import { SocketContext } from "@/utils/SocketContext";
 
 interface GameChatProps

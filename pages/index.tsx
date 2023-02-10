@@ -8,7 +8,7 @@ import { useState, useContext } from "react";
 import { useTranslation, Trans } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import styles from "@/styles/GameHome.module.scss";
+import styles from "./index.module.scss";
 import { UserType } from "@/enums/User";
 import i18nextConfig from "@/next-i18next.config";
 import { SocketContext } from "@/utils/SocketContext";

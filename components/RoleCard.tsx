@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useState, useContext, useEffect } from "react";
 
-import styles from "@/styles/RoleCard.module.scss";
+import styles from "./RoleCard.module.scss";
 import { UserType } from "@/enums/User";
 import { SocketContext } from "@/utils/SocketContext";
 

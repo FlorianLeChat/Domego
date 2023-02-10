@@ -8,7 +8,7 @@ import type { SweetAlertIcon } from "sweetalert2";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useContext, useState, useEffect } from "react";
 
-import styles from "@/styles/RoleSelection.module.scss";
+import styles from "./selection.module.scss";
 import { UserType } from "@/enums/User";
 import i18nextConfig from "@/next-i18next.config";
 import { SocketContext } from "@/utils/SocketContext";

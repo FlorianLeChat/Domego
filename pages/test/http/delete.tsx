@@ -1,7 +1,7 @@
 //
 // Route vers la page de test de la base de données (requêtes DELETE).
 //
-import styles from "@/styles/TestApi.module.scss";
+import styles from "./test.module.scss";
 import { fetchApi } from "@/utils/NetworkHelper";
 
 export default function HttpGet()
