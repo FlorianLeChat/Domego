@@ -15,7 +15,7 @@ import type { DocumentProps } from "next/document";
 
 export default function Document( props: DocumentProps )
 {
-	// Génération de la structure HTML.
+	// Affichage du rendu HTML de la page.
 	return (
 		<Html lang={props.__NEXT_DATA__.locale ?? i18nextConfig.i18n.defaultLocale} dir="auto" prefix="og: https://ogp.me/ns#">
 			<Head>

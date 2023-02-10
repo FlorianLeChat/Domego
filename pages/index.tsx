@@ -206,7 +206,7 @@ export default function GameHome()
 		setDisabled( !event.target.validity.valid );
 	};
 
-	// Affichage du rendu HTML du composant.
+	// Affichage du rendu HTML de la page.
 	return (
 		<section id={styles[ "GameHome" ]}>
 			{/* Titre de la page */}

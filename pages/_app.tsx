@@ -38,7 +38,7 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 		fetch( `${ basePath }/api/socket` );
 	}, [] );
 
-	// Génération de la structure de la page.
+	// Affichage du rendu HTML de la page.
 	return (
 		<>
 			<Head>
@@ -75,24 +75,25 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 				<link rel="apple-touch-icon" href={`${ basePath }/assets/favicons/180x180.webp`} />
 				<link rel="manifest" href={`${ basePath }/manifest.json`} />
 			</Head>
+
+			{/* Avertissement page sans JavaScript */}
+			<noscript>
+				<h1>This website created with <a href="https://nextjs.org/">NextJS</a> requires JavaScript to run.</h1>
+				<h2>Click <a href="https://www.whatismybrowser.com/detect/is-javascript-enabled">here</a> to be redirected to an external site to help you solve this issue.</h2>
+			</noscript>
+
+			{/* Injection de règles de style CSS */}
+			<style jsx global>
+				{`
+					html
+					{
+						font-family: ${ roboto.style.fontFamily };
+					}
+				`}
+			</style>
+
+			{/* Affichage du composant demandé */}
 			<main>
-				{/* Avertissement page sans JavaScript */}
-				<noscript>
-					<h1>This website created with <a href="https://nextjs.org/">NextJS</a> requires JavaScript to run.</h1>
-					<h2>Click <a href="https://www.whatismybrowser.com/detect/is-javascript-enabled">here</a> to be redirected to an external site to help you solve this issue.</h2>
-				</noscript>
-
-				{/* Injection de règles de style CSS */}
-				<style jsx global>
-					{`
-						html
-						{
-							font-family: ${ roboto.style.fontFamily };
-						}
-					`}
-				</style>
-
-				{/* Affichage du composant demandé */}
 				<SocketProvider>
 					<Component {...pageProps} />
 				</SocketProvider>

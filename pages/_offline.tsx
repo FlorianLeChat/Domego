@@ -5,5 +5,6 @@ import Error from "next/error";
 
 export default function Offline()
 {
+	// Affichage du rendu HTML de la page.
 	return <Error statusCode={503} title="Service Unavailable" />;
 }

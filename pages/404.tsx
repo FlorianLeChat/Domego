@@ -24,7 +24,7 @@ export default function HTTP404()
 	// @ts-ignore
 	const { t } = useTranslation();
 
-	// Affichage du rendu HTML du composant.
+	// Affichage du rendu HTML de la page.
 	return (
 		<section id={styles[ "NotFound" ]}>
 			{/* Titre de la page */}
