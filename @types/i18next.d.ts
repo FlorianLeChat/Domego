@@ -1,6 +1,5 @@
 // Paramètres personnalisés pour le typage de i18next.
 import "i18next";
-import type common from "@public/locales/en/common.json";
 
 declare module "i18next"
 {
@@ -8,7 +7,7 @@ declare module "i18next"
 	{
 		defaultNS: "common";
 		resources: {
-			common: typeof common;
+			common: typeof import( "@/public/locales/en/common.json" );
 		};
 		returnNull: false;
 		returnEmptyString: false;

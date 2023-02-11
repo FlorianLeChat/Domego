@@ -28,7 +28,6 @@ export async function getStaticProps( { locale }: { locale: string; } )
 export default function GameHome()
 {
 	// Déclaration des constantes.
-	// @ts-ignore
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
 	const { push } = useRouter();

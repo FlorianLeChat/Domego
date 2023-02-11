@@ -21,7 +21,6 @@ export async function getStaticProps( { locale }: { locale: string; } )
 export default function HTTP404()
 {
 	// Déclaration des constantes.
-	// @ts-ignore
 	const { t } = useTranslation();
 
 	// Affichage du rendu HTML de la page.
