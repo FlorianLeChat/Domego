@@ -58,8 +58,8 @@ export default function RoleSelection()
 
 				Swal.fire( {
 					icon: icon,
-					text: t( message ),
-					title: t( title ),
+					text: t( message as any ),
+					title: t( title as any ),
 					confirmButtonColor: "#28a745"
 				} );
 			}
