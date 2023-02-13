@@ -15,7 +15,7 @@ interface GameChatProps
 
 export default function GameChat( props: GameChatProps )
 {
-	// Création des constantes.
+	// Déclaration des constantes.
 	const list = useRef<HTMLUListElement>( null );
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
