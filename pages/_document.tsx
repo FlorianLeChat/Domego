@@ -22,7 +22,6 @@ export default function Document( props: DocumentProps )
 				{/* Pré-connexion des ressources externes */}
 				<link rel="preconnect" href="https://www.google.com" />
 				<link rel="preconnect" href="https://www.gstatic.com" />
-				<link rel="preconnect" href="https://www.google-analytics.com" />
 
 				{/* Scripts JavaScript */}
 				<Script src={`https://www.googletagmanager.com/gtag/js?id=${ process.env[ "NEXT_PUBLIC_ANALYTICS_IDENTIFIER" ] }`} strategy="afterInteractive" />

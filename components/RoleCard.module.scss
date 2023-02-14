@@ -1,9 +1,9 @@
 // Conteneur d'un rôle.
 $colors: (1: royalblue, 2: limegreen, 3: gold, 4: black, 5: magenta, 6: red);
 
-@each $indice, $color in $colors
+@each $index, $color in $colors
 {
-	article.RoleCard:nth-of-type(#{ $indice })
+	article.RoleCard:nth-of-type(#{ $index })
 	{
 		// Corps d'un rôle.
 		flex: 1 1 30%;

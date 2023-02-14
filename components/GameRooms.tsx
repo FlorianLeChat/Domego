@@ -77,7 +77,6 @@ export default function GameRooms( props: GameRoomsProps )
 			text: t( "modals.joining_game_description", { type: t( `pages.rooms.${ type }` as any ).toLowerCase() } ),
 			title: t( "modals.joining_game_title" ),
 			allowEscapeKey: false,
-			timerProgressBar: true,
 			allowOutsideClick: false,
 			didOpen: () =>
 			{
@@ -135,8 +134,8 @@ export default function GameRooms( props: GameRoomsProps )
 		{
 			// Lors de la réception des données, on construit le HTML afin de l'afficher
 			//	lors du rendu de la page.
-			const rows = rooms.map( ( room: GameRoomList, indice: number ) =>
-				<tr key={indice}>
+			const rows = rooms.map( ( room: GameRoomList, index: number ) =>
+				<tr key={index}>
 					<td>{room.id}</td>
 					<td>{room.creator}</td>
 					<td>{room.players}/6 [{room.spectators}]</td>

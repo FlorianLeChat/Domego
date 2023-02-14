@@ -57,7 +57,6 @@ export default function GameHome()
 				text: t( "modals.recaptcha_waiting_description" ),
 				title: t( "modals.recaptcha_waiting_title" ),
 				allowEscapeKey: false,
-				timerProgressBar: true,
 				allowOutsideClick: false,
 				didOpen: async () =>
 				{
@@ -156,7 +155,6 @@ export default function GameHome()
 			text: t( "modals.creating_new_game_description" ),
 			title: t( "modals.creating_new_game_title" ),
 			allowEscapeKey: false,
-			timerProgressBar: true,
 			allowOutsideClick: false,
 			didOpen: () =>
 			{
