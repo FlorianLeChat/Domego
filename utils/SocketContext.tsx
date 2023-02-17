@@ -61,7 +61,7 @@ export const SocketContext = createContext<Socket>( instance );
 // Permet d'importer la référence du contexte du socket.
 // 	Source : https://stackoverflow.com/a/67270359
 //
-export const SocketProvider = ( { children }: any ) =>
+export const SocketProvider = ( { children }: { children: React.ReactNode; } ) =>
 (
 	<SocketContext.Provider value={instance}>{children}</SocketContext.Provider>
 );
