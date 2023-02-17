@@ -15,7 +15,7 @@ html
 }
 
 // Lien vers le dépôt GitHub du projet.
-main > a
+#__next > a
 {
 	// Animation du logo GitHub.
 	&:hover path:nth-of-type(2)
