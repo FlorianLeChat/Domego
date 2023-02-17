@@ -3,7 +3,6 @@
 /**
  * @type {import("next").NextConfig}
  */
-const { join } = require( "path" );
 const { i18n } = require( "./next-i18next.config" );
 const withPWA = require( "next-pwa" )( {
 	dest: "public",
@@ -23,9 +22,6 @@ module.exports = withPWA( {
 	basePath: process.env[ "NEXT_PUBLIC_BASE_PATH" ],
 	poweredByHeader: false,
 	reactStrictMode: true,
-	sassOptions: {
-		includePaths: [ join( __dirname, "styles" ) ],
-	},
 	async redirects()
 	{
 		// Définition des redirections de base.
