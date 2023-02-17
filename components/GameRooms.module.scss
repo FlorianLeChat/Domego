@@ -67,7 +67,6 @@ table#GameRooms
 					margin: auto;
 					cursor: pointer;
 					border: 1px solid rgb(139, 139, 139);
-					outline: none;
 					display: block;
 					padding: 0.25rem 0.5rem;
 					border-radius: 0.25rem;
@@ -99,7 +98,6 @@ table#GameRooms
 					{
 						// Effet de maintien sur le bouton.
 						color: rgb(64, 169, 255);
-						outline: none;
 						box-shadow: 0 0 0 0.25rem rgba(24, 144, 255, 0.2);
 						border-color: rgb(64, 169, 255);
 					}
