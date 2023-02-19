@@ -37,7 +37,7 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 	useEffect( () =>
 	{
 		fetch( `${ basePath }/api/socket` );
-	}, [] );
+	}, [ basePath ] );
 
 	// Affichage du rendu HTML de la page.
 	return (

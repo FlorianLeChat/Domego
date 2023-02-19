@@ -28,7 +28,7 @@ export default function Document( props: DocumentProps )
 				<Script src={`https://www.google.com/recaptcha/api.js?render=${ process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] }`} strategy="afterInteractive" />
 
 				{/* Google Analytics */}
-				<Script strategy="afterInteractive">
+				<Script id="google-analytics" strategy="afterInteractive">
 					{`
 						window.dataLayer = window.dataLayer || [];
 
