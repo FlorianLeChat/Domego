@@ -54,8 +54,8 @@ export default function GameRooms( props: GameRoomsProps )
 		const Swal = ( await import( "sweetalert2" ) ).default;
 		const result = await Swal.fire( {
 			icon: "question",
-			text: t( `modals.join_game_${ type }_description` as any ),
-			title: t( `modals.join_game_${ type }_title` as any ),
+			text: t( `modals.join_game_${ type }_description` ),
+			title: t( `modals.join_game_${ type }_title` ),
 			reverseButtons: true,
 			showCancelButton: true,
 			cancelButtonText: t( "global.no" ),
@@ -74,7 +74,7 @@ export default function GameRooms( props: GameRoomsProps )
 		//	que la partie est en cours de chargement.
 		await Swal.fire( {
 			icon: "info",
-			text: t( "modals.joining_game_description", { type: t( `pages.rooms.${ type }` as any ).toLowerCase() } ),
+			text: t( "modals.joining_game_description", { type: t( `pages.rooms.${ type }` ).toLowerCase() } ),
 			title: t( "modals.joining_game_title" ),
 			allowEscapeKey: false,
 			allowOutsideClick: false,
@@ -93,8 +93,8 @@ export default function GameRooms( props: GameRoomsProps )
 					{
 						Swal.fire( {
 							icon: icon,
-							text: t( message as any ),
-							title: t( title as any ),
+							text: t( message ),
+							title: t( title ),
 							confirmButtonColor: "#28a745"
 						} );
 

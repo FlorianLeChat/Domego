@@ -96,8 +96,8 @@ export default function GameHome()
 								{
 									Swal.fire( {
 										icon: icon,
-										text: t( message as any ),
-										title: t( title as any ),
+										text: t( message ),
+										title: t( title ),
 										confirmButtonColor: "#28a745"
 									} );
 
@@ -171,8 +171,8 @@ export default function GameHome()
 					{
 						Swal.fire( {
 							icon: icon,
-							text: t( message as any ),
-							title: t( title as any ),
+							text: t( message ),
+							title: t( title ),
 							confirmButtonColor: "#28a745"
 						} );
 

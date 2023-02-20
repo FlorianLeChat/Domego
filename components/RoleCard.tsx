@@ -120,17 +120,17 @@ export default function RoleCard( props: RoleCardProps )
 	return (
 		<article className={styles[ "RoleCard" ]}>
 			{/* Image représentative du rôle */}
-			<Image src={`/assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` as any )} width={225} height={225} />
+			<Image src={`/assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} width={225} height={225} />
 
 			{/* Utilisateur jouant ce rôle */}
 			<span>{player}</span>
 
 			<div>
 				{/* Nom du rôle */}
-				<h2>{t( `pages.selection.${ props.name }_title` as any )}</h2>
+				<h2>{t( `pages.selection.${ props.name }_title` )}</h2>
 
 				{/* Description du rôle */}
-				<p>{t( `pages.selection.${ props.name }_description` as any )}</p>
+				<p>{t( `pages.selection.${ props.name }_description` )}</p>
 
 				{/* Budget à disposition */}
 				<span>{props.budget}</span>
