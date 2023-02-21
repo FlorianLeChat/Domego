@@ -2,6 +2,7 @@
 // Route permettant de valider les jetons d'authentification de Google reCAPTCHA.
 //
 import { Server, Socket } from "socket.io";
+import { RecaptchaAttributes } from "@/interfaces/Recaptcha";
 
 export function Recaptcha( _io: Server, socket: Socket )
 {
@@ -32,7 +33,7 @@ export function Recaptcha( _io: Server, socket: Socket )
 		{
 			// Si la réponse est correcte, on transforme le résultat sous format JSON
 			//	avant de vérifier si le jeton est valide ou non.
-			const json = await response.json();
+			const json = await response.json() as RecaptchaAttributes;
 
 			if ( json.success )
 			{
