@@ -22,7 +22,7 @@ export default function RoleCard( props: RoleCardProps )
 	// Déclaration des constantes.
 	const { t } = useTranslation();
 	const socket = useContext( SocketContext );
-	const { query } = useRouter();
+	const { query, basePath } = useRouter();
 
 	// Déclaration des variables d'état.
 	const [ ready, setReady ] = useState( false );
@@ -120,7 +120,7 @@ export default function RoleCard( props: RoleCardProps )
 	return (
 		<article className={styles[ "RoleCard" ]}>
 			{/* Image représentative du rôle */}
-			<Image src={`/assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} width={225} height={225} />
+			<Image src={`${ basePath }/assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} width={225} height={225} />
 
 			{/* Utilisateur jouant ce rôle */}
 			<span>{player}</span>
