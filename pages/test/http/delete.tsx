@@ -1,13 +1,23 @@
 //
 // Route vers la page de test de la base de données (requêtes DELETE).
 //
+import useSWR from "swr";
 import styles from "./test.module.scss";
-import { fetchApi } from "@/utils/NetworkHelper";
 
 export default function HttpGet()
 {
 	// Récupération des données de l'API.
-	const { data, error, isLoading } = fetchApi( "users", "DELETE", { age: 10 } );
+	const { data, error, isLoading } = useSWR( "http://localhost:3000/api/users", async ( url ) =>
+	{
+		return await fetch( url, {
+			method: "DELETE",
+			body: JSON.stringify( { age: 10 } ),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8"
+			}
+		} ).then( response => response.json() );
+	} );
+
 	let response = "";
 
 	if ( error )

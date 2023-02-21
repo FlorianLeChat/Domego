@@ -1,13 +1,23 @@
 //
 // Route vers la page de test de la base de données (requêtes PUT).
 //
+import useSWR from "swr";
 import styles from "./test.module.scss";
-import { fetchApi } from "@/utils/NetworkHelper";
 
 export default function HttpGet()
 {
 	// Récupération des données de l'API.
-	const { data, error, isLoading } = fetchApi( "users", "PUT", { filter: { email: "florian@gmail.com", age: { $not: { $eq: 10 } } }, update: { age: 10 } } );
+	const { data, error, isLoading } = useSWR( "http://localhost:3000/api/users", async ( url ) =>
+	{
+		return await fetch( url, {
+			method: "PUT",
+			body: JSON.stringify( { filter: { email: "florian@gmail.com", age: { $not: { $eq: 10 } } }, update: { age: 10 } } ),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8"
+			}
+		} ).then( response => response.json() );
+	} );
+
 	let response = "";
 
 	if ( error )

@@ -130,4 +130,4 @@ export default async function handler( request: NextApiRequest, response: NextAp
 			// La méthode utilisée n'est pas supportée.
 			response.status( 405 ).end();
 	}
-};
+}
