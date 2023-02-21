@@ -2,15 +2,15 @@
 // Route permettant de valider les jetons d'authentification de Google reCAPTCHA.
 //
 import { Server, Socket } from "socket.io";
-import { RecaptchaAttributes } from "@/interfaces/Recaptcha";
+import type { RecaptchaAttributes } from "@/interfaces/Recaptcha";
 
 export function Recaptcha( _io: Server, socket: Socket )
 {
 	socket.on( "GameRecaptcha", async ( token, callback ) =>
 	{
-		// On vérifie d'abord si on se trouve actuellement dans un environnement
-		// 	de développement ou de production.
-		if ( process.env[ "NODE_ENV" ] === "development" )
+		// On vérifie d'abord si la clé secrète de l'API de Google reCAPTCHA
+		//	a été définie ou non.
+		if ( !process.env[ "CAPTCHA_SECRET_KEY" ] )
 		{
 			callback( "success", "🤖", "🤖" );
 			return;

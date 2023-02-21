@@ -48,7 +48,6 @@ section#GameHome
 	display: flex;
 	min-height: 100vh;
 	text-align: center;
-	user-select: none;
 	align-items: center;
 	flex-direction: column;
 
@@ -167,6 +166,15 @@ section#GameHome
 				border-color: rgb(64, 169, 255);
 			}
 		}
+	}
+
+	> small
+	{
+		// Avertissement de Google reCAPTCHA.
+		margin: 2rem 1rem 2rem 1rem;
+		padding: 0.25rem;
+		box-shadow: 0.2rem 0.2rem 0.2rem rgb(139 139 139);
+		background-color: whitesmoke;
 	}
 
 	&::before

@@ -47,10 +47,9 @@ export default function GameHome()
 
 		// On réalise juste après une vérification de sécurité en utilisant le service
 		//	Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
-		// 	Note : cette vérification n'est pas nécessaire en mode développement.
 		const Swal = ( await import( "sweetalert2" ) ).default;
 
-		if ( process.env[ "NODE_ENV" ] === "production" && process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] !== "" )
+		if ( process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] )
 		{
 			await Swal.fire( {
 				icon: "info",
@@ -238,6 +237,9 @@ export default function GameHome()
 				{/* Tableau des parties en cours */}
 				<GameRooms username={username} />
 			</article>
+
+			{/* Avertissement de Google reCAPTCHA */}
+			<small><Trans i18nKey="pages.index.google_recaptcha" components={{ a1: <a href="https://policies.google.com/privacy">...</a>, a2: <a href="https://policies.google.com/terms">...</a> }} /></small>
 		</section>
 	);
 }

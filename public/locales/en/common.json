@@ -48,7 +48,8 @@
 			"username_length": "<strong>5</strong> minimum characters, <strong>20</strong> maximum characters",
 			"create_new_game": "Create a new game",
 			"games_available": "Available games",
-			"send_chat_message": "Send"
+			"send_chat_message": "Send",
+			"google_recaptcha": "This site is protected by reCAPTCHA and the Google <a1>Privacy Policy</a1> and <a2>Terms of Service</a2> apply."
 		},
 		"rooms": {
 			"join": "Join",

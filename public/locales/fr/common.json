@@ -48,7 +48,8 @@
 			"username_length": "<strong>5</strong> caractères minimum, <strong>20</strong> caractères maximum",
 			"create_new_game": "Créer une partie",
 			"games_available": "Parties disponibles",
-			"send_chat_message": "Envoyer"
+			"send_chat_message": "Envoyer",
+			"google_recaptcha": "Ce site est protégé par reCAPTCHA et les <a1>politiques de confidentialité</a1> et les <a2>conditions d'utilisation</a2> de Google s'appliquent."
 		},
 		"rooms": {
 			"join": "Rejoindre",
