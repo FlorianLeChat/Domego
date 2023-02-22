@@ -11,7 +11,7 @@ Ce projet, réalisé en tant que sujet de fin d'année scolaire, est issue d'un 
 * npm **9.2+**
 * MongoDB **6.0+**
 
-**Pour installer le projet, il suffit juste de vous rendre dans le dossier `server` et de tapez la commande `npm run setup`. Si vous voulez travailler dans un environnement de développement local, utilisez la commande `npm start` dans le dossier `client` et la commande `npm run build` dans le dossier `server` dans deux terminaux séparés. Une image Docker est d'ailleurs disponible pour tester ce projet ! 🐳**
+**Pour essayer le projet, il suffit d'installer l'ensemble des dépendances nécessaires avec la commande `npm install` puis de lancer le serveur de développement avec la commande `npm run dev`. Une image Docker est aussi disponible pour tester ce projet pour les personnes les plus expérimentées ! 🐳**
 
 ⚠️ Ce projet n'étant pas terminé et sera potentiellement repris par d'autres personnes à l'avenir, l'entièreté du code est commentée dans ma langue natale (en français).
 
@@ -30,7 +30,7 @@ This project, completed as an end-of-school-year project, is based on a board ga
 * npm **9.2+**
 * MongoDB **6.0+**
 
-**To install the project, just navigate to the `server` folder and type the command `npm run setup`. If you want to work in a local development environment, use the `npm start` command in the `client` folder and the `npm run build` command in the `server` folder in two separate terminals. A Docker image is also available to test this project! 🐳**
+**To test the project, you simply have to install all the necessary dependencies with `npm install` command and then launch the development server with `npm run dev` command. A Docker image is also available to test this project for the most skilled people! 🐳**
 
 ⚠️ Since this project is not finished and will potentially be resumed by other people in the future, the whole code is commented in my native language (French).
 
