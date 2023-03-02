@@ -35,7 +35,7 @@
     "sanitize.css": "~13.0",
     "next-i18next": "~13.1",
     "react-i18next": "~12.1",
-    "socket.io-client": "~4.5"
+    "socket.io-client": "~4.6"
   },
   "devDependencies": {
     "@types/cors": "~2.8",
