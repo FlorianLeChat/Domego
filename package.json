@@ -33,7 +33,7 @@
     "@next/font": "~13.1",
     "sweetalert2": "<11.4.9",
     "sanitize.css": "~13.0",
-    "next-i18next": "~13.0",
+    "next-i18next": "~13.2",
     "react-i18next": "~12.1",
     "socket.io-client": "~4.5"
   },
