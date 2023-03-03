@@ -12,7 +12,7 @@ import "@total-typescript/ts-reset";
 // Importation des dépendances.
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { Roboto } from "@next/font/google";
+import { Roboto } from "next/font/google";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { appWithTranslation } from "next-i18next";
