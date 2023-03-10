@@ -162,12 +162,17 @@ export default function GameRooms( props: GameRoomsProps )
 		// On effectue ensuite une première actualisation des parties en cours.
 		updateRooms();
 
+		// On précharge également les pages de jeu afin d'accélérer le chargement
+		//	de la partie lorsque l'utilisateur va rejoindre une partie.
+		router.prefetch( "/game/board" );
+		router.prefetch( "/game/selection" );
+
 		return () =>
 		{
 			// On supprime enfin le minuteur au démontage du composant.
 			clearInterval( interval );
 		};
-	}, [ t, socket, updateRooms ] );
+	}, [ t, socket, updateRooms, router ] );
 
 	// Affichage du rendu HTML du composant.
 	return (

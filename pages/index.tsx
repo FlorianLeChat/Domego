@@ -4,9 +4,9 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import type { SweetAlertIcon } from "sweetalert2";
-import { useState, useContext } from "react";
 import { useTranslation, Trans } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useState, useContext, useEffect } from "react";
 
 import styles from "./index.module.scss";
 import { UserType } from "@/enums/User";
@@ -29,8 +29,8 @@ export default function GameHome()
 {
 	// Déclaration des constantes.
 	const { t } = useTranslation();
+	const router = useRouter();
 	const socket = useContext( SocketContext );
-	const { push } = useRouter();
 
 	// Déclaration des variables d'état.
 	const [ username, setUsername ] = useState( "" );
@@ -187,7 +187,7 @@ export default function GameHome()
 			{
 				// Redirection automatique si la fenêtre de chargement est fermée
 				//	normalement (sans aucune erreur émise par le serveur).
-				push( {
+				router.push( {
 					query: { roomId: uuid, username: username, admin: true, type: UserType.PLAYER },
 					pathname: `/game/selection`
 				}, `/game/selection` );
@@ -201,6 +201,12 @@ export default function GameHome()
 		setUsername( event.target.value );
 		setDisabled( !event.target.validity.valid );
 	};
+
+	// Préchargement de la page de sélection de la partie.
+	useEffect( () =>
+	{
+		router.prefetch( "/game/selection" );
+	}, [ router ] );
 
 	// Affichage du rendu HTML de la page.
 	return (
