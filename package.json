@@ -39,7 +39,7 @@
   "devDependencies": {
     "@types/cors": "~2.8",
     "@types/uuid": "~9.0",
-    "@types/node": "~18.14",
+    "@types/node": "~18.15",
     "@types/react": "~18.0",
     "@types/validator": "~13.7",
     "@types/grecaptcha": "~3.0",
