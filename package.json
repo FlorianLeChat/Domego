@@ -25,7 +25,6 @@
     "uuid": "~9.0",
     "next": "~13.2",
     "react": "~18.2",
-    "i18next": "~22.4",
     "mongoose": "~7.0",
     "next-pwa": "~5.6",
     "socket.io": "~4.6",
@@ -33,7 +32,6 @@
     "sweetalert2": "<11.4.9",
     "sanitize.css": "~13.0",
     "next-i18next": "~13.2",
-    "react-i18next": "~12.2",
     "socket.io-client": "~4.6"
   },
   "devDependencies": {
