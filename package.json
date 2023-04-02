@@ -50,7 +50,7 @@
     "@total-typescript/ts-reset": "~0.4"
   },
   "optionalDependencies": {
-    "sharp": "~0.31",
+    "sharp": "~0.32",
     "bufferutil": "~4.0",
     "utf-8-validate": "~6.0"
   },
