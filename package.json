@@ -42,7 +42,7 @@
     "@types/validator": "~13.7",
     "@types/grecaptcha": "~3.0",
     "pm2": "~5.3",
-    "sass": "~1.59",
+    "sass": "~1.60",
     "typescript": "~5.0",
     "localtunnel": "~2.0",
     "next-sitemap": "~4.0",
