@@ -1,5 +1,11 @@
 {
-	"extends": ["next/core-web-vitals", "plugin:jsx-a11y/strict", "airbnb"],
+	"ignorePatterns": ["next-env.d.ts", "*.config.js"],
+	"parserOptions": {
+		"project": ["./tsconfig.json"]
+	},
+	"extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "plugin:@typescript-eslint/strict", "plugin:jsx-a11y/strict", "airbnb"],
+	"plugins": ["@typescript-eslint"],
+	"parser": "@typescript-eslint/parser",
 	"rules": {
 		"indent": ["error", "tab", { "SwitchCase": 1 }],
 		"quotes": ["error", "double"],
@@ -7,15 +13,14 @@
 		"max-len": ["warn", { "code": 115, "ignoreStrings": true, "ignoreComments": true, "ignoreTemplateLiterals": true }],
 		"no-tabs": ["error", { "allowIndentationTabs": true }],
 		"eol-last": ["error", "never"],
-		"no-shadow": ["error", { "allow": ["done"] }],
+		"no-shadow": "off",
 		"no-plusplus": "off",
 		"brace-style": ["error", "allman"],
 		"comma-dangle": ["error", "never"],
-		"no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "CustomTypeOptions" }],
+		"no-unused-vars": "off",
 		"global-require": "off",
 		"space-in-parens": ["error", "always"],
 		"object-curly-newline": ["error", { "ObjectExpression": { "consistent": true } }],
-		"no-underscore-dangle": ["error", { "allow": ["__NEXT_DATA__"] }],
 		"array-bracket-spacing": ["error", "always"],
 		"template-curly-spacing": ["error", "always"],
 		"computed-property-spacing": ["error", "always"],
@@ -23,6 +28,9 @@
 		"import/order": "off",
 		"import/extensions": ["error", "never"],
 		"import/no-extraneous-dependencies": ["error", { "bundledDependencies": false }],
+
+		"@typescript-eslint/no-shadow": "error",
+		"@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
 
 		"react/jsx-indent": ["error", "tab"],
 		"react/react-in-jsx-scope": "off",
