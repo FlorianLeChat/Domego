@@ -1,3 +1,35 @@
 {
-	"extends": ["next/core-web-vitals", "plugin:jsx-a11y/strict"]
+	"extends": ["next/core-web-vitals", "plugin:jsx-a11y/strict", "airbnb"],
+	"rules": {
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
+		"quotes": ["error", "double"],
+		"new-cap": ["error", { "capIsNew": false, "newIsCapExceptions": ["webkitSpeechRecognition"] }],
+		"max-len": ["warn", { "code": 115, "ignoreStrings": true, "ignoreComments": true, "ignoreTemplateLiterals": true }],
+		"no-tabs": ["error", { "allowIndentationTabs": true }],
+		"eol-last": ["error", "never"],
+		"no-shadow": ["error", { "allow": ["done"] }],
+		"no-plusplus": "off",
+		"brace-style": ["error", "allman"],
+		"comma-dangle": ["error", "never"],
+		"no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "CustomTypeOptions" }],
+		"global-require": "off",
+		"space-in-parens": ["error", "always"],
+		"object-curly-newline": ["error", { "ObjectExpression": { "consistent": true } }],
+		"no-underscore-dangle": ["error", { "allow": ["__NEXT_DATA__"] }],
+		"array-bracket-spacing": ["error", "always"],
+		"template-curly-spacing": ["error", "always"],
+		"computed-property-spacing": ["error", "always"],
+
+		"import/order": "off",
+		"import/extensions": ["error", "never"],
+		"import/no-extraneous-dependencies": ["error", { "bundledDependencies": false }],
+
+		"react/jsx-indent": ["error", "tab"],
+		"react/react-in-jsx-scope": "off",
+		"react/no-array-index-key": "off",
+		"react/no-unknown-property": ["error", { "ignore": ["jsx", "global"] }],
+		"react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
+		"react/jsx-props-no-spreading": ["error", { "exceptions": ["Component"] }],
+		"react/jsx-one-expression-per-line": "off"
+	}
 }
