@@ -22,8 +22,11 @@ export function Disconnect( io: Server, socket: Socket )
 			const identifier = user.id;
 
 			// On patiente quelques secondes afin de permettre à l'utilisateur
-			await new Promise( resolve => setTimeout( resolve, GRACE_TIME ) );
 			//  de se reconnecter et de reprendre la partie.
+			await new Promise( ( resolve ) =>
+			{
+				setTimeout( resolve, GRACE_TIME );
+			} );
 
 			// On vérifie alors si l'identifiant unique a été actualisé ou non.
 			//  Note : cela signifie que l'utilisateur s'est reconnecté.
