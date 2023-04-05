@@ -10,7 +10,6 @@ import { useContext, useState, useEffect } from "react";
 
 import styles from "./selection.module.scss";
 import { UserType } from "@/enums/User";
-import i18nextConfig from "@/next-i18next.config";
 import { SocketContext } from "@/utils/SocketContext";
 
 const RoleCard = dynamic( () => import( "@/components/RoleCard" ) );
@@ -21,7 +20,7 @@ export async function getStaticProps( { locale }: { locale: string; } )
 	// Récupération des traductions côté serveur.
 	return {
 		props: {
-			...( await serverSideTranslations( locale ?? i18nextConfig.i18n.defaultLocale ) )
+			...( await serverSideTranslations( locale ) )
 		}
 	};
 }

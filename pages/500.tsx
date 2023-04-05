@@ -6,14 +6,13 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import styles from "./500.module.scss";
-import i18nextConfig from "@/next-i18next.config";
 
 export async function getStaticProps( { locale }: { locale: string; } )
 {
 	// Récupération des traductions côté serveur.
 	return {
 		props: {
-			...( await serverSideTranslations( locale ?? i18nextConfig.i18n.defaultLocale ) )
+			...( await serverSideTranslations( locale ) )
 		}
 	};
 }

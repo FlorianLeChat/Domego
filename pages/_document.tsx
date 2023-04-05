@@ -3,9 +3,6 @@
 //  Source : https://nextjs.org/docs/advanced-features/custom-document
 //
 
-// Importation des fichiers de configuration.
-import i18nextConfig from "@/next-i18next.config";
-
 // Importation des dépendances.
 import Script from "next/script";
 import { Html, Main, Head, NextScript } from "next/document";
@@ -13,20 +10,19 @@ import { Html, Main, Head, NextScript } from "next/document";
 // Importation des types.
 import type { DocumentProps } from "next/document";
 
-export default function Document( props: DocumentProps )
+export default function Document( { __NEXT_DATA__ }: DocumentProps )
 {
 	// Déclaration des constantes.
-	const locale = props.__NEXT_DATA__.locale ?? i18nextConfig.i18n.defaultLocale;
 	const url = new URL( process.env.NEXT_PUBLIC_BASE_PATH + __NEXT_DATA__.page, process.env.NEXT_PUBLIC_URL ).href;
 
 	// Affichage du rendu HTML de la page.
 	return (
-		<Html lang={locale} dir="auto" prefix="og: https://ogp.me/ns#">
+		<Html lang={__NEXT_DATA__.locale} dir="auto" prefix="og: https://ogp.me/ns#">
 			<Head>
 				{/* Informations pour les moteurs de recherche */}
 				<meta property="og:type" content="website" />
-				<meta property="og:locale" content={locale} />
 				<meta property="og:url" content={url} />
+				<meta property="og:locale" content={__NEXT_DATA__.locale} />
 				<meta property="og:title" content={process.env.NEXT_PUBLIC_TITLE} />
 				<meta property="og:description" content={process.env.NEXT_PUBLIC_DESCRIPTION} />
 				<meta property="og:image" content={process.env.NEXT_PUBLIC_BANNER} />

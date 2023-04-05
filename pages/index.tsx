@@ -10,7 +10,6 @@ import { useState, useContext, useEffect } from "react";
 
 import styles from "./index.module.scss";
 import { UserType } from "@/enums/User";
-import i18nextConfig from "@/next-i18next.config";
 import { SocketContext } from "@/utils/SocketContext";
 
 const GameRooms = dynamic( () => import( "@/components/GameRooms" ) );
@@ -20,7 +19,7 @@ export async function getStaticProps( { locale }: { locale: string; } )
 	// Récupération des traductions côté serveur.
 	return {
 		props: {
-			...( await serverSideTranslations( locale ?? i18nextConfig.i18n.defaultLocale ) )
+			...( await serverSideTranslations( locale ) )
 		}
 	};
 }
