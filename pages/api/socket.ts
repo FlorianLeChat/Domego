@@ -42,36 +42,28 @@ export default function handler( _request: NextApiRequest, response: NextApiResp
 		io.on( "connection", ( socket ) =>
 		{
 			// Connexion des utilisateurs.
-			const { Connect } = require( "@/routes/connect" );
-			Connect( io, socket );
+			import( "@/routes/connect" ).then( ( { Connect } ) => Connect( io, socket ) );
 
 			// Déconnexion des utilisateurs.
-			const { Disconnect } = require( "@/routes/disconnect" );
-			Disconnect( io, socket );
+			import( "@/routes/disconnect" ).then( ( { Disconnect } ) => Disconnect( io, socket ) );
 
 			// Récupération des parties.
-			const { Rooms } = require( "@/routes/rooms" );
-			Rooms( io, socket );
+			import( "@/routes/rooms" ).then( ( { Rooms } ) => Rooms( io, socket ) );
 
 			// Assignation des rôles.
-			const { Roles } = require( "@/routes/roles" );
-			Roles( io, socket );
+			import( "@/routes/roles" ).then( ( { Roles } ) => Roles( io, socket ) );
 
 			// Gestion des messages.
-			const { Chat } = require( "@/routes/chat" );
-			Chat( io, socket );
+			import( "@/routes/chat" ).then( ( { Chat } ) => Chat( io, socket ) );
 
 			// Action des administrateurs.
-			const { Admin } = require( "@/routes/admin" );
-			Admin( io, socket );
+			import( "@/routes/admin" ).then( ( { Admin } ) => Admin( io, socket ) );
 
 			// Calcul de la latence client<->serveur.
-			const { Ping } = require( "@/routes/ping" );
-			Ping( io, socket );
+			import( "@/routes/ping" ).then( ( { Ping } ) => Ping( io, socket ) );
 
 			// Validation des jetons reCAPTCHA.
-			const { Recaptcha } = require( "@/routes/recaptcha" );
-			Recaptcha( io, socket );
+			import( "@/routes/recaptcha" ).then( ( { Recaptcha } ) => Recaptcha( io, socket ) );
 		} );
 	}
 
