@@ -226,16 +226,18 @@ export default function GameHome()
 
 			<article>
 				{/* Saisie d'un nom d'utilisateur */}
-				<label>
+				<label htmlFor="pseudo">
 					{t( "pages.index.choose_username" )}<span>*</span>
 					<br />
 					(<Trans i18nKey="pages.index.username_length" components={{ strong: <strong /> }} />)
 				</label>
 
-				<input type="text" name="pseudo" placeholder="Marc007" autoComplete="username" spellCheck="false" minLength={5} maxLength={20} onChange={updateUsername} value={username} required />
+				<input type="text" id="pseudo" name="pseudo" placeholder="Marc007" autoComplete="username" spellCheck="false" minLength={5} maxLength={20} onChange={updateUsername} value={username} required />
 
 				{/* Bouton de création d'une nouvelle partie */}
-				<button type="button" onClick={createNewGame} disabled={disabled}>{t( "pages.index.create_new_game" )}</button>
+				<button type="button" onClick={createNewGame} disabled={disabled}>
+					{t( "pages.index.create_new_game" )}
+				</button>
 
 				{/* Tableau des parties en cours */}
 				<GameRooms username={username} />

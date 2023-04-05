@@ -138,18 +138,18 @@ export default function RoleCard( { name, budget }: RoleCardProps )
 
 			{/* Bouton de sélection du rôle */}
 			<div>
-				<input type="checkbox" onChange={selectRole} checked={selected} disabled={query[ "type" ] === UserType.SPECTATOR || ready} />
-				<label>{t( "pages.selection.check" )}</label>
+				<input id="select" type="checkbox" onChange={selectRole} checked={selected} disabled={query.type === UserType.SPECTATOR || ready} />
+				<label htmlFor="select">{t( "pages.selection.check" )}</label>
 			</div>
 
 			{/* Bouton de prêt à jouer */}
 			{/* (disponible seulement si le rôle est sélectionné par l'utilisateur) */}
-			{player === query[ "username" ] &&
+			{target === query.username && (
 				<div>
-					<input type="checkbox" onChange={readyToPlay} />
-					<label>{t( "pages.selection.ready" )}</label>
+					<input id="ready" type="checkbox" onChange={readyToPlay} />
+					<label htmlFor="ready">{t( "pages.selection.ready" )}</label>
 				</div>
-			}
+			)}
 		</article>
 	);
 }

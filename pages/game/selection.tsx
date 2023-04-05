@@ -149,11 +149,21 @@ export default function RoleSelection()
 
 			{/* Bouton de lancement de la partie */}
 			{/* (disponible seulement pour l'administrateur) */}
-			{router.query[ "admin" ] && <button type="button" onClick={startGame} disabled={disabled}>{t( "pages.selection.launch" )}</button>}
+			{query.admin && (
+				<button type="button" onClick={startGame} disabled={disabled}>
+					{t( "pages.selection.launch" )}
+				</button>
+			)}
 
 			{/* Communications textuelles de la partie */}
 			{/* (disponible seulement pour les non-spectateurs) */}
-			{router.query[ "type" ] === UserType.PLAYER && <button type="button" onClick={toggleChat}></button>}<GameChat show={showChat} />
+			{query.type === UserType.PLAYER && (
+				<button type="button" onClick={toggleChat}>
+					Chat
+				</button>
+			)}
+
+			<GameChat show={showChat} />
 		</section>
 	);
 }
