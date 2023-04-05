@@ -1,6 +1,6 @@
 //
 // Interface des attributs des réponses de l'API de Google reCAPTCHA.
-// 	Source : https://developers.google.com/recaptcha/docs/v3
+//  Source : https://developers.google.com/recaptcha/docs/v3
 //
 export interface RecaptchaAttributes
 {

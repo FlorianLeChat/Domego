@@ -50,8 +50,8 @@ export default function RoleSelection()
 		socket.emit( "GameAdmin", "start", async ( icon: SweetAlertIcon, title: string, message: string ) =>
 		{
 			// Si la réponse indique que la partie ne peut pas être actuellement lancée,
-			//	on affiche le message d'erreur correspondant avec les informations
-			//	transmises par le serveur.
+			//  on affiche le message d'erreur correspondant avec les informations
+			//  transmises par le serveur.
 			if ( icon !== "success" )
 			{
 				const Swal = ( await import( "sweetalert2" ) ).default;
@@ -89,20 +89,20 @@ export default function RoleSelection()
 		}
 
 		// On vérifie après la latence entre le client et le serveur
-		//	distant en mettant en mémoire le temps actuel.
+		//  distant en mettant en mémoire le temps actuel.
 		const start = Date.now();
 
 		socket.emit( "GamePing", async () =>
 		{
 			// Lors de la réception de la requête par le serveur,
-			//	on calcule la différence entre la temps actuel ainsi
-			//	que le temps précédemment mis en mémoire.
+			//  on calcule la différence entre la temps actuel ainsi
+			//  que le temps précédemment mis en mémoire.
 			const delta = Date.now() - start;
 
 			if ( delta > 500 )
 			{
 				// Si la différence est supérieure à 500ms,
-				//	on affiche un avertissement à l'utilisateur.
+				//  on affiche un avertissement à l'utilisateur.
 				const Swal = ( await import( "sweetalert2" ) ).default;
 
 				Swal.fire( {
@@ -115,8 +115,8 @@ export default function RoleSelection()
 		} );
 
 		// On accroche ensuite un événement pour rediriger automatiquement
-		//	l'utilisateur lorsque la partie a été lancée par l'administrateur.
 		socket.on( "GameStart", () =>
+		//  l'utilisateur lorsque la partie a été lancée par l'administrateur.
 		{
 			router.replace( {
 				query: { roomId: router.query[ "uuid" ], username: router.query[ "username" ], admin: router.query[ "admin" ], type: router.query[ "type" ] },
@@ -125,8 +125,8 @@ export default function RoleSelection()
 		} );
 
 		// On accroche enfin un dernier événement (seulement pour les administrateurs)
-		//	afin de déterminer l'état du bouton de lancement de partie.
 		socket.on( "GameReady", ( state: boolean ) =>
+		//  afin de déterminer l'état du bouton de lancement de partie.
 		{
 			setDisabled( !state );
 		} );

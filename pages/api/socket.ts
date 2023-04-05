@@ -21,12 +21,12 @@ export default function handler( _request: NextApiRequest, response: NextApiResp
 		io.use( ( socket, next ) =>
 		{
 			// On vérifie ensuite si l'utilisateur a transmis un identifiant
-			//	unique en provenance de son navigateur pendant la phase de connexion.
 			if ( socket.handshake.auth[ "cacheId" ] )
+			//  unique en provenance de son navigateur pendant la phase de connexion.
 			{
 				// On tente de récupère un quelconque utilisateur actuellement
-				//	enregistré avant de le mettre à jour.
 				const user = findUser( socket.handshake.auth[ "cacheId" ] );
+				//  enregistré avant de le mettre à jour.
 
 				if ( user )
 				{

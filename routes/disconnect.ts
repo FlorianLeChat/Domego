@@ -6,7 +6,7 @@ import { Server, Socket } from "socket.io";
 import { destroyUser, findUser } from "@/utils/UserManager";
 
 // Temps d'attente avant une nouvelle vérification de l'identifiant
-//	unique de l'utilisateur déconnecté.
+//  unique de l'utilisateur déconnecté.
 const GRACE_TIME = 10000;
 
 export function Disconnect( io: Server, socket: Socket )
@@ -22,22 +22,22 @@ export function Disconnect( io: Server, socket: Socket )
 			const identifier = user.id;
 
 			// On patiente quelques secondes afin de permettre à l'utilisateur
-			//	de se reconnecter et de reprendre la partie.
 			await new Promise( resolve => setTimeout( resolve, GRACE_TIME ) );
+			//  de se reconnecter et de reprendre la partie.
 
 			// On vérifie alors si l'identifiant unique a été actualisé ou non.
-			// 	Note : cela signifie que l'utilisateur s'est reconnecté.
+			//  Note : cela signifie que l'utilisateur s'est reconnecté.
 			if ( identifier !== socket.id )
 			{
 				return;
 			}
 
 			// Si l'utilisateur s'est déconnecté pendant une trop longue période,
-			// 	on le supprime définitivement de la liste des utilisateurs.
+			//  on le supprime définitivement de la liste des utilisateurs.
 			destroyUser( socket.id );
 
 			// On envoie ensuite une notification à l'ensemble des utilisateurs
-			//	encore présents dans le salon afin d'indiquer son départ.
+			//  encore présents dans le salon afin d'indiquer son départ.
 			io.to( user.game ).emit( "GameAlert", user.name, "server.user_disconnected" );
 
 			// On met enfin à jour les informations de la partie.

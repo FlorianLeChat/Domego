@@ -1,6 +1,6 @@
 //
 // Page utilisée pour générer le contenu statique HTML de la page.
-// 	Source : https://nextjs.org/docs/advanced-features/custom-app
+//  Source : https://nextjs.org/docs/advanced-features/custom-app
 //
 
 // Importation de la feuille de style CSS globale.
@@ -36,7 +36,7 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 	const { basePath } = useRouter();
 
 	// Création du socket de communication avec le serveur.
-	// 	Source : https://github.com/vercel/next.js/discussions/15341
+	//  Source : https://github.com/vercel/next.js/discussions/15341
 	useEffect( () =>
 	{
 		fetch( `${ basePath }/api/socket` );

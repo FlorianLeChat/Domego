@@ -12,7 +12,7 @@ export function Connect( io: Server, socket: Socket )
 	socket.on( "GameConnect", ( name, type, game, callback ) =>
 	{
 		// On vérifie tout d'abord si l'utilisateur n'est pas déjà connecté
-		// 	dans une autre partie.
+		//  dans une autre partie.
 		if ( findUser( socket.id ) )
 		{
 			callback( "error", "server.duplicated_data_title", "server.duplicated_data_description" );
@@ -20,15 +20,15 @@ export function Connect( io: Server, socket: Socket )
 		}
 
 		// On vérifie également si les informations transmises par l'utilisateur
-		//	sont considérées comme valides.
 		if ( ( name.length < 5 || name.length > 20 ) || ( !Object.values( UserType ).includes( type ) ) || game.length !== 36 )
+		//  sont considérées comme valides.
 		{
 			callback( "error", "server.invalid_data_title", "server.invalid_data_description" );
 			return;
 		}
 
 		// On met à jour par la même occasion les informations des parties actuelles
-		//	afin de prendre en compte ou non les nouveaux joueurs.
+		//  afin de prendre en compte ou non les nouveaux joueurs.
 		const room = findRoom( game );
 
 		if ( !room )
@@ -44,7 +44,7 @@ export function Connect( io: Server, socket: Socket )
 				const user = findUser( identifier );
 
 				// L'utilisateur ne doit pas avoir le même nom d'utilisateur que celui
-				//	qui a été indiqué.
+				//  qui a été indiqué.
 				if ( user && user.name === name )
 				{
 					callback( "error", "server.duplicated_username_title", "server.duplicated_username_description" );
@@ -77,7 +77,7 @@ export function Connect( io: Server, socket: Socket )
 		callback( "success" );
 
 		// On envoie enfin un message de connexion à tous les joueurs du salon
-		//	sauf au nouvel utilisateur.
+		//  sauf au nouvel utilisateur.
 		io.to( user.game ).emit( "GameAlert", user.name, "server.user_connected" );
 	} );
 };

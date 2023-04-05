@@ -56,15 +56,15 @@ export default function GameChat( props: GameChatProps )
 		}
 
 		// On accroche ensuite un premier écouteur pour récupérer les messages
-		//	des autres joueurs depuis le serveur.
 		socket.on( "GameChat", ( name, message ) =>
+		//  des autres joueurs depuis le serveur.
 		{
 			addMessage( elements => [ ...elements, <li key={elements.length}>{`[${ new Date().toLocaleTimeString() }] ${ name } : ${ message }`}</li> ] );
 		} );
 
 		// On accroche enfin un deuxième écouteur pour récupérer les notifications
-		//	de connexion et de déconnexion des autres joueurs.
 		socket.on( "GameAlert", ( name, message ) =>
+		//  de connexion et de déconnexion des autres joueurs.
 		{
 			addMessage( elements => [ ...elements, <i key={elements.length}>{t( message, { username: name } )}</i> ] );
 		} );
@@ -78,7 +78,7 @@ export default function GameChat( props: GameChatProps )
 		if ( last )
 		{
 			// Le dernier élément peut être invalide si le composant
-			//	parent est actuellement caché ou en cours de démontage.
+			//  parent est actuellement caché ou en cours de démontage.
 			last.scrollIntoView( { behavior: "smooth", block: "end", inline: "nearest" } );
 		}
 	}, [ messages ] );
@@ -87,8 +87,8 @@ export default function GameChat( props: GameChatProps )
 	if ( props.show )
 	{
 		// Le rendu est demandé par un composant parent ou par l'utilisateur.
-		// 	Note : c'est principalement le cas dans la page dédiée aux communications
-		//		textuelles entre les joueurs de la partie.
+		//  Note : c'est principalement le cas dans la page dédiée aux communications
+		//   textuelles entre les joueurs de la partie.
 		return (
 			<section id={styles[ "GameChat" ]}>
 				{/* Liste des messages */}

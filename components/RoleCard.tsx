@@ -67,7 +67,7 @@ export default function RoleCard( props: RoleCardProps )
 	const readyToPlay = ( event: React.ChangeEvent<HTMLInputElement> ) =>
 	{
 		// On envoie une simple requête d'usage au serveur pour signaler
-		//	que le joueur est prêt à jouer sans autre vérification.
+		//  que le joueur est prêt à jouer sans autre vérification.
 		const state = event.currentTarget.checked;
 
 		if ( socket?.connected )
@@ -88,11 +88,11 @@ export default function RoleCard( props: RoleCardProps )
 		}
 
 		// On émet ensuite une requête au serveur pour vérifier
-		//	si le rôle est déjà sélectionné ou non.
 		socket.emit( "GameRole", props.name, "check", true, ( available: boolean, player: string ) =>
+		//  si le rôle est déjà sélectionné ou non.
 		{
 			// Si le rôle est déjà sélectionné, on l'assigne localement
-			//	le rôle avec les informations reçues depuis le serveur.
+			//  le rôle avec les informations reçues depuis le serveur.
 			if ( !available )
 			{
 				setReady( true );
@@ -102,8 +102,8 @@ export default function RoleCard( props: RoleCardProps )
 		} );
 
 		// On accroche alors un écouteur pour réceptionner les mises à jour
-		//	des sélections des rôles.
 		socket.on( "GameRole", ( role: string, state: boolean, player: string ) =>
+		//  des sélections des rôles.
 		{
 			// Si la mise à jour correspond au rôle actuelle, alors on l'assigne
 			//	enfin localement avec les informations reçues depuis le serveur.

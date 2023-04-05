@@ -28,7 +28,7 @@ interface GameRoomList
 }
 
 // Temps d'attente entre chaque rafraîchissement de la liste
-//	des serveurs auprès du serveur (en millisecondes).
+//  des serveurs auprès du serveur (en millisecondes).
 const REFRESH_TIME = 5000;
 
 export default function GameRooms( props: GameRoomsProps )
@@ -71,7 +71,7 @@ export default function GameRooms( props: GameRoomsProps )
 		}
 
 		// On affiche ensuite une animation de chargement pour indiquer à l'utilisateur
-		//	que la partie est en cours de chargement.
+		//  que la partie est en cours de chargement.
 		await Swal.fire( {
 			icon: "info",
 			text: t( "modals.joining_game_description", { type: t( `pages.rooms.${ type }` ).toLowerCase() } ),
@@ -87,8 +87,8 @@ export default function GameRooms( props: GameRoomsProps )
 				socket.emit( "GameConnect", props.username, type, roomId, ( icon: SweetAlertIcon, title: string, message: string ) =>
 				{
 					// Si la réponse indique que la partie n'a pas été créée avec succès,
-					//	on affiche le message d'erreur correspondant avec les informations
-					//	transmises par le serveur.
+					//  on affiche le message d'erreur correspondant avec les informations
+					//  transmises par le serveur.
 					if ( icon !== "success" )
 					{
 						Swal.fire( {
@@ -102,14 +102,14 @@ export default function GameRooms( props: GameRoomsProps )
 					}
 
 					// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
-					//	l'exécution des opérations.
+					//  l'exécution des opérations.
 					Swal.close();
 				} );
 			},
 			willClose: () =>
 			{
 				// Redirection automatique si la fenêtre de chargement est fermée
-				//	normalement (sans aucune erreur émise par le serveur).
+				//  normalement (sans aucune erreur émise par le serveur).
 				const path = `/game/${ state === RoomState.LAUNCHED ? "board" : "selection" }`;
 
 				router.push( {
@@ -133,8 +133,8 @@ export default function GameRooms( props: GameRoomsProps )
 		socket.emit( "GameRooms", ( rooms: GameRoomList[] ) =>
 		{
 			// Lors de la réception des données, on construit le HTML afin de l'afficher
-			//	lors du rendu de la page.
 			const rows = rooms.map( ( room: GameRoomList, index: number ) =>
+			//  lors du rendu de la page.
 				<tr key={index}>
 					<td>{room.id}</td>
 					<td>{room.creator}</td>
@@ -156,14 +156,14 @@ export default function GameRooms( props: GameRoomsProps )
 	useEffect( () =>
 	{
 		// On créé un minuteur qui actualise périodiquement les informations
-		//	des parties en cours au montage du composant.
+		//  des parties en cours au montage du composant.
 		const interval = setInterval( updateRooms, REFRESH_TIME );
 
 		// On effectue ensuite une première actualisation des parties en cours.
 		updateRooms();
 
 		// On précharge également les pages de jeu afin d'accélérer le chargement
-		//	de la partie lorsque l'utilisateur va rejoindre une partie.
+		//  de la partie lorsque l'utilisateur va rejoindre une partie.
 		router.prefetch( "/game/board" );
 		router.prefetch( "/game/selection" );
 

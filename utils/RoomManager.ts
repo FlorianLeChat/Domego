@@ -86,8 +86,8 @@ export function findRoom( id: string )
 
 //
 // Permet de récupérer l'ensemble des parties en mémoire.
-//	Note : certains champs sont masqués/modifiés avant d'être envoyés
-//		aux utilisateurs de la partie React.
+//  Note : certains champs sont masqués/modifiés avant d'être envoyés
+//   aux utilisateurs de la partie React.
 //
 export function getRooms()
 {

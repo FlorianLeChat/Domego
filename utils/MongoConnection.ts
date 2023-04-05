@@ -1,6 +1,6 @@
 //
 // Permet d'établir une connexion avec la base de données MongoDB.
-// 	Source : https://github.com/vercel/next.js/blob/c45481beb1d8c3bc0e1882ee153ef22004ba60c1/examples/with-mongodb-mongoose/lib/dbConnect.js
+//  Source : https://github.com/vercel/next.js/blob/c45481beb1d8c3bc0e1882ee153ef22004ba60c1/examples/with-mongodb-mongoose/lib/dbConnect.js
 //
 import mongoose from "mongoose";
 

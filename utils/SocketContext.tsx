@@ -11,7 +11,7 @@ let instance!: Socket;
 if ( typeof window !== "undefined" )
 {
 	// On tente d'abord de récupérer l'identifiant unique précédemment
-	// 	mis en mémoire et on stocke le nombre de tentatives de connexion.
+	//  mis en mémoire et on stocke le nombre de tentatives de connexion.
 	const cacheId = sessionStorage.getItem( "cacheId" );
 	let retries = 0;
 
@@ -21,17 +21,17 @@ if ( typeof window !== "undefined" )
 	instance.on( "connect", () =>
 	{
 		// Si la connexion au serveur a réussi, on met alors en mémoire
-		//	l'identifiant unique du socket.
+		//  l'identifiant unique du socket.
 		sessionStorage.setItem( "cacheId", instance.id );
 	} );
 	instance.on( "connect_error", ( error ) =>
 	{
 		// Si la connexion au serveur a échoué, on vérifie le nombre de
-		// 	tentatives de connexion.
+		//  tentatives de connexion.
 		if ( retries === 0 )
 		{
 			// Si c'est la première tentative, on tente de se reconnecter
-			// 	au serveur après 1 seconde.
+			//  au serveur après 1 seconde.
 			setTimeout( () =>
 			{
 				retries++;
@@ -41,13 +41,13 @@ if ( typeof window !== "undefined" )
 		else
 		{
 			// Si c'est la deuxième tentative, on affiche l'erreur dans la
-			// 	console et on redirige vers la page d'erreur.
 			console.error( error.message );
 
 			if ( Router.pathname !== "/500" )
 			{
 				Router.push( "/500" );
 			}
+			//  console et on redirige vers la page d'erreur.
 		}
 	} );
 }
@@ -59,7 +59,7 @@ export const SocketContext = createContext<Socket>( instance );
 
 //
 // Permet d'importer la référence du contexte du socket.
-// 	Source : https://stackoverflow.com/a/67270359
+//  Source : https://stackoverflow.com/a/67270359
 //
 export const SocketProvider = ( { children }: { children: React.ReactNode; } ) =>
 (

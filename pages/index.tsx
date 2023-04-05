@@ -46,7 +46,7 @@ export default function GameHome()
 		}
 
 		// On réalise juste après une vérification de sécurité en utilisant le service
-		//	Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
+		//  Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
 		const Swal = ( await import( "sweetalert2" ) ).default;
 
 		if ( process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] && process.env[ "NODE_ENV" ] === "production" )
@@ -66,7 +66,7 @@ export default function GameHome()
 					if ( !window.grecaptcha )
 					{
 						// Si le service est indisponible, on affiche un message d'erreur
-						// 	et on arrête l'exécution de la fonction.
+						//  et on arrête l'exécution de la fonction.
 						Swal.fire( {
 							icon: "error",
 							text: t( "modals.recaptcha_unavailable_description" ),
@@ -83,14 +83,14 @@ export default function GameHome()
 						try
 						{
 							// Récupération et vérification du jeton d'authentification généré
-							//	par l'API de Google reCAPTCHA.
 							const token = await window.grecaptcha.execute( process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] ?? "", { action: "create" } );
+							//  par l'API de Google reCAPTCHA.
 
 							socket.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
 							{
 								// Si la réponse indique que le joueur n'est pas un humain,
-								//	on affiche le message d'erreur correspondant avec les informations
-								//	transmises par le serveur.
+								//  on affiche le message d'erreur correspondant avec les informations
+								//  transmises par le serveur.
 								if ( icon !== "success" )
 								{
 									Swal.fire( {
@@ -104,16 +104,16 @@ export default function GameHome()
 								}
 
 								// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
-								//	l'exécution des opérations.
+								//  l'exécution des opérations.
 								Swal.close();
 							} );
 						}
 						catch ( error )
 						{
 							// Si une erreur est survenue lors de l'exécution de la fonction de vérification,
-							//	on affiche un message d'erreur.
 							console.error( error );
 
+							//  on affiche un message d'erreur.
 							Swal.fire( {
 								icon: "error",
 								text: t( "modals.recaptcha_invalid_token_description" ),
@@ -146,7 +146,7 @@ export default function GameHome()
 		}
 
 		// On affiche enfin une animation de chargement pour indiquer à l'utilisateur
-		//	que la partie est en cours de création.
+		//  que la partie est en cours de création.
 		const uuid = ( await import( "uuid" ) ).v4();
 
 		await Swal.fire( {
@@ -164,8 +164,8 @@ export default function GameHome()
 				socket.emit( "GameConnect", username, UserType.PLAYER, uuid, ( icon: SweetAlertIcon, title: string, message: string ) =>
 				{
 					// Si la réponse indique que la partie n'a pas été créée avec succès,
-					//	on affiche le message d'erreur correspondant avec les informations
-					//	transmises par le serveur.
+					//  on affiche le message d'erreur correspondant avec les informations
+					//  transmises par le serveur.
 					if ( icon !== "success" )
 					{
 						Swal.fire( {
@@ -179,14 +179,14 @@ export default function GameHome()
 					}
 
 					// Dans le cas contraire, on ferme la fenêtre de chargement pour poursuivre
-					//	l'exécution des opérations.
+					//  l'exécution des opérations.
 					Swal.close();
 				} );
 			},
 			willClose: () =>
 			{
 				// Redirection automatique si la fenêtre de chargement est fermée
-				//	normalement (sans aucune erreur émise par le serveur).
+				//  normalement (sans aucune erreur émise par le serveur).
 				router.push( {
 					query: { roomId: uuid, username: username, admin: true, type: UserType.PLAYER },
 					pathname: `/game/selection`

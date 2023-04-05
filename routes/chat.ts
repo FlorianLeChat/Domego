@@ -9,7 +9,7 @@ export function Chat( io: Server, socket: Socket )
 	socket.on( "GameChat", ( message ) =>
 	{
 		// On tente de récupérer les informations de l'utilisateur avant
-		//	d'émettre le message à tous les autres utilisateurs du salon.
+		//  d'émettre le message à tous les autres utilisateurs du salon.
 		const user = findUser( socket.id );
 
 		if ( user )

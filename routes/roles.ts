@@ -12,7 +12,7 @@ export function Roles( _io: Server, socket: Socket )
 	socket.on( "GameRole", ( role, action, state, callback ) =>
 	{
 		// On tente de récupérer tout d'abord les informations de l'utilisateur
-		//	avant de réaliser certaines vérifications pour l'authentifier.
+		//  avant de réaliser certaines vérifications pour l'authentifier.
 		const user = findUser( socket.id );
 
 		if ( !user || user.type === UserType.SPECTATOR )
@@ -21,7 +21,7 @@ export function Roles( _io: Server, socket: Socket )
 		}
 
 		// On récupère ensuite les informations de la partie où le joueur
-		//	cherche à se connecter.
+		//  cherche à se connecter.
 		const room = findRoom( user.game );
 
 		if ( !room )
@@ -30,17 +30,17 @@ export function Roles( _io: Server, socket: Socket )
 		}
 
 		// On récupère alors le rôle sélectionné par l'utilisateur avant
-		//	de déterminer l'action qu'il veut réaliser.
+		//  de déterminer l'action qu'il veut réaliser.
 		if ( role && Object.values( UserRole ).includes( role ) )
 		{
 			if ( action === "select" || action === "check" )
 			{
 				// L'utilisateur semble vouloir sélectionner ou désélectionner
-				//	un rôle, on poursuit les vérifications d'usage.
+				//  un rôle, on poursuit les vérifications d'usage.
 				if ( state )
 				{
 					// Si c'est une sélection, on vérifie que le rôle sélectionné
-					//	n'est pas occupé par quelqu'un d'autre.
+					//  n'est pas occupé par quelqu'un d'autre.
 					let cache = user.role && user.name;
 
 					for ( const identifier of room.players )
@@ -59,21 +59,21 @@ export function Roles( _io: Server, socket: Socket )
 					if ( !cache && !user.role && action === "select" )
 					{
 						// Si le rôle est libre, on l'assigne à l'utilisateur et
-						//	on signale le changement à tous les utilisateurs du salon.
+						//  on signale le changement à tous les utilisateurs du salon.
 						user.role = role;
 
 						socket.broadcast.to( room.id ).emit( "GameRole", role, true, user.name );
 					}
 
 					// Dans le cas contraire, rien ne se passe mais on renvoie
-					//	systématiquement un résultat pour indiquer si le changement
-					//	s'est effectué ou non.
 					callback( !cache, cache || user.name );
+					//  systématiquement un résultat pour indiquer si le changement
+					//  s'est effectué ou non.
 				}
 				else
 				{
 					// En cas de désélection, on met à jour les informations de l'utilisateur
-					//	avant de signaler ce même changement à tous les utilisateurs du salon.
+					//  avant de signaler ce même changement à tous les utilisateurs du salon.
 					if ( user.role === role )
 					{
 						user.role = undefined;
@@ -90,7 +90,7 @@ export function Roles( _io: Server, socket: Socket )
 				user.state = state ? UserState.READY : UserState.WAITING;
 
 				// Par la même occasion, on essaie de déterminer si la partie est prête
-				//	à être lancée par l'administrateur de la partie.
+				//  à être lancée par l'administrateur de la partie.
 				let ready = room.players.length === 6 && state;
 
 				if ( !ready )
@@ -109,7 +109,7 @@ export function Roles( _io: Server, socket: Socket )
 				}
 
 				// Après la vérification, on change l'état de la partie si nécessaire
-				//	avant d'en avertir l'administrateur.
+				//  avant d'en avertir l'administrateur.
 				room.state = ready ? RoomState.READY : RoomState.CREATED;
 
 				socket.broadcast.to( room.creator ).emit( "GameReady", ready );

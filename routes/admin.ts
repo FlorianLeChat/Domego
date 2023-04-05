@@ -19,7 +19,7 @@ export function Admin( io: Server, socket: Socket )
 		}
 
 		// On récupère ensuite les informations de la partie où l'administrateur
-		//	cherche à se connecter.
+		//  cherche à se connecter.
 		const room = findRoom( user.game );
 
 		if ( !room || room.creator !== user.id )
@@ -31,7 +31,7 @@ export function Admin( io: Server, socket: Socket )
 		if ( action === "start" )
 		{
 			// L'administrateur veut démarrer la partie, on vérifie alors l'état
-			//	actuel de la partie.
+			//  actuel de la partie.
 			if ( room.state === RoomState.READY )
 			{
 				// Tous les participants sont prêts, on peut donc démarrer la partie.
