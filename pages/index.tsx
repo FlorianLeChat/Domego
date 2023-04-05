@@ -110,8 +110,6 @@ export default function GameHome()
 						catch ( error )
 						{
 							// Si une erreur est survenue lors de l'exécution de la fonction de vérification,
-							console.error( error );
-
 							//  on affiche un message d'erreur.
 							Swal.fire( {
 								icon: "error",

@@ -40,7 +40,6 @@ export default async function handler( request: NextApiRequest, response: NextAp
 			catch ( error )
 			{
 				// Erreur lors de la récupération des données.
-				console.error( error );
 				response.status( 500 ).end();
 			}
 
@@ -68,7 +67,6 @@ export default async function handler( request: NextApiRequest, response: NextAp
 			catch ( error )
 			{
 				// Erreur lors de l'ajout des données.
-				console.error( error );
 				response.status( 500 ).end();
 			}
 
@@ -94,7 +92,6 @@ export default async function handler( request: NextApiRequest, response: NextAp
 			}
 			catch ( error )
 			{
-				console.error( error );
 				response.status( 500 ).end();
 			}
 
@@ -120,7 +117,6 @@ export default async function handler( request: NextApiRequest, response: NextAp
 			}
 			catch ( error )
 			{
-				console.error( error );
 				response.json( { state: false } );
 			}
 
