@@ -17,7 +17,7 @@ interface RoleCardProps
 	budget: string;
 }
 
-export default function RoleCard( props: RoleCardProps )
+export default function RoleCard( { name, budget }: RoleCardProps )
 {
 	// Déclaration des constantes.
 	const { t } = useTranslation();
@@ -26,7 +26,7 @@ export default function RoleCard( props: RoleCardProps )
 
 	// Déclaration des variables d'état.
 	const [ ready, setReady ] = useState( false );
-	const [ player, setPlayer ] = useState( "" );
+	const [ target, setTarget ] = useState( "" );
 	const [ selected, setSelected ] = useState( false );
 
 	// Bouton de sélection d'un rôle.
@@ -42,29 +42,29 @@ export default function RoleCard( props: RoleCardProps )
 		const state = !selected;
 
 		// On envoie enfin une requête au serveur pour déterminer s'il est
-		//	possible de sélectionner le rôle.
-		socket.emit( "GameRole", props.name, "select", state, ( available: boolean, player: string ) =>
+		//  possible de sélectionner le rôle.
+		socket?.emit( "GameRole", name, "select", state, ( available: boolean, player: string ) =>
 		{
 			// Si le serveur renvoie une réponse positive, on s'assigne localement
-			//	le rôle sélectionné.
+			//  le rôle sélectionné.
 			if ( available && state )
 			{
-				setPlayer( player );
+				setTarget( player );
 				setSelected( true );
 			}
 			else
 			{
 				// Dans le cas contraire, soit le rôle est déjà occupé ou soit
-				//	on a voulu désélectionner le rôle.
+				//  on a voulu désélectionner le rôle.
 				setReady( false );
-				setPlayer( "" );
+				setTarget( "" );
 				setSelected( false );
 			}
 		} );
 	};
 
 	// Bouton de confirmation de sélection d'un rôle.
-	const readyToPlay = ( event: React.ChangeEvent<HTMLInputElement> ) =>
+	const readyToPlay = ( event: ChangeEvent<HTMLInputElement> ) =>
 	{
 		// On envoie une simple requête d'usage au serveur pour signaler
 		//  que le joueur est prêt à jouer sans autre vérification.
@@ -72,7 +72,7 @@ export default function RoleCard( props: RoleCardProps )
 
 		if ( socket?.connected )
 		{
-			socket.emit( "GameRole", props.name, "ready", state );
+			socket?.emit( "GameRole", name, "ready", state );
 		}
 
 		setReady( state );
@@ -88,52 +88,52 @@ export default function RoleCard( props: RoleCardProps )
 		}
 
 		// On émet ensuite une requête au serveur pour vérifier
-		socket.emit( "GameRole", props.name, "check", true, ( available: boolean, player: string ) =>
 		//  si le rôle est déjà sélectionné ou non.
+		socket?.emit( "GameRole", name, "check", true, ( available: boolean, player: string ) =>
 		{
 			// Si le rôle est déjà sélectionné, on l'assigne localement
 			//  le rôle avec les informations reçues depuis le serveur.
 			if ( !available )
 			{
 				setReady( true );
-				setPlayer( player );
+				setTarget( player );
 				setSelected( true );
 			}
 		} );
 
 		// On accroche alors un écouteur pour réceptionner les mises à jour
-		socket.on( "GameRole", ( role: string, state: boolean, player: string ) =>
 		//  des sélections des rôles.
+		socket?.on( "GameRole", ( role: string, state: boolean, player: string ) =>
 		{
 			// Si la mise à jour correspond au rôle actuelle, alors on l'assigne
-			//	enfin localement avec les informations reçues depuis le serveur.
-			if ( props.name === role )
+			//  enfin localement avec les informations reçues depuis le serveur.
+			if ( name === role )
 			{
 				setReady( state );
-				setPlayer( player );
+				setTarget( player );
 				setSelected( state );
 			}
 		} );
-	}, [ props.name, socket ] );
+	}, [ name, socket ] );
 
 	// Affichage du rendu HTML du composant.
 	return (
 		<article className={styles.RoleCard}>
 			{/* Image représentative du rôle */}
-			<Image src={`${ basePath }/assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} width={225} height={225} />
+			<Image src={`${ basePath }/assets/images/jobs/${ name }.webp`} alt={t( `pages.selection.${ name }_title` )} width={225} height={225} />
 
 			{/* Utilisateur jouant ce rôle */}
-			<span>{player}</span>
+			<span>{target}</span>
 
 			<div>
 				{/* Nom du rôle */}
-				<h2>{t( `pages.selection.${ props.name }_title` )}</h2>
+				<h2>{t( `pages.selection.${ name }_title` )}</h2>
 
 				{/* Description du rôle */}
-				<p>{t( `pages.selection.${ props.name }_description` )}</p>
+				<p>{t( `pages.selection.${ name }_description` )}</p>
 
 				{/* Budget à disposition */}
-				<span>{props.budget}</span>
+				<span>{budget}</span>
 			</div>
 
 			{/* Bouton de sélection du rôle */}

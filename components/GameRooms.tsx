@@ -31,7 +31,7 @@ interface GameRoomList
 //  des serveurs auprès du serveur (en millisecondes).
 const REFRESH_TIME = 5000;
 
-export default function GameRooms( props: GameRoomsProps )
+export default function GameRooms( { username }: GameRoomsProps )
 {
 	// Déclaration des variables d'état.
 	const [ rooms, setRooms ] = useState<JSX.Element[]>( [] );
@@ -84,7 +84,7 @@ export default function GameRooms( props: GameRoomsProps )
 				Swal.showLoading();
 
 				// Envoi de la requête pour rejoindre la partie.
-				socket.emit( "GameConnect", props.username, type, roomId, ( icon: SweetAlertIcon, title: string, message: string ) =>
+				socket?.emit( "GameConnect", username, type, roomId, ( icon: SweetAlertIcon, title: string, message: string ) =>
 				{
 					// Si la réponse indique que la partie n'a pas été créée avec succès,
 					//  on affiche le message d'erreur correspondant avec les informations
@@ -92,7 +92,7 @@ export default function GameRooms( props: GameRoomsProps )
 					if ( icon !== "success" )
 					{
 						Swal.fire( {
-							icon: icon,
+							icon,
 							text: t( message ),
 							title: t( title ),
 							confirmButtonColor: "#28a745"
@@ -113,12 +113,12 @@ export default function GameRooms( props: GameRoomsProps )
 				const path = `/game/${ state === RoomState.LAUNCHED ? "board" : "selection" }`;
 
 				router.push( {
-					query: { roomId: roomId, username: props.username, admin: false, type: type },
+					query: { roomId, username, admin: false, type },
 					pathname: path
 				}, path );
 			}
 		} );
-	}, [ t, props, socket, router ] );
+	}, [ t, socket, username, router ] );
 
 	// Récupération de l'ensemble des parties en cours.
 	const updateRooms = useCallback( () =>
@@ -130,11 +130,11 @@ export default function GameRooms( props: GameRoomsProps )
 		}
 
 		// On effectue alors une requête pour récupérer la liste des parties en cours.
-		socket.emit( "GameRooms", ( rooms: GameRoomList[] ) =>
+		socket?.emit( "GameRooms", ( list: GameRoomList[] ) =>
 		{
 			// Lors de la réception des données, on construit le HTML afin de l'afficher
-			const rows = rooms.map( ( room: GameRoomList, index: number ) =>
 			//  lors du rendu de la page.
+			setRooms( list.map( ( room: GameRoomList, index: number ) => (
 				<tr key={index}>
 					<td>{room.id}</td>
 					<td>{room.creator}</td>
@@ -146,9 +146,7 @@ export default function GameRooms( props: GameRoomsProps )
 						<button type="button" onClick={() => joinGame( room.id, UserType.SPECTATOR, room.state )} disabled={room.state === RoomState.FINISHED}>{t( "pages.rooms.watch" )}</button>
 					</td>
 				</tr>
-			);
-
-			setRooms( rows );
+			) ) );
 		} );
 	}, [ t, socket, joinGame ] );
 
@@ -172,7 +170,7 @@ export default function GameRooms( props: GameRoomsProps )
 			// On supprime enfin le minuteur au démontage du composant.
 			clearInterval( interval );
 		};
-	}, [ t, socket, updateRooms, router ] );
+	}, [ t, updateRooms, router ] );
 
 	// Affichage du rendu HTML du composant.
 	return (

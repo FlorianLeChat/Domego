@@ -10,10 +10,10 @@ import { SocketContext } from "@/utils/SocketContext";
 interface GameChatProps
 {
 	// Déclaration des champs des propriétés du composant.
-	show?: boolean;
+	show: boolean;
 }
 
-export default function GameChat( props: GameChatProps )
+export default function GameChat( { show }: GameChatProps )
 {
 	// Déclaration des constantes.
 	const list = useRef<HTMLUListElement>( null );
@@ -39,7 +39,7 @@ export default function GameChat( props: GameChatProps )
 		// On envoie ensuite le message au serveur.
 		if ( socket?.connected )
 		{
-			socket.emit( "GameChat", input );
+			socket?.emit( "GameChat", input );
 		}
 
 		// On vide enfin le champ de saisie.
@@ -56,24 +56,24 @@ export default function GameChat( props: GameChatProps )
 		}
 
 		// On accroche ensuite un premier écouteur pour récupérer les messages
-		socket.on( "GameChat", ( name, message ) =>
 		//  des autres joueurs depuis le serveur.
+		socket?.on( "GameChat", ( username, message ) =>
 		{
-			addMessage( elements => [ ...elements, <li key={elements.length}>{`[${ new Date().toLocaleTimeString() }] ${ name } : ${ message }`}</li> ] );
+			addMessage( ( elements ) => [ ...elements, <li key={elements.length}>{`[${ new Date().toLocaleTimeString() }] ${ username } : ${ message }`}</li> ] );
 		} );
 
 		// On accroche enfin un deuxième écouteur pour récupérer les notifications
-		socket.on( "GameAlert", ( name, message ) =>
 		//  de connexion et de déconnexion des autres joueurs.
+		socket?.on( "GameAlert", ( username, message ) =>
 		{
-			addMessage( elements => [ ...elements, <i key={elements.length}>{t( message, { username: name } )}</i> ] );
+			addMessage( ( elements ) => [ ...elements, <i key={elements.length}>{t( message, { username } )}</i> ] );
 		} );
 	}, [ t, socket ] );
 
 	// Retour automatique aux messages les plus récents.
 	useEffect( () =>
 	{
-		const last = list.current?.lastChild as Element;
+		const last = list.current?.lastChild as Element | null;
 
 		if ( last )
 		{
@@ -84,7 +84,7 @@ export default function GameChat( props: GameChatProps )
 	}, [ messages ] );
 
 	// Affichage conditionnel du rendu HTML du composant.
-	if ( props.show )
+	if ( show )
 	{
 		// Le rendu est demandé par un composant parent ou par l'utilisateur.
 		//  Note : c'est principalement le cas dans la page dédiée aux communications

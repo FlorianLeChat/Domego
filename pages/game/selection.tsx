@@ -29,8 +29,8 @@ export default function RoleSelection()
 {
 	// Déclaration des constantes.
 	const { t } = useTranslation();
-	const router = useRouter();
 	const socket = useContext( SocketContext );
+	const { push, replace, query } = useRouter();
 
 	// Déclaration des variables d'état.
 	const [ disabled, setDisabled ] = useState( true );
@@ -46,7 +46,7 @@ export default function RoleSelection()
 		}
 
 		// On envoie enfin une requête au serveur pour lancer la partie.
-		socket.emit( "GameAdmin", "start", async ( icon: SweetAlertIcon, title: string, message: string ) =>
+		socket?.emit( "GameAdmin", "start", async ( icon: SweetAlertIcon, title: string, message: string ) =>
 		{
 			// Si la réponse indique que la partie ne peut pas être actuellement lancée,
 			//  on affiche le message d'erreur correspondant avec les informations
@@ -75,9 +75,9 @@ export default function RoleSelection()
 	useEffect( () =>
 	{
 		// On vérifie d'abord si des paramètres ont été transmis à la page.
-		if ( Object.keys( router.query ).length === 0 )
+		if ( Object.keys( query ).length === 0 )
 		{
-			router.push( "/404" );
+			push( "/404" );
 			return;
 		}
 
@@ -91,7 +91,7 @@ export default function RoleSelection()
 		//  distant en mettant en mémoire le temps actuel.
 		const start = Date.now();
 
-		socket.emit( "GamePing", async () =>
+		socket?.emit( "GamePing", async () =>
 		{
 			// Lors de la réception de la requête par le serveur,
 			//  on calcule la différence entre la temps actuel ainsi
@@ -114,22 +114,22 @@ export default function RoleSelection()
 		} );
 
 		// On accroche ensuite un événement pour rediriger automatiquement
-		socket.on( "GameStart", () =>
 		//  l'utilisateur lorsque la partie a été lancée par l'administrateur.
+		socket?.on( "GameStart", () =>
 		{
-			router.replace( {
-				query: { roomId: router.query[ "uuid" ], username: router.query[ "username" ], admin: router.query[ "admin" ], type: router.query[ "type" ] },
+			replace( {
+				query: { roomId: query.uuid, username: query.username, admin: query.admin, type: query.type },
 				pathname: "/game/board"
 			} );
 		} );
 
 		// On accroche enfin un dernier événement (seulement pour les administrateurs)
-		socket.on( "GameReady", ( state: boolean ) =>
 		//  afin de déterminer l'état du bouton de lancement de partie.
+		socket?.on( "GameReady", ( state: boolean ) =>
 		{
 			setDisabled( !state );
 		} );
-	}, [ t, router, socket ] );
+	}, [ t, replace, push, socket, query ] );
 
 	// Affichage du rendu HTML du composant.
 	return (
