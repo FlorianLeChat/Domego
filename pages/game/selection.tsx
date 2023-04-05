@@ -56,7 +56,7 @@ export default function RoleSelection()
 				const Swal = ( await import( "sweetalert2" ) ).default;
 
 				Swal.fire( {
-					icon: icon,
+					icon,
 					text: t( message ),
 					title: t( title ),
 					confirmButtonColor: "#28a745"

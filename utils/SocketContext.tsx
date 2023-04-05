@@ -1,7 +1,7 @@
 // Importation des dépendances.
 import Router from "next/router";
 import { io, Socket } from "socket.io-client";
-import { createContext } from "react";
+import { createContext, ReactNode } from "react";
 
 //
 // Permet de créer le socket de communication avec le serveur.
@@ -16,8 +16,8 @@ if ( typeof window !== "undefined" )
 	let retries = 0;
 
 	// On crée ensuite le socket de communication avec le serveur.
-	instance.auth = { "cacheId": cacheId };
 	instance = io( { path: `${ process.env.NEXT_PUBLIC_BASE_PATH }/socket.io` } );
+	instance.auth = { cacheId };
 	instance.on( "connect", () =>
 	{
 		// Si la connexion au serveur a réussi, on met alors en mémoire
@@ -61,7 +61,7 @@ export const SocketContext = createContext<Socket>( instance );
 // Permet d'importer la référence du contexte du socket.
 //  Source : https://stackoverflow.com/a/67270359
 //
-export const SocketProvider = ( { children }: { children: React.ReactNode; } ) =>
-(
-	<SocketContext.Provider value={instance}>{children}</SocketContext.Provider>
-);
+export function SocketProvider( { children }: { children: ReactNode; } )
+{
+	return <SocketContext.Provider value={instance}>{children}</SocketContext.Provider>;
+}

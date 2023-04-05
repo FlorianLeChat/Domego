@@ -4,7 +4,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, ChangeEvent } from "react";
 
 import styles from "./RoleCard.module.scss";
 import { UserType } from "@/enums/User";
@@ -118,7 +118,7 @@ export default function RoleCard( props: RoleCardProps )
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<article className={styles[ "RoleCard" ]}>
+		<article className={styles.RoleCard}>
 			{/* Image représentative du rôle */}
 			<Image src={`${ basePath }/assets/images/jobs/${ props.name }.webp`} alt={t( `pages.selection.${ props.name }_title` )} width={225} height={225} />
 

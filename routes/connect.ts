@@ -39,7 +39,9 @@ export function Connect( io: Server, socket: Socket )
 		else
 		{
 			// Vérification de l'unicité des noms d'utilisateurs.
-			for ( const identifier of room.players )
+			let found = false;
+
+			room.players.forEach( ( identifier ) =>
 			{
 				const user = findUser( identifier );
 
@@ -47,9 +49,14 @@ export function Connect( io: Server, socket: Socket )
 				//  qui a été indiqué.
 				if ( user && user.name === name )
 				{
-					callback( "error", "server.duplicated_username_title", "server.duplicated_username_description" );
-					return;
+					found = true;
 				}
+			} );
+
+			if ( found )
+			{
+				callback( "error", "server.duplicated_username_title", "server.duplicated_username_description" );
+				return;
 			}
 
 			// Vérification du nombre de places restantes.

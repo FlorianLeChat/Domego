@@ -2,7 +2,7 @@
 // Composant des communications textuelles entre les joueurs d'une partie.
 //
 import { useTranslation } from "next-i18next";
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect, useContext, ChangeEvent, FormEvent } from "react";
 
 import styles from "./GameChat.module.scss";
 import { SocketContext } from "@/utils/SocketContext";
@@ -25,13 +25,13 @@ export default function GameChat( props: GameChatProps )
 	const [ messages, addMessage ] = useState<JSX.Element[]>( [ <i key={0}>{t( "pages.index.chat_welcome" )}</i> ] );
 
 	// Récupération du message saisi par l'utilisateur.
-	const handleInputChange = ( event: React.ChangeEvent<HTMLInputElement> ) =>
+	const handleInputChange = ( event: ChangeEvent<HTMLInputElement> ) =>
 	{
 		setInput( event.target.value );
 	};
 
 	// Envoi des nouveaux messages au serveur.
-	const handleFormSubmit = ( event: React.FormEvent<HTMLFormElement> ) =>
+	const handleFormSubmit = ( event: FormEvent<HTMLFormElement> ) =>
 	{
 		// On cesse d'abord le comportement par défaut du formulaire.
 		event.preventDefault();
@@ -102,11 +102,9 @@ export default function GameChat( props: GameChatProps )
 			</section>
 		);
 	}
-	else
-	{
-		// Le rendu est caché par un composant parent.
-		// 	Note : c'est uniquement le cas lorsqu'on veut cacher le chat dans
-		//		 la page de sélection des rôles.
-		return ( <></> );
-	}
+
+	// Le rendu est caché par un composant parent.
+	//  Note : c'est uniquement le cas lorsqu'on veut cacher le chat dans
+	//   la page de sélection des rôles.
+	return null;
 }

@@ -10,10 +10,7 @@ const schema = new mongoose.Schema( {
 	creatorName: {
 		type: String,
 		required: true,
-		validate: ( value: string ) =>
-		{
-			return validator.isEmail( value );
-		}
+		validate: ( value: string ) => validator.isEmail( value )
 	},
 
 	// Nombre de joueurs présents.

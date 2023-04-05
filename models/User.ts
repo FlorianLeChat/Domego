@@ -11,10 +11,7 @@ const schema = new mongoose.Schema( {
 		type: String,
 		required: true,
 		lowercase: true,
-		validate: ( value: string ) =>
-		{
-			return validator.isEmail( value );
-		}
+		validate: ( value: string ) => validator.isEmail( value )
 	},
 
 	// Identité de l'utilisateur.

@@ -17,11 +17,11 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { appWithTranslation } from "next-i18next";
 
-// Importation des composants.
-const Layout = dynamic( () => import( "@/components/Layout" ) );
-
 // Importation des types.
 import type { AppProps } from "next/app";
+
+// Importation des composants.
+const Layout = dynamic( () => import( "@/components/Layout" ) );
 
 // Création de la police de caractères Roboto.
 const roboto = Roboto( {
@@ -30,7 +30,7 @@ const roboto = Roboto( {
 	display: "swap"
 } );
 
-const Domego = ( { Component, pageProps }: AppProps ) =>
+function Domego( { Component, pageProps }: AppProps )
 {
 	// Déclaration des constantes.
 	const { basePath } = useRouter();

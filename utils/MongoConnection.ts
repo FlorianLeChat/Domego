@@ -40,10 +40,7 @@ export async function ConnectToMongoDB()
 
 		mongoose.set( "strictQuery", true );
 
-		cached.promise = mongoose.connect( `mongodb://${ process.env[ "MONGODB_HOST" ] }:${ process.env[ "MONGODB_PORT" ] }/`, options ).then( ( mongoose ) =>
-		{
-			return mongoose;
-		} );
+		cached.promise = mongoose.connect( `mongodb://${ process.env.MONGODB_HOST }:${ process.env.MONGODB_PORT }/`, options ).then( ( connection ) => connection );
 	}
 
 	try

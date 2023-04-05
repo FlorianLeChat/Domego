@@ -25,7 +25,7 @@ module.exports = withPWA( {
 	async redirects()
 	{
 		// Définition des redirections de base.
-		let redirects = [
+		const redirects = [
 			{
 				source: "/source",
 				permanent: true,

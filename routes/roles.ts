@@ -43,18 +43,17 @@ export function Roles( _io: Server, socket: Socket )
 					//  n'est pas occupé par quelqu'un d'autre.
 					let cache = user.role && user.name;
 
-					for ( const identifier of room.players )
+					room.players.forEach( ( identifier ) =>
 					{
-						const user = findUser( identifier );
+						const target = findUser( identifier );
 
-						// Un utilisateur ne doit pas avoir le même rôle que celui
-						//	qui a été sélectionné.
-						if ( user && user.role === role )
+						// L'utilisateur ne doit pas avoir le même rôle que celui
+						//  qui a été sélectionné.
+						if ( target && target.role === role )
 						{
-							cache = user.name;
-							break;
+							cache = target.name;
 						}
-					}
+					} );
 
 					if ( !cache && !user.role && action === "select" )
 					{
@@ -66,9 +65,9 @@ export function Roles( _io: Server, socket: Socket )
 					}
 
 					// Dans le cas contraire, rien ne se passe mais on renvoie
-					callback( !cache, cache || user.name );
 					//  systématiquement un résultat pour indiquer si le changement
 					//  s'est effectué ou non.
+					callback( !cache, cache ?? user.name );
 				}
 				else
 				{
@@ -95,17 +94,16 @@ export function Roles( _io: Server, socket: Socket )
 
 				if ( !ready )
 				{
-					for ( const identifier of room.players )
+					room.players.forEach( ( identifier ) =>
 					{
-						const user = findUser( identifier );
+						const target = findUser( identifier );
 
-						// L'utilisateur ne doit pas être marqué comme en attente.
-						if ( user && user.state === UserState.WAITING )
+						// Un utilisateur ne doit pas être marqué comme en attente.
+						if ( target && target.state === UserState.WAITING )
 						{
 							ready = false;
-							break;
 						}
-					}
+					} );
 				}
 
 				// Après la vérification, on change l'état de la partie si nécessaire
