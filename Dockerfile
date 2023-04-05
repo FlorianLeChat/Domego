@@ -16,9 +16,6 @@ RUN --mount=type=cache,target=/usr/src/app/.npm \
 	npm set cache /usr/src/app/.npm && \
 	npm install
 
-# Rename the default environment file
-COPY .env.base .env
-
 # Find and replace the database host, username and password
 RUN sed -i "s/localhost/database/g" .env
 RUN sed -i "s/username/root/g" .env
