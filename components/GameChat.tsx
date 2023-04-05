@@ -37,10 +37,7 @@ export default function GameChat( { show }: GameChatProps )
 		event.preventDefault();
 
 		// On envoie ensuite le message au serveur.
-		if ( socket?.connected )
-		{
-			socket?.emit( "GameChat", input );
-		}
+		socket?.emit( "GameChat", input );
 
 		// On vide enfin le champ de saisie.
 		setInput( "" );
@@ -49,13 +46,7 @@ export default function GameChat( { show }: GameChatProps )
 	// Récupération des nouveaux messages.
 	useEffect( () =>
 	{
-		// On vérifie d'abord que la connexion aux sockets est établie.
-		if ( !socket?.connected )
-		{
-			return;
-		}
-
-		// On accroche ensuite un premier écouteur pour récupérer les messages
+		// On accroche d'abord un premier écouteur pour récupérer les messages
 		//  des autres joueurs depuis le serveur.
 		socket?.on( "GameChat", ( username, message ) =>
 		{

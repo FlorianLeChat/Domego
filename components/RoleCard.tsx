@@ -32,13 +32,7 @@ export default function RoleCard( { name, budget }: RoleCardProps )
 	// Bouton de sélection d'un rôle.
 	const selectRole = () =>
 	{
-		// On vérifie d'abord que la connexion aux sockets est établie.
-		if ( !socket?.connected )
-		{
-			return;
-		}
-
-		// On détermine ensuite si le bouton est coché ou non.
+		// On détermine d'abord si le bouton est coché ou non.
 		const state = !selected;
 
 		// On envoie enfin une requête au serveur pour déterminer s'il est
@@ -70,10 +64,7 @@ export default function RoleCard( { name, budget }: RoleCardProps )
 		//  que le joueur est prêt à jouer sans autre vérification.
 		const state = event.currentTarget.checked;
 
-		if ( socket?.connected )
-		{
-			socket?.emit( "GameRole", name, "ready", state );
-		}
+		socket?.emit( "GameRole", name, "ready", state );
 
 		setReady( state );
 	};
@@ -81,13 +72,7 @@ export default function RoleCard( { name, budget }: RoleCardProps )
 	// Réception des mises à jour de sélection des rôles.
 	useEffect( () =>
 	{
-		// On vérifie d'abord que la connexion aux sockets est établie.
-		if ( !socket?.connected )
-		{
-			return;
-		}
-
-		// On émet ensuite une requête au serveur pour vérifier
+		// On émet d'abord une requête au serveur pour vérifier
 		//  si le rôle est déjà sélectionné ou non.
 		socket?.emit( "GameRole", name, "check", true, ( available: boolean, player: string ) =>
 		{
@@ -114,7 +99,7 @@ export default function RoleCard( { name, budget }: RoleCardProps )
 				setSelected( state );
 			}
 		} );
-	}, [ name, socket ] );
+	}, [ socket, name ] );
 
 	// Affichage du rendu HTML du composant.
 	return (

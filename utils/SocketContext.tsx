@@ -6,7 +6,7 @@ import { createContext, ReactNode } from "react";
 //
 // Permet de créer le socket de communication avec le serveur.
 //
-let instance!: Socket;
+let instance!: Socket | null;
 
 if ( typeof window !== "undefined" )
 {
@@ -22,25 +22,25 @@ if ( typeof window !== "undefined" )
 	{
 		// Si la connexion au serveur a réussi, on met alors en mémoire
 		//  l'identifiant unique du socket.
-		sessionStorage.setItem( "cacheId", instance.id );
+		sessionStorage.setItem( "cacheId", instance?.id ?? "" );
 	} );
 	instance.on( "connect_error", () =>
 	{
 		// Si la connexion au serveur a échoué, on vérifie le nombre de
 		//  tentatives de connexion.
-		if ( retries === 0 )
+		if ( retries < 2 )
 		{
-			// Si c'est la première tentative, on tente de se reconnecter
-			//  au serveur après 1 seconde.
+			// Si c'est la première ou deuxième tentative, on tente de se
+			//  reconnecter au serveur après 1 seconde.
 			setTimeout( () =>
 			{
 				retries++;
-				instance.connect();
+				instance?.connect();
 			}, 1000 );
 		}
 		else if ( Router.pathname !== "/500" )
 		{
-			// Si c'est la deuxième tentative, on affiche l'erreur dans la
+			// Si c'est la troisième tentative, on affiche l'erreur dans la
 			//  console et on redirige vers la page d'erreur.
 			Router.push( "/500" );
 		}
@@ -50,7 +50,7 @@ if ( typeof window !== "undefined" )
 //
 // Permet de créer un contexte d'exportation avec le socket précédemment créé.
 //
-export const SocketContext = createContext<Socket>( instance );
+export const SocketContext = createContext( instance );
 
 //
 // Permet d'importer la référence du contexte du socket.

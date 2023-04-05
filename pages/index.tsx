@@ -38,13 +38,7 @@ export default function GameHome()
 	// Bouton de création d'une nouvelle partie.
 	const createNewGame = async () =>
 	{
-		// On vérifie d'abord que la connexion aux sockets est établie.
-		if ( !socket?.connected )
-		{
-			return;
-		}
-
-		// On réalise juste après une vérification de sécurité en utilisant le service
+		// On réalise d'abord une vérification de sécurité en utilisant le service
 		//  Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
 		const Swal = ( await import( "sweetalert2" ) ).default;
 
@@ -85,7 +79,7 @@ export default function GameHome()
 							//  par l'API de Google reCAPTCHA.
 							const token = await window.grecaptcha.execute( process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY ?? "", { action: "create" } );
 
-							socket.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
+							socket?.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
 							{
 								// Si la réponse indique que le joueur n'est pas un humain,
 								//  on affiche le message d'erreur correspondant avec les informations
@@ -158,7 +152,7 @@ export default function GameHome()
 				Swal.showLoading();
 
 				// Envoi de la requête de création de la partie.
-				socket.emit( "GameConnect", username, UserType.PLAYER, uuid, ( icon: SweetAlertIcon, title: string, message: string ) =>
+				socket?.emit( "GameConnect", username, UserType.PLAYER, uuid, ( icon: SweetAlertIcon, title: string, message: string ) =>
 				{
 					// Si la réponse indique que la partie n'a pas été créée avec succès,
 					//  on affiche le message d'erreur correspondant avec les informations

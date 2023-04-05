@@ -39,13 +39,7 @@ export default function RoleSelection()
 	// Bouton de lancement de la partie.
 	const startGame = () =>
 	{
-		// On vérifie d'abord que la connexion aux sockets est établie.
-		if ( !socket?.connected )
-		{
-			return;
-		}
-
-		// On envoie enfin une requête au serveur pour lancer la partie.
+		// On envoie une requête au serveur pour lancer la partie.
 		socket?.emit( "GameAdmin", "start", async ( icon: SweetAlertIcon, title: string, message: string ) =>
 		{
 			// Si la réponse indique que la partie ne peut pas être actuellement lancée,
@@ -81,13 +75,7 @@ export default function RoleSelection()
 			return;
 		}
 
-		// On vérifie également que la connexion aux sockets est établie.
-		if ( !socket?.connected )
-		{
-			return;
-		}
-
-		// On vérifie après la latence entre le client et le serveur
+		// On vérifie ensuite la latence entre le client et le serveur
 		//  distant en mettant en mémoire le temps actuel.
 		const start = Date.now();
 
@@ -113,7 +101,7 @@ export default function RoleSelection()
 			}
 		} );
 
-		// On accroche ensuite un événement pour rediriger automatiquement
+		// On accroche après un événement pour rediriger automatiquement
 		//  l'utilisateur lorsque la partie a été lancée par l'administrateur.
 		socket?.on( "GameStart", () =>
 		{

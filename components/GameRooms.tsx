@@ -44,13 +44,7 @@ export default function GameRooms( { username }: GameRoomsProps )
 	// Bouton pour rejoindre une partie (joueur/spectateur).
 	const joinGame = useCallback( async ( roomId: string, type: string, state: number ) =>
 	{
-		// On vérifie d'abord que la connexion aux sockets est établie.
-		if ( !socket?.connected )
-		{
-			return;
-		}
-
-		// On vérifie après si l'utilisateur veut bien rejoindre la partie.
+		// On vérifie d'abord si l'utilisateur veut bien rejoindre la partie.
 		const Swal = ( await import( "sweetalert2" ) ).default;
 		const result = await Swal.fire( {
 			icon: "question",
@@ -123,13 +117,7 @@ export default function GameRooms( { username }: GameRoomsProps )
 	// Récupération de l'ensemble des parties en cours.
 	const updateRooms = useCallback( () =>
 	{
-		// On vérifie d'abord que la connexion aux sockets est établie.
-		if ( !socket?.connected )
-		{
-			return;
-		}
-
-		// On effectue alors une requête pour récupérer la liste des parties en cours.
+		// On effectue une requête pour récupérer la liste des parties en cours.
 		socket?.emit( "GameRooms", ( list: GameRoomList[] ) =>
 		{
 			// Lors de la réception des données, on construit le HTML afin de l'afficher
