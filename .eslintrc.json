@@ -3,6 +3,9 @@
 	"parserOptions": {
 		"project": ["./tsconfig.json"]
 	},
+	"globals": {
+		"JSX": "readonly"
+	},
 	"extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "plugin:@typescript-eslint/strict", "plugin:jsx-a11y/strict", "airbnb"],
 	"plugins": ["@typescript-eslint"],
 	"parser": "@typescript-eslint/parser",
@@ -19,6 +22,7 @@
 		"comma-dangle": ["error", "never"],
 		"no-unused-vars": "off",
 		"global-require": "off",
+		"no-multi-assign": "off",
 		"space-in-parens": ["error", "always"],
 		"object-curly-newline": ["error", { "ObjectExpression": { "consistent": true } }],
 		"array-bracket-spacing": ["error", "always"],
@@ -27,10 +31,12 @@
 
 		"import/order": "off",
 		"import/extensions": ["error", "never"],
+		"import/prefer-default-export": "off",
 		"import/no-extraneous-dependencies": ["error", { "bundledDependencies": false }],
 
 		"@typescript-eslint/no-shadow": "error",
-		"@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+		"@typescript-eslint/no-unused-vars": ["error"],
+		"@typescript-eslint/no-unnecessary-condition": "off", // https://github.com/typescript-eslint/typescript-eslint/issues/4624
 
 		"react/jsx-indent": ["error", "tab"],
 		"react/react-in-jsx-scope": "off",
