@@ -50,7 +50,10 @@ export default function GameChat( { show }: GameChatProps )
 		//  des autres joueurs depuis le serveur.
 		socket?.on( "GameChat", ( username, message ) =>
 		{
-			addMessage( ( elements ) => [ ...elements, <li key={elements.length}>{`[${ new Date().toLocaleTimeString() }] ${ username } : ${ message }`}</li> ] );
+			addMessage( ( elements ) => [
+				...elements,
+				<li key={elements.length}>{`[${ new Date().toLocaleTimeString() }] ${ username } : ${ message }`}</li>
+			] );
 		} );
 
 		// On accroche enfin un deuxième écouteur pour récupérer les notifications
@@ -87,7 +90,10 @@ export default function GameChat( { show }: GameChatProps )
 
 				{/* Champ de saisie */}
 				<form onSubmit={handleFormSubmit}>
-					<input type="text" placeholder="Lorem ipsum dolor sit amet..." onChange={handleInputChange} value={input} />
+					<input
+						type="text" placeholder="Lorem ipsum dolor sit amet..."
+						onChange={handleInputChange} value={input}
+					/>
 					<button type="submit">{t( "pages.index.send_chat_message" )}</button>
 				</form>
 			</section>

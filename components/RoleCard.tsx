@@ -105,7 +105,11 @@ export default function RoleCard( { name, budget }: RoleCardProps )
 	return (
 		<article className={styles.RoleCard}>
 			{/* Image représentative du rôle */}
-			<Image src={`${ basePath }/assets/images/jobs/${ name }.webp`} alt={t( `pages.selection.${ name }_title` )} width={225} height={225} />
+			<Image
+				src={`${ basePath }/assets/images/jobs/${ name }.webp`}
+				alt={t( `pages.selection.${ name }_title` )}
+				width={225} height={225}
+			/>
 
 			{/* Utilisateur jouant ce rôle */}
 			<span>{target}</span>
@@ -123,7 +127,11 @@ export default function RoleCard( { name, budget }: RoleCardProps )
 
 			{/* Bouton de sélection du rôle */}
 			<div>
-				<input id="select" type="checkbox" onChange={selectRole} checked={selected} disabled={query.type === UserType.SPECTATOR || ready} />
+				<input
+					id="select" type="checkbox"
+					checked={selected} onChange={selectRole}
+					disabled={query.type === UserType.SPECTATOR || ready}
+				/>
 				<label htmlFor="select">{t( "pages.selection.check" )}</label>
 			</div>
 

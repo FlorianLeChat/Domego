@@ -32,6 +32,7 @@ export async function ConnectToMongoDB()
 	if ( !cached.promise )
 	{
 		// Si ce n'est pas le cas, on définit d'abord la connexion à la base de données.
+		const uri = `mongodb://${ process.env.MONGODB_HOST }:${ process.env.MONGODB_PORT }/`;
 		const options = {
 			user: process.env.MONGODB_USERNAME,
 			pass: process.env.MONGODB_PASSWORD,
@@ -40,7 +41,8 @@ export async function ConnectToMongoDB()
 
 		mongoose.set( "strictQuery", true );
 
-		cached.promise = mongoose.connect( `mongodb://${ process.env.MONGODB_HOST }:${ process.env.MONGODB_PORT }/`, options ).then( ( connection ) => connection );
+		cached.promise = mongoose.connect( uri, options )
+			.then( ( connection ) => connection );
 	}
 
 	try

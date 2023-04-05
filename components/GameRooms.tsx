@@ -78,7 +78,11 @@ export default function GameRooms( { username }: GameRoomsProps )
 				Swal.showLoading();
 
 				// Envoi de la requête pour rejoindre la partie.
-				socket?.emit( "GameConnect", username, type, roomId, ( icon: SweetAlertIcon, title: string, message: string ) =>
+				socket?.emit( "GameConnect", username, type, roomId, (
+					icon: SweetAlertIcon,
+					title: string,
+					message: string
+				) =>
 				{
 					// Si la réponse indique que la partie n'a pas été créée avec succès,
 					//  on affiche le message d'erreur correspondant avec les informations
@@ -129,9 +133,20 @@ export default function GameRooms( { username }: GameRoomsProps )
 					<td>{room.players}/6 [{room.spectators}]</td>
 					<td>
 						{/* Rejoindre la partie */}
-						<button type="button" onClick={() => joinGame( room.id, UserType.PLAYER, room.state )} disabled={room.state !== RoomState.CREATED}>{t( "pages.rooms.join" )}</button>
+						<button
+							type="button" disabled={room.state !== RoomState.CREATED}
+							onClick={() => joinGame( room.id, UserType.PLAYER, room.state )}
+						>
+							{t( "pages.rooms.join" )}
+						</button>
+
 						{/* Observer la partie */}
-						<button type="button" onClick={() => joinGame( room.id, UserType.SPECTATOR, room.state )} disabled={room.state === RoomState.FINISHED}>{t( "pages.rooms.watch" )}</button>
+						<button
+							type="button" disabled={room.state === RoomState.FINISHED}
+							onClick={() => joinGame( room.id, UserType.SPECTATOR, room.state )}
+						>
+							{t( "pages.rooms.watch" )}
+						</button>
 					</td>
 				</tr>
 			) ) );

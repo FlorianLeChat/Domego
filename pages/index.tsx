@@ -77,7 +77,8 @@ export default function GameHome()
 						{
 							// Récupération et vérification du jeton d'authentification généré
 							//  par l'API de Google reCAPTCHA.
-							const token = await window.grecaptcha.execute( process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY ?? "", { action: "create" } );
+							const key = process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY ?? "";
+							const token = await window.grecaptcha.execute( key, { action: "create" } );
 
 							socket?.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
 							{
@@ -152,7 +153,11 @@ export default function GameHome()
 				Swal.showLoading();
 
 				// Envoi de la requête de création de la partie.
-				socket?.emit( "GameConnect", username, UserType.PLAYER, uuid, ( icon: SweetAlertIcon, title: string, message: string ) =>
+				socket?.emit( "GameConnect", username, UserType.PLAYER, uuid, (
+					icon: SweetAlertIcon,
+					title: string,
+					message: string
+				) =>
 				{
 					// Si la réponse indique que la partie n'a pas été créée avec succès,
 					//  on affiche le message d'erreur correspondant avec les informations
@@ -226,7 +231,10 @@ export default function GameHome()
 					(<Trans i18nKey="pages.index.username_length" components={{ strong: <strong /> }} />)
 				</label>
 
-				<input type="text" id="pseudo" name="pseudo" placeholder="Marc007" autoComplete="username" spellCheck="false" minLength={5} maxLength={20} onChange={updateUsername} value={username} required />
+				<input
+					type="text" id="pseudo" name="pseudo" placeholder="Marc007" autoComplete="username" spellCheck="false"
+					minLength={5} maxLength={20} value={username} onChange={updateUsername} required
+				/>
 
 				{/* Bouton de création d'une nouvelle partie */}
 				<button type="button" onClick={createNewGame} disabled={disabled}>
@@ -238,7 +246,15 @@ export default function GameHome()
 			</article>
 
 			{/* Avertissement de Google reCAPTCHA */}
-			<small><Trans i18nKey="pages.index.google_recaptcha" components={{ a1: <a href="https://policies.google.com/privacy">...</a>, a2: <a href="https://policies.google.com/terms">...</a> }} /></small>
+			<small>
+				<Trans
+					i18nKey="pages.index.google_recaptcha"
+					components={{
+						a1: <a href="https://policies.google.com/privacy">...</a>,
+						a2: <a href="https://policies.google.com/terms">...</a>
+					}}
+				/>
+			</small>
 		</section>
 	);
 }

@@ -13,7 +13,12 @@ import type { DocumentProps } from "next/document";
 export default function Document( { __NEXT_DATA__ }: DocumentProps )
 {
 	// Déclaration des constantes.
-	const url = new URL( process.env.NEXT_PUBLIC_BASE_PATH + __NEXT_DATA__.page, process.env.NEXT_PUBLIC_URL ).href;
+	const websiteUrl = new URL( process.env.NEXT_PUBLIC_BASE_PATH + __NEXT_DATA__.page, process.env.NEXT_PUBLIC_URL );
+	const recaptchaUrl = new URL( "https://www.google.com/recaptcha/api.js" );
+	const analyticsUrl = new URL( "https://www.googletagmanager.com/gtag/js" );
+
+	recaptchaUrl.searchParams.append( "render", process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY ?? "" );
+	analyticsUrl.searchParams.append( "id", process.env.NEXT_PUBLIC_ANALYTICS_IDENTIFIER ?? "" );
 
 	// Affichage du rendu HTML de la page.
 	return (
@@ -21,14 +26,14 @@ export default function Document( { __NEXT_DATA__ }: DocumentProps )
 			<Head>
 				{/* Informations pour les moteurs de recherche */}
 				<meta property="og:type" content="website" />
-				<meta property="og:url" content={url} />
+				<meta property="og:url" content={websiteUrl.href} />
 				<meta property="og:locale" content={__NEXT_DATA__.locale} />
 				<meta property="og:title" content={process.env.NEXT_PUBLIC_TITLE} />
 				<meta property="og:description" content={process.env.NEXT_PUBLIC_DESCRIPTION} />
 				<meta property="og:image" content={process.env.NEXT_PUBLIC_BANNER} />
 
 				<meta property="twitter:card" content="summary_large_image" />
-				<meta property="twitter:url" content={url} />
+				<meta property="twitter:url" content={websiteUrl.href} />
 				<meta property="twitter:title" content={process.env.NEXT_PUBLIC_TITLE} />
 				<meta property="twitter:description" content={process.env.NEXT_PUBLIC_DESCRIPTION} />
 				<meta property="twitter:image" content={process.env.NEXT_PUBLIC_BANNER} />
@@ -39,8 +44,8 @@ export default function Document( { __NEXT_DATA__ }: DocumentProps )
 				<link rel="preconnect" href="https://www.gstatic.com" />
 
 				{/* Scripts JavaScript */}
-				<Script src={`https://www.googletagmanager.com/gtag/js?id=${ process.env.NEXT_PUBLIC_ANALYTICS_IDENTIFIER }`} strategy="afterInteractive" />
-				<Script src={`https://www.google.com/recaptcha/api.js?render=${ process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY }`} strategy="afterInteractive" />
+				<Script src={recaptchaUrl.href} strategy="afterInteractive" />
+				<Script src={analyticsUrl.href} strategy="afterInteractive" />
 
 				{/* Google Analytics */}
 				<Script id="google-analytics" strategy="afterInteractive">

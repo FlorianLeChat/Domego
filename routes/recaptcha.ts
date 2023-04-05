@@ -27,7 +27,9 @@ export function Recaptcha( _io: Server, socket: Socket )
 		// On effectue alors une requête à l'API de Google reCAPTCHA
 		//  afin de vérifier si le jeton d'authentification envoyé par le client
 		//  est valide ou non.
-		const response = await fetch( `https://www.google.com/recaptcha/api/siteverify?secret=${ process.env.CAPTCHA_SECRET_KEY }&response=${ token }` );
+		const secret = process.env.CAPTCHA_SECRET_KEY;
+		const endpoint = `https://www.google.com/recaptcha/api/siteverify?secret=${ secret }&response=${ token }`;
+		const response = await fetch( endpoint );
 
 		if ( response.ok )
 		{

@@ -20,8 +20,9 @@ export function Connect( io: Server, socket: Socket )
 		}
 
 		// On vérifie également si les informations transmises par l'utilisateur
-		if ( ( name.length < 5 || name.length > 20 ) || ( !Object.values( UserType ).includes( type ) ) || game.length !== 36 )
 		//  sont considérées comme valides.
+		if ( ( name.length < 5 || name.length > 20 ) || game.length !== 36
+			|| ( !Object.values( UserType ).includes( type ) ) )
 		{
 			callback( "error", "server.invalid_data_title", "server.invalid_data_description" );
 			return;

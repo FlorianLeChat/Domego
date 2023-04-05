@@ -9,7 +9,11 @@ export default function HttpGet()
 	// Récupération des données de l'API.
 	const { data, error, isLoading } = useSWR( "http://localhost:3000/api/users", async ( url ) => fetch( url, {
 		method: "POST",
-		body: JSON.stringify( { email: "florian@gmail.com", name: { first: "Florian", last: "Trayon" }, age: Math.floor( Math.random() * 100 ) + 1 } ),
+		body: JSON.stringify( {
+			email: "florian@gmail.com",
+			name: { first: "Florian", last: "Trayon" },
+			age: Math.floor( Math.random() * 100 ) + 1
+		} ),
 		headers: {
 			"Content-type": "application/json; charset=UTF-8"
 		}
