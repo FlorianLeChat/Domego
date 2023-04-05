@@ -24,7 +24,7 @@ if ( typeof window !== "undefined" )
 		//  l'identifiant unique du socket.
 		sessionStorage.setItem( "cacheId", instance.id );
 	} );
-	instance.on( "connect_error", ( error ) =>
+	instance.on( "connect_error", () =>
 	{
 		// Si la connexion au serveur a échoué, on vérifie le nombre de
 		//  tentatives de connexion.
@@ -38,16 +38,11 @@ if ( typeof window !== "undefined" )
 				instance.connect();
 			}, 1000 );
 		}
-		else
+		else if ( Router.pathname !== "/500" )
 		{
 			// Si c'est la deuxième tentative, on affiche l'erreur dans la
-			console.error( error.message );
-
-			if ( Router.pathname !== "/500" )
-			{
-				Router.push( "/500" );
-			}
 			//  console et on redirige vers la page d'erreur.
+			Router.push( "/500" );
 		}
 	} );
 }
