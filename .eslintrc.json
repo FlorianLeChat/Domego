@@ -36,7 +36,6 @@
 
 		"@typescript-eslint/no-shadow": "error",
 		"@typescript-eslint/no-unused-vars": ["error"],
-		"@typescript-eslint/no-unnecessary-condition": "off", // https://github.com/typescript-eslint/typescript-eslint/issues/4624
 
 		"react/jsx-indent": ["error", "tab"],
 		"react/react-in-jsx-scope": "off",

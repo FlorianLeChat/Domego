@@ -62,7 +62,7 @@ export default function GameHome()
 					Swal.showLoading();
 
 					// Vérification de la disponibilité du service reCAPTCHA.
-					if ( !window.grecaptcha )
+					if ( typeof window.grecaptcha === "undefined" )
 					{
 						// Si le service est indisponible, on affiche un message d'erreur
 						//  et on arrête l'exécution de la fonction.

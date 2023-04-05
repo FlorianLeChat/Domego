@@ -53,6 +53,8 @@ export function Connect( io: Server, socket: Socket )
 				}
 			} );
 
+			// Note : https://github.com/typescript-eslint/typescript-eslint/issues/4624
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			if ( found )
 			{
 				callback( "error", "server.duplicated_username_title", "server.duplicated_username_description" );

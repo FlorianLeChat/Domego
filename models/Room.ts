@@ -21,4 +21,4 @@ const schema = new mongoose.Schema( {
 
 } );
 
-export default mongoose.models.Room || mongoose.model( "Room", schema );
+export default ( "Room" in mongoose.models ) || mongoose.model( "Room", schema );
