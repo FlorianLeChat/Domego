@@ -60,4 +60,4 @@ export async function ConnectToMongoDB()
 
 	// On retourne enfin la connexion à la base de données.
 	return cached.conn;
-};
+}

@@ -10,4 +10,4 @@ export function Rooms( _io: Server, socket: Socket )
 	{
 		callback( getRooms() );
 	} );
-};
+}

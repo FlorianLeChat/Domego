@@ -80,4 +80,4 @@ export function Connect( io: Server, socket: Socket )
 		//  sauf au nouvel utilisateur.
 		io.to( user.game ).emit( "GameAlert", user.name, "server.user_connected" );
 	} );
-};
+}

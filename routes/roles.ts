@@ -116,4 +116,4 @@ export function Roles( _io: Server, socket: Socket )
 			}
 		}
 	} );
-};
+}

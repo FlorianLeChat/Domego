@@ -9,4 +9,4 @@ export function Ping( _io: Server, socket: Socket )
 	{
 		callback();
 	} );
-};
+}

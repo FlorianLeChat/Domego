@@ -22,7 +22,7 @@ export async function getStaticProps( { locale }: { locale: string; } )
 	return {
 		props: {
 			...( await serverSideTranslations( locale ?? i18nextConfig.i18n.defaultLocale ) )
-		},
+		}
 	};
 }
 

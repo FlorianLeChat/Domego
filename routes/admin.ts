@@ -48,4 +48,4 @@ export function Admin( io: Server, socket: Socket )
 			}
 		}
 	} );
-};
+}

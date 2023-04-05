@@ -90,6 +90,6 @@ const Domego = ( { Component, pageProps }: AppProps ) =>
 			</Layout>
 		</>
 	);
-};
+}
 
 export default appWithTranslation( Domego );

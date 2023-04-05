@@ -49,4 +49,4 @@ export function Recaptcha( _io: Server, socket: Socket )
 			}
 		}
 	} );
-};
+}

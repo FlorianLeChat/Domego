@@ -44,4 +44,4 @@ export function Disconnect( io: Server, socket: Socket )
 			updateRoom( user.game, socket.id, user.type, false );
 		}
 	} );
-};
+}
