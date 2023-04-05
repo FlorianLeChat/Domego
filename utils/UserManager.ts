@@ -17,6 +17,14 @@ export function registerUser( id: string, name: string, type: UserType, game: st
 }
 
 //
+// Permet de récupérer les informations d'un utilisateur en particulier.
+//
+export function findUser( id: string )
+{
+	return users.find( ( user ) => user.id === id );
+}
+
+//
 // Permet de supprimer les données d'un utilisateur déconnecté.
 //
 export function destroyUser( id: string )
@@ -27,14 +35,8 @@ export function destroyUser( id: string )
 	{
 		return users.splice( index, 1 )[ 0 ];
 	}
-}
 
-//
-// Permet de récupérer les informations d'un utilisateur en particulier.
-//
-export function findUser( id: string )
-{
-	return users.find( ( user ) => user.id === id );
+	return null;
 }
 
 //
