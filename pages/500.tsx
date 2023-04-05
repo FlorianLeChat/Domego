@@ -25,7 +25,7 @@ export default function HTTP500()
 
 	// Affichage du rendu HTML de la page.
 	return (
-		<section id={styles[ "InternalError" ]}>
+		<section id={styles.InternalError}>
 			{/* Titre de la page */}
 			<h1>{t( "pages.internalerror.title" )}</h1>
 

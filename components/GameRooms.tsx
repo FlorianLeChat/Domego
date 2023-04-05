@@ -176,7 +176,7 @@ export default function GameRooms( props: GameRoomsProps )
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<table id={styles[ "GameRooms" ]}>
+		<table id={styles.GameRooms}>
 			<thead>
 				<tr>
 					{/* Titre du tableau */}

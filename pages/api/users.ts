@@ -11,7 +11,7 @@ export default async function handler( request: NextApiRequest, response: NextAp
 	await ConnectToMongoDB();
 
 	// Restriction de l'accès à l'API en mode de production.
-	if ( process.env[ "NODE_ENV" ] === "production" )
+	if ( process.env.NODE_ENV === "production" )
 	{
 		response.status( 403 ).end();
 	}

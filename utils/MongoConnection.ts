@@ -33,9 +33,9 @@ export async function ConnectToMongoDB()
 	{
 		// Si ce n'est pas le cas, on définit d'abord la connexion à la base de données.
 		const options = {
-			user: process.env[ "MONGODB_USERNAME" ],
-			pass: process.env[ "MONGODB_PASSWORD" ],
-			dbName: process.env[ "MONGODB_DATABASE" ]
+			user: process.env.MONGODB_USERNAME,
+			pass: process.env.MONGODB_PASSWORD,
+			dbName: process.env.MONGODB_DATABASE
 		};
 
 		mongoose.set( "strictQuery", true );

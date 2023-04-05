@@ -49,7 +49,7 @@ export default function GameHome()
 		//  Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
 		const Swal = ( await import( "sweetalert2" ) ).default;
 
-		if ( process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] && process.env[ "NODE_ENV" ] === "production" )
+		if ( process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY && process.env.NODE_ENV === "production" )
 		{
 			await Swal.fire( {
 				icon: "info",
@@ -83,8 +83,8 @@ export default function GameHome()
 						try
 						{
 							// Récupération et vérification du jeton d'authentification généré
-							const token = await window.grecaptcha.execute( process.env[ "NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY" ] ?? "", { action: "create" } );
 							//  par l'API de Google reCAPTCHA.
+							const token = await window.grecaptcha.execute( process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY ?? "", { action: "create" } );
 
 							socket.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
 							{
@@ -210,7 +210,7 @@ export default function GameHome()
 
 	// Affichage du rendu HTML de la page.
 	return (
-		<section id={styles[ "GameHome" ]}>
+		<section id={styles.GameHome}>
 			{/* Affichage de l'animation du logo vers le dépôt GitHub */}
 			{/* Source : https://tholman.com/github-corners/ */}
 			<a href="https://github.com/FlorianLeChat/Domego" target="_blank" rel="noopener noreferrer">

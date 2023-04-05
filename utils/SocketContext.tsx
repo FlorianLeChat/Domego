@@ -16,8 +16,8 @@ if ( typeof window !== "undefined" )
 	let retries = 0;
 
 	// On crée ensuite le socket de communication avec le serveur.
-	instance = io( { path: process.env[ "NEXT_PUBLIC_BASE_PATH" ] + "/socket.io" } );
 	instance.auth = { "cacheId": cacheId };
+	instance = io( { path: `${ process.env.NEXT_PUBLIC_BASE_PATH }/socket.io` } );
 	instance.on( "connect", () =>
 	{
 		// Si la connexion au serveur a réussi, on met alors en mémoire

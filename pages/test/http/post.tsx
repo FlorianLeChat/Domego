@@ -39,7 +39,7 @@ export default function HttpGet()
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<section id={styles[ "TestApi" ]}>
+		<section id={styles.TestApi}>
 			<h1>Requête de type POST vers l&apos;API</h1>
 
 			<p>État de la réponse : {response}</p>

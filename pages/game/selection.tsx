@@ -134,7 +134,7 @@ export default function RoleSelection()
 
 	// Affichage du rendu HTML du composant.
 	return (
-		<section id={styles[ "RoleSelection" ]}>
+		<section id={styles.RoleSelection}>
 			{/* Titre de la page */}
 			<h1>{t( "pages.selection.title" )}</h1>
 

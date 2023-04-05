@@ -25,7 +25,7 @@ export default function HTTP404()
 
 	// Affichage du rendu HTML de la page.
 	return (
-		<section id={styles[ "NotFound" ]}>
+		<section id={styles.NotFound}>
 			{/* Titre de la page */}
 			<h1>{t( "pages.notfound.title" )}</h1>
 

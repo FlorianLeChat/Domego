@@ -13,7 +13,7 @@ export default function handler( _request: NextApiRequest, response: NextApiResp
 	{
 		// Si ce n'est pas le cas, on créé une nouvelle instance de Socket.io avant de la mettre en mémoire.
 		const io = new Server( response.socket.server, {
-			path: process.env[ "NEXT_PUBLIC_BASE_PATH" ] + "/socket.io",
+			path: `${ process.env.NEXT_PUBLIC_BASE_PATH }/socket.io`
 		} );
 
 		response.socket.server.io = io;
@@ -21,12 +21,12 @@ export default function handler( _request: NextApiRequest, response: NextApiResp
 		io.use( ( socket, next ) =>
 		{
 			// On vérifie ensuite si l'utilisateur a transmis un identifiant
-			if ( socket.handshake.auth[ "cacheId" ] )
 			//  unique en provenance de son navigateur pendant la phase de connexion.
+			if ( socket.handshake.auth.cacheId )
 			{
 				// On tente de récupère un quelconque utilisateur actuellement
-				const user = findUser( socket.handshake.auth[ "cacheId" ] );
 				//  enregistré avant de le mettre à jour.
+				const user = findUser( socket.handshake.auth.cacheId );
 
 				if ( user )
 				{

@@ -90,7 +90,7 @@ export default function GameChat( props: GameChatProps )
 		//  Note : c'est principalement le cas dans la page dédiée aux communications
 		//   textuelles entre les joueurs de la partie.
 		return (
-			<section id={styles[ "GameChat" ]}>
+			<section id={styles.GameChat}>
 				{/* Liste des messages */}
 				<ul ref={list}>{messages}</ul>
 
