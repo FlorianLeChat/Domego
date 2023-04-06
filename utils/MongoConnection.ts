@@ -4,16 +4,17 @@
 //
 import mongoose from "mongoose";
 
+// On récupère d'abord la connexion établie avec la base de données.
 declare global
 {
-	// Déclaration de la variable globale mongoose.
+	// Note : https://mariusschulz.com/blog/declaring-global-variables-in-typescript#declare-a-global-variable
+	// eslint-disable-next-line vars-on-top, no-var
 	var mongoose: { conn?: mongoose.Mongoose, promise?: Promise<mongoose.Mongoose>; };
 }
 
-// On récupère d'abord la connexion établie avec la base de données.
 let cached = global.mongoose;
 
-if ( !cached )
+if ( typeof cached === "undefined" )
 {
 	// Si aucune connexion n'est établie, on se prépare à en établir une.
 	cached = global.mongoose = { conn: undefined, promise: undefined };

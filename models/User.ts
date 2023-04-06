@@ -28,4 +28,5 @@ const schema = new mongoose.Schema( {
 
 } );
 
-export default ( "User" in mongoose.models ) || mongoose.model( "User", schema );
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+export default mongoose.models.User || mongoose.model( "User", schema );

@@ -21,4 +21,5 @@ const schema = new mongoose.Schema( {
 
 } );
 
-export default ( "Room" in mongoose.models ) || mongoose.model( "Room", schema );
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+export default mongoose.models.Room || mongoose.model( "Room", schema );
