@@ -71,7 +71,7 @@
     "build": "next build && next-sitemap",
     "start": "pm2 start --name domego next -- start -p 3000",
     "stop": "pm2 delete domego",
-    "restart": "pm2 restart domego",
+    "restart": "pm2 restart domego --update-env",
     "reload": "pm2 reload domego",
     "tunnel": "npx localtunnel --port 3000"
   },
