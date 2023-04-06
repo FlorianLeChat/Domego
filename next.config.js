@@ -17,7 +17,12 @@ const withPWA = require( "next-pwa" )( {
 	}
 } );
 
-module.exports = withPWA( {
+const withBundleAnalyzer = require( "@next/bundle-analyzer" )( {
+	enabled: process.env.ANALYZE === "true",
+	openAnalyzer: false,
+} );
+
+module.exports = withBundleAnalyzer( withPWA( {
 	i18n,
 	basePath: process.env.NEXT_PUBLIC_BASE_PATH,
 	poweredByHeader: false,
@@ -46,4 +51,4 @@ module.exports = withPWA( {
 		// Application des redirections.
 		return redirects;
 	}
-} );
+} ) );

@@ -32,7 +32,8 @@
     "sweetalert2": "<11.4.9",
     "sanitize.css": "~13.0",
     "next-i18next": "<=12.1.0",
-    "socket.io-client": "~4.6"
+    "socket.io-client": "~4.6",
+    "@next/bundle-analyzer": "~13.2"
   },
   "devDependencies": {
     "@types/cors": "~2.8",
