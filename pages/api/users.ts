@@ -1,9 +1,12 @@
 //
 // Route fournissant des données sur les utilisateurs.
 //
-import User from "@/models/User";
+import mongoose from "mongoose";
+import UserSchema from "@/models/User";
 import { ConnectToMongoDB } from "@/utils/MongoConnection";
 import type { NextApiRequest, NextApiResponse } from "next";
+
+type SchemaAttributes = mongoose.InferSchemaType<typeof UserSchema>;
 
 export default async function handler( request: NextApiRequest, response: NextApiResponse )
 {
@@ -16,6 +19,10 @@ export default async function handler( request: NextApiRequest, response: NextAp
 		response.status( 403 ).end();
 	}
 
+	// Génération du modèle de données pour les utilisateurs.
+	const UserModel: mongoose.Model<SchemaAttributes> = ( "User" in mongoose.models )
+		? mongoose.models.User : mongoose.model( "User", UserSchema );
+
 	// Détermination de la méthode HTTP utilisée.
 	switch ( request.method )
 	{
@@ -24,7 +31,7 @@ export default async function handler( request: NextApiRequest, response: NextAp
 			// Récupération de l'ensemble des utilisateurs (maximum 10).
 			try
 			{
-				const document = await User.find().limit( 10 );
+				const document = await UserModel.find().limit( 10 );
 
 				if ( Object.keys( document ).length > 0 )
 				{
@@ -50,7 +57,7 @@ export default async function handler( request: NextApiRequest, response: NextAp
 			// Ajout d'un nouvel utilisateur dans la base de données.
 			try
 			{
-				const user = new User( request.body );
+				const user = new UserModel( request.body );
 				const document = await user.save();
 
 				if ( Object.keys( document ).length > 0 )
@@ -77,9 +84,9 @@ export default async function handler( request: NextApiRequest, response: NextAp
 			// Modification d'un l'utilisateur dans la base de données.
 			try
 			{
-				const document = await User.findOneAndUpdate( request.body.filter, request.body.update );
+				const document = await UserModel.findOneAndUpdate( request.body.filter, request.body.update );
 
-				if ( Object.keys( document ).length > 0 )
+				if ( document && Object.keys( document ).length > 0 )
 				{
 					// Données modifiées.
 					response.status( 200 ).json( { response: document } );
@@ -102,9 +109,9 @@ export default async function handler( request: NextApiRequest, response: NextAp
 			// Suppression d'un utilisateur dans la base de données.
 			try
 			{
-				const document = await User.findOneAndDelete( request.body );
+				const document = await UserModel.findOneAndDelete( request.body );
 
-				if ( Object.keys( document ).length > 0 )
+				if ( document && Object.keys( document ).length > 0 )
 				{
 					// Données supprimées.
 					response.status( 200 ).json( { response: document } );

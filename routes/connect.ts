@@ -40,22 +40,14 @@ export function Connect( io: Server, socket: Socket )
 		else
 		{
 			// Vérification de l'unicité des noms d'utilisateurs.
-			let found = false;
-
-			room.players.forEach( ( identifier ) =>
+			const found = room.players.some( ( identifier ) =>
 			{
-				const user = findUser( identifier );
-
 				// L'utilisateur ne doit pas avoir le même nom d'utilisateur que celui
 				//  qui a été indiqué.
-				if ( user && user.name === name )
-				{
-					found = true;
-				}
+				const user = findUser( identifier );
+				return user && user.name === name;
 			} );
 
-			// Note : https://github.com/typescript-eslint/typescript-eslint/issues/4624
-			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			if ( found )
 			{
 				callback( "error", "server.duplicated_username_title", "server.duplicated_username_description" );

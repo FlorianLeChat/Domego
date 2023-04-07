@@ -5,32 +5,25 @@
 import mongoose from "mongoose";
 
 // On récupère d'abord la connexion établie avec la base de données.
-declare global
-{
-	// Note : https://mariusschulz.com/blog/declaring-global-variables-in-typescript#declare-a-global-variable
-	// eslint-disable-next-line vars-on-top, no-var
-	var mongoose: { conn?: mongoose.Mongoose, promise?: Promise<mongoose.Mongoose>; };
-}
+let cache = global.mongoose;
 
-let cached = global.mongoose;
-
-if ( typeof cached === "undefined" )
+if ( typeof cache === "undefined" )
 {
 	// Si aucune connexion n'est établie, on se prépare à en établir une.
-	cached = global.mongoose = { conn: undefined, promise: undefined };
+	cache = global.mongoose = { conn: undefined, promise: undefined };
 }
 
 export async function ConnectToMongoDB()
 {
 	// On vérifie ensuite si la connexion est déjà établie.
-	if ( cached.conn )
+	if ( cache.conn )
 	{
 		// Si c'est le cas, on retourne directement la connexion.
-		return cached.conn;
+		return cache.conn;
 	}
 
 	// On vérifie également si la promesse de connexion est déjà en cours.
-	if ( !cached.promise )
+	if ( !cache.promise )
 	{
 		// Si ce n'est pas le cas, on définit d'abord la connexion à la base de données.
 		const uri = `mongodb://${ process.env.MONGODB_HOST }:${ process.env.MONGODB_PORT }/`;
@@ -42,22 +35,25 @@ export async function ConnectToMongoDB()
 
 		mongoose.set( "strictQuery", true );
 
-		cached.promise = mongoose.connect( uri, options )
-			.then( ( connection ) => connection );
+		cache = {
+			conn: undefined,
+			promise: mongoose.connect( uri, options )
+				.then( ( connection ) => connection )
+		};
 	}
 
 	try
 	{
 		// On attend après la connexion à la base de données.
-		cached.conn = await cached.promise;
+		cache = { conn: await cache.promise, promise: undefined };
 	}
 	catch ( error )
 	{
 		// Si une erreur survient, on supprime la promesse de connexion.
-		cached.promise = undefined;
+		cache = { conn: undefined, promise: undefined };
 		throw error;
 	}
 
 	// On retourne enfin la connexion à la base de données.
-	return cached.conn;
+	return cache.conn;
 }

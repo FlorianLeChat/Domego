@@ -1,10 +1,10 @@
 //
 // Modèle de données pour les parties.
 //
-import mongoose from "mongoose";
 import validator from "validator";
+import { Schema } from "mongoose";
 
-const schema = new mongoose.Schema( {
+const RoomSchema = new Schema( {
 
 	// Nom du créateur de la partie.
 	creatorName: {
@@ -21,5 +21,4 @@ const schema = new mongoose.Schema( {
 
 } );
 
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-export default mongoose.models.Room || mongoose.model( "Room", schema );
+export default RoomSchema;

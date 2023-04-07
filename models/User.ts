@@ -1,10 +1,10 @@
 //
 // Modèle de données pour les utilisateurs.
 //
-import mongoose from "mongoose";
 import validator from "validator";
+import { Schema } from "mongoose";
 
-const schema = new mongoose.Schema( {
+const UserSchema = new Schema( {
 
 	// Adresse électronique de l'utilisateur.
 	email: {
@@ -28,5 +28,4 @@ const schema = new mongoose.Schema( {
 
 } );
 
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-export default mongoose.models.User || mongoose.model( "User", schema );
+export default UserSchema;
