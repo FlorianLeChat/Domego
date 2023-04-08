@@ -38,16 +38,6 @@ module.exports = withBundleAnalyzer( withPWA( {
 			}
 		];
 
-		if ( process.env.NODE_ENV === "production" )
-		{
-			// Ajout des redirections de test en production.
-			redirects.push( {
-				source: "/test/:path*",
-				permanent: true,
-				destination: "/"
-			} );
-		}
-
 		// Application des redirections.
 		return redirects;
 	}

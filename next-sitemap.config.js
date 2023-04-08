@@ -7,7 +7,7 @@ const url = ( process.env.NEXT_PUBLIC_URL ?? "" ) + process.env.NEXT_PUBLIC_BASE
  */
 module.exports = {
 	siteUrl: url,
-	exclude: [ "/fr*", "/test/*", "/404", "/500", "/sitemap.xml" ],
+	exclude: [ "/fr*", "/404", "/500", "/sitemap.xml" ],
 	transform: async ( _config, path ) =>
 	{
 		// Modification de la priorité de la page d'accueil
