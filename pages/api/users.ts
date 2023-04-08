@@ -57,8 +57,7 @@ export default async function handler( request: NextApiRequest, response: NextAp
 			// Ajout d'un nouvel utilisateur dans la base de données.
 			try
 			{
-				const user = new UserModel( request.body );
-				const document = await user.save();
+				const document = new UserModel( request.query ).save();
 
 				if ( Object.keys( document ).length > 0 )
 				{
