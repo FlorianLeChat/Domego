@@ -1,6 +1,16 @@
 import { test, expect } from "@playwright/test";
 
 //
+// Permet de vérifier la bonne exécution du serveur Socket.IO.
+//
+test( "Connexion au serveur Socket.IO", async ( { request } ) =>
+{
+	const response = await request.get( "/api/socket" );
+
+	expect( response.ok() ).toBeTruthy();
+} );
+
+//
 // Permet de vérifier les requêtes de type GET à l'API MongoDB.
 //
 test( "Requête de type GET à l'API", async ( { request } ) =>
