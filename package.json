@@ -47,6 +47,7 @@
     "typescript": "~5.0",
     "localtunnel": "~2.0",
     "next-sitemap": "~4.0",
+    "@playwright/test": "~1.32",
     "eslint-config-next": "~13.2",
     "eslint-config-airbnb": "~19.0",
     "@typescript-eslint/parser": "~5.57",
@@ -67,6 +68,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "test": "playwright test",
     "lint": "eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx",
     "build": "next build && next-sitemap",
     "start": "pm2 start --name domego next -- start -p 3000",
