@@ -18,7 +18,6 @@ const config: PlaywrightTestConfig = {
 		timeout: 30 * 1000,
 		reuseExistingServer: !process.env.CI
 	},
-	fullyParallel: true,
 	projects: [
 		{
 			name: "Desktop Chrome",
