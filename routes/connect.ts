@@ -13,8 +13,17 @@ export function Connect( io: Server, socket: Socket )
 	{
 		// On vérifie tout d'abord si l'utilisateur n'est pas déjà connecté
 		//  dans une autre partie.
-		if ( findUser( socket.id ) )
+		const target = findUser( socket.id );
+
+		if ( target )
 		{
+			if ( target.game === game )
+			{
+				// Le joueur tente de se reconnecter à la partie.
+				callback( "success" );
+				return;
+			}
+
 			callback( "error", "server.duplicated_data_title", "server.duplicated_data_description" );
 			return;
 		}
@@ -40,7 +49,7 @@ export function Connect( io: Server, socket: Socket )
 		else
 		{
 			// Vérification de l'unicité des noms d'utilisateurs.
-			const found = room.players.some( ( identifier ) =>
+			const isFound = room.players.some( ( identifier ) =>
 			{
 				// L'utilisateur ne doit pas avoir le même nom d'utilisateur que celui
 				//  qui a été indiqué.
@@ -48,7 +57,7 @@ export function Connect( io: Server, socket: Socket )
 				return user && user.name === name;
 			} );
 
-			if ( found )
+			if ( isFound )
 			{
 				callback( "error", "server.duplicated_username_title", "server.duplicated_username_description" );
 				return;
