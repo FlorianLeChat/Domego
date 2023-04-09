@@ -30,10 +30,10 @@ test.beforeEach( async ( { page } ) =>
 test( "Sélection d'un rôle", async ( { page } ) =>
 {
 	// Clic sur le bouton pour prendre un rôle quelconque.
-	await page.getByLabel( "Choose this role" ).check();
+	await page.getByRole( "checkbox", { name: "Choose this role" } ).click();
 
 	// Clic sur le bouton pour confirmer la prise du rôle.
-	await page.getByLabel( "I'm ready!" ).check();
+	await page.getByRole( "checkbox", { name: "I'm ready!" } ).click();
 
 	// Vérification de la confirmation de la prise du rôle.
 	await expect( page.getByText( "Marc007", { exact: true } ) ).toBeVisible();
