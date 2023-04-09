@@ -147,7 +147,7 @@ export default function RoleSelection()
 			{/* (disponible seulement pour les non-spectateurs) */}
 			{query.type === UserType.PLAYER && (
 				<button type="button" onClick={toggleChat}>
-					Chat
+					...
 				</button>
 			)}
 
