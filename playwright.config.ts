@@ -7,6 +7,7 @@ const config: PlaywrightTestConfig = {
 		baseURL,
 		trace: "on-first-retry"
 	},
+	workers: 1,
 	retries: 1,
 	timeout: 30 * 1000,
 	testDir: path.join( __dirname, "tests/e2e" ),
