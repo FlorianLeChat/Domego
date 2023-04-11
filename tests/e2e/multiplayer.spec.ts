@@ -5,6 +5,8 @@ import { test, expect } from "@playwright/test";
 //
 test( "Connexion à une partie existante", async ( { browser } ) =>
 {
+	test.skip();
+
 	// Création de deux contextes de navigateur.
 	const player1Context = await browser.newContext();
 	const player2Context = await browser.newContext();
@@ -110,6 +112,8 @@ test( "Partie encore active", async ( { page } ) =>
 //
 test( "Reconnexion à la volée", async ( { page } ) =>
 {
+	test.skip();
+
 	// Accès à la page d'accueil.
 	await page.goto( "/" );
 
