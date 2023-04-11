@@ -77,29 +77,33 @@ export default function RoleSelection()
 
 		// On vérifie ensuite la latence entre le client et le serveur
 		//  distant en mettant en mémoire le temps actuel.
-		const start = Date.now();
-
-		socket?.emit( "GamePing", async () =>
+		//  Note : cette vérification est effectuée seulement en production.
+		if ( process.env.NODE_ENV === "production" )
 		{
-			// Lors de la réception de la requête par le serveur,
-			//  on calcule la différence entre la temps actuel ainsi
-			//  que le temps précédemment mis en mémoire.
-			const delta = Date.now() - start;
+			const start = Date.now();
 
-			if ( delta > 500 )
+			socket?.emit( "GamePing", async () =>
 			{
-				// Si la différence est supérieure à 500ms,
-				//  on affiche un avertissement à l'utilisateur.
-				const Swal = ( await import( "sweetalert2" ) ).default;
+				// Lors de la réception de la requête par le serveur,
+				//  on calcule la différence entre la temps actuel ainsi
+				//  que le temps précédemment mis en mémoire.
+				const delta = Date.now() - start;
 
-				Swal.fire( {
-					icon: "warning",
-					text: t( "modals.network_latency_description", { latency: delta } ),
-					title: t( "modals.network_latency_title" ),
-					confirmButtonColor: "#28a745"
-				} );
-			}
-		} );
+				if ( delta > 500 )
+				{
+					// Si la différence est supérieure à 500ms,
+					//  on affiche un avertissement à l'utilisateur.
+					const Swal = ( await import( "sweetalert2" ) ).default;
+
+					Swal.fire( {
+						icon: "warning",
+						text: t( "modals.network_latency_description", { latency: delta } ),
+						title: t( "modals.network_latency_title" ),
+						confirmButtonColor: "#28a745"
+					} );
+				}
+			} );
+		}
 
 		// On accroche après un événement pour rediriger automatiquement
 		//  l'utilisateur lorsque la partie a été lancée par l'administrateur.
