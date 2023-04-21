@@ -60,8 +60,8 @@
     "utf-8-validate": "~6.0"
   },
   "engines": {
-    "node": ">=19.4",
-    "npm": ">=9.2"
+    "node": ">=20.0",
+    "npm": ">=9.6"
   },
   "overrides": {
     "uuid": "$uuid"
