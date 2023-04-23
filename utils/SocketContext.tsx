@@ -1,5 +1,6 @@
 // Importation des dépendances.
 import Router from "next/router";
+import { join } from "path";
 import { io, Socket } from "socket.io-client";
 import { createContext, ReactNode } from "react";
 
@@ -16,7 +17,7 @@ if ( typeof window !== "undefined" )
 	let retries = 0;
 
 	// On crée ensuite le socket de communication avec le serveur.
-	instance = io( { path: `${ process.env.NEXT_PUBLIC_BASE_PATH }/socket.io` } );
+	instance = io( { path: join( process.env.NEXT_PUBLIC_URL ?? "", "socket.io" ) } );
 	instance.auth = { cacheId };
 	instance.on( "connect", () =>
 	{

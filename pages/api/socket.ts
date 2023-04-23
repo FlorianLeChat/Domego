@@ -1,6 +1,7 @@
 //
 // Route permettant l'initialisation des connexions via Socket.io.
 //
+import { join } from "path";
 import { Server } from "socket.io";
 import { findUser } from "@/utils/UserManager";
 import type { NextApiRequest } from "next";
@@ -13,7 +14,7 @@ export default function handler( _request: NextApiRequest, response: NextApiResp
 	{
 		// Si ce n'est pas le cas, on créé une nouvelle instance de Socket.io avant de la mettre en mémoire.
 		const io = new Server( response.socket.server, {
-			path: `${ process.env.NEXT_PUBLIC_BASE_PATH }/socket.io`
+			path: join( process.env.NEXT_PUBLIC_URL ?? "", "socket.io" )
 		} );
 
 		response.socket.server.io = io;
