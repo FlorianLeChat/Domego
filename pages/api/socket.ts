@@ -14,7 +14,7 @@ export default function handler( _request: NextApiRequest, response: NextApiResp
 	{
 		// Si ce n'est pas le cas, on créé une nouvelle instance de Socket.io avant de la mettre en mémoire.
 		const io = new Server( response.socket.server, {
-			path: join( process.env.NEXT_PUBLIC_URL ?? "", "socket.io" )
+			path: join( new URL( process.env.NEXT_PUBLIC_URL ?? "" ).pathname, "socket.io" ).replace( /\\/g, "/" )
 		} );
 
 		response.socket.server.io = io;
