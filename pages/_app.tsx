@@ -56,6 +56,9 @@ function Domego( { Component, pageProps }: AppProps )
 	{
 		CookieConsent.run(
 			{
+				// Activation automatique de la fenêtre de consentement.
+				autoShow: process.env.NODE_ENV === "production",
+
 				// Désactivation de l'interaction avec la page.
 				disablePageInteraction: true,
 
