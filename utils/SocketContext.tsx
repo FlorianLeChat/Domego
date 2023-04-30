@@ -1,12 +1,12 @@
-// Importation des dépendances.
+//
+// Permet de créer les sockets de communication avec le serveur.
+//  Source : https://stackoverflow.com/a/67270359
+//
 import Router from "next/router";
 import { join } from "path";
 import { io, Socket } from "socket.io-client";
 import { createContext, ReactNode } from "react";
 
-//
-// Permet de créer le socket de communication avec le serveur.
-//
 let instance!: Socket | null;
 
 if ( typeof window !== "undefined" )
@@ -48,15 +48,10 @@ if ( typeof window !== "undefined" )
 	} );
 }
 
-//
-// Permet de créer un contexte d'exportation avec le socket précédemment créé.
-//
+// Création et exportation du contexte.
 export const SocketContext = createContext( instance );
 
-//
-// Permet d'importer la référence du contexte du socket.
-//  Source : https://stackoverflow.com/a/67270359
-//
+// Exportation du fournisseur de contexte.
 export function SocketProvider( { children }: { children: ReactNode; } )
 {
 	return <SocketContext.Provider value={instance}>{children}</SocketContext.Provider>;
