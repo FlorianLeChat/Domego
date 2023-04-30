@@ -7,6 +7,9 @@
 @import "sanitize.css/ui-monospace";
 @import "sanitize.css/reduce-motion";
 
+// Importation des dépendances externes.
+@import "../node_modules/vanilla-cookieconsent/dist/cookieconsent.css";
+
 // Ensemble des pages.
 html
 {
