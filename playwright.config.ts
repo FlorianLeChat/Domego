@@ -1,7 +1,9 @@
 import { join } from "path";
 import { PlaywrightTestConfig, devices } from "@playwright/test";
 
-const baseURL = `http://localhost:${ process.env.PORT ?? 3000 }`;
+const port = process.env.PORT ?? 3000;
+const baseURL = `http://localhost:${ port }`;
+
 const config: PlaywrightTestConfig = {
 	use: {
 		baseURL,
@@ -15,7 +17,7 @@ const config: PlaywrightTestConfig = {
 	reporter: process.env.CI ? "github" : "html",
 	outputDir: "test-results/",
 	webServer: {
-		url: baseURL,
+		port,
 		command: "npm run dev",
 		reuseExistingServer: !process.env.CI
 	},
