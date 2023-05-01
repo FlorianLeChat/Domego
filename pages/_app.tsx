@@ -35,9 +35,10 @@ const roboto = Roboto( {
 function Domego( { Component, pageProps }: AppProps )
 {
 	// Déclaration des constantes.
-	const router = useRouter();
-	const favicons = `${ router.basePath }/assets/favicons`;
+	const { basePath, locale } = useRouter();
 	const analyticsUrl = new URL( "https://www.googletagmanager.com/gtag/js" );
+	const favicons = `${ basePath }/assets/favicons`;
+
 	analyticsUrl.searchParams.append( "id", process.env.NEXT_PUBLIC_ANALYTICS_IDENTIFIER ?? "" );
 
 	// Déclaration des variables d'état.
@@ -47,8 +48,8 @@ function Domego( { Component, pageProps }: AppProps )
 	//  Source : https://github.com/vercel/next.js/discussions/15341
 	useEffect( () =>
 	{
-		fetch( `${ router.basePath }/api/socket` );
-	}, [ router.basePath ] );
+		fetch( `${ basePath }/api/socket` );
+	}, [ basePath ] );
 
 	// Affichage du consentement des cookies.
 	//  Source : https://cookieconsent.orestbida.com/reference/api-reference.html
@@ -64,7 +65,7 @@ function Domego( { Component, pageProps }: AppProps )
 
 				// Paramètres internes des cookies.
 				cookie: {
-					path: router.basePath
+					path: basePath
 				},
 
 				// Paramètres de l'interface utilisateur.
@@ -94,10 +95,10 @@ function Domego( { Component, pageProps }: AppProps )
 
 				// Configuration des traductions.
 				language: {
-					default: router.locale ?? "en",
+					default: locale ?? "en",
 					translations: {
-						en: "./locales/en/common.json",
-						fr: "./locales/fr/common.json"
+						en: `${ basePath }/locales/en/common.json`,
+						fr: `${ basePath }/locales/fr/common.json`
 					}
 				},
 
@@ -112,7 +113,7 @@ function Domego( { Component, pageProps }: AppProps )
 				)
 			}
 		);
-	}, [ router.basePath, router.locale ] );
+	}, [ basePath, locale ] );
 
 	// Affichage du rendu HTML de la page.
 	return (
@@ -137,7 +138,7 @@ function Domego( { Component, pageProps }: AppProps )
 				<link rel="icon" type="image/webp" sizes="512x512" href={`${ favicons }/512x512.webp`} />
 
 				<link rel="apple-touch-icon" href={`${ favicons }/180x180.webp`} />
-				<link rel="manifest" href={`${ router.basePath }/manifest.json`} />
+				<link rel="manifest" href={`${ basePath }/manifest.json`} />
 			</Head>
 
 			{/* Google Analytics */}
