@@ -17,7 +17,9 @@ if ( typeof window !== "undefined" )
 	let retries = 0;
 
 	// On crée ensuite le socket de communication avec le serveur.
-	instance = io( { path: join( new URL( process.env.NEXT_PUBLIC_URL ?? "" ).pathname, "socket.io" ) } );
+	instance = io( {
+		path: join( new URL( process.env.NEXT_PUBLIC_URL ?? "" ).pathname, "/internal/socket.io/" ).replace( /\\/g, "/" )
+	} );
 	instance.auth = { cacheId };
 	instance.on( "connect", () =>
 	{
@@ -39,7 +41,7 @@ if ( typeof window !== "undefined" )
 				instance?.connect();
 			}, 1000 );
 		}
-		else if ( Router.pathname !== "/500" )
+		else if ( Router.pathname !== "/404" && Router.pathname !== "/500" )
 		{
 			// Si c'est la troisième tentative, on affiche l'erreur dans la
 			//  console et on redirige vers la page d'erreur.
