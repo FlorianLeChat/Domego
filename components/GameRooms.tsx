@@ -21,7 +21,7 @@ interface GameRoomList
 {
 	// Déclaration des champs de la liste des parties.
 	id: string;
-	state: number;
+	state: RoomState;
 	creator: string;
 	players: number;
 	spectators: number;
@@ -42,7 +42,7 @@ export default function GameRooms( { username }: GameRoomsProps )
 	const socket = useContext( SocketContext );
 
 	// Bouton pour rejoindre une partie (joueur/spectateur).
-	const joinGame = useCallback( async ( roomId: string, type: string, state: number ) =>
+	const joinGame = useCallback( async ( roomId: string, type: string, state: RoomState ) =>
 	{
 		// On vérifie d'abord si l'utilisateur veut bien rejoindre la partie.
 		const Swal = ( await import( "sweetalert2" ) ).default;
