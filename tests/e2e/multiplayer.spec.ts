@@ -20,7 +20,6 @@ test( "Connexion à une partie existante", async ( { browser } ) =>
 	await player1Page.getByPlaceholder( "Marc007" ).fill( "Player 1" );
 	await player1Page.getByRole( "button", { name: "Create a new game" } ).click();
 	await player1Page.getByRole( "button", { name: "Yes" } ).click();
-	await player1Page.waitForLoadState( "networkidle" );
 
 	// Choix du rôle pour le joueur 1.
 	await expect( player1Page ).toHaveURL( "/game/selection" );
@@ -30,7 +29,6 @@ test( "Connexion à une partie existante", async ( { browser } ) =>
 	await player2Page.getByPlaceholder( "Marc007" ).fill( "Player 2" );
 	await player2Page.getByRole( "button", { name: "Join" } ).last().click();
 	await player2Page.getByRole( "button", { name: "Yes" } ).click();
-	await player2Page.waitForLoadState( "networkidle" );
 
 	// Vérification du rôle du joueur 1 par le joueur 2.
 	await expect( player2Page ).toHaveURL( "/game/selection" );
@@ -64,7 +62,6 @@ test( "Pseudonyme déjà utilisé", async ( { browser } ) =>
 	await player1Page.getByPlaceholder( "Marc007" ).fill( "Player 1" );
 	await player1Page.getByRole( "button", { name: "Create a new game" } ).click();
 	await player1Page.getByRole( "button", { name: "Yes" } ).click();
-	await player1Page.waitForLoadState( "networkidle" );
 
 	await expect( player1Page ).toHaveURL( "/game/selection" );
 
@@ -72,7 +69,6 @@ test( "Pseudonyme déjà utilisé", async ( { browser } ) =>
 	await player2Page.getByPlaceholder( "Marc007" ).fill( "Player 1" );
 	await player2Page.getByRole( "button", { name: "Join" } ).last().click();
 	await player2Page.getByRole( "button", { name: "Yes" } ).click();
-	await player2Page.waitForLoadState( "networkidle" );
 
 	// Vérification du message d'erreur par le serveur.
 	await expect( player2Page ).toHaveURL( "/" );
@@ -92,19 +88,16 @@ test( "Partie encore active", async ( { page } ) =>
 	await page.getByPlaceholder( "Marc007" ).fill( "Player 1" );
 	await page.getByRole( "button", { name: "Create a new game" } ).click();
 	await page.getByRole( "button", { name: "Yes" } ).click();
-	await page.waitForLoadState( "networkidle" );
 
 	await expect( page ).toHaveURL( "/game/selection" );
 
 	// Retour à la page d'accueil.
 	await page.goBack();
-	await page.waitForLoadState( "networkidle" );
 
 	// Création d'une nouvelle partie (encore).
 	await page.getByPlaceholder( "Marc007" ).fill( "Player 1" );
 	await page.getByRole( "button", { name: "Create a new game" } ).click();
 	await page.getByRole( "button", { name: "Yes" } ).click();
-	await page.waitForLoadState( "networkidle" );
 
 	// Vérification du message d'erreur par le serveur.
 	await expect( page ).toHaveURL( "/" );
@@ -124,19 +117,16 @@ test( "Reconnexion à la volée", async ( { page } ) =>
 	await page.getByPlaceholder( "Marc007" ).fill( "Player 1" );
 	await page.getByRole( "button", { name: "Create a new game" } ).click();
 	await page.getByRole( "button", { name: "Yes" } ).click();
-	await page.waitForLoadState( "networkidle" );
 
 	await expect( page ).toHaveURL( "/game/selection" );
 
 	// Retour à la page d'accueil.
 	await page.goBack();
-	await page.waitForLoadState( "networkidle" );
 
 	// Reconnexion à la partie.
 	await page.getByPlaceholder( "Marc007" ).fill( "Player 1" );
 	await page.getByRole( "button", { name: "Join" } ).last().click();
 	await page.getByRole( "button", { name: "Yes" } ).click();
-	await page.waitForLoadState( "networkidle" );
 
 	// Vérification de la redirection vers la page de sélection de rôle.
 	await expect( page ).toHaveURL( "/game/selection" );

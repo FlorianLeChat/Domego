@@ -25,7 +25,7 @@ export function Disconnect( io: Server, socket: Socket )
 			//  de se reconnecter et de reprendre la partie.
 			await new Promise( ( resolve ) =>
 			{
-				setTimeout( resolve, GRACE_TIME );
+				setTimeout( resolve, process.env.NODE_ENV === "production" ? GRACE_TIME : 0 );
 			} );
 
 			// On vérifie alors si l'identifiant unique a été actualisé ou non.
