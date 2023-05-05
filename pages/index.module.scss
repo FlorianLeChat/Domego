@@ -1,5 +1,13 @@
 section#GameHome
 {
+	// Corps de la page d'accueil.
+	display: flex;
+	min-height: 100vh;
+	text-align: center;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+
 	// Lien vers le dépôt GitHub du projet.
 	> a
 	{
@@ -68,13 +76,6 @@ section#GameHome
 			100% { transform: rotate(0); }
 		}
 	}
-
-	// Corps de la page d'accueil.
-	display: flex;
-	min-height: 100vh;
-	text-align: center;
-	align-items: center;
-	flex-direction: column;
 
 	h1
 	{
