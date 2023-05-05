@@ -25,6 +25,21 @@ test( "Vérification de certains contenus", async ( { page } ) =>
 } );
 
 //
+// Permet de vérifier que le consentement des cookies fonctionne.
+//
+test( "Affichage du consentement des cookies", async ( { page } ) =>
+{
+	// Clic sur le bouton du consentement des cookies.
+	await page.getByRole( "link", { name: "manage your preferences" } ).click();
+
+	// Sauvegarde des préférences actuelles.
+	await page.getByRole( "button", { name: "Save preferences" } ).click();
+
+	// Vérification de la page actuelle.
+	await expect( page ).toHaveURL( "/" );
+} );
+
+//
 // Permet de vérifier qu'il est possible d'annuler la création d'une nouvelle partie.
 //
 test( "Annulation d'une nouvelle partie", async ( { page } ) =>

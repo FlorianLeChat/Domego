@@ -49,7 +49,8 @@
 			"create_new_game": "Créer une partie",
 			"games_available": "Parties disponibles",
 			"send_chat_message": "Envoyer",
-			"google_recaptcha": "Ce site est protégé par reCAPTCHA sur lequel s'appliquent les <a1>politiques de confidentialité</a1> et les <a2>conditions d'utilisation</a2> de Google."
+			"google_recaptcha": "Ce site est protégé par reCAPTCHA sur lequel s'appliquent les <a1>politiques de confidentialité</a1> et les <a2>conditions d'utilisation</a2> de Google.",
+			"cookies_preferences": "Ce site utilise des cookies pour vous offrir la meilleure expérience possible. Vous pouvez <a1>gérer vos préférences</a1> à tout moment."
 		},
 		"rooms": {
 			"join": "Rejoindre",

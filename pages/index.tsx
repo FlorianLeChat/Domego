@@ -3,10 +3,11 @@
 //
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import * as CookieConsent from "vanilla-cookieconsent";
 import type { SweetAlertIcon } from "sweetalert2";
 import { useTranslation, Trans } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useState, useContext, useEffect, ChangeEvent } from "react";
+import { useState, useContext, useEffect, ChangeEvent, MouseEvent } from "react";
 
 import styles from "./index.module.scss";
 import { UserType } from "@/enums/User";
@@ -198,6 +199,13 @@ export default function GameHome()
 		setDisabled( !event.target.validity.valid );
 	};
 
+	// Affichage de la fenêtre de préférences des cookies.
+	const showPreferences = ( event: MouseEvent<HTMLAnchorElement> ) =>
+	{
+		event.preventDefault();
+		CookieConsent.showPreferences();
+	};
+
 	// Préchargement de la page de sélection de la partie.
 	useEffect( () =>
 	{
@@ -260,6 +268,15 @@ export default function GameHome()
 					components={{
 						a1: <a href="https://policies.google.com/privacy">...</a>,
 						a2: <a href="https://policies.google.com/terms">...</a>
+					}}
+				/>
+
+				<br />
+
+				<Trans
+					i18nKey="pages.index.cookies_preferences"
+					components={{
+						a1: <a href="#cookies" onClick={showPreferences}>...</a>
 					}}
 				/>
 			</small>

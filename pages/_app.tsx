@@ -63,6 +63,9 @@ function Domego( { Component, pageProps }: AppProps )
 				// Désactivation de l'interaction avec la page.
 				disablePageInteraction: true,
 
+				// Disparition du mécanisme pour les robots.
+				hideFromBots: process.env.NODE_ENV === "production",
+
 				// Paramètres internes des cookies.
 				cookie: {
 					path: basePath
