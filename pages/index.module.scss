@@ -3,6 +3,13 @@ section#GameHome
 	// Lien vers le dépôt GitHub du projet.
 	> a
 	{
+		@media screen and (max-width: 320px)
+		{
+			// Suppression du logo GitHub sur les écrans
+			//  de petite taille.
+			display: none;
+		}
+
 		// Animation du logo GitHub.
 		&:hover path:nth-of-type(2)
 		{
