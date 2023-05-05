@@ -31,7 +31,7 @@ section#GameHome
 			fill: rgb(63, 63, 63);
 			right: 0;
 			color: whitesmoke;
-			position: absolute;
+			position: fixed;
 			clip-path: polygon(0 0, 100% 0, 100% 100%);
 
 			path:nth-of-type(2)
