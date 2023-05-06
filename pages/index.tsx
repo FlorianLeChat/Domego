@@ -9,9 +9,10 @@ import { useTranslation, Trans } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useState, useContext, useEffect, ChangeEvent, MouseEvent } from "react";
 
-import styles from "./index.module.scss";
 import { UserType } from "@/enums/User";
 import { SocketContext } from "@/utils/SocketContext";
+
+import styles from "./index.module.scss";
 
 const GameRooms = dynamic( () => import( "@/components/GameRooms" ) );
 

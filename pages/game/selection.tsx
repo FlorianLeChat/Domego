@@ -8,9 +8,10 @@ import type { SweetAlertIcon } from "sweetalert2";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useContext, useState, useEffect } from "react";
 
-import styles from "./selection.module.scss";
 import { UserType } from "@/enums/User";
 import { SocketContext } from "@/utils/SocketContext";
+
+import styles from "./selection.module.scss";
 
 const RoleCard = dynamic( () => import( "@/components/RoleCard" ) );
 const GameChat = dynamic( () => import( "@/components/GameChat" ) );

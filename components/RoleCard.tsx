@@ -6,9 +6,10 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useState, useContext, useEffect, ChangeEvent } from "react";
 
-import styles from "./RoleCard.module.scss";
 import { UserType } from "@/enums/User";
 import { SocketContext } from "@/utils/SocketContext";
+
+import styles from "./RoleCard.module.scss";
 
 interface RoleCardProps
 {
