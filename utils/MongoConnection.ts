@@ -10,7 +10,8 @@ let cache = global.mongoose;
 if ( typeof cache === "undefined" )
 {
 	// Si aucune connexion n'est établie, on se prépare à en établir une.
-	cache = global.mongoose = { conn: undefined, promise: undefined };
+	cache = { conn: undefined, promise: undefined };
+	global.mongoose = cache;
 }
 
 export async function ConnectToMongoDB()
