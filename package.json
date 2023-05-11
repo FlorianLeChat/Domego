@@ -61,8 +61,8 @@
     "utf-8-validate": "~6.0"
   },
   "engines": {
-    "node": ">=20.0",
-    "npm": ">=9.6"
+    "node": ">=18.0",
+    "npm": ">=8.6"
   },
   "overrides": {
     "uuid": "$uuid"
