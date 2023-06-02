@@ -45,7 +45,7 @@
     "@types/grecaptcha": "~3.0",
     "pm2": "~5.3",
     "sass": "~1.62",
-    "typescript": "~5.0",
+    "typescript": "~5.1",
     "localtunnel": "~2.0",
     "next-sitemap": "~4.0",
     "@playwright/test": "~1.33",
