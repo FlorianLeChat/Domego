@@ -34,7 +34,7 @@
     "next-i18next": "<=12.1.0",
     "socket.io-client": "~4.6",
     "vanilla-cookieconsent": "3.0.0-rc.14",
-    "@next/bundle-analyzer": "~13.3"
+    "@next/bundle-analyzer": "~13.4"
   },
   "devDependencies": {
     "@types/cors": "~2.8",
