@@ -49,8 +49,7 @@ section#InternalError
 	&::before
 	{
 		// Fond d'écran de la page
-		left: 0;
-		right: 0;
+		inset: auto 0;
 		width: 100%;
 		height: 100%;
 		filter: blur(0.5rem);

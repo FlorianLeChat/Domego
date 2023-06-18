@@ -35,9 +35,8 @@ section#GameHome
 		svg
 		{
 			// Délimitation de la zone cliquable.
-			top: 0;
 			fill: rgb(63, 63, 63);
-			right: 0;
+			inset: 0 0 auto auto;
 			color: whitesmoke;
 			position: fixed;
 			clip-path: polygon(0 0, 100% 0, 100% 100%);
@@ -203,8 +202,7 @@ section#GameHome
 	&::before
 	{
 		// Fond d'écran du corps de la page.
-		left: 0;
-		right: 0;
+		inset: auto 0;
 		width: 100%;
 		height: 100%;
 		filter: blur(0.5rem);
