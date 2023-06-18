@@ -25,10 +25,7 @@ export default function GameChat( { show }: GameChatProps )
 	const [ messages, addMessage ] = useState<JSX.Element[]>( [ <i key={0}>{t( "pages.index.chat_welcome" )}</i> ] );
 
 	// Récupération du message saisi par l'utilisateur.
-	const handleInputChange = ( event: ChangeEvent<HTMLInputElement> ) =>
-	{
-		setInput( event.target.value );
-	};
+	const handleInputChange = ( event: ChangeEvent<HTMLInputElement> ) => setInput( event.target.value );
 
 	// Envoi des nouveaux messages au serveur.
 	const handleFormSubmit = ( event: FormEvent<HTMLFormElement> ) =>

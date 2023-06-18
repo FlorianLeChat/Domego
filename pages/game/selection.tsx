@@ -61,10 +61,7 @@ export default function RoleSelection()
 	};
 
 	// Apparition ou disparition des communications textuelles.
-	const toggleChat = () =>
-	{
-		setShowChat( !showChat );
-	};
+	const toggleChat = () => setShowChat( !showChat );
 
 	// Envoi et des réceptions des mises à jour depuis/vers le serveur.
 	useEffect( () =>
