@@ -6,7 +6,7 @@ import { UserAttributes } from "@/interfaces/User";
 export const users: UserAttributes[] = [];
 
 //
-// Permet d'enregistrer un utilisateur ayant rejoint une partie.
+// Enregistrement d'un nouvel utilisateur ayant rejoint la partie.
 //
 export function registerUser( id: string, name: string, type: UserType, game: string )
 {
@@ -17,7 +17,7 @@ export function registerUser( id: string, name: string, type: UserType, game: st
 }
 
 //
-// Permet de récupérer les informations d'un utilisateur en particulier.
+// Récupération d'un utilisateur en fonction de son identifiant.
 //
 export function findUser( id: string )
 {
@@ -25,7 +25,7 @@ export function findUser( id: string )
 }
 
 //
-// Permet de supprimer les données d'un utilisateur déconnecté.
+// Suppression d'un utilisateur en fonction de son identifiant.
 //
 export function destroyUser( id: string )
 {
@@ -40,7 +40,7 @@ export function destroyUser( id: string )
 }
 
 //
-// Permet d'exporter l'ensemble des utilisateurs en mémoire.
+// Récupération de tous les utilisateurs en mémoire.
 //
 export function getUsers()
 {

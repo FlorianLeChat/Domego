@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 //
-// Permet d'accéder à la page d'accueil avant chaque test.
+// Accès à la page d'accueil avant chaque test.
 //
 test.beforeEach( async ( { page } ) =>
 {
@@ -10,7 +10,7 @@ test.beforeEach( async ( { page } ) =>
 } );
 
 //
-// Permet de vérifier que le site est accessible et que les contenus sont bien présents.
+// Vérification de l'accessibilité du site et des contenus associés.
 //
 test( "Vérification de certains contenus", async ( { page } ) =>
 {
@@ -25,7 +25,7 @@ test( "Vérification de certains contenus", async ( { page } ) =>
 } );
 
 //
-// Permet de vérifier que le consentement des cookies fonctionne.
+// Vérification de l'affichage du consentement des cookies.
 //
 test( "Affichage du consentement des cookies", async ( { page } ) =>
 {
@@ -40,7 +40,7 @@ test( "Affichage du consentement des cookies", async ( { page } ) =>
 } );
 
 //
-// Permet de vérifier qu'il est possible d'annuler la création d'une nouvelle partie.
+// Vérification de l'annulation de la création d'une nouvelle partie.
 //
 test( "Annulation d'une nouvelle partie", async ( { page } ) =>
 {
@@ -58,7 +58,7 @@ test( "Annulation d'une nouvelle partie", async ( { page } ) =>
 } );
 
 //
-// Permet de vérifier qu'il est possible de créer une nouvelle partie.
+// Vérification de la possibilité de créer une nouvelle partie.
 //
 test( "Création d'une nouvelle partie", async ( { page } ) =>
 {

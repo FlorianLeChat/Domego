@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 //
-// Permet de créer une nouvelle partie avant chaque test.
+// Création d'une nouvelle partie avant chaque test.
 //
 test.beforeEach( async ( { page } ) =>
 {
@@ -25,7 +25,7 @@ test.beforeEach( async ( { page } ) =>
 } );
 
 //
-// Permet de vérifier qu'il est possible de prendre et de confirmer un rôle.
+// Vérification de la prise et la confirmation d'un rôle.
 //
 test( "Sélection d'un rôle", async ( { page } ) =>
 {
@@ -40,7 +40,7 @@ test( "Sélection d'un rôle", async ( { page } ) =>
 } );
 
 //
-// Permet de vérifier qu'il est possible de parler dans le chat.
+// Vérification de la capacité à envoyer un message dans le chat.
 //
 test( "Utilisation du chat", async ( { page } ) =>
 {

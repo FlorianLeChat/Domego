@@ -1,5 +1,5 @@
 //
-// Permet de créer les sockets de communication avec le serveur.
+// Création et gestion des sockets de communication avec le serveur.
 //  Source : https://stackoverflow.com/a/67270359
 //
 import Router from "next/router";

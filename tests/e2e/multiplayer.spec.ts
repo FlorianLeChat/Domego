@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 //
-// Permet de vérifier qu'il est possible de rejoindre une partie existante.
+// Vérification de la possibilité à rejoindre une partie existante.
 //
 test( "Connexion à une partie existante", async ( { browser } ) =>
 {
@@ -42,7 +42,7 @@ test( "Connexion à une partie existante", async ( { browser } ) =>
 } );
 
 //
-// Permet de vérifier qu'il est impossible de choisir un pseudonyme déjà utilisé
+// Vérification de la possibile à choisir un pseudonyme déjà utilisé
 //  dans une partie existante.
 //
 test( "Pseudonyme déjà utilisé", async ( { browser } ) =>
@@ -76,8 +76,8 @@ test( "Pseudonyme déjà utilisé", async ( { browser } ) =>
 } );
 
 //
-// Permet de vérifier qu'il est impossible de créer une partie si une partie
-//  est déjà en cours.
+// Vérification de la possibilité de créer une nouvelle partie
+//  alors qu'une partie est déjà en cours.
 //
 test( "Partie encore active", async ( { page } ) =>
 {
@@ -105,8 +105,8 @@ test( "Partie encore active", async ( { page } ) =>
 } );
 
 //
-// Permet de vérifier qu'il est possible de se reconnecter à une partie
-//  existante à la volée.
+// Vérification de la possibilité de se reconnecter à une partie
+//  en cours après une interruption de nature quelconque.
 //
 test( "Reconnexion à la volée", async ( { page } ) =>
 {

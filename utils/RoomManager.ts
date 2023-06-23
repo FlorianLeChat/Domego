@@ -9,7 +9,7 @@ export const rooms: RoomAttributes[] = [];
 export const MAX_PLAYERS = 6;
 
 //
-// Permet d'enregistrer les informations d'une nouvelle partie.
+// Enregistrement des données d'une nouvelle partie.
 //
 export function registerRoom( id: string, player: string )
 {
@@ -20,7 +20,7 @@ export function registerRoom( id: string, player: string )
 }
 
 //
-// Permet de récupérer les informations d'une partie en particulier.
+// Récupération des informations d'une partie à partir de son identifiant.
 //
 export function findRoom( id: string )
 {
@@ -28,7 +28,7 @@ export function findRoom( id: string )
 }
 
 //
-// Permet de supprimer les données d'une partie vide.
+// Suppression d'une partie à partir de son identifiant.
 //
 export function destroyRoom( id: string )
 {
@@ -43,7 +43,7 @@ export function destroyRoom( id: string )
 }
 
 //
-// Permet de mettre à jour certaines informations relatives à une partie.
+// Mise à jour des données d'une partie grâce à son identifiant.
 //
 export function updateRoom( id: string, player: string, type: UserType, state: boolean )
 {
@@ -92,7 +92,7 @@ export function updateRoom( id: string, player: string, type: UserType, state: b
 }
 
 //
-// Permet de récupérer l'ensemble des parties en mémoire.
+// Récupération de l'ensemble des parties en mémoire.
 //  Note : certains champs sont masqués/modifiés avant d'être envoyés
 //   aux utilisateurs de la partie React.
 //
