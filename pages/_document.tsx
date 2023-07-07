@@ -20,7 +20,7 @@ export default function Document( { __NEXT_DATA__ }: DocumentProps )
 
 	// Affichage du rendu HTML de la page.
 	return (
-		<Html lang={__NEXT_DATA__.locale} dir="auto" prefix="og: https://ogp.me/ns#">
+		<Html lang={__NEXT_DATA__.locale} prefix="og: https://ogp.me/ns#">
 			<Head>
 				{/* Informations pour les moteurs de recherche */}
 				<meta property="og:type" content="website" />
