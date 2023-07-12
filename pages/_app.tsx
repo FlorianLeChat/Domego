@@ -110,6 +110,7 @@ function Domego( { Component, pageProps }: AppProps )
 				// Configuration des traductions.
 				language: {
 					default: "en",
+					autoDetect: "document",
 					translations: {
 						en: `${ basePath }/locales/en/common.json`,
 						fr: `${ basePath }/locales/fr/common.json`
