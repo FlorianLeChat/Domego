@@ -13,9 +13,9 @@ import "@total-typescript/ts-reset";
 import Head from "next/head";
 import Script from "next/script";
 import dynamic from "next/dynamic";
+import { run } from "vanilla-cookieconsent";
 import { Roboto } from "next/font/google";
 import { useRouter } from "next/router";
-import * as CookieConsent from "vanilla-cookieconsent";
 import { appWithTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
 
@@ -35,11 +35,13 @@ const roboto = Roboto( {
 function Domego( { Component, pageProps }: AppProps )
 {
 	// Déclaration des constantes.
-	const { basePath, locale } = useRouter();
+	const { basePath } = useRouter();
 	const analyticsUrl = new URL( "https://www.googletagmanager.com/gtag/js" );
+	const recaptchaUrl = new URL( "https://www.google.com/recaptcha/api.js" );
 	const favicons = `${ basePath }/assets/favicons`;
 
 	analyticsUrl.searchParams.append( "id", process.env.NEXT_PUBLIC_ANALYTICS_IDENTIFIER ?? "" );
+	recaptchaUrl.searchParams.append( "render", process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY ?? "" );
 
 	// Déclaration des variables d'état.
 	const [ analytics, setAnalytics ] = useState( false );
@@ -55,7 +57,7 @@ function Domego( { Component, pageProps }: AppProps )
 	//  Source : https://cookieconsent.orestbida.com/reference/api-reference.html
 	useEffect( () =>
 	{
-		CookieConsent.run(
+		run(
 			{
 				// Activation automatique de la fenêtre de consentement.
 				autoShow: process.env.NODE_ENV === "production",
@@ -93,12 +95,21 @@ function Domego( { Component, pageProps }: AppProps )
 								}
 							]
 						}
+					},
+					security: {
+						autoClear: {
+							cookies: [
+								{
+									name: /^(OTZ|__Secure-ENID|SOCS|CONSENT|AEC)/
+								}
+							]
+						}
 					}
 				},
 
 				// Configuration des traductions.
 				language: {
-					default: locale ?? "en",
+					default: "en",
 					translations: {
 						en: `${ basePath }/locales/en/common.json`,
 						fr: `${ basePath }/locales/fr/common.json`
@@ -116,7 +127,7 @@ function Domego( { Component, pageProps }: AppProps )
 				)
 			}
 		);
-	}, [ basePath, locale ] );
+	}, [ basePath ] );
 
 	// Affichage du rendu HTML de la page.
 	return (
@@ -148,6 +159,7 @@ function Domego( { Component, pageProps }: AppProps )
 			{analytics && (
 				<>
 					<Script src={analyticsUrl.href} strategy="lazyOnload" />
+					<Script src={recaptchaUrl.href} strategy="lazyOnload" />
 					<Script id="google-analytics" strategy="lazyOnload">
 						{`
 							window.dataLayer = window.dataLayer || [];
