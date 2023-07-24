@@ -10,7 +10,7 @@ test( "Connexion au serveur Socket.IO", async ( { request } ) =>
 {
 	const response = await request.get( "/api/socket" );
 
-	expect( response.ok() ).toBeTruthy();
+	expect( response ).toBeOK();
 } );
 
 //
@@ -22,7 +22,7 @@ test( "Requête de type GET à l'API", async ( { request } ) =>
 
 	const response = await request.get( "/api/users" );
 
-	expect( response.ok() ).toBeTruthy();
+	expect( response ).toBeOK();
 } );
 
 //
@@ -40,7 +40,7 @@ test( "Requête de type POST à l'API", async ( { request } ) =>
 		}
 	} );
 
-	expect( response.ok() ).toBeTruthy();
+	expect( response ).toBeOK();
 } );
 
 //
@@ -58,7 +58,7 @@ test( "Requête de type PUT à l'API", async ( { request } ) =>
 		}
 	} );
 
-	expect( response.ok() ).toBeTruthy();
+	expect( response ).toBeOK();
 } );
 
 //
@@ -76,5 +76,5 @@ test( "Requête de type DELETE à l'API", async ( { request } ) =>
 		}
 	} );
 
-	expect( response.ok() ).toBeTruthy();
+	expect( response ).toBeOK();
 } );
