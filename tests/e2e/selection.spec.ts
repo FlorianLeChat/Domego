@@ -9,7 +9,7 @@ test.beforeEach( async ( { page } ) =>
 	await page.goto( "/" );
 
 	// Remplissage d'un pseudonyme dans le champ de saisie.
-	await page.getByPlaceholder( "Marc007" ).fill( "Marc007" );
+	await page.getByPlaceholder( "Marc007" ).fill( `Player ${ Math.floor( Math.random() * 1000 ) }` );
 
 	// Clic sur le bouton de création d'une nouvelle partie.
 	await page.getByRole( "button", { name: "Create a new game" } ).click();
@@ -30,13 +30,13 @@ test.beforeEach( async ( { page } ) =>
 test( "Sélection d'un rôle", async ( { page } ) =>
 {
 	// Clic sur le bouton pour prendre un rôle quelconque.
-	await page.getByRole( "checkbox", { name: "Choose this role" } ).click();
+	await page.getByRole( "article" ).locator( "#select" ).first().click();
 
 	// Clic sur le bouton pour confirmer la prise du rôle.
 	await page.getByRole( "checkbox", { name: "I'm ready!" } ).click();
 
 	// Vérification de la confirmation de la prise du rôle.
-	await expect( page.getByText( "Marc007", { exact: true } ) ).toBeVisible();
+	await expect( page.getByText( "Player" ) ).toBeVisible();
 } );
 
 //
