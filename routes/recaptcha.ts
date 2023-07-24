@@ -10,7 +10,7 @@ export function Recaptcha( _io: Server, socket: Socket )
 	{
 		// On vérifie d'abord si la clé secrète de l'API de Google reCAPTCHA
 		//  a été définie ou non.
-		if ( !process.env.CAPTCHA_SECRET_KEY || process.env.NODE_ENV === "development" )
+		if ( !process.env.CAPTCHA_SECRET_KEY || process.env.NEXT_PUBLIC_ENV === "development" )
 		{
 			callback( "success", "🤖", "🤖" );
 			return;

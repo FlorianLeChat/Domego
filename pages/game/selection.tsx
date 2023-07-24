@@ -76,7 +76,7 @@ export default function RoleSelection()
 		// On vérifie ensuite la latence entre le client et le serveur
 		//  distant en mettant en mémoire le temps actuel.
 		//  Note : cette vérification est effectuée seulement en production.
-		if ( process.env.NODE_ENV === "production" )
+		if ( process.env.NEXT_PUBLIC_ENV === "production" )
 		{
 			const start = Date.now();
 

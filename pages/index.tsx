@@ -44,7 +44,7 @@ export default function GameHome()
 		//  Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
 		const Swal = ( await import( "sweetalert2" ) ).default;
 
-		if ( process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY && process.env.NODE_ENV === "production" )
+		if ( process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY && process.env.NEXT_PUBLIC_ENV === "production" )
 		{
 			await Swal.fire( {
 				icon: "info",

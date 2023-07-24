@@ -60,13 +60,13 @@ function Domego( { Component, pageProps }: AppProps )
 		run(
 			{
 				// Activation automatique de la fenêtre de consentement.
-				autoShow: process.env.NODE_ENV === "production",
+				autoShow: process.env.NEXT_PUBLIC_ENV === "production",
 
 				// Désactivation de l'interaction avec la page.
 				disablePageInteraction: true,
 
 				// Disparition du mécanisme pour les robots.
-				hideFromBots: process.env.NODE_ENV === "production",
+				hideFromBots: process.env.NEXT_PUBLIC_ENV === "production",
 
 				// Paramètres internes des cookies.
 				cookie: {
