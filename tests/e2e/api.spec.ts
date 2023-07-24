@@ -16,11 +16,9 @@ test( "Connexion au serveur Socket.IO", async ( { request } ) =>
 //
 // Vérification des requêtes de type GET à l'API MongoDB.
 //
-const credentials = process.env.MONGODB_USERNAME && process.env.MONGODB_PASSWORD;
-
 test( "Requête de type GET à l'API", async ( { request } ) =>
 {
-	test.skip( !credentials );
+	test.skip( process.env.CI === "true" );
 
 	const response = await request.get( "/api/users" );
 
@@ -32,7 +30,7 @@ test( "Requête de type GET à l'API", async ( { request } ) =>
 //
 test( "Requête de type POST à l'API", async ( { request } ) =>
 {
-	test.skip( !credentials );
+	test.skip( process.env.CI === "true" );
 
 	const response = await request.post( "/api/users", {
 		params: {
@@ -50,7 +48,7 @@ test( "Requête de type POST à l'API", async ( { request } ) =>
 //
 test( "Requête de type PUT à l'API", async ( { request } ) =>
 {
-	test.skip( !credentials );
+	test.skip( process.env.CI === "true" );
 
 	const response = await request.put( "/api/users", {
 		params: {
@@ -68,7 +66,7 @@ test( "Requête de type PUT à l'API", async ( { request } ) =>
 //
 test( "Requête de type DELETE à l'API", async ( { request } ) =>
 {
-	test.skip( !credentials );
+	test.skip( process.env.CI === "true" );
 
 	const response = await request.delete( "/api/users", {
 		params: {
