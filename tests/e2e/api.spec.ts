@@ -1,8 +1,7 @@
-import path from "path";
-import dotenv from "dotenv";
 import { test, expect } from "@playwright/test";
+import { loadEnvConfig } from "@next/env";
 
-dotenv.config( { path: path.resolve( __dirname, "../../.env.local" ) } );
+loadEnvConfig( process.cwd() );
 
 //
 // Vérification du fonctionnement du serveur Socket.IO.
