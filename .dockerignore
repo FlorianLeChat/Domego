@@ -1,5 +1,4 @@
 **/*.md
-**/*.d.ts
 **/.env*.local
 **/.next
 **/.git*

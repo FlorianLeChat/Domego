@@ -16,13 +16,13 @@ RUN --mount=type=cache,target=/usr/src/app/.npm \
 	npm set cache /usr/src/app/.npm && \
 	npm install
 
-# Find and replace the database host, username and password
-RUN sed -i "s/localhost/database/g" .env
-RUN sed -i "s/username/root/g" .env
-RUN sed -i "s/password/password/g" .env
-
 # Copy the remaining files AFTER installing dependencies
 COPY --chown=node:node . .
+
+# Find and replace the database host, username and password
+RUN sed -i "s/MONGODB_HOST=localhost/MONGODB_DATABASE=database/g" .env
+RUN sed -i "s/MONGODB_USERNAME=username/MONGODB_USERNAME=root/g" .env
+RUN sed -i "s/MONGODB_PASSWORD=password/MONGODB_PASSWORD=password/g" .env
 
 # Build the entire project
 RUN npm run build
