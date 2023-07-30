@@ -36,7 +36,7 @@ test( "Sélection d'un rôle", async ( { page } ) =>
 	await page.getByRole( "checkbox", { name: "I'm ready!" } ).click();
 
 	// Vérification de la confirmation de la prise du rôle.
-	await expect( page.getByText( "Player" ) ).toBeVisible();
+	await expect( page.getByText( "Player" ).first() ).toBeVisible();
 } );
 
 //
