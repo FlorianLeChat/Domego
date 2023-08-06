@@ -8,9 +8,8 @@ export function Recaptcha( _io: Server, socket: Socket )
 {
 	socket.on( "GameRecaptcha", async ( token, callback ) =>
 	{
-		// On vérifie d'abord si la clé secrète de l'API de Google reCAPTCHA
-		//  a été définie ou non.
-		if ( !process.env.CAPTCHA_SECRET_KEY || process.env.NEXT_PUBLIC_ENV === "development" )
+		// On vérifie d'abord si le service est activé ou non.
+		if ( process.env.NEXT_PUBLIC_RECAPTCHA_ENABLED === "false" )
 		{
 			callback( "success", "🤖", "🤖" );
 			return;
@@ -27,7 +26,7 @@ export function Recaptcha( _io: Server, socket: Socket )
 		// On effectue alors une requête à l'API de Google reCAPTCHA
 		//  afin de vérifier si le jeton d'authentification envoyé par le client
 		//  est valide ou non.
-		const secret = process.env.CAPTCHA_SECRET_KEY;
+		const secret = process.env.RECAPTCHA_SECRET_KEY;
 		const endpoint = `https://www.google.com/recaptcha/api/siteverify?secret=${ secret }&response=${ token }`;
 		const response = await fetch( endpoint );
 

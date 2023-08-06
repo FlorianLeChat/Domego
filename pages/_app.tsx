@@ -40,11 +40,12 @@ function Domego( { Component, pageProps }: AppProps )
 	const recaptchaUrl = new URL( "https://www.google.com/recaptcha/api.js" );
 	const favicons = `${ basePath }/assets/favicons`;
 
-	analyticsUrl.searchParams.append( "id", process.env.NEXT_PUBLIC_ANALYTICS_IDENTIFIER ?? "" );
-	recaptchaUrl.searchParams.append( "render", process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY ?? "" );
+	analyticsUrl.searchParams.append( "id", process.env.NEXT_PUBLIC_ANALYTICS_TAG ?? "" );
+	recaptchaUrl.searchParams.append( "render", process.env.NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY ?? "" );
 
 	// Déclaration des variables d'état.
 	const [ analytics, setAnalytics ] = useState( false );
+	const [ recaptcha, setRecaptcha ] = useState( false );
 
 	// Création du socket de communication avec le serveur.
 	//  Source : https://github.com/vercel/next.js/discussions/15341
@@ -119,14 +120,20 @@ function Domego( { Component, pageProps }: AppProps )
 				},
 
 				// Exécution des actions de consentement.
-				onConsent: ( { cookie } ) => (
-					cookie.categories.find( ( category: string ) => category === "analytics" ) && setAnalytics( true )
-				),
-
-				// Exécution des actions de changement.
-				onChange: ( { cookie } ) => (
-					cookie.categories.find( ( category: string ) => category === "analytics" ) && setAnalytics( true )
-				)
+				onConsent: ( { cookie } ) =>
+				{
+					cookie.categories.forEach( ( category: string ) =>
+					{
+						if ( category === "analytics" )
+						{
+							setAnalytics( process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true" );
+						}
+						else if ( category === "security" )
+						{
+							setRecaptcha( process.env.NEXT_PUBLIC_RECAPTCHA_ENABLED === "true" );
+						}
+					} );
+				}
 			}
 		);
 	}, [ basePath ] );
@@ -161,7 +168,6 @@ function Domego( { Component, pageProps }: AppProps )
 			{analytics && (
 				<>
 					<Script src={analyticsUrl.href} strategy="lazyOnload" />
-					<Script src={recaptchaUrl.href} strategy="lazyOnload" />
 					<Script id="google-analytics" strategy="lazyOnload">
 						{`
 							window.dataLayer = window.dataLayer || [];
@@ -172,11 +178,14 @@ function Domego( { Component, pageProps }: AppProps )
 							}
 
 							gtag( "js", new Date() );
-							gtag( "config", "${ process.env.NEXT_PUBLIC_ANALYTICS_IDENTIFIER ?? "" }" );
+							gtag( "config", "${ process.env.NEXT_PUBLIC_ANALYTICS_TAG ?? "" }" );
 						`}
 					</Script>
 				</>
 			)}
+
+			{/* Google reCAPTCHA */}
+			{recaptcha && <Script src={recaptchaUrl.href} strategy="lazyOnload" />}
 
 			{/* Avertissement page sans JavaScript */}
 			<noscript>

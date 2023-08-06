@@ -44,7 +44,7 @@ export default function GameHome()
 		//  Google reCAPTCHA pour déterminer si l'utilisateur est un humain.
 		const Swal = ( await import( "sweetalert2" ) ).default;
 
-		if ( process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY && process.env.NEXT_PUBLIC_ENV === "production" )
+		if ( process.env.NEXT_PUBLIC_RECAPTCHA_ENABLED === "true" )
 		{
 			await Swal.fire( {
 				icon: "info",
@@ -79,7 +79,7 @@ export default function GameHome()
 						{
 							// Récupération et vérification du jeton d'authentification généré
 							//  par l'API de Google reCAPTCHA.
-							const key = process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY ?? "";
+							const key = process.env.NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY ?? "";
 							const token = await window.grecaptcha.execute( key, { action: "create" } );
 
 							socket?.emit( "GameRecaptcha", token, ( icon: SweetAlertIcon, title: string, message: string ) =>
@@ -259,15 +259,21 @@ export default function GameHome()
 
 			{/* Avertissement de Google reCAPTCHA */}
 			<small>
-				<Trans
-					i18nKey="pages.index.google_recaptcha"
-					components={{
-						a1: <a href="https://policies.google.com/privacy">...</a>,
-						a2: <a href="https://policies.google.com/terms">...</a>
-					}}
-				/>
+				{
+					( process.env.NEXT_PUBLIC_RECAPTCHA_ENABLED === "true" ) && (
+						<>
+							<Trans
+								i18nKey="pages.index.google_recaptcha"
+								components={{
+									a1: <a href="https://policies.google.com/privacy">...</a>,
+									a2: <a href="https://policies.google.com/terms">...</a>
+								}}
+							/>
 
-				<br />
+							<br />
+						</>
+					)
+				}
 
 				<Trans
 					i18nKey="pages.index.cookies_preferences"
