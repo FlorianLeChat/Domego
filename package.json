@@ -27,7 +27,7 @@
     "mongoose": "~7.4",
     "next-pwa": "~5.6",
     "socket.io": "~4.7",
-    "validator": "~13.9",
+    "validator": "~13.11",
     "sweetalert2": "<11.4.9",
     "sanitize.css": "~13.0",
     "next-i18next": "~14.0",
@@ -40,7 +40,7 @@
     "@types/uuid": "~9.0",
     "@types/node": "~20.4",
     "@types/react": "~18.2",
-    "@types/validator": "~13.9",
+    "@types/validator": "~13.11",
     "@types/grecaptcha": "~3.0",
     "pm2": "~5.3",
     "typescript": "~5.1",
@@ -50,7 +50,7 @@
     "eslint-config-next": "~13.4",
     "eslint-config-airbnb": "~19.0",
     "@total-typescript/ts-reset": "~0.4",
-    "@typescript-eslint/eslint-plugin": "~5.60"
+    "@typescript-eslint/eslint-plugin": "~6.3"
   },
   "optionalDependencies": {
     "sharp": "~0.32",
