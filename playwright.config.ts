@@ -8,8 +8,8 @@ export default defineConfig(
 	{
 		use: {
 			baseURL,
-			trace: "retain-on-failure",
-			video: "retain-on-failure"
+			trace: process.env.CI ? "off" : "on-first-retry",
+			video: process.env.CI ? "off" : "on-first-retry"
 		},
 		expect: { timeout: 10000 },
 		workers: 1,
