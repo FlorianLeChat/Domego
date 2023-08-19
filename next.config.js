@@ -24,19 +24,5 @@ module.exports = withPWA( {
 	i18n,
 	basePath: basePath === "/" ? "" : ( basePath.endsWith( "/" ) ? basePath.slice( 0, -1 ) : basePath ),
 	poweredByHeader: false,
-	reactStrictMode: true,
-	async redirects()
-	{
-		// Définition des redirections de base.
-		const redirects = [
-			{
-				source: "/source",
-				permanent: true,
-				destination: "https://github.com/FlorianLeChat/Domego"
-			}
-		];
-
-		// Application des redirections.
-		return redirects;
-	}
+	reactStrictMode: true
 } );
