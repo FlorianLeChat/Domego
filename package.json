@@ -42,7 +42,6 @@
     "@types/react": "~18.2",
     "@types/validator": "~13.11",
     "@types/grecaptcha": "~3.0",
-    "pm2": "~5.3",
     "typescript": "~5.1",
     "localtunnel": "~2.0",
     "next-sitemap": "~4.1",
@@ -69,10 +68,7 @@
     "test": "playwright test",
     "lint": "eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx",
     "build": "next build && next-sitemap",
-    "start": "pm2 start --name domego next -- start -p 3000",
-    "stop": "pm2 delete domego",
-    "restart": "pm2 restart domego --update-env",
-    "reload": "pm2 reload domego",
+    "start": "next start",
     "tunnel": "npx localtunnel --port 3000"
   },
   "browserslist": [

@@ -43,4 +43,4 @@ USER node
 EXPOSE 3000
 
 # Run the website
-CMD [ "npx", "next", "start" ]
+CMD [ "npm", "run", "start" ]
