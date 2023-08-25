@@ -43,7 +43,6 @@
     "@types/validator": "~13.11",
     "@types/grecaptcha": "~3.0",
     "typescript": "~5.1",
-    "localtunnel": "~2.0",
     "next-sitemap": "~4.1",
     "@playwright/test": "~1.36",
     "eslint-config-next": "~13.4",
@@ -68,8 +67,7 @@
     "test": "playwright test",
     "lint": "eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx",
     "build": "next build && next-sitemap",
-    "start": "next start",
-    "tunnel": "npx localtunnel --port 3000"
+    "start": "next start"
   },
   "browserslist": [
     "defaults"
