@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.8"
 
 networks:
   domego:
@@ -8,7 +8,6 @@ services:
   # https://hub.docker.com/_/mongo
   mongo:
     image: mongo:latest
-    container_name: database
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -20,12 +19,27 @@ services:
   # https://github.com/FlorianLeChat/Domego
   node:
     image: domego
-    container_name: website
-    restart: unless-stopped
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      retries: 3
+      timeout: 5s
+    networks:
+      - domego
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 512M
+        reservations:
+          cpus: "0.25"
+          memory: 128M
+      restart_policy:
+        window: 60s
+        condition: on-failure
+        max_attempts: 5
     build:
       context: .
       dockerfile: ./Dockerfile
-    networks:
-      - domego
     ports:
       - 3000:3000

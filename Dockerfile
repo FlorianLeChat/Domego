@@ -4,6 +4,9 @@
 # https://hub.docker.com/_/node
 FROM node:lts-alpine
 
+# Add cURL for health check
+RUN apk --no-cache add curl
+
 # Set the working directory to the website files
 WORKDIR /usr/src/app
 
@@ -32,9 +35,6 @@ RUN npm run build
 
 # Change the ownership of the build files
 RUN chown -R node:node /usr/src/app/.next
-
-# Remove all development dependencies
-RUN npm prune --production
 
 # Use non-root user
 USER node
