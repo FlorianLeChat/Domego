@@ -65,7 +65,7 @@
   "scripts": {
     "dev": "next dev",
     "test": "playwright test",
-    "lint": "eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx --report-unused-disable-directives",
     "build": "next build && next-sitemap",
     "start": "next start"
   },
