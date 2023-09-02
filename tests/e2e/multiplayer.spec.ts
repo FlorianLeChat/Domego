@@ -5,9 +5,6 @@ import { test, expect } from "@playwright/test";
 //
 test( "Connexion à une partie existante", async ( { browser, browserName } ) =>
 {
-	// Firefox semble systématiquement échouer sur ce test (bug de Playwright ?).
-	test.skip( browserName === "firefox" );
-
 	// Création de deux contextes de navigateur.
 	const player1Context = await browser.newContext();
 	const player2Context = await browser.newContext();
