@@ -33,14 +33,14 @@ export default defineConfig(
 				name: "Microsoft Edge",
 				use: {
 					...devices[ "Desktop Edge" ]
-				},
+				}
 			},
 			{
 				name: "Mobile Chrome",
 				use: {
 					...devices[ "Pixel 5" ]
 				}
-			},
+			}
 		]
 	} as PlaywrightTestConfig
 );

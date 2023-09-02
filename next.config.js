@@ -23,6 +23,5 @@ const withPWA = require( "next-pwa" )( {
 module.exports = withPWA( {
 	i18n,
 	basePath: basePath === "/" ? "" : ( basePath.endsWith( "/" ) ? basePath.slice( 0, -1 ) : basePath ),
-	poweredByHeader: false,
-	reactStrictMode: true
+	poweredByHeader: false
 } );
