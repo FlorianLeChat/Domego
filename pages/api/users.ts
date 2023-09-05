@@ -83,7 +83,8 @@ export default async function handler( request: NextApiRequest, response: NextAp
 			// Modification d'un l'utilisateur dans la base de données.
 			try
 			{
-				const document = await UserModel.findOneAndUpdate( request.body.filter, request.body.update );
+				const { filter, update } = request.body;
+				const document = await UserModel.findOneAndUpdate( filter, update );
 
 				if ( document && Object.keys( document ).length > 0 )
 				{

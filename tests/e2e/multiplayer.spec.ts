@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 //
 // Vérification de la possibilité à rejoindre une partie existante.
 //
-test( "Connexion à une partie existante", async ( { browser, browserName } ) =>
+test( "Connexion à une partie existante", async ( { browser } ) =>
 {
 	// Création de deux contextes de navigateur.
 	const player1Context = await browser.newContext();

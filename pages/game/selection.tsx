@@ -108,7 +108,12 @@ export default function RoleSelection()
 		socket?.on( "GameStart", () =>
 		{
 			replace( {
-				query: { roomId: query.uuid, username: query.username, admin: query.admin, type: query.type },
+				query: {
+					roomId: query.uuid,
+					username: query.username,
+					admin: query.admin,
+					type: query.type
+				},
 				pathname: "/game/board"
 			} );
 		} );

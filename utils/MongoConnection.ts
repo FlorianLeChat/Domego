@@ -38,8 +38,7 @@ export async function ConnectToMongoDB()
 
 		cache = {
 			conn: undefined,
-			promise: mongoose.connect( uri, options )
-				.then( ( connection ) => connection )
+			promise: mongoose.connect( uri, options ).then( ( connection ) => connection )
 		};
 	}
 

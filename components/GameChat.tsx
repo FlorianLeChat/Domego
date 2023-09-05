@@ -25,7 +25,10 @@ export default function GameChat( { show }: GameChatProps )
 	const [ messages, addMessage ] = useState<JSX.Element[]>( [ <i key={0}>{t( "pages.index.chat_welcome" )}</i> ] );
 
 	// Récupération du message saisi par l'utilisateur.
-	const handleInputChange = ( event: ChangeEvent<HTMLInputElement> ) => setInput( event.target.value );
+	const handleInputChange = ( event: ChangeEvent<HTMLInputElement> ) =>
+	{
+		setInput( event.target.value );
+	};
 
 	// Envoi des nouveaux messages au serveur.
 	const handleFormSubmit = ( event: FormEvent<HTMLFormElement> ) =>
@@ -57,7 +60,10 @@ export default function GameChat( { show }: GameChatProps )
 		//  de connexion et de déconnexion des autres joueurs.
 		socket?.on( "GameAlert", ( username, message ) =>
 		{
-			addMessage( ( elements ) => [ ...elements, <i key={elements.length}>{t( message, { username } )}</i> ] );
+			addMessage( ( elements ) => [
+				...elements,
+				<i key={elements.length}>{t( message, { username } )}</i>
+			] );
 		} );
 	}, [ t, socket ] );
 

@@ -13,7 +13,14 @@ export const MAX_PLAYERS = 6;
 //
 export function registerRoom( id: string, player: string )
 {
-	const room = { id, state: RoomState.CREATED, creator: player, players: [ player ], spectators: [] };
+	const room = {
+		id,
+		state: RoomState.CREATED,
+		creator: player,
+		players: [ player ],
+		spectators: []
+	};
+
 	rooms.push( room );
 
 	return rooms;

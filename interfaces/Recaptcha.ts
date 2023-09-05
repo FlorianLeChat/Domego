@@ -5,19 +5,19 @@
 export interface RecaptchaAttributes
 {
 	// État de validité du jeton d'authentification.
-	"success": boolean,
+	success: boolean;
 
 	// Score de confiance attribué à l'utilisateur.
-	"score": number;
+	score: number;
 
 	// Nom de l'action pour cette requête.
-	"action": string;
+	action: string;
 
 	// Date et heure de la requête.
-	"challenge_ts": Date,
+	challenge_ts: Date;
 
 	// Nom de domaine de l'application.
-	"hostname": string,
+	hostname: string;
 
 	// Codes d'erreurs éventuelles.
 	"error-codes"?: string[];

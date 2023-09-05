@@ -71,7 +71,8 @@ export function Connect( io: Server, socket: Socket )
 			}
 
 			// Vérification de l'état actuel de la partie.
-			if ( ( room.state !== RoomState.CREATED && type === UserType.PLAYER ) || room.state === RoomState.FINISHED )
+			if ( ( room.state !== RoomState.CREATED && type === UserType.PLAYER )
+				|| room.state === RoomState.FINISHED )
 			{
 				callback( "error", "server.game_started_title", "server.game_started_description" );
 				return;

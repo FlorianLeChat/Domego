@@ -12,7 +12,8 @@ export default function handler( _request: NextApiRequest, response: NextApiResp
 	// On vérifie tout d'abord si le socket n'a pas déjà été initialisé.
 	if ( !response.socket.server.io )
 	{
-		// Si ce n'est pas le cas, on créé une nouvelle instance de Socket.io avant de la mettre en mémoire.
+		// Si ce n'est pas le cas, on créé une nouvelle instance de Socket.io
+		//  avant de la mettre en mémoire.
 		const io = new Server( response.socket.server, {
 			path: join( new URL( process.env.NEXT_PUBLIC_URL ?? "" ).pathname, "/internal/" ).replace( /\\/g, "/" )
 		} );
