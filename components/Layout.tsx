@@ -8,7 +8,7 @@ import { ReactNode } from "react";
 // Importation des fonctions utilitaires.
 import { SocketProvider } from "@/utils/SocketContext";
 
-export default function Layout( { children }: { children: ReactNode; } )
+export default function Layout( { children }: { children: ReactNode } )
 {
 	// Affichage du rendu HTML du composant.
 	return (

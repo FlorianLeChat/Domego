@@ -54,7 +54,7 @@ if ( typeof window !== "undefined" )
 export const SocketContext = createContext( instance );
 
 // Exportation du fournisseur de contexte.
-export function SocketProvider( { children }: { children: ReactNode; } )
+export function SocketProvider( { children }: { children: ReactNode } )
 {
 	return <SocketContext.Provider value={instance}>{children}</SocketContext.Provider>;
 }

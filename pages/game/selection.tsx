@@ -16,7 +16,7 @@ import styles from "./selection.module.scss";
 const RoleCard = dynamic( () => import( "@/components/RoleCard" ) );
 const GameChat = dynamic( () => import( "@/components/GameChat" ) );
 
-export async function getStaticProps( { locale }: { locale: string; } )
+export async function getStaticProps( { locale }: { locale: string } )
 {
 	// Récupération des traductions côté serveur.
 	return {

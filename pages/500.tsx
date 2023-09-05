@@ -7,7 +7,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import styles from "./500.module.scss";
 
-export async function getStaticProps( { locale }: { locale: string; } )
+export async function getStaticProps( { locale }: { locale: string } )
 {
 	// Récupération des traductions côté serveur.
 	return {
