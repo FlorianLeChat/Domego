@@ -70,7 +70,7 @@ export default function GameChat( { show }: GameChatProps )
 	// Retour automatique aux messages les plus récents.
 	useEffect( () =>
 	{
-		const last = list.current?.lastChild as Element | null;
+		const last = list.current?.lastChild as HTMLElement | null;
 
 		if ( last )
 		{
