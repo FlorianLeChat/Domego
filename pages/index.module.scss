@@ -8,9 +8,13 @@ section#GameHome
 	flex-direction: column;
 	justify-content: center;
 
-	// Lien vers le dépôt GitHub du projet.
 	> a
 	{
+		// Lien vers le dépôt GitHub.
+		inset: 0 0 auto auto;
+		position: fixed;
+		clip-path: polygon(0 0, 100% 0, 100% 100%);
+
 		@media screen and (max-width: 320px)
 		{
 			// Suppression du logo GitHub sur les écrans
@@ -36,10 +40,7 @@ section#GameHome
 		{
 			// Délimitation de la zone cliquable.
 			fill: rgb(63, 63, 63);
-			inset: 0 0 auto auto;
 			color: whitesmoke;
-			position: fixed;
-			clip-path: polygon(0 0, 100% 0, 100% 100%);
 
 			path:nth-of-type(2)
 			{
