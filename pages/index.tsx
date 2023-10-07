@@ -265,8 +265,8 @@ export default function GameHome()
 							<Trans
 								i18nKey="pages.index.google_recaptcha"
 								components={{
-									a1: <a href="https://policies.google.com/privacy">...</a>,
-									a2: <a href="https://policies.google.com/terms">...</a>
+									a1: <a rel="noopener noreferrer" href="https://policies.google.com/privacy" target="_blank">...</a>,
+									a2: <a rel="noopener noreferrer" href="https://policies.google.com/terms" target="_blank">...</a>
 								}}
 							/>
 
