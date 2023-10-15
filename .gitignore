@@ -33,6 +33,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# docker
+/docker/config
+
 # playwright
 /test-results/
 /playwright-report/

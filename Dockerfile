@@ -25,10 +25,9 @@ RUN chown -R node:node /usr/src/app/node_modules
 # Copy the remaining files AFTER installing dependencies
 COPY --chown=node:node . .
 
-# Find and replace the database host, username and password
-RUN sed -i "s/MONGODB_HOST=localhost/MONGODB_DATABASE=database/g" .env
-RUN sed -i "s/MONGODB_USERNAME=username/MONGODB_USERNAME=root/g" .env
-RUN sed -i "s/MONGODB_PASSWORD=password/MONGODB_PASSWORD=password/g" .env
+# Find and replace the database host and password
+RUN sed -i "s/MONGODB_HOST=127.0.0.1/MONGODB_HOST=mongo/g" .env
+RUN sed -i "s/MONGODB_PASSWORD=password/MONGODB_PASSWORD=$(cat /usr/src/app/docker/config/db_root_password.txt | tr -d '\n')/g" .env
 
 # Build the entire project
 RUN npm run build
