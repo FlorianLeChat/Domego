@@ -3,16 +3,27 @@
 /**
  * @type {import("next").NextConfig}
  */
-const { i18n } = require("./next-i18next.config");
-const basePath = new URL(process.env.NEXT_PUBLIC_URL ?? "").pathname;
+const { i18n } = require( "./next-i18next.config" );
+const { withSentryConfig } = require( "@sentry/nextjs" );
 
-module.exports = {
+const basePath = new URL( process.env.NEXT_PUBLIC_URL ?? "" ).pathname;
+const nextConfig = {
 	i18n,
-	basePath:
-		basePath === "/"
-			? ""
-			: basePath.endsWith("/")
-			? basePath.slice(0, -1)
-			: basePath,
 	poweredByHeader: false,
+	basePath: basePath === "/" ? "" : basePath.endsWith("/") ? basePath.slice(0, -1) : basePath,
+	sentry: {
+		tunnelRoute: "/monitoring",
+		disableLogger: true,
+		hideSourceMaps: true,
+		widenClientFileUpload: true
+	}
 };
+
+const sentryConfig = {
+	org: process.env.SENTRY_ORG,
+	silent: true,
+	project: process.env.SENTRY_PROJECT,
+	authToken: process.env.SENTRY_AUTH_TOKEN
+};
+
+module.exports = withSentryConfig( nextConfig, sentryConfig );

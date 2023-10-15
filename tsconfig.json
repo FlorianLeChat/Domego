@@ -1,6 +1,6 @@
 {
     "exclude": ["node_modules"],
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+    "include": ["next-env.d.ts", "**/*.config.js", "**/*.ts", "**/*.tsx"],
     "compilerOptions": {
         "lib": ["dom", "dom.iterable", "esnext"],
         "jsx": "preserve",
