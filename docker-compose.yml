@@ -26,6 +26,8 @@ services:
     node:
         image: domego
         restart: always
+        depends_on:
+            - mongo
         healthcheck:
             test: ["CMD", "curl", "-f", "http://localhost:3000"]
             retries: 3
