@@ -25,7 +25,6 @@ services:
     # https://github.com/FlorianLeChat/Domego
     node:
         image: domego
-        restart: always
         depends_on:
             - mongo
         healthcheck:
