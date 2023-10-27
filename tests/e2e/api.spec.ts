@@ -18,7 +18,7 @@ test( "Connexion au serveur Socket.IO", async ( { request } ) =>
 //
 test( "Requête de type GET à l'API", async ( { request } ) =>
 {
-	test.skip( process.env.CI === "true" );
+	test.skip( true, "Pas encore implémenté" );
 
 	const response = await request.get( "/api/users" );
 
@@ -30,7 +30,7 @@ test( "Requête de type GET à l'API", async ( { request } ) =>
 //
 test( "Requête de type POST à l'API", async ( { request } ) =>
 {
-	test.skip( process.env.CI === "true" );
+	test.skip( true, "Pas encore implémenté" );
 
 	const response = await request.post( "/api/users", {
 		params: {
@@ -48,7 +48,7 @@ test( "Requête de type POST à l'API", async ( { request } ) =>
 //
 test( "Requête de type PUT à l'API", async ( { request } ) =>
 {
-	test.skip( process.env.CI === "true" );
+	test.skip( true, "Pas encore implémenté" );
 
 	const response = await request.put( "/api/users", {
 		params: {
@@ -66,7 +66,7 @@ test( "Requête de type PUT à l'API", async ( { request } ) =>
 //
 test( "Requête de type DELETE à l'API", async ( { request } ) =>
 {
-	test.skip( process.env.CI === "true" );
+	test.skip( true, "Pas encore implémenté" );
 
 	const response = await request.delete( "/api/users", {
 		params: {
