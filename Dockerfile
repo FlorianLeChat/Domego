@@ -10,20 +10,20 @@ RUN apk --no-cache add curl
 # Set the working directory to the website files
 WORKDIR /usr/src/app
 
-# Copy only files required to install dependencies
-COPY --chown=node:node package*.json .
+# Change permissions of the working directory
+RUN chown node:node .
+
+# Copy all files required to build the project
+COPY --chown=node:node . .
 
 # Install all dependencies
 # Use cache mount to speed up installation of existing dependencies
-RUN --mount=type=cache,target=/usr/src/app/.npm \
-	npm set cache /usr/src/app/.npm && \
-	npm install
+RUN --mount=type=cache,target=.npm \
+	npm set cache .npm && \
+	npm install && chown -R node:node ./node_modules
 
-# Change ownership of the installed dependencies
-RUN chown -R node:node /usr/src/app/node_modules
-
-# Copy the remaining files AFTER installing dependencies
-COPY --chown=node:node . .
+# Use non-root user
+USER node
 
 # Find and replace the database host and password
 RUN sed -i "s/MONGODB_HOST=127.0.0.1/MONGODB_HOST=mongo/g" .env
@@ -32,14 +32,8 @@ RUN sed -i "s/MONGODB_PASSWORD=password/MONGODB_PASSWORD=$(cat /usr/src/app/dock
 # Build the entire project
 RUN npm run build
 
-# Change the ownership of the build files
-RUN chown -R node:node /usr/src/app/.next
-
-# Use non-root user
-USER node
-
-# Expose the port 3000
-EXPOSE 3000
+# Remove all development dependencies
+RUN npm prune --production
 
 # Run the website
 CMD [ "npm", "run", "start" ]
