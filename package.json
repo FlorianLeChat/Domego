@@ -63,9 +63,6 @@
     "node": ">=20.5",
     "npm": ">=10.1"
   },
-  "overrides": {
-    "uuid": "$uuid"
-  },
   "scripts": {
     "dev": "next dev",
     "test": "playwright test",
