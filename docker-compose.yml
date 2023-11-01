@@ -25,6 +25,7 @@ services:
     # https://github.com/FlorianLeChat/Domego
     node:
         image: domego
+        restart: always
         depends_on:
             - mongo
         healthcheck:
@@ -41,10 +42,6 @@ services:
                 reservations:
                     cpus: "0.25"
                     memory: 128M
-            restart_policy:
-                window: 60s
-                condition: on-failure
-                max_attempts: 5
         build:
             context: .
             dockerfile: ./Dockerfile
