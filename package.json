@@ -36,6 +36,7 @@
     "utf-8-validate": "~6.0",
     "@sentry/nextjs": "~7.77",
     "socket.io-client": "~4.7",
+    "@next/third-parties": "~14.0",
     "vanilla-cookieconsent": "3.0.0-rc.16",
     "@total-typescript/ts-reset": "~0.5"
   },

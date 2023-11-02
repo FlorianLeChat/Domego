@@ -16,6 +16,7 @@ import dynamic from "next/dynamic";
 import { run } from "vanilla-cookieconsent";
 import { Roboto } from "next/font/google";
 import { useRouter } from "next/router";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { appWithTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
 
@@ -40,8 +41,15 @@ function Domego( { Component, pageProps }: AppProps )
 	const recaptchaUrl = new URL( "https://www.google.com/recaptcha/api.js" );
 	const favicons = `${ basePath }/assets/favicons`;
 
-	analyticsUrl.searchParams.append( "id", process.env.NEXT_PUBLIC_ANALYTICS_TAG ?? "" );
-	recaptchaUrl.searchParams.append( "render", process.env.NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY ?? "" );
+	analyticsUrl.searchParams.append(
+		"id",
+		process.env.NEXT_PUBLIC_ANALYTICS_TAG ?? ""
+	);
+
+	recaptchaUrl.searchParams.append(
+		"render",
+		process.env.NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY ?? ""
+	);
 
 	// Déclaration des variables d'état.
 	const [ analytics, setAnalytics ] = useState( false );
@@ -149,53 +157,75 @@ function Domego( { Component, pageProps }: AppProps )
 				{/* Méta-données du document */}
 				<meta charSet="utf-8" />
 				<meta name="author" content={process.env.NEXT_PUBLIC_AUTHOR} />
-				<meta name="description" content={process.env.NEXT_PUBLIC_DESCRIPTION} />
+				<meta
+					name="description"
+					content={process.env.NEXT_PUBLIC_DESCRIPTION}
+				/>
 				<meta name="keywords" content={process.env.NEXT_PUBLIC_TAGS} />
-				<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1, viewport-fit=cover"
+				/>
 				<meta name="theme-color" content="#40a9ff" />
 
 				{/* Titre du document */}
 				<title>{`${ process.env.NEXT_PUBLIC_TITLE }`}</title>
 
 				{/* Icônes et manifeste du document */}
-				<link rel="icon" type="image/webp" sizes="16x16" href={`${ favicons }/16x16.webp`} />
-				<link rel="icon" type="image/webp" sizes="32x32" href={`${ favicons }/32x32.webp`} />
-				<link rel="icon" type="image/webp" sizes="48x48" href={`${ favicons }/48x48.webp`} />
-				<link rel="icon" type="image/webp" sizes="192x192" href={`${ favicons }/192x192.webp`} />
-				<link rel="icon" type="image/webp" sizes="512x512" href={`${ favicons }/512x512.webp`} />
+				<link
+					rel="icon"
+					type="image/webp"
+					sizes="16x16"
+					href={`${ favicons }/16x16.webp`}
+				/>
+				<link
+					rel="icon"
+					type="image/webp"
+					sizes="32x32"
+					href={`${ favicons }/32x32.webp`}
+				/>
+				<link
+					rel="icon"
+					type="image/webp"
+					sizes="48x48"
+					href={`${ favicons }/48x48.webp`}
+				/>
+				<link
+					rel="icon"
+					type="image/webp"
+					sizes="192x192"
+					href={`${ favicons }/192x192.webp`}
+				/>
+				<link
+					rel="icon"
+					type="image/webp"
+					sizes="512x512"
+					href={`${ favicons }/512x512.webp`}
+				/>
 
-				<link rel="apple-touch-icon" href={`${ favicons }/180x180.webp`} />
+				<link
+					rel="apple-touch-icon"
+					href={`${ favicons }/180x180.webp`}
+				/>
 				<link rel="manifest" href={`${ basePath }/manifest.json`} />
 			</Head>
 
 			{/* Google Analytics */}
 			{analytics && (
-				<>
-					<Script src={analyticsUrl.href} strategy="lazyOnload" />
-					<Script id="google-analytics" strategy="lazyOnload">
-						{`
-							window.dataLayer = window.dataLayer || [];
-
-							function gtag( ...args )
-							{
-								window.dataLayer.push( ...args );
-							}
-
-							gtag( "js", new Date() );
-							gtag( "config", "${ process.env.NEXT_PUBLIC_ANALYTICS_TAG ?? "" }" );
-						`}
-					</Script>
-				</>
+				<GoogleTagManager
+					gtmId={process.env.NEXT_PUBLIC_ANALYTICS_TAG ?? ""}
+				/>
 			)}
 
 			{/* Google reCAPTCHA */}
-			{recaptcha && <Script src={recaptchaUrl.href} strategy="lazyOnload" />}
+			{recaptcha && (
+				<Script src={recaptchaUrl.href} strategy="lazyOnload" />
+			)}
 
 			{/* Injection de règles de style CSS */}
 			<style jsx global>
 				{`
-					html
-					{
+					html {
 						font-family: ${ roboto.style.fontFamily };
 					}
 				`}
