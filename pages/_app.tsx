@@ -79,7 +79,7 @@ function Domego( { Component, pageProps }: AppProps )
 			// Paramètres internes des cookies.
 			cookie: {
 				path: basePath,
-				name: "NEXT_ANALYTICS"
+				name: "NEXT_COOKIE"
 			},
 
 			// Paramètres de l'interface utilisateur.
