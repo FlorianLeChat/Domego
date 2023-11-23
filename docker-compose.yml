@@ -21,6 +21,8 @@ services:
             MONGO_INITDB_DATABASE: domego
         networks:
             - domego
+        ports:
+            - 27017:27017
 
     # https://github.com/FlorianLeChat/Domego
     node:
