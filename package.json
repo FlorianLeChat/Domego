@@ -32,7 +32,6 @@
     "sweetalert2": "<11.4.9",
     "sanitize.css": "~13.0",
     "next-i18next": "~15.0",
-    "react-i18next": "~13.5",
     "utf-8-validate": "~6.0",
     "@sentry/nextjs": "~7.84",
     "socket.io-client": "~4.7",
