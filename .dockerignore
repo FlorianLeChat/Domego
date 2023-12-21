@@ -6,7 +6,6 @@
 **/.gitattributes
 **/node_modules
 **/Dockerfile
-**/db_root_password.txt
 **/docker-*
 **/CODEOWNERS
 **/LICENSE
