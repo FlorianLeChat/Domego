@@ -25,7 +25,8 @@ RUN --mount=type=cache,target=.npm \
 # Use non-root user
 USER node
 
-# Find and replace the database host and password
+# Find and replace some default environment variables
+RUN sed -i "s/NEXT_PUBLIC_ENV=development/NEXT_PUBLIC_ENV=production/g" .env
 RUN sed -i "s/MONGODB_HOST=127.0.0.1/MONGODB_HOST=mongo/g" .env
 RUN if [ -f "docker/config/db_root_password.txt" ]; then \
 	sed -i "s/MONGODB_PASSWORD=password/MONGODB_PASSWORD=$(cat /usr/src/app/docker/config/db_root_password.txt)/g" .env; \
