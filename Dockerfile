@@ -27,7 +27,9 @@ USER node
 
 # Find and replace the database host and password
 RUN sed -i "s/MONGODB_HOST=127.0.0.1/MONGODB_HOST=mongo/g" .env
-RUN sed -i "s/MONGODB_PASSWORD=password/MONGODB_PASSWORD=$(cat /usr/src/app/docker/config/db_root_password.txt | tr -d '\n')/g" .env
+RUN if [ -f "docker/config/db_root_password.txt" ]; then \
+	sed -i "s/MONGODB_PASSWORD=password/MONGODB_PASSWORD=$(cat /usr/src/app/docker/config/db_root_password.txt)/g" .env; \
+fi
 
 # Build the entire project
 RUN npm run build
