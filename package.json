@@ -55,7 +55,7 @@
     "@playwright/test": "~1.42",
     "eslint-config-next": "~14.1",
     "eslint-config-airbnb": "~19.0",
-    "@typescript-eslint/eslint-plugin": "~7.1"
+    "@typescript-eslint/eslint-plugin": "~6.2"
   },
   "engines": {
     "node": ">=18.0",
