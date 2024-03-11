@@ -1,3 +1,4 @@
+import { faker } from "@faker-js/faker";
 import { test, expect } from "@playwright/test";
 
 //
@@ -45,7 +46,7 @@ test( "Affichage du consentement des cookies", async ( { page } ) =>
 test( "Annulation d'une nouvelle partie", async ( { page } ) =>
 {
 	// Remplissage d'un pseudonyme dans le champ de saisie.
-	await page.getByPlaceholder( "Marc007" ).fill( "Marc007" );
+	await page.getByPlaceholder( "Marc007" ).fill( faker.internet.displayName() );
 
 	// Clic sur le bouton de création d'une nouvelle partie.
 	await page.getByRole( "button", { name: "Create a new game" } ).click();
@@ -63,7 +64,7 @@ test( "Annulation d'une nouvelle partie", async ( { page } ) =>
 test( "Création d'une nouvelle partie", async ( { page } ) =>
 {
 	// Remplissage d'un pseudonyme dans le champ de saisie.
-	await page.getByPlaceholder( "Marc007" ).fill( "Marc007" );
+	await page.getByPlaceholder( "Marc007" ).fill( faker.internet.displayName() );
 
 	// Clic sur le bouton de création d'une nouvelle partie.
 	await page.getByRole( "button", { name: "Create a new game" } ).click();

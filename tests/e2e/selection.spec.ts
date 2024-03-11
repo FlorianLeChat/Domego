@@ -1,15 +1,18 @@
+import { faker } from "@faker-js/faker";
 import { test, expect } from "@playwright/test";
 
 //
 // Création d'une nouvelle partie avant chaque test.
 //
+const player = faker.internet.displayName();
+
 test.beforeEach( async ( { page } ) =>
 {
 	// Accès à la page d'accueil.
 	await page.goto( "/" );
 
 	// Remplissage d'un pseudonyme dans le champ de saisie.
-	await page.getByPlaceholder( "Marc007" ).fill( `Player ${ Math.floor( Math.random() * 1000 ) }` );
+	await page.getByPlaceholder( "Marc007" ).fill( player );
 
 	// Clic sur le bouton de création d'une nouvelle partie.
 	await page.getByRole( "button", { name: "Create a new game" } ).click();
@@ -18,7 +21,9 @@ test.beforeEach( async ( { page } ) =>
 	await page.getByRole( "button", { name: "Yes" } ).click();
 
 	// Vérification du titre de la page.
-	await expect( page.getByRole( "heading", { name: "Choose your role" } ) ).toBeVisible();
+	await expect(
+		page.getByRole( "heading", { name: "Choose your role" } )
+	).toBeVisible();
 
 	// Vérification de l'URL de la page.
 	await expect( page ).toHaveURL( "/game/selection" );
@@ -36,7 +41,7 @@ test( "Sélection d'un rôle", async ( { page } ) =>
 	await page.getByRole( "checkbox", { name: "I'm ready!" } ).click();
 
 	// Vérification de la confirmation de la prise du rôle.
-	await expect( page.getByText( "Player" ).first() ).toBeVisible();
+	await expect( page.getByText( player ).first() ).toBeVisible();
 } );
 
 //
@@ -45,7 +50,9 @@ test( "Sélection d'un rôle", async ( { page } ) =>
 test( "Utilisation du chat", async ( { page } ) =>
 {
 	// Remplissage d'un message dans le champ de saisie.
-	await page.getByPlaceholder( "Lorem ipsum dolor sit amet..." ).fill( "Bonjour" );
+	await page
+		.getByPlaceholder( "Lorem ipsum dolor sit amet..." )
+		.fill( "Bonjour" );
 
 	// Clic sur le bouton pour envoyer le message.
 	await page.getByRole( "button", { name: "Send" } ).click();

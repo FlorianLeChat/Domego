@@ -1,3 +1,4 @@
+import { faker } from "@faker-js/faker";
 import { test, expect } from "@playwright/test";
 
 //
@@ -17,7 +18,7 @@ test( "Connexion à une partie existante", async ( { browser } ) =>
 	await player2Page.goto( "/" );
 
 	// Création d'une nouvelle partie par le joueur 1.
-	const player1Name = `Player ${ Math.floor( Math.random() * 1000 ) }`;
+	const player1Name = faker.internet.displayName();
 	await player1Page.getByPlaceholder( "Marc007" ).fill( player1Name );
 	await player1Page.getByRole( "button", { name: "Create a new game" } ).click();
 	await player1Page.getByRole( "button", { name: "Yes" } ).click();
@@ -27,7 +28,7 @@ test( "Connexion à une partie existante", async ( { browser } ) =>
 	await player1Page.getByRole( "article" ).locator( "#select" ).first().click();
 
 	// Connexion à la partie par le joueur 2.
-	const player2Name = `Player ${ Math.floor( Math.random() * 1000 ) }`;
+	const player2Name = faker.internet.displayName();
 	await player2Page.getByPlaceholder( "Marc007" ).fill( player2Name );
 	await player2Page.getByRole( "row", { name: player1Name } ).getByRole( "button", { name: "Join" } ).click();
 	await player2Page.getByRole( "button", { name: "Yes" } ).click();
@@ -61,7 +62,7 @@ test( "Pseudonyme déjà utilisé", async ( { browser } ) =>
 	await player2Page.goto( "/" );
 
 	// Création d'une nouvelle partie par le joueur 1.
-	const player1Name = `Player ${ Math.floor( Math.random() * 1000 ) }`;
+	const player1Name = faker.internet.displayName();
 	await player1Page.getByPlaceholder( "Marc007" ).fill( player1Name );
 	await player1Page.getByRole( "button", { name: "Create a new game" } ).click();
 	await player1Page.getByRole( "button", { name: "Yes" } ).click();
@@ -88,7 +89,7 @@ test( "Partie encore active", async ( { page } ) =>
 	await page.goto( "/" );
 
 	// Création d'une nouvelle partie.
-	const playerName = `Player ${ Math.floor( Math.random() * 1000 ) }`;
+	const playerName = faker.internet.displayName();
 	await page.getByPlaceholder( "Marc007" ).fill( playerName );
 	await page.getByRole( "button", { name: "Create a new game" } ).click();
 	await page.getByRole( "button", { name: "Yes" } ).click();
@@ -122,7 +123,7 @@ test( "Reconnexion à la volée", async ( { page } ) =>
 	await page.goto( "/" );
 
 	// Création d'une nouvelle partie.
-	const playerName = `Player ${ Math.floor( Math.random() * 1000 ) }`;
+	const playerName = faker.internet.displayName();
 	await page.getByPlaceholder( "Marc007" ).fill( playerName );
 	await page.getByRole( "button", { name: "Create a new game" } ).click();
 	await page.getByRole( "button", { name: "Yes" } ).click();
