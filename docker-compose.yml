@@ -21,7 +21,7 @@ services:
         networks:
             - domego
         ports:
-            - 27017:27017
+            - "27017:27017"
 
     # https://github.com/FlorianLeChat/Domego
     node:
@@ -44,4 +44,4 @@ services:
             context: .
             dockerfile: ./docker/Dockerfile.${NEXT_PUBLIC_ENV}
         ports:
-            - 3000:3000
+            - "3000:3000"
