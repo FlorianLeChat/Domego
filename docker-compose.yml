@@ -14,16 +14,10 @@ services:
         volumes:
             - ./docker/config:/etc/mongo
             - ./docker/database:/data/db
-        secrets:
-            - db_root_password
-        # entrypoint: ["mongod", "--config", "/etc/mongo/mongod.conf"]
         environment:
-            MONGO_INITDB_DATABASE: domego
-            MONGO_INITDB_ROOT_USERNAME: root
-            # > Default credentials (for test image)
-            MONGO_INITDB_ROOT_PASSWORD: password
-            # > Custom credentials with secrets (for production image)
-            # MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+            MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
+            MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
         networks:
             - domego
         ports:
@@ -41,7 +35,7 @@ services:
         depends_on:
             - mongo
         healthcheck:
-            test: ["CMD", "curl", "-f", "http://localhost:3000"]
+            test: curl -f http://localhost:3000
             retries: 3
             timeout: 5s
         networks:
@@ -56,10 +50,6 @@ services:
                     memory: 128M
         build:
             context: .
-            dockerfile: ./Dockerfile
+            dockerfile: ./docker/Dockerfile.${NEXT_PUBLIC_ENV}
         ports:
             - 3000:3000
-
-secrets:
-    db_root_password:
-        file: ./docker/config/db_root_password.txt
