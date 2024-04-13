@@ -1,7 +1,5 @@
 name: domego
 
-version: "3.8"
-
 networks:
     domego:
         driver: bridge
