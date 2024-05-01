@@ -218,7 +218,7 @@ export default function GameHome()
 		<section id={styles.GameHome}>
 			{/* Affichage de l'animation du logo vers le dépôt GitHub */}
 			{/* Source : https://tholman.com/github-corners/ */}
-			<a href="https://github.com/FlorianLeChat/Domego" target="_blank" rel="noopener noreferrer">
+			<a href="https://github.com/FlorianLeChat/Domego" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
 				<svg width="80" height="80" viewBox="0 0 250 250">
 					<path d="M0 0l115 115h15l12 27 108 108V0z" />
 					<path d="M128 109c-15-9-9-19-9-19 3-7 2-11 2-11-1-7 3-2 3-2 4 5 2 11 2 11-3 10 5 15 9 16" />
