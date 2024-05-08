@@ -2,6 +2,9 @@
 
 ## In French
 
+> [!CAUTION]
+> **Ce projet n'est plus maintenu depuis mai 2024. Si vous comptez utiliser la totalité ou une partie du code source, veuillez noter que les dépendances ne seront plus à jour et que vous vous exposez à des vulnérabilités de sécurité si des mesures adéquates ne sont pas mises en place.**
+
 *Domego est un jeu pédagogique sérieux dans lequel chaque joueur prend le rôle d'un acteur d'une opération de construction. L'objectif est double : collectivement les joueurs doivent faire en sorte que le projet se déroule au mieux et termine dans les délais avec le coût le plus faible possible, individuellement, ils doivent assurer la pérennité de leur activité en répondant à différents objectifs (faire des bénéfices, assurer leur renommée, etc.).*
 
 Ce projet, réalisé en tant que sujet de fin d'année scolaire, est issue d'un jeu de plateau développé par [Franck Taillandier pour l'Université de Bordeaux](https://www.i2m.u-bordeaux.fr/Projets/Autres-projets2/Domego). Ceci est la **troisième** itération de la version numérique ce jeu, la [première](https://github.com/Polytech-PFE2019/pfe2019-009) et la [deuxième](https://github.com/Denisko185/SI4-stage-Domego) sont publiquement accessibles mais utilisent des technologies différentes que celles employées dans cette version.
@@ -17,6 +20,9 @@ Ce projet, réalisé en tant que sujet de fin d'année scolaire, est issue d'un 
 ___
 
 ## In English
+
+> [!CAUTION]
+> **This project is no longer maintained since May 2024. If you intend to run the whole or some part of my source code, please be aware that some dependencies will be outdated and you expose yourself to security vulnerabilities if proper safeguards are not enforced.**
 
 *Domego is a serious educational game in which each player takes the role of an actor in a construction operation. The objective is dual: collectively, the players must ensure that the project runs smoothly and finishes on time with the lowest possible cost, individually, they must ensure the sustainability of their business by meeting different objectives (making profits, ensuring their reputation, etc.).*
 
